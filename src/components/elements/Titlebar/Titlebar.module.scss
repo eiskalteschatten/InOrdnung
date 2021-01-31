@@ -1,5 +1,7 @@
+@import "../../../scss/variables";
+
 .titlebar {
-  height: 22px;
+  height: $macTitlebarSize;
   width: 100%;
   left: 0;
   position: fixed;

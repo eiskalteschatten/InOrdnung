@@ -1,0 +1,15 @@
+@import "../../scss/variables";
+
+.sidebar {
+  background: $lightSidebarBgColor;
+
+  @media (prefers-color-scheme: dark) {
+    background: $darkSidebarBgColor;
+  }
+}
+
+.isDarwin {
+  .sidebar {
+    padding-top: $macTitlebarSize;
+  }
+}

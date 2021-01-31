@@ -1,7 +1,9 @@
+@import "../../scss/variables";
+
 .iconSection {
   text-align: center;
   margin: 20px 0;
-  padding-top: 22px;
+  padding-top: $macTitlebarSize;
 
   .icon {
     width: 175px;
@@ -19,10 +21,16 @@
 }
 
 .recentProjects {
-  background: #e5e5e5;
-  padding-top: 22px;
+  background: $lightSidebarBgColor;
+  padding-top: $macTitlebarSize;
 
   @media (prefers-color-scheme: dark) {
-    background: #333333;
+    background: $darkSidebarBgColor;
+  }
+}
+
+.isDarwin {
+  .iconSection, .recentProjects {
+    padding-top: $macTitlebarSize;
   }
 }

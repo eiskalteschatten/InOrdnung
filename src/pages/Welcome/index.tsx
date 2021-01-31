@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -48,7 +49,10 @@ const Welcome: React.FC = () => {
             </RoundedButton>
           </div>
         </Col>
-        <Col xs={5} className={styles.recentProjects}>
+        <Col xs={5} className={clsx({
+          [styles.recentProjects]: true,
+          'hasDarwinTitlebar': platform === 'darwin'
+        })}>
         </Col>
       </Row>
     </div>
