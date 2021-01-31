@@ -34,6 +34,7 @@ export default async (): Promise<void> => {
       window.webContents.on('did-finish-load', (): void => {
         if (window) {
           initializeRenderer(window);
+          window.webContents.send('processVersions', process.versions);
         }
       });
 
