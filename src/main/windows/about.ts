@@ -9,8 +9,8 @@ let window: BrowserWindow | null;
 export default async (): Promise<void> => {
   if (!window) {
     const browserWindowOptions: BrowserWindowConstructorOptions = {
-      width: 250,
-      height: 200,
+      width: 450,
+      height: 250,
       resizable: false,
       webPreferences: {
         nodeIntegration: true,
