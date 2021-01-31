@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import EventsFromMain from './EventsFromMain';
 import { IntlProviderWrapper } from './intl/IntlContext';
-import MainLayout from './components/MainLayout';
+
+import Welcome from './pages/Welcome';
+import Project from './pages/Project';
 
 const App: React.FC = () => {
   // TODO: allow the saved locale from the DB to override the system's settings
@@ -12,7 +15,12 @@ const App: React.FC = () => {
     <>
       <EventsFromMain />
       <IntlProviderWrapper injectedLocale={locale}>
-        <MainLayout />
+        <BrowserRouter>
+          <Switch>
+            <Route path='/' exact component={Welcome} />
+            <Route path='/project' component={Project} />
+          </Switch>
+        </BrowserRouter>
       </IntlProviderWrapper>
     </>
   );

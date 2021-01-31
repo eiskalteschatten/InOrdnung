@@ -2,12 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
-import { State } from '../store';
-import Titlebar from './Titlebar';
+import { State } from '../../store';
+import Titlebar from './TitleBar';
 
-import styles from './MainLayout.module.scss';
+import styles from './TitlebarLayout.module.scss';
 
-const MainLayout: React.FC = () => {
+interface Props {
+  children: any;
+}
+
+const TitlebarLayout: React.FC<Props> = ({ children }) => {
   const platform = useSelector((state: State) => state.app.platform);
 
   return (
@@ -19,10 +23,9 @@ const MainLayout: React.FC = () => {
       })}
     >
       {platform === 'darwin' && (<Titlebar />)}
-
-      content here
+      {children}
     </div>
   );
 };
 
-export default MainLayout;
+export default TitlebarLayout;
