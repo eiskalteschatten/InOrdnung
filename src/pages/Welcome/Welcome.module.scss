@@ -28,9 +28,3 @@
     background: $darkSidebarBgColor;
   }
 }
-
-.isDarwin {
-  .iconSection, .recentProjects {
-    padding-top: $macTitlebarSize;
-  }
-}

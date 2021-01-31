@@ -2,14 +2,10 @@
 
 .sidebar {
   background: $lightSidebarBgColor;
+  min-width: 200px;
+  overflow: auto;
 
   @media (prefers-color-scheme: dark) {
     background: $darkSidebarBgColor;
-  }
-}
-
-.isDarwin {
-  .sidebar {
-    padding-top: $macTitlebarSize;
   }
 }
