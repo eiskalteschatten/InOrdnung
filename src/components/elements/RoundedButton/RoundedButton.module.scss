@@ -1,0 +1,52 @@
+.roundedButton {
+  position: relative;
+  opacity: 0.8;
+  padding: 0.5em;
+  cursor: pointer;
+  z-index: 0;
+  border: none;
+  background: none;
+
+  &::before {
+    content: '';
+    border-radius: 5px;
+    z-index: -1;
+    position: absolute;
+    top: -1px;
+    right: -2px;
+    bottom: -1px;
+    left: -2px;
+    transform: scale(0);
+    transition: transform 100ms;
+  }
+
+  &:hover {
+    opacity: 1;
+
+    &::before {
+      background: rgba(0, 0, 0, .1);
+      transform: scale(1);
+
+      @media (prefers-color-scheme: dark) {
+        background: rgba(255, 255, 255, .1);
+      }
+    }
+  }
+
+  &:active {
+    opacity: 1;
+
+    &::before {
+      background: rgba(0, 0, 0, .15);
+      transform: scale(1);
+
+      @media (prefers-color-scheme: dark) {
+        background: rgba(255, 255, 255, .15);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: #ffffff;
+  }
+}
