@@ -4,10 +4,10 @@ import path from 'path';
 import initializeRenderer from '../initializeRenderer';
 import appMenu from '../../menus/welcome';
 
-let welcomeWindow: BrowserWindow | null;
+let window: BrowserWindow | null;
 
 export default async (): Promise<void> => {
-  if (!welcomeWindow) {
+  if (!window) {
     if (process.env.NODE_ENV === 'development') {
       const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
       await installExtension(REDUX_DEVTOOLS);
@@ -26,29 +26,32 @@ export default async (): Promise<void> => {
       browserWindowOptions.titleBarStyle = 'hidden';
     }
 
-    welcomeWindow = new BrowserWindow(browserWindowOptions);
+    window = new BrowserWindow(browserWindowOptions);
 
-    if (welcomeWindow) {
-      welcomeWindow.loadURL(
+    if (window) {
+      window.loadURL(
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
           : `file://${path.join(__dirname, '../index.html')}`
       );
 
-      welcomeWindow.on('closed', () => {
-        welcomeWindow = null;
+      window.on('closed', () => {
+        window = null;
       });
 
-      welcomeWindow.webContents.on('did-finish-load', (): void => {
-        if (welcomeWindow) {
-          initializeRenderer(welcomeWindow);
+      window.webContents.on('did-finish-load', (): void => {
+        if (window) {
+          initializeRenderer(window);
         }
       });
 
-      welcomeWindow.on('focus', () => {
+      window.on('focus', () => {
         const menu = Menu.buildFromTemplate(appMenu);
         Menu.setApplicationMenu(menu);
       });
     }
+  }
+  else {
+    window.focus();
   }
 };
