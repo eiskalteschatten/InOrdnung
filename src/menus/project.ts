@@ -1,16 +1,20 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import config from '../config';
+import translations from '../intl';
+import { getLocale } from '../lib/helper';
 import createWindow from '../main/windows/project';
 import openWelcomeWindow from '../main/windows/welcome';
 import openAboutWindow from '../main/windows/about';
 
+const translation = translations[getLocale()];
+
 const template: MenuItemConstructorOptions[] = [
   {
-    label: 'File',
+    label: translation.file,
     submenu: [
       {
-        label: 'New Project',
+        label: translation.menuNewProject,
         accelerator: 'CmdOrCtrl+N',
         click: (): void => {
           createWindow();
@@ -21,7 +25,7 @@ const template: MenuItemConstructorOptions[] = [
     ],
   },
   {
-    label: 'Edit',
+    label: translation.edit,
     submenu: [
       { role: 'undo' },
       { role: 'redo' },
@@ -35,7 +39,7 @@ const template: MenuItemConstructorOptions[] = [
     ],
   },
   {
-    label: 'View',
+    label: translation.view,
     submenu: [
       { role: 'resetZoom' },
       { role: 'zoomIn' },
@@ -44,7 +48,7 @@ const template: MenuItemConstructorOptions[] = [
       { role: 'togglefullscreen' },
       { type: 'separator' },
       {
-        label: 'Advanced',
+        label: translation.menuDevelopment,
         submenu: [
           { role: 'reload' },
           { role: 'forceReload' },
@@ -63,20 +67,20 @@ const template: MenuItemConstructorOptions[] = [
     role: 'help',
     submenu: [
       {
-        label: 'Welcome to InOrdnung',
+        label: translation.welcomeToInOrdung,
         click: (): void => {
           openWelcomeWindow();
         },
       },
       { type: 'separator' },
       {
-        label: 'Submit Feedback',
+        label: translation.menuSubmitFeedback,
         click: (): void => {
           shell.openExternal('https://www.alexseifert.com/contact');
         },
       },
       {
-        label: 'About Alex Seifert',
+        label: translation.aboutAlexSeifert,
         click: (): void => {
           shell.openExternal('https://www.alexseifert.com');
         },
@@ -90,20 +94,20 @@ if (process.platform === 'darwin') {
     label: app.getName(),
     submenu: [
       {
-        label: `About ${config.app.name}`,
+        label: `${translation.menuAbout} ${config.app.name}`,
         click: (): void => {
           openAboutWindow();
         },
       },
       {
-        label: 'Check for Updates...',
+        label: translation.menuCheckForUpdates,
         click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
           focusedWindow?.webContents.send('check-for-updates');
         },
       },
       { type: 'separator' },
       {
-        label: 'Preferences',
+        label: translation.preferences,
         accelerator: 'Cmd+,',
         click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
           focusedWindow?.webContents.send('open-preferences');
@@ -145,7 +149,7 @@ else {
   (template[1].submenu as MenuItemConstructorOptions[]).push(
     { type: 'separator' },
     {
-      label: 'Preferences',
+      label: translation.preferences,
       accelerator: 'Ctrl+,',
       click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
         focusedWindow?.webContents.send('open-preferences');
@@ -159,7 +163,7 @@ else {
   template[4].submenu = [
     helpMenu[0],
     {
-      label: 'Check for Updates...',
+      label: translation.menuCheckForUpdates,
       click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
         focusedWindow?.webContents.send('check-for-updates');
       },
@@ -169,7 +173,7 @@ else {
     { type: 'separator' },
     helpMenu[3],
     {
-      label: `About ${config.app.name}`,
+      label: `${translation.menuAbout} ${config.app.name}`,
       click: (): void => {
         openAboutWindow();
       },

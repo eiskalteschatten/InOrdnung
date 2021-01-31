@@ -1,15 +1,19 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import config from '../config';
+import translations from '../intl';
+import { getLocale } from '../lib/helper';
 import createProjectWindow from '../main/windows/project';
 import openAboutWindow from '../main/windows/about';
 
+const translation = translations[getLocale()];
+
 const template: MenuItemConstructorOptions[] = [
   {
-    label: 'File',
+    label: translation.file,
     submenu: [
       {
-        label: 'New Project',
+        label: translation.menuNewProject,
         accelerator: 'CmdOrCtrl+N',
         click: (): void => {
           createProjectWindow();
@@ -20,19 +24,19 @@ const template: MenuItemConstructorOptions[] = [
     ],
   },
   {
-    label: 'Edit',
+    label: translation.edit,
     submenu: [
       { role: 'cut' },
       { role: 'copy' },
       { role: 'paste' },
-      { role: 'pasteAndMatchStyle' },
+      { role: 'pasteAndMatchStyle' }
     ],
   },
   {
-    label: 'View',
+    label: translation.view,
     submenu: [
       {
-        label: 'Advanced',
+        label: translation.menuDevelopment,
         submenu: [
           { role: 'reload' },
           { role: 'forceReload' },
@@ -51,13 +55,13 @@ const template: MenuItemConstructorOptions[] = [
     role: 'help',
     submenu: [
       {
-        label: 'Submit Feedback',
+        label: translation.menuSubmitFeedback,
         click: (): void => {
           shell.openExternal('https://www.alexseifert.com/contact');
         },
       },
       {
-        label: 'About Alex Seifert',
+        label: translation.aboutAlexSeifert,
         click: (): void => {
           shell.openExternal('https://www.alexseifert.com');
         },
@@ -71,20 +75,20 @@ if (process.platform === 'darwin') {
     label: app.getName(),
     submenu: [
       {
-        label: `About ${config.app.name}`,
+        label: `${translation.menuAbout} ${config.app.name}`,
         click: (): void => {
           openAboutWindow();
         },
       },
       {
-        label: 'Check for Updates...',
+        label: translation.menuCheckForUpdates,
         click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
           focusedWindow?.webContents.send('check-for-updates');
         },
       },
       { type: 'separator' },
       {
-        label: 'Preferences',
+        label: translation.preferences,
         accelerator: 'Cmd+,',
         click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
           focusedWindow?.webContents.send('open-preferences');
@@ -126,7 +130,7 @@ else {
   (template[1].submenu as MenuItemConstructorOptions[]).push(
     { type: 'separator' },
     {
-      label: 'Preferences',
+      label: translation.preferences,
       accelerator: 'Ctrl+,',
       click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
         focusedWindow?.webContents.send('open-preferences');
@@ -139,7 +143,7 @@ else {
   const helpMenu = template[4].submenu as MenuItemConstructorOptions[];
   template[4].submenu = [
     {
-      label: 'Check for Updates...',
+      label: translation.menuCheckForUpdates,
       click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
         focusedWindow?.webContents.send('check-for-updates');
       },
@@ -149,7 +153,7 @@ else {
     { type: 'separator' },
     helpMenu[1],
     {
-      label: `About ${config.app.name}`,
+      label: `${translation.menuAbout} ${config.app.name}`,
       click: (): void => {
         openAboutWindow();
       },

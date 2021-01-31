@@ -6,6 +6,9 @@ export interface Config {
   updates: {
     url: string;
   };
+  intl: {
+    defaultLocale: string;
+  };
 }
 
 export default {
@@ -15,5 +18,8 @@ export default {
   },
   updates: {
     url: 'update url'
+  },
+  intl: {
+    defaultLocale: process.env.REACT_APP_LOCALE || 'en'
   }
 } as Config;

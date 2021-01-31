@@ -1,10 +1,12 @@
 import React, { createContext, useState } from 'react';
 import { IntlProvider } from 'react-intl';
 
+import config from '../config';
+
 import enMessages from './en';
 import deMessages from './de';
 
-const defaultLocale = process.env.REACT_APP_LOCALE || 'en';
+const defaultLocale = config.intl.defaultLocale;
 const availableLocales = ['en', 'de'];
 
 const allMessages: any = {
