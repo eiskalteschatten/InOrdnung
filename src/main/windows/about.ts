@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, Menu } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../../menus/welcome';
+import appMenu from '../menus/welcome';
 
 let window: BrowserWindow | undefined;
 

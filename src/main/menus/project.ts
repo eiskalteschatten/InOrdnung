@@ -1,11 +1,11 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import config from '../config';
-import translations from '../intl';
-import { getLocale } from '../lib/helper';
-import createWindow from '../main/windows/project';
-import openWelcomeWindow from '../main/windows/welcome';
-import openAboutWindow from '../main/windows/about';
+import config from '../../config';
+import translations from '../../intl';
+import { getLocale } from '../../lib/helper';
+import createWindow from '../windows/project';
+import openWelcomeWindow from '../windows/welcome';
+import openAboutWindow from '../windows/about';
 
 const translation = translations[getLocale()];
 
