@@ -3,6 +3,7 @@ import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 
 import config from '../config';
 import createWindow from '../main/windows/project';
 import openWelcomeWindow from '../main/windows/welcome';
+import openAboutWindow from '../main/windows/about';
 
 const template: MenuItemConstructorOptions[] = [
   {
@@ -91,8 +92,8 @@ if (process.platform === 'darwin') {
     submenu: [
       {
         label: `About ${config.app.name}`,
-        click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-          focusedWindow?.webContents.send('open-about');
+        click: (): void => {
+          openAboutWindow();
         },
       },
       {
@@ -171,8 +172,8 @@ else {
     helpMenu[4],
     {
       label: `About ${config.app.name}`,
-      click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-        focusedWindow?.webContents.send('open-about');
+      click: (): void => {
+        openAboutWindow();
       },
     },
   ];
