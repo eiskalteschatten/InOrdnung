@@ -1,7 +1,7 @@
 {
-  "name": "electron-react-typescript",
+  "name": "inordnung",
   "version": "1.0.0",
-  "description": "A Boilerplate Project for Electron.js, React and TypeScript",
+  "description": "",
   "main": "./public/electron.js",
   "scripts": {
     "build:react": "react-scripts build",
@@ -24,9 +24,9 @@
     "eject": "react-scripts eject"
   },
   "build": {
-    "productName": "ElectronReactTypesScript",
+    "productName": "InOrdnung",
     "copyright": "Copyright © 2021 Alex Seifert",
-    "appId": "com.alexseifert.electronReactTypesScript",
+    "appId": "com.alexseifert.inOrdnung",
     "buildDependenciesFromSource": true,
     "files": [
       "build"
