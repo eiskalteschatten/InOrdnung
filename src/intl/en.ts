@@ -1,13 +1,13 @@
+import appMenu from './translations/appMenu';
+import welcome from './translations/welcome';
+import project from './translations/project';
+import about from './translations/about';
+import errors from './translations/errors';
+
 export default {
-  // General
-  welcomeToInOrdung: 'Welcome to InOrdnung',
-  by: 'by',
-
-  // Projects
-  createANewProject: 'Create a new project',
-
-  // Errors
-  error: 'Error',
-  errorPageNotFound: 'The page you are looking for could not be found.',
-  errorAnErrorOccurred: 'An error occurred.'
+  ...appMenu.en,
+  ...welcome.en,
+  ...project.en,
+  ...about.en,
+  ...errors.en
 };

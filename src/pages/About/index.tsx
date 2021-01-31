@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import useTranslation from '../../intl/useTranslation';
+
 import icon from '../../assets/images/icon.svg';
 import styles from './About.module.scss';
 
@@ -17,11 +19,12 @@ interface ProcessVersions {
 
 const About: React.FC = () => {
   const [processVersions, setProcessVersions] = useState<ProcessVersions>();
+  const aboutInOrdnung = useTranslation('aboutInOrdnung');
 
   useEffect(() => {
-    document.title = 'About InOrdnung';
+    document.title = aboutInOrdnung;
     ipcRenderer.on('processVersions', (event: any, versions: ProcessVersions): any => setProcessVersions(versions));
-  }, []);
+  }, [aboutInOrdnung]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
     e.preventDefault();

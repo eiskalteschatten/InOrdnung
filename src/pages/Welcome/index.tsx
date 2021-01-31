@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import { IntlContext } from '../../intl/IntlContext';
+import useTranslation from '../../intl/useTranslation';
 import { State } from '../../store';
 import Titlebar from '../../components/elements/Titlebar';
 import RoundedButton from '../../components/elements/RoundedButton';
@@ -17,11 +17,11 @@ const { ipcRenderer } = window.require('electron');
 
 const Welcome: React.FC = () => {
   const platform = useSelector((state: State) => state.app.platform);
-  const { messages } = useContext(IntlContext);
+  const welcomeToInOrdung = useTranslation('welcomeToInOrdung');
 
   useEffect(() => {
-    document.title = messages.welcomeToInOrdung;
-  }, [messages]);
+    document.title = welcomeToInOrdung;
+  }, [welcomeToInOrdung]);
 
   const handleNewProjectClick = (): void => {
     ipcRenderer.send('createNewProject');
