@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import { IntlContext } from '../../intl/IntlContext';
 import { State } from '../../store';
 import Titlebar from '../../components/elements/Titlebar';
 import RoundedButton from '../../components/elements/RoundedButton';
@@ -15,10 +17,11 @@ const { ipcRenderer } = window.require('electron');
 
 const Welcome: React.FC = () => {
   const platform = useSelector((state: State) => state.app.platform);
+  const { messages } = useContext(IntlContext);
 
   useEffect(() => {
-    document.title = 'Welcome to InOrdnung';
-  }, []);
+    document.title = messages.welcomeToInOrdung;
+  }, [messages]);
 
   const handleNewProjectClick = (): void => {
     ipcRenderer.send('createNewProject');
@@ -34,12 +37,14 @@ const Welcome: React.FC = () => {
           <div className={styles.iconSection}>
             <img src={icon} alt='InOrdnung' className={styles.icon} />
 
-            <div className={styles.welcome}>Welcome to InOrdnung</div>
+            <div className={styles.welcome}>
+              <FormattedMessage id='welcomeToInOrdung' />
+            </div>
           </div>
 
           <div className={styles.buttons}>
             <RoundedButton onClick={handleNewProjectClick}>
-              <i className='bi-file-earmark-plus' /> Create a new project
+              <i className='bi-file-earmark-plus' />&nbsp;<FormattedMessage id='createANewProject' />
             </RoundedButton>
           </div>
         </Col>

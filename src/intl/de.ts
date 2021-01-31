@@ -1,5 +1,9 @@
 export default {
   // General
+  welcomeToInOrdung: 'Willkommen in InOrdnung',
+
+  // Projects
+  createANewProject: 'Ein neues Projekt erstellen',
 
   // Errors
   error: 'Fehler',
