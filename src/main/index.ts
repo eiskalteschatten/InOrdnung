@@ -16,9 +16,11 @@ export const createWindow = async (): Promise<BrowserWindow> => {
     await installExtension(REDUX_DEVTOOLS);
   }
 
+  // const preferences = load window preferences here;
+
   const browserWindowOptions: BrowserWindowConstructorOptions = {
-    // width: Main.preferences.windowWidth,
-    // height: Main.preferences.windowHeight,
+    // width: preferences.windowWidth,
+    // height: preferences.windowHeight,
     icon: path.join(__dirname, '../assets/images/icon128.png'),
     webPreferences: {
       nodeIntegration: true
@@ -29,19 +31,19 @@ export const createWindow = async (): Promise<BrowserWindow> => {
     browserWindowOptions.titleBarStyle = 'hidden';
   }
 
-  // if (Main.preferences.windowX && Main.preferences.windowY) {
-  //   browserWindowOptions.x = Main.preferences.windowX;
-  //   browserWindowOptions.y = Main.preferences.windowY;
+  // if (preferences.windowX && preferences.windowY) {
+  //   browserWindowOptions.x = preferences.windowX;
+  //   browserWindowOptions.y = preferences.windowY;
   // }
 
   const newWindow = new BrowserWindow(browserWindowOptions);
 
   if (newWindow) {
-    // if (Main.preferences.windowIsMaximized) {
+    // if (preferences.windowIsMaximized) {
     //   newWindow.maximize();
     // }
 
-    // newWindow.setFullScreen(Main.preferences.windowIsFullScreen || false);
+    // newWindow.setFullScreen(preferences.windowIsFullScreen || false);
 
     newWindow.loadURL(
       process.env.NODE_ENV === 'development'
