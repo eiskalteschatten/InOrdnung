@@ -1,7 +1,8 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import config from '../config';
-import { createWindow, openWelcomeWindow } from '../main';
+import createWindow from '../main/windows/project';
+import openWelcomeWindow from '../main/windows/welcome';
 
 const template: MenuItemConstructorOptions[] = [
   {
