@@ -1,7 +1,7 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import config from '../config';
-import { createWindow } from '../main/main';
+import { createWindow } from '../main';
 
 const template: MenuItemConstructorOptions[] = [
   {
