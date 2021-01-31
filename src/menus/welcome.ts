@@ -1,7 +1,7 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import config from '../config';
-import createWindow from '../main/windows/project';
+import createProjectWindow from '../main/windows/project';
 import openAboutWindow from '../main/windows/about';
 
 const template: MenuItemConstructorOptions[] = [
@@ -12,7 +12,7 @@ const template: MenuItemConstructorOptions[] = [
         label: 'New Project',
         accelerator: 'CmdOrCtrl+N',
         click: (): void => {
-          createWindow();
+          createProjectWindow();
         },
       },
       { type: 'separator' },

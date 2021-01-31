@@ -11,6 +11,8 @@ import RoundedButton from '../../components/elements/RoundedButton';
 import icon from '../../assets/images/icon.svg';
 import styles from './Welcome.module.scss';
 
+const { ipcRenderer } = window.require('electron');
+
 const Welcome: React.FC = () => {
   const platform = useSelector((state: State) => state.app.platform);
 
@@ -19,7 +21,8 @@ const Welcome: React.FC = () => {
   }, []);
 
   const handleNewProjectClick = (): void => {
-    console.log('tell the main process to open a new project window');
+    ipcRenderer.send('createNewProject');
+    window.close();
   };
 
   return (
