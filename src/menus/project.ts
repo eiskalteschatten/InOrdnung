@@ -57,25 +57,24 @@ const template: MenuItemConstructorOptions[] = [
     role: 'window',
     submenu: [
       { role: 'minimize' },
-      { type: 'separator' },
-      {
-        label: 'Welcome to InOrdnung',
-        click: (): void => {
-          openWelcomeWindow();
-        },
-      },
     ],
   },
   {
     role: 'help',
     submenu: [
       {
+        label: 'Welcome to InOrdnung',
+        click: (): void => {
+          openWelcomeWindow();
+        },
+      },
+      { type: 'separator' },
+      {
         label: 'Submit Feedback',
         click: (): void => {
           shell.openExternal('https://www.alexseifert.com/contact');
         },
       },
-      { type: 'separator' },
       {
         label: 'About Alex Seifert',
         click: (): void => {
@@ -158,6 +157,7 @@ else {
   // Help menu
   const helpMenu = template[4].submenu as MenuItemConstructorOptions[];
   template[4].submenu = [
+    helpMenu[0],
     {
       label: 'Check for Updates...',
       click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
@@ -165,11 +165,9 @@ else {
       },
     },
     { type: 'separator' },
-    helpMenu[0],
-    { type: 'separator' },
     helpMenu[2],
     { type: 'separator' },
-    helpMenu[4],
+    helpMenu[3],
     {
       label: `About ${config.app.name}`,
       click: (): void => {

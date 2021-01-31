@@ -56,7 +56,6 @@ const template: MenuItemConstructorOptions[] = [
           shell.openExternal('https://www.alexseifert.com/contact');
         },
       },
-      { type: 'separator' },
       {
         label: 'About Alex Seifert',
         click: (): void => {
@@ -148,9 +147,7 @@ else {
     { type: 'separator' },
     helpMenu[0],
     { type: 'separator' },
-    helpMenu[2],
-    { type: 'separator' },
-    helpMenu[4],
+    helpMenu[1],
     {
       label: `About ${config.app.name}`,
       click: (): void => {
