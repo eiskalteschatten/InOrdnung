@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { remote } from 'electron';
+
+const { remote } = window.require('electron');
 
 // import styles from './About.module.scss';
 

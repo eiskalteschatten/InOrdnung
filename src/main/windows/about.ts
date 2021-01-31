@@ -13,7 +13,8 @@ export default async (): Promise<void> => {
       height: 200,
       resizable: false,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        enableRemoteModule: true
       }
     };
 
