@@ -49,7 +49,7 @@ export const createWindow = async (): Promise<BrowserWindow> => {
         : `file://${path.join(__dirname, '../index.html')}`
     );
 
-    // newWindow.on('closed', onClose(newWindow));
+    newWindow.on('closed', () => onClose(newWindow));
 
     newWindow.webContents.on('did-finish-load', (): void => {
       if (newWindow) {
