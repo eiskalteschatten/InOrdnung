@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 
 import { State } from '../../store';
-import Titlebar from './TitleBar';
+import Titlebar from '../elements/Titlebar';
 
 import styles from './TitlebarLayout.module.scss';
 

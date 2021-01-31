@@ -1,0 +1,28 @@
+.iconSection {
+  text-align: center;
+  margin: 20px 0;
+  padding-top: 22px;
+
+  .icon {
+    width: 175px;
+  }
+
+  .welcome {
+    font-size: 36px;
+    margin-top: 10px;
+  }
+}
+
+.buttons {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.recentProjects {
+  background: #e5e5e5;
+  padding-top: 22px;
+
+  @media (prefers-color-scheme: dark) {
+    background: #333333;
+  }
+}

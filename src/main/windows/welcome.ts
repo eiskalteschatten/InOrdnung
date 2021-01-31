@@ -14,8 +14,8 @@ export default async (): Promise<void> => {
     }
 
     const browserWindowOptions: BrowserWindowConstructorOptions = {
-      width: 900,
-      height: 500,
+      width: 800,
+      height: 400,
       resizable: false,
       webPreferences: {
         nodeIntegration: true
