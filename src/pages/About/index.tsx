@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -41,7 +42,7 @@ const About: React.FC = () => {
       <Col>
         <div className={styles.title}>InOrdnung</div>
 
-        <div>by <a href='https://www.alexseifert.com' onClick={handleLinkClick}>Alex Seifert</a></div>
+        <div><FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick}>Alex Seifert</a></div>
 
         <div className={styles.version}>
           {remote.app.getVersion()}
