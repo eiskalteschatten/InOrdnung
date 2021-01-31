@@ -1,7 +1,7 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import config from '../config';
-import { createWindow, openWelcomeWindow } from '../main';
+import { createWindow } from '../main';
 
 const template: MenuItemConstructorOptions[] = [
   {
@@ -21,26 +21,15 @@ const template: MenuItemConstructorOptions[] = [
   {
     label: 'Edit',
     submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
-      { type: 'separator' },
       { role: 'cut' },
       { role: 'copy' },
       { role: 'paste' },
       { role: 'pasteAndMatchStyle' },
-      { role: 'delete' },
-      { role: 'selectAll' },
     ],
   },
   {
     label: 'View',
     submenu: [
-      { role: 'resetZoom' },
-      { role: 'zoomIn' },
-      { role: 'zoomOut' },
-      { type: 'separator' },
-      { role: 'togglefullscreen' },
-      { type: 'separator' },
       {
         label: 'Advanced',
         submenu: [
@@ -55,13 +44,6 @@ const template: MenuItemConstructorOptions[] = [
     role: 'window',
     submenu: [
       { role: 'minimize' },
-      { type: 'separator' },
-      {
-        label: 'Welcome to InOrdnung',
-        click: (): void => {
-          openWelcomeWindow();
-        },
-      },
     ],
   },
   {

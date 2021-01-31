@@ -6,11 +6,13 @@ import './eventsFromRenderer';
 import config from '../config';
 import initializeRenderer from './initializeRenderer';
 import appMenu from '../menus/app';
+import welcomeMenu from '../menus/welcome';
 
 let app: Electron.App;
+let welcomeWindow: BrowserWindow | null;
 const windows = new Set();
 
-export const createWindow = async (): Promise<BrowserWindow> => {
+export const createWindow = async (): Promise<void> => {
   if (process.env.NODE_ENV === 'development') {
     const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
     await installExtension(REDUX_DEVTOOLS);
@@ -47,8 +49,8 @@ export const createWindow = async (): Promise<BrowserWindow> => {
 
     newWindow.loadURL(
       process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
-        : `file://${path.join(__dirname, '../index.html')}`
+        ? 'http://localhost:3000/project'
+        : `file://${path.join(__dirname, '../index.html#project')}`
     );
 
     newWindow.on('closed', () => onClose(newWindow));
@@ -66,8 +68,53 @@ export const createWindow = async (): Promise<BrowserWindow> => {
 
     windows.add(newWindow);
   }
+};
 
-  return newWindow;
+export const openWelcomeWindow = async (): Promise<void> => {
+  if (!welcomeWindow) {
+    if (process.env.NODE_ENV === 'development') {
+      const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
+      await installExtension(REDUX_DEVTOOLS);
+    }
+
+    const browserWindowOptions: BrowserWindowConstructorOptions = {
+      width: 900,
+      height: 500,
+      resizable: false,
+      webPreferences: {
+        nodeIntegration: true
+      }
+    };
+
+    if (process.platform === 'darwin') {
+      browserWindowOptions.titleBarStyle = 'hidden';
+    }
+
+    welcomeWindow = new BrowserWindow(browserWindowOptions);
+
+    if (welcomeWindow) {
+      welcomeWindow.loadURL(
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000'
+          : `file://${path.join(__dirname, '../index.html')}`
+      );
+
+      welcomeWindow.on('closed', () => {
+        welcomeWindow = null;
+      });
+
+      welcomeWindow.webContents.on('did-finish-load', (): void => {
+        if (welcomeWindow) {
+          initializeRenderer(welcomeWindow);
+        }
+      });
+
+      welcomeWindow.on('focus', () => {
+        const menu = Menu.buildFromTemplate(welcomeMenu);
+        Menu.setApplicationMenu(menu);
+      });
+    }
+  }
 };
 
 const onWindowAllClosed = (): void => {
@@ -99,19 +146,14 @@ const onClose = async (window: BrowserWindow | null): Promise<void> => {
   }
 };
 
-const onReady = async (): Promise<void> => {
-
-};
-
 export default (_app: Electron.App): void => {
   app = _app;
   app.on('window-all-closed', onWindowAllClosed);
-  app.on('ready', onReady);
   app.setName(config.app.name);
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (windows.size === 0) createWindow();
+    if (windows.size === 0) openWelcomeWindow();
   });
 };
