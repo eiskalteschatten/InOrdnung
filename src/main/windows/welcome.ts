@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, Menu } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import welcomeMenu from '../../menus/welcome';
+import appMenu from '../../menus/welcome';
 
 let welcomeWindow: BrowserWindow | null;
 
@@ -46,7 +46,7 @@ export default async (): Promise<void> => {
       });
 
       welcomeWindow.on('focus', () => {
-        const menu = Menu.buildFromTemplate(welcomeMenu);
+        const menu = Menu.buildFromTemplate(appMenu);
         Menu.setApplicationMenu(menu);
       });
     }
