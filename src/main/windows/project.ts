@@ -64,7 +64,7 @@ export default async (): Promise<void> => {
   }
 };
 
-const onClose = async (window: BrowserWindow | null): Promise<void> => {
+const onClose = async (window: BrowserWindow | undefined): Promise<void> => {
   try {
     if (window) {
       // const windowBounds = window.getBounds();
@@ -79,7 +79,7 @@ const onClose = async (window: BrowserWindow | null): Promise<void> => {
       // };
 
       windows.delete(window);
-      window = null;
+      window = undefined;
     }
   }
   catch (error) {

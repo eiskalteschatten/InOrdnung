@@ -4,7 +4,7 @@ import path from 'path';
 import initializeRenderer from '../initializeRenderer';
 import appMenu from '../../menus/welcome';
 
-let window: BrowserWindow | null;
+let window: BrowserWindow | undefined;
 
 export default async (): Promise<void> => {
   if (!window) {
@@ -28,7 +28,7 @@ export default async (): Promise<void> => {
       );
 
       window.on('closed', () => {
-        window = null;
+        window = undefined;
       });
 
       window.webContents.on('did-finish-load', (): void => {
