@@ -6,12 +6,23 @@ import Col from 'react-bootstrap/Col';
 import icon from '../../assets/images/icon.svg';
 import styles from './About.module.scss';
 
-const { remote } = window.require('electron');
+const { remote, shell } = window.require('electron');
 
 const About: React.FC = () => {
   useEffect(() => {
     document.title = 'About InOrdnung';
   }, []);
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
+    e.preventDefault();
+
+    const target = e.target as HTMLAnchorElement;
+    const href = target.getAttribute('href');
+
+    if (href) {
+      shell.openExternal(href);
+    }
+  };
 
   return (
     <Row className={styles.about}>
@@ -21,7 +32,7 @@ const About: React.FC = () => {
       <Col>
         <div className={styles.title}>InOrdnung</div>
 
-        <div>by Alex Seifert</div>
+        <div>by <a href='https://www.alexseifert.com' onClick={handleLinkClick}>Alex Seifert</a></div>
 
         <div className={styles.version}>
           {remote.app.getVersion()}
