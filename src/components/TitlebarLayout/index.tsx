@@ -17,9 +17,7 @@ const TitlebarLayout: React.FC<Props> = ({ children }) => {
   return (
     <div
       className={clsx({
-        [styles.background]: true,
-        [styles.isDarwin]: platform === 'darwin',
-        'd-flex': true
+        [styles.isDarwin]: platform === 'darwin'
       })}
     >
       {platform === 'darwin' && (<Titlebar />)}
