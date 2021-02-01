@@ -23,10 +23,6 @@ export default async (): Promise<void> => {
     }
   };
 
-  if (process.platform === 'darwin') {
-    browserWindowOptions.titleBarStyle = 'hidden';
-  }
-
   // if (preferences.windowX && preferences.windowY) {
   //   browserWindowOptions.x = preferences.windowX;
   //   browserWindowOptions.y = preferences.windowY;
