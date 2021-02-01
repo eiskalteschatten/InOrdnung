@@ -4,6 +4,7 @@
   background: $lightSidebarBgColor;
   min-width: 200px;
   overflow: auto;
+  padding: 10px;
 
   @media (prefers-color-scheme: dark) {
     background: $darkSidebarBgColor;
