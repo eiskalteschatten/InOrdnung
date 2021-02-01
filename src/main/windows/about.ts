@@ -16,7 +16,7 @@ export default async (): Promise<void> => {
         nodeIntegration: true,
         enableRemoteModule: true
       },
-      backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#ffffff'
+      backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0'
     };
 
     window = new BrowserWindow(browserWindowOptions);

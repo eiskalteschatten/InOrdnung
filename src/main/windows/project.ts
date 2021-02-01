@@ -21,7 +21,7 @@ export default async (): Promise<void> => {
     webPreferences: {
       nodeIntegration: true
     },
-    backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#ffffff'
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0'
   };
 
   // if (preferences.windowX && preferences.windowY) {
