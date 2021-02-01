@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, Menu } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
@@ -15,7 +15,8 @@ export default async (): Promise<void> => {
       webPreferences: {
         nodeIntegration: true,
         enableRemoteModule: true
-      }
+      },
+      backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#ffffff'
     };
 
     window = new BrowserWindow(browserWindowOptions);

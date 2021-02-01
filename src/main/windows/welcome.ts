@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, Menu } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
@@ -19,7 +19,8 @@ export default async (): Promise<void> => {
       resizable: false,
       webPreferences: {
         nodeIntegration: true
-      }
+      },
+      backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#ffffff'
     };
 
     if (process.platform === 'darwin') {

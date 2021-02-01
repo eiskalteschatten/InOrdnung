@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, Menu } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
@@ -20,7 +20,8 @@ export default async (): Promise<void> => {
     icon: path.join(__dirname, '../../assets/images/icon128.png'),
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#ffffff'
   };
 
   // if (preferences.windowX && preferences.windowY) {
