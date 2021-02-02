@@ -9,6 +9,9 @@ export interface Config {
   intl: {
     defaultLocale: string;
   };
+  extensions: {
+    images: string[];
+  };
 }
 
 export default {
@@ -21,5 +24,8 @@ export default {
   },
   intl: {
     defaultLocale: process.env.REACT_APP_LOCALE || 'en'
-  }
+  },
+  extensions: {
+    images: ['jpg', 'jpeg', 'png', 'gif', 'svg'],
+  },
 } as Config;
