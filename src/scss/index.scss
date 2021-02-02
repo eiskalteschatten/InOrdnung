@@ -24,3 +24,5 @@ body {
 .hasDarwinTitlebar {
   padding-top: $macTitlebarSize;
 }
+
+@import "./dark-mode-overrides.scss";

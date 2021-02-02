@@ -1,0 +1,15 @@
+@import "./variables";
+
+@media (prefers-color-scheme: dark) {
+  .form-control {
+    background: $darkFormBg;
+    border-color: darken($darkFormBg, 15%);
+    color: $darkColor;
+
+    &:focus {
+      background: lighten($darkFormBg, 2%);
+      border-color: darken($darkFormBg, 10%);
+      color: $darkColor;
+    }
+  }
+}
