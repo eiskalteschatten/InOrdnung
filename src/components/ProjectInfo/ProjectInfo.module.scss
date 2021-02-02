@@ -7,39 +7,6 @@
   width: 100%;
 }
 
-.projectImage {
-  display: flex;
-  width: 350px;
-  height: 300px;
-  border: 1px dashed lighten($lightColor, 50%);
-  margin: 35px 0 60px 0;
-  align-items: center;
-  text-align: center;
-  font-size: .8em;
-  padding: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background: $lightButtonHoverBg;
-
-    @media (prefers-color-scheme: dark) {
-      background: $darkButtonHoverBg;
-    }
-  }
-
-  &:active {
-    background: $lightButtonActiveBg;
-
-    @media (prefers-color-scheme: dark) {
-      background: $darkButtonActiveBg;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    border: 1px dashed darken($darkColor, 50%);
-  }
-}
-
 .formGroup {
   width: 400px;
 }

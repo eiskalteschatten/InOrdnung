@@ -2,14 +2,14 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import clsx from 'clsx';
 
+import ProjectImage from './ProjectImage';
+
 import styles from './ProjectInfo.module.scss';
 
 const ProjectInfo: React.FC = () => {
   return (
     <div className={styles.projectInfo}>
-      <div className={styles.projectImage}>
-        <FormattedMessage id='dragOrClickProjectImage' />
-      </div>
+      <ProjectImage />
 
       <div
         className={clsx(
