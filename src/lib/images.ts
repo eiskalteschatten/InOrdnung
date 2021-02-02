@@ -13,9 +13,9 @@ export const checkIfFileIsImage = (imagePath: string, promptUser = false): boole
   if (config.extensions.images.indexOf(extension) <= -1) {
     if (promptUser) {
       const extensionsString = config.extensions.images.join(', ');
-      const errorDescription = `${translation.projectImageMustBeImageFileDesc} ${extensionsString}.`;
-      dialog.showErrorBox(translation.projectImageMustBeImageFile, errorDescription);
-      console.error(translation.projectImageMustBeImageFile, errorDescription);
+      const errorDescription = `${translation.errorImageMustBeImageFileDesc} ${extensionsString}.`;
+      dialog.showErrorBox(translation.errorImageMustBeImageFile, errorDescription);
+      console.error(translation.errorImageMustBeImageFile, errorDescription);
     }
 
     return false;
