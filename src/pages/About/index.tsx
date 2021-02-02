@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { IpcRendererEvent } from 'electron';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -23,7 +24,7 @@ const About: React.FC = () => {
 
   useEffect(() => {
     document.title = aboutInOrdnung;
-    ipcRenderer.on('processVersions', (event: any, versions: ProcessVersions): any => setProcessVersions(versions));
+    ipcRenderer.on('processVersions', (event: IpcRendererEvent, versions: ProcessVersions): void => setProcessVersions(versions));
   }, [aboutInOrdnung]);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
