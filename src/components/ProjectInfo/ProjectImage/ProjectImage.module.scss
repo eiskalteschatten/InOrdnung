@@ -11,6 +11,7 @@
   font-size: .8em;
   padding: 10px;
   cursor: pointer;
+  -webkit-user-select: none;
 
   &:hover {
     background: $lightButtonHoverBg;
@@ -30,5 +31,13 @@
 
   @media (prefers-color-scheme: dark) {
     border: 1px dashed darken($darkColor, 50%);
+  }
+}
+
+.isDragging {
+  background: darken($lightBgColor, 10%);
+
+  @media (prefers-color-scheme: dark) {
+    background: lighten($darkBgColor, 10%);
   }
 }
