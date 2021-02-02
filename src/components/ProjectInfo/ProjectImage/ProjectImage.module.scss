@@ -1,9 +1,12 @@
 @import "../../../scss/variables";
 
+$imageWidth: 350px;
+$imageHeight: 300px;
+
 .projectImage {
   display: flex;
-  width: 350px;
-  height: 300px;
+  width: $imageWidth;
+  height: $imageHeight;
   border: 1px dashed lighten($lightColor, 50%);
   margin: 35px 0 60px 0;
   align-items: center;
@@ -40,4 +43,10 @@
   @media (prefers-color-scheme: dark) {
     background: lighten($darkBgColor, 10%);
   }
+}
+
+.image {
+  width: $imageWidth;
+  height: $imageHeight;
+  object-fit: cover;
 }
