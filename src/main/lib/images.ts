@@ -2,9 +2,9 @@ import { dialog } from 'electron';
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 
-import config from '../config';
-import translations from '../intl';
-import { getLocale } from '../lib/helper';
+import config from '../../config';
+import translations from '../../intl';
+import { getLocale } from '../../lib/helper';
 
 export const checkIfFileIsImage = (imagePath: string, promptUser = false): boolean => {
   const translation = translations[getLocale()];
