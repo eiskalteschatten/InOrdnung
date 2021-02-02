@@ -8,7 +8,9 @@
 }
 
 .formGroup {
-  width: 400px;
+  width: 100%;
+  min-width: 400px;
+  max-width: 600px;
 }
 
 .formControlWrapper {
