@@ -4,6 +4,8 @@ import clsx from 'clsx';
 
 import styles from './ProjectImage.module.scss';
 
+const { ipcRenderer } = window.require('electron');
+
 const ProjectImage: React.FC = () => {
   const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
 
@@ -22,6 +24,10 @@ const ProjectImage: React.FC = () => {
     setIsDraggingOver(false);
   };
 
+  const handleClick = (): void => {
+    ipcRenderer.send('selectProjectImage');
+  };
+
   // TODO: add context menu!
 
   return (
@@ -33,6 +39,7 @@ const ProjectImage: React.FC = () => {
       onDragOver={handleOnDragOver}
       onDragLeave={handleOnDragLeave}
       onDrop={handleOnDrop}
+      onClick={handleClick}
     >
       <FormattedMessage id='dragOrClickProjectImage' />
     </div>
