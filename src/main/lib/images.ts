@@ -1,6 +1,7 @@
 import { dialog } from 'electron';
 import { promises as fsPromises } from 'fs';
 import path from 'path';
+import FileType from 'file-type';
 
 import config from '../../config';
 import translations from '../../intl';
@@ -30,10 +31,15 @@ export const encodeImage = async (imagePath: string): Promise<string> => {
       throw new Error('The file is not an image!');
     }
 
-    return  await fsPromises.readFile(imagePath, { encoding: 'base64' });
+    return await fsPromises.readFile(imagePath, { encoding: 'base64' });
   }
   catch (error) {
     console.error(error);
     return '';
   }
+};
+
+export const getFileType = async (imagePath: string): Promise<string> => {
+  const fileType = await FileType.fromFile(imagePath);
+  return fileType?.mime ?? '';
 };

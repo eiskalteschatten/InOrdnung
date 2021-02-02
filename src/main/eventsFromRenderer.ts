@@ -2,11 +2,11 @@ import { ipcMain, dialog, IpcMainEvent } from 'electron';
 
 import config from '../config';
 import createProjectWindow from './windows/project';
-import { checkIfFileIsImage, encodeImage } from '../lib/images';
+import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
 
 ipcMain.on('createNewProject', createProjectWindow);
 
-ipcMain.on('selectProjectImage', async (): Promise<void> => {
+ipcMain.on('selectProjectImage', async (e: IpcMainEvent): Promise<void> => {
   const result = await dialog.showOpenDialog({
     filters: [
       { name: 'Images', extensions: config.extensions.images },
@@ -14,21 +14,18 @@ ipcMain.on('selectProjectImage', async (): Promise<void> => {
     properties: ['openFile'],
   });
 
-  const encodedImage = await encodeImage(result.filePaths[0]);
-
-  // TODO: send to Redux
-
-  console.log(encodedImage);
+  const imagePath = result.filePaths[0];
+  const image = await encodeImage(imagePath);
+  const mimeType = await getFileType(imagePath);
+  e.sender.send('updateProjectInfo', { image: { image, mimeType } });
 });
 
-ipcMain.on('handleProjectImageDrop', async (event: IpcMainEvent, imagePath: string): Promise<void> => {
+ipcMain.on('handleProjectImageDrop', async (e: IpcMainEvent, imagePath: string): Promise<void> => {
   const fileIsImage = checkIfFileIsImage(imagePath, true);
 
   if (fileIsImage) {
-    const encodedImage = await encodeImage(imagePath);
-
-    // TODO: send to Redux
-
-    console.log(encodedImage);
+    const image = await encodeImage(imagePath);
+    const mimeType = await getFileType(imagePath);
+    e.sender.send('updateProjectInfo', { image: { image, mimeType } });
   }
 });

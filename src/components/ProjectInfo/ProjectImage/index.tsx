@@ -10,7 +10,7 @@ import styles from './ProjectImage.module.scss';
 const { ipcRenderer } = window.require('electron');
 
 const ProjectImage: React.FC = () => {
-  const projectInfo = useSelector((state: State) => state.project.data.projectInfo);
+  const projectImage = useSelector((state: State) => state.project.data.projectInfo.image);
   const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
 
   const handleOnDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
@@ -46,8 +46,8 @@ const ProjectImage: React.FC = () => {
       onDrop={handleOnDrop}
       onClick={handleClick}
     >
-      {projectInfo?.image ? (
-        <img src={projectInfo.image} className={styles.image} />
+      {projectImage ? (
+        <img src={`data:${projectImage.mimeType};base64,${projectImage.image}`} className={styles.image} />
       ) :(
         <FormattedMessage id='dragOrClickProjectImage' />
       )}
