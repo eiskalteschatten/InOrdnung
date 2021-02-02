@@ -7,20 +7,20 @@
   display: block;
 
   &:hover {
-    background: rgba(0, 0, 0, .1);
+    background: $lightButtonHoverBg;
     color: inherit;
     text-decoration: none;
 
     @media (prefers-color-scheme: dark) {
-      background: rgba(255, 255, 255, .1);
+      background: $darkButtonHoverBg;
     }
   }
 
   &:active, &.selected {
-    background: rgba(0, 0, 0, .15);
+    background: $lightButtonActiveBg;
 
     @media (prefers-color-scheme: dark) {
-      background: rgba(255, 255, 255, .15);
+      background: $darkButtonActiveBg;
     }
   }
 

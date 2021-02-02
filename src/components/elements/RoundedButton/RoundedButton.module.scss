@@ -1,3 +1,5 @@
+@import "../../../scss/variables";
+
 .roundedButton {
   position: relative;
   opacity: 0.8;
@@ -24,11 +26,11 @@
     opacity: 1;
 
     &::before {
-      background: rgba(0, 0, 0, .1);
+      background: $lightButtonHoverBg;
       transform: scale(1);
 
       @media (prefers-color-scheme: dark) {
-        background: rgba(255, 255, 255, .1);
+        background: $darkButtonHoverBg;
       }
     }
   }
@@ -37,11 +39,11 @@
     opacity: 1;
 
     &::before {
-      background: rgba(0, 0, 0, .15);
+      background: $lightButtonActiveBg;
       transform: scale(1);
 
       @media (prefers-color-scheme: dark) {
-        background: rgba(255, 255, 255, .15);
+        background: $darkButtonActiveBg;
       }
     }
   }

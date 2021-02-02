@@ -17,7 +17,7 @@ const Project: React.FC = () => {
     <div className={styles.projectLayout}>
       <Sidebar />
 
-      <div className={styles.leftView}>
+      <div className={styles.rightView}>
         <Switch>
           <Route exact path={`${path}`} component={ProjectInfo} />
         </Switch>
