@@ -3,7 +3,7 @@ import { Reducer } from 'redux';
 import { AppActions } from '../actions/appActions';
 
 import {
-  APP_PLATFORM,
+  APP_SET_PLATFORM,
 } from '../constants';
 
 export interface AppState {
@@ -19,7 +19,7 @@ const appReducer: Reducer<AppState, AppActions> = (
   action: AppActions
 ): any => {
   switch (action.type) {
-    case APP_PLATFORM:
+    case APP_SET_PLATFORM:
       return {
         ...state,
         platform: action.platform,
