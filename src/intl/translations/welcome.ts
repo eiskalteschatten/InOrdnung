@@ -1,8 +1,8 @@
 export default {
   en: {
-    welcomeToInOrdung: 'Welcome to InOrdnung'
+    welcomeToInOrdung: 'Welcome to InOrdnung',
   },
   de: {
-    welcomeToInOrdung: 'Willkommen in InOrdnung'
-  }
+    welcomeToInOrdung: 'Willkommen in InOrdnung',
+  },
 };

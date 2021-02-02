@@ -9,5 +9,5 @@ export default {
   ...welcome.de,
   ...project.de,
   ...about.de,
-  ...errors.de
+  ...errors.de,
 };

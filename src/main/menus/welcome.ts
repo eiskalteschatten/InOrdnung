@@ -29,7 +29,7 @@ const template: MenuItemConstructorOptions[] = [
       { role: 'cut' },
       { role: 'copy' },
       { role: 'paste' },
-      { role: 'pasteAndMatchStyle' }
+      { role: 'pasteAndMatchStyle' },
     ],
   },
   {

@@ -7,5 +7,5 @@ interface Translations {
 
 export default {
   en,
-  de
+  de,
 } as Translations;

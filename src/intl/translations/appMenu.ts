@@ -9,7 +9,7 @@ export default {
     aboutAlexSeifert: 'About Alex Seifert',
     menuAbout: 'About',
     menuCheckForUpdates: 'Check for Updates...',
-    preferences: 'Preferences'
+    preferences: 'Preferences',
   },
   de: {
     file: 'Datei',
@@ -21,6 +21,6 @@ export default {
     aboutAlexSeifert: 'Über Alex Seifert',
     menuAbout: 'Über',
     menuCheckForUpdates: 'Nach Aktualisierungen prüfen...',
-    preferences: 'Einstellungen'
-  }
+    preferences: 'Einstellungen',
+  },
 };

@@ -18,9 +18,9 @@ export default async (): Promise<void> => {
       height: 400,
       resizable: false,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
       },
-      backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0'
+      backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0',
     };
 
     if (process.platform === 'darwin') {

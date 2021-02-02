@@ -9,5 +9,5 @@ export default {
   ...welcome.en,
   ...project.en,
   ...about.en,
-  ...errors.en
+  ...errors.en,
 };

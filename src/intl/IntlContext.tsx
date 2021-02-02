@@ -6,12 +6,12 @@ import config from '../config';
 import enMessages from './en';
 import deMessages from './de';
 
-const defaultLocale = config.intl.defaultLocale;
+const { defaultLocale } = config.intl;
 const availableLocales = ['en', 'de'];
 
 const allMessages: any = {
   en: enMessages,
-  de: deMessages
+  de: deMessages,
 };
 
 const Context = createContext({
@@ -19,7 +19,7 @@ const Context = createContext({
   defaultLocale,
   availableLocales,
   messages: allMessages[defaultLocale],
-  switchLocale: (switchToLocale: string) => {}  // eslint-disable-line @typescript-eslint/no-unused-vars
+  switchLocale: (switchToLocale: string) => {},  // eslint-disable-line @typescript-eslint/no-unused-vars
 });
 
 interface Props {
@@ -43,7 +43,7 @@ const IntlProviderWrapper: React.FC<Props> = ({ children, injectedLocale }) => {
       defaultLocale,
       availableLocales,
       messages,
-      switchLocale
+      switchLocale,
     }}>
       <IntlProvider
         key={locale}

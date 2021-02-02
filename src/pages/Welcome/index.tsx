@@ -51,7 +51,7 @@ const Welcome: React.FC = () => {
         </Col>
         <Col xs={5} className={clsx({
           [styles.recentProjects]: true,
-          'hasDarwinTitlebar': platform === 'darwin'
+          'hasDarwinTitlebar': platform === 'darwin',
         })}>
         </Col>
       </Row>

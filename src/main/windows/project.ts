@@ -19,9 +19,9 @@ export default async (): Promise<void> => {
     height: 650, // preferences.windowHeight || 650,
     icon: path.join(__dirname, '../../assets/images/icon128.png'),
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
     },
-    backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0'
+    backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0',
   };
 
   // if (preferences.windowX && preferences.windowY) {

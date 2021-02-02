@@ -22,7 +22,7 @@ const SidebarItem: React.FC<Props> = ({ iconClass, title, path }) => {
       to={path}
       className={clsx({
         [styles.sidebarItem]: true,
-        [styles.selected]: currentPath === path
+        [styles.selected]: currentPath === path,
       })}
     >
       <i className={clsx(iconClass, styles.icon)}/>

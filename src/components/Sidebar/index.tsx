@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
   const sidebarItems: SidebarItemProp[] = [{
     path: '/',
     iconClass: 'bi-info-circle',
-    title: useTranslation('projectInfo')
+    title: useTranslation('projectInfo'),
   }];
 
   return (

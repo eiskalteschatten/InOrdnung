@@ -1,10 +1,10 @@
 export default {
   en: {
     aboutInOrdnung: 'About InOrdnung',
-    by: 'by'
+    by: 'by',
   },
   de: {
     aboutInOrdnung: 'Über InOrdnung',
-    by: 'von'
-  }
+    by: 'von',
+  },
 };

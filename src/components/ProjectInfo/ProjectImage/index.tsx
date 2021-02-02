@@ -34,7 +34,7 @@ const ProjectImage: React.FC = () => {
     <div
       className={clsx({
         [styles.projectImage]: true,
-        [styles.isDragging]: isDraggingOver
+        [styles.isDragging]: isDraggingOver,
       })}
       onDragOver={handleOnDragOver}
       onDragLeave={handleOnDragLeave}

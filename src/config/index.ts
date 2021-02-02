@@ -17,13 +17,13 @@ export interface Config {
 export default {
   app: {
     name: 'InOrdnung',
-    version: '1.0.0'
+    version: '1.0.0',
   },
   updates: {
-    url: 'update url'
+    url: 'update url',
   },
   intl: {
-    defaultLocale: process.env.REACT_APP_LOCALE || 'en'
+    defaultLocale: process.env.REACT_APP_LOCALE || 'en',
   },
   extensions: {
     images: ['jpg', 'jpeg', 'png', 'gif', 'svg'],
