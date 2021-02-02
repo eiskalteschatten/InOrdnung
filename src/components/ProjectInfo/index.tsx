@@ -28,9 +28,8 @@ const ProjectInfo: React.FC = () => {
 
         <div className={styles.formControlWrapper}>
           <label htmlFor='projectDescription'><FormattedMessage id='projectDescription' /></label>
-          <input
-            type='text'
-            className='form-control'
+          <textarea
+            className={clsx('form-control', styles.projectDescription)}
             id='projectDescription'
           />
         </div>
