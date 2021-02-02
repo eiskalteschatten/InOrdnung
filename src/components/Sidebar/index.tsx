@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
 import useTranslation from '../../intl/useTranslation';
-import SidebarItem, { Props as SidebarItemProp } from './components/SidebarItem';
+import SidebarItem, { Props as SidebarItemProp } from './SidebarItem';
 
 import styles from './Sidebar.module.scss';
 
