@@ -17,19 +17,23 @@ const ProjectInfo: React.FC = () => {
           styles.formGroup
         )}
       >
-        <label htmlFor='projectName'><FormattedMessage id='projectName' /></label>
-        <input
-          type='text'
-          className='form-control'
-          id='projectName'
-        />
+        <div className={styles.formControlWrapper}>
+          <label htmlFor='projectName'><FormattedMessage id='projectName' /></label>
+          <input
+            type='text'
+            className='form-control'
+            id='projectName'
+          />
+        </div>
 
-        <label htmlFor='projectDescription'><FormattedMessage id='projectDescription' /></label>
-        <input
-          type='text'
-          className='form-control'
-          id='projectDescription'
-        />
+        <div className={styles.formControlWrapper}>
+          <label htmlFor='projectDescription'><FormattedMessage id='projectDescription' /></label>
+          <input
+            type='text'
+            className='form-control'
+            id='projectDescription'
+          />
+        </div>
       </div>
     </div>
   );
