@@ -15,8 +15,8 @@ export default async (): Promise<void> => {
   // const preferences = load window preferences here;
 
   const browserWindowOptions: BrowserWindowConstructorOptions = {
-    // width: preferences.windowWidth,
-    // height: preferences.windowHeight,
+    width: 1000, // preferences.windowWidth || 1000,
+    height: 650, // preferences.windowHeight || 650,
     icon: path.join(__dirname, '../../assets/images/icon128.png'),
     webPreferences: {
       nodeIntegration: true
