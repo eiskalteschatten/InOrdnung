@@ -5,9 +5,6 @@ $imageHeight: 300px;
 
 .projectImage {
   display: flex;
-  width: $imageWidth;
-  height: $imageHeight;
-  border: 1px dashed lighten($lightColor, 50%);
   margin: 35px 0 60px 0;
   align-items: center;
   justify-content: center;
@@ -16,24 +13,30 @@ $imageHeight: 300px;
   cursor: pointer;
   -webkit-user-select: none;
 
-  &:hover {
-    background: $lightButtonHoverBg;
+  &.noImage {
+    border: 1px dashed lighten($lightColor, 50%);
+    width: $imageWidth;
+  height: $imageHeight;
+
+    &:hover {
+      background: $lightButtonHoverBg;
+
+      @media (prefers-color-scheme: dark) {
+        background: $darkButtonHoverBg;
+      }
+    }
+
+    &:active {
+      background: $lightButtonActiveBg;
+
+      @media (prefers-color-scheme: dark) {
+        background: $darkButtonActiveBg;
+      }
+    }
 
     @media (prefers-color-scheme: dark) {
-      background: $darkButtonHoverBg;
+      border: 1px dashed darken($darkColor, 50%);
     }
-  }
-
-  &:active {
-    background: $lightButtonActiveBg;
-
-    @media (prefers-color-scheme: dark) {
-      background: $darkButtonActiveBg;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    border: 1px dashed darken($darkColor, 50%);
   }
 }
 
@@ -46,7 +49,7 @@ $imageHeight: 300px;
 }
 
 .image {
-  width: $imageWidth;
-  height: $imageHeight;
+  max-width: $imageWidth;
+  max-height: $imageHeight;
   object-fit: cover;
 }
