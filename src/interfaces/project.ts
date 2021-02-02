@@ -3,9 +3,9 @@ export interface ProjectInfo {
   description?: string;
   image?: string;
   hasStartDate?: boolean;
-  startDate?: Date;
+  startDate?: string;
   hasEndDate?: boolean;
-  endDate?: Date;
+  endDate?: string;
 }
 
 export interface ProjectFileMetaData {

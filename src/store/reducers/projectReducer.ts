@@ -31,7 +31,10 @@ const appReducer: Reducer<ProjectState, ProjectActions> = (
     case PROJECT_SET_PROJECT_INFO:
       return {
         ...state,
-        projectInfo: action.payload,
+        data: {
+          ...state.data,
+          projectInfo: action.payload,
+        },
       };
     default:
       return state;
