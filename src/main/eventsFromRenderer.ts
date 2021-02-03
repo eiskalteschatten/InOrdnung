@@ -42,3 +42,8 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, project: ProjectFile, fileMeta
     await writeFile(project, fileMetaData, window);
   }
 });
+
+ipcMain.on('projectIsEdited', async (e: IpcMainEvent): Promise<void> => {
+  const window = BrowserWindow.fromWebContents(e.sender);
+  window?.setDocumentEdited(true);
+});

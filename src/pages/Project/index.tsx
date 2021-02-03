@@ -1,22 +1,32 @@
 import React, { useEffect } from 'react';
 import { Route, useRouteMatch, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { State } from '../../store';
+import { fileSetSaved } from '../../store/actions/fileActions';
 import Sidebar from '../../components/Sidebar';
 import ProjectInfo from '../../components/ProjectInfo';
 import useTranslation from '../../intl/useTranslation';
 
 import styles from './Project.module.scss';
 
+const { ipcRenderer } = window.require('electron');
+
 const Project: React.FC = () => {
   const { path } = useRouteMatch();
-  const projectName = useSelector((state: State) => state.project.projectInfo.name);
+  const project = useSelector((state: State) => state.project);
   const untitled = useTranslation('projectUntitled');
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = projectName || untitled;
-  }, [projectName, untitled]);
+    document.title = project.projectInfo.name || untitled;
+  }, [project, untitled]);
+
+  useEffect(() => {
+    dispatch(fileSetSaved(false));
+
+    ipcRenderer.send('projectIsEdited');
+  }, [project]);
 
   return (
     <div className={styles.projectLayout}>
