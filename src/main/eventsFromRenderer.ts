@@ -4,6 +4,8 @@ import createProjectWindow from './windows/project';
 import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
 import projectImageCm from './cmMenus/projectImage';
 import { selectProjectImage } from './lib/project';
+import { writeFile } from './lib/projectFile';
+import { ProjectFile, ProjectFileMetaData } from '../interfaces/project';
 
 ipcMain.on('createNewProject', createProjectWindow);
 
@@ -31,4 +33,8 @@ ipcMain.on('showProjectImageContextMenu', (e: IpcMainEvent): void => {
     const menu = Menu.buildFromTemplate(projectImageCm);
     menu.popup({ window });
   }
+});
+
+ipcMain.on('saveProject', async (e: IpcMainEvent, project: ProjectFile, fileMetaData: ProjectFileMetaData): Promise<void> => {
+  await writeFile(project, fileMetaData, e.sender);
 });
