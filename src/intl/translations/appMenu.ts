@@ -2,6 +2,8 @@ export default {
   en: {
     file: 'File',
     menuNewProject: 'New Project',
+    menuSave: 'Save',
+    menuSaveAs: 'Save As...',
     edit: 'Edit',
     view: 'View',
     menuDevelopment: 'Development',
@@ -14,6 +16,8 @@ export default {
   de: {
     file: 'Datei',
     menuNewProject: 'Neues Projekt',
+    menuSave: 'Speichern',
+    menuSaveAs: 'Speichern unter...',
     edit: 'Bearbeiten',
     view: 'Darstellung',
     menuDevelopment: 'Entwicklung',

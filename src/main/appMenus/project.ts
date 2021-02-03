@@ -22,6 +22,20 @@ const template: MenuItemConstructorOptions[] = [
       },
       { type: 'separator' },
       { role: 'close' },
+      {
+        label: translation.menuSave,
+        accelerator: 'CmdOrCtrl+S',
+        click: (): void => {
+
+        },
+      },
+      {
+        label: translation.menuSaveAs,
+        accelerator: 'CmdOrCtrl+Shift+S',
+        click: (): void => {
+
+        },
+      },
     ],
   },
   {
