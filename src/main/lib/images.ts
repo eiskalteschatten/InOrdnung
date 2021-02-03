@@ -27,6 +27,7 @@ export const checkIfFileIsImage = (imagePath: string, promptUser = false): boole
   }
   catch (error) {
     console.error(error);
+    return false;
   }
 };
 
