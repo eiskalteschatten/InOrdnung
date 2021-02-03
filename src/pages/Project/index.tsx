@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, useRouteMatch, Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -15,8 +15,10 @@ const { ipcRenderer } = window.require('electron');
 const Project: React.FC = () => {
   const { path } = useRouteMatch();
   const project = useSelector((state: State) => state.project);
+  const file = useSelector((state: State) => state.file);
   const untitled = useTranslation('projectUntitled');
   const dispatch = useDispatch();
+  const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
 
   useEffect(() => {
     document.title = project.projectInfo.name || untitled;
@@ -25,6 +27,16 @@ const Project: React.FC = () => {
   useEffect(() => {
     dispatch(fileSetSaved(false));
     ipcRenderer.send('projectIsEdited');
+
+    if (file.fileLoaded) {
+      if (autoSaveTimeout) {
+        clearTimeout(autoSaveTimeout);
+      }
+
+      setAutoSaveTimeout(setTimeout(() => {
+        ipcRenderer.send('saveProject', project, file);
+      }, 1000));
+    }
   }, [project]);
 
   return (
