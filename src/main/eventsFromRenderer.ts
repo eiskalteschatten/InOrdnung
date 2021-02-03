@@ -1,8 +1,9 @@
-import { ipcMain, dialog, IpcMainEvent } from 'electron';
+import { ipcMain, dialog, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 
 import config from '../config';
 import createProjectWindow from './windows/project';
 import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
+import projectImageCm from './cmMenus/projectImage';
 
 ipcMain.on('createNewProject', createProjectWindow);
 
@@ -29,5 +30,14 @@ ipcMain.on('handleProjectImageDrop', async (e: IpcMainEvent, imagePath: string):
     const image = await encodeImage(imagePath);
     const mimeType = await getFileType(imagePath);
     e.sender.send('updateProjectInfo', { image: { image, mimeType } });
+  }
+});
+
+ipcMain.on('showProjectImageContextMenu', (e: IpcMainEvent): void => {
+  const window = BrowserWindow.fromWebContents(e.sender);
+
+  if (window) {
+    const menu = Menu.buildFromTemplate(projectImageCm);
+    menu.popup({ window });
   }
 });

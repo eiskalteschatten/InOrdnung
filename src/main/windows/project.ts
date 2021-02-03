@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } fro
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../menus/project';
+import appMenu from '../appMenus/project';
 
 export const windows = new Set();
 

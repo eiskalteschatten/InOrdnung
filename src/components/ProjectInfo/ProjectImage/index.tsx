@@ -33,7 +33,9 @@ const ProjectImage: React.FC = () => {
     ipcRenderer.send('selectProjectImage');
   };
 
-  // TODO: add context menu
+  const handleCm = (): void => {
+    ipcRenderer.send('showProjectImageContextMenu');
+  };
 
   return (
     <div
@@ -46,6 +48,7 @@ const ProjectImage: React.FC = () => {
       onDragLeave={handleOnDragLeave}
       onDrop={handleOnDrop}
       onClick={handleClick}
+      onContextMenu={handleCm}
     >
       {projectImage ? (
         <img src={`data:${projectImage.mimeType};base64,${projectImage.image}`} className={styles.image} />
