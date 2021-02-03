@@ -21,7 +21,7 @@ ipcRenderer.on('updateProjectInfo', (event: IpcRendererEvent, projectInfo: Proje
 
 ipcRenderer.on('deleteProjectImage', (): any => dispatch(projectInfoDeleteImage()));
 
-ipcRenderer.on('saveProjectFileData', (event: IpcRendererEvent, fileMetaData: ProjectFileMetaData): void => {
+ipcRenderer.on('setProjectFileData', (event: IpcRendererEvent, fileMetaData: ProjectFileMetaData): void => {
   const state = getState();
   dispatch(fileSetMetaData({
     ...state.file,

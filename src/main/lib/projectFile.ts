@@ -14,7 +14,7 @@ export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   });
 
   if (!canceled) {
-    window.webContents.send('saveProjectFileData', {
+    window.webContents.send('setProjectFileData', {
       path: filePath,
       saved: true,
       fileLoaded: true,
