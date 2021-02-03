@@ -7,6 +7,9 @@ export default {
     projectDescription: 'Project Description',
     projectHasStartDate: 'This project has a start date',
     projectHasEndDate: 'This project has a end date',
+    projectChooseImage: 'Choose Image',
+    projectDeleteImage: 'Delete Image',
+    projectDeleteImageConfirmation: 'Are you sure you want to delete the project image?',
   },
   de: {
     createANewProject: 'Ein neues Projekt erstellen',
@@ -16,5 +19,8 @@ export default {
     projectDescription: 'Projektbeschriebung',
     projectHasStartDate: 'Dieses Projekt hat ein Startdatum',
     projectHasEndDate: 'Dieses Projekt hat ein Enddatum',
+    projectChooseImage: 'Bild auswählen',
+    projectDeleteImage: 'Bild löschen',
+    projectDeleteImageConfirmation: 'Sind Sie sicher, dass Sie das Projektbild löschen wollen?',
   },
 };
