@@ -13,9 +13,9 @@ export interface ProjectInfo {
 }
 
 export interface ProjectFileMetaData {
-  fileLoaded: boolean;
+  fileLoaded?: boolean;
   path: string;
-  saved: boolean;
+  saved?: boolean;
 }
 
 export interface ProjectFile {

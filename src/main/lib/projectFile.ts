@@ -14,6 +14,10 @@ export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   });
 
   if (!canceled) {
-    console.log(filePath);
+    window.webContents.send('saveProject', {
+      path: filePath,
+      saved: true,
+      fileLoaded: true,
+    });
   }
 };
