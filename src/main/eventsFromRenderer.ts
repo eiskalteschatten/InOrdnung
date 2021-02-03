@@ -15,9 +15,11 @@ ipcMain.on('selectProjectImage', async (e: IpcMainEvent): Promise<void> => {
   });
 
   const imagePath = result.filePaths[0];
-  const image = await encodeImage(imagePath);
-  const mimeType = await getFileType(imagePath);
-  e.sender.send('updateProjectInfo', { image: { image, mimeType } });
+  if (imagePath) {
+    const image = await encodeImage(imagePath);
+    const mimeType = await getFileType(imagePath);
+    e.sender.send('updateProjectInfo', { image: { image, mimeType } });
+  }
 });
 
 ipcMain.on('handleProjectImageDrop', async (e: IpcMainEvent, imagePath: string): Promise<void> => {

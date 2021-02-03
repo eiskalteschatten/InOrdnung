@@ -8,21 +8,26 @@ import translations from '../../intl';
 import { getLocale } from '../../lib/helper';
 
 export const checkIfFileIsImage = (imagePath: string, promptUser = false): boolean => {
-  const translation = translations[getLocale()];
-  const extension = path.extname(imagePath).replace('.', '').toLowerCase();
+  try {
+    const translation = translations[getLocale()];
+    const extension = path.extname(imagePath).replace('.', '').toLowerCase();
 
-  if (config.extensions.images.indexOf(extension) <= -1) {
-    if (promptUser) {
-      const extensionsString = config.extensions.images.join(', ');
-      const errorDescription = `${translation.errorImageMustBeImageFileDesc} ${extensionsString}.`;
-      dialog.showErrorBox(translation.errorImageMustBeImageFile, errorDescription);
-      console.error(translation.errorImageMustBeImageFile, errorDescription);
+    if (config.extensions.images.indexOf(extension) <= -1) {
+      if (promptUser) {
+        const extensionsString = config.extensions.images.join(', ');
+        const errorDescription = `${translation.errorImageMustBeImageFileDesc} ${extensionsString}.`;
+        dialog.showErrorBox(translation.errorImageMustBeImageFile, errorDescription);
+        console.error(translation.errorImageMustBeImageFile, errorDescription);
+      }
+
+      return false;
     }
 
-    return false;
+    return true;
   }
-
-  return true;
+  catch (error) {
+    console.error(error);
+  }
 };
 
 export const encodeImage = async (imagePath: string): Promise<string> => {
