@@ -4,7 +4,7 @@ import config from '../../config';
 import { getTranslation } from '../../lib/helper';
 import createProjectWindow from '../windows/project';
 import openAboutWindow from '../windows/about';
-import { openFile } from '../lib/projectFile';
+import { openFileDialog } from '../lib/projectFile';
 
 const translation = getTranslation();
 
@@ -23,8 +23,18 @@ const template: MenuItemConstructorOptions[] = [
         label: translation.menuOpen,
         accelerator: 'CmdOrCtrl+O',
         click: async (): Promise<void> => {
-          await openFile();
+          await openFileDialog();
         },
+      },
+      {
+        label: translation.menuOpenRecent,
+        role: 'recentDocuments',
+        submenu:[
+          {
+            label: translation.menuClearMenu,
+            role: 'clearRecentDocuments',
+          },
+        ],
       },
       { type: 'separator' },
       { role: 'close' },

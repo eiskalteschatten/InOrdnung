@@ -3,6 +3,7 @@ import './eventsFromRenderer';
 import config from '../config';
 import openWelcomeWindow from './windows/welcome';
 import { windows } from './windows/project';
+import { openFile } from './lib/projectFile';
 
 let app: Electron.App;
 
@@ -21,7 +22,7 @@ export default (_app: Electron.App): void => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (windows.size === 0) {
-      openWelcomeWindow(); 
+      openWelcomeWindow();
     }
   });
 
@@ -29,7 +30,11 @@ export default (_app: Electron.App): void => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (windows.size === 0) {
-      openWelcomeWindow(); 
+      openWelcomeWindow();
     }
+  });
+
+  app.on('open-file', async (e: Event, path: string): Promise<void> => {
+    await openFile(path);
   });
 };

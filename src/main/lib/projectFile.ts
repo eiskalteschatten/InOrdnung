@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog } from 'electron';
+import { BrowserWindow, dialog, app } from 'electron';
 import { promises as fsPromises } from 'fs';
 
 import config from '../../config';
@@ -44,7 +44,7 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
   }
 };
 
-export const openFile = async (): Promise<void> => {
+export const openFileDialog = async (): Promise<void> => {
   try {
     const { filePaths, canceled } = await dialog.showOpenDialog({
       filters: [
@@ -54,11 +54,20 @@ export const openFile = async (): Promise<void> => {
     });
 
     if (!canceled) {
-      const filePath = filePaths[0];
-      const fileContentsString = await fsPromises.readFile(filePath, 'utf8');
-      const fileContents = JSON.parse(fileContentsString);
-      await createProjectWindow(fileContents, filePath);
+      await openFile(filePaths[0]);
     }
+  }
+  catch (error) {
+    console.error(error);
+  }
+};
+
+export const openFile = async (filePath: string): Promise<void> => {
+  try {
+    const fileContentsString = await fsPromises.readFile(filePath, 'utf8');
+    const fileContents = JSON.parse(fileContentsString);
+    await createProjectWindow(fileContents, filePath);
+    app.addRecentDocument(filePath);
   }
   catch (error) {
     console.error(error);
