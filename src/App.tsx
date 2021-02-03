@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import EventsFromMain from './EventsFromMain';
 import { IntlProviderWrapper } from './intl/IntlContext';
 
 import Welcome from './pages/Welcome';
@@ -14,7 +13,6 @@ const App: React.FC = () => {
 
   return (
     <>
-      <EventsFromMain />
       <IntlProviderWrapper injectedLocale={locale}>
         <BrowserRouter>
           <Switch>
