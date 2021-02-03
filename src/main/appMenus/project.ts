@@ -5,7 +5,7 @@ import { getTranslation } from '../../lib/helper';
 import createWindow from '../windows/project';
 import openWelcomeWindow from '../windows/welcome';
 import openAboutWindow from '../windows/about';
-import { saveFile, saveFileAs } from '../lib/projectFile';
+import { saveFileAs } from '../lib/projectFile';
 
 const translation = getTranslation();
 
@@ -25,10 +25,8 @@ const template: MenuItemConstructorOptions[] = [
       {
         label: translation.menuSave,
         accelerator: 'CmdOrCtrl+S',
-        click: async (item: MenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
-          if (focusedWindow) {
-            await saveFile(focusedWindow);
-          }
+        click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
+          focusedWindow?.webContents.send('saveProject');
         },
       },
       {

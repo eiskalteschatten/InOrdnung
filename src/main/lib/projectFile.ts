@@ -7,10 +7,6 @@ import { getTranslation } from '../../lib/helper';
 
 const translation = getTranslation();
 
-export const saveFile = async (window: BrowserWindow): Promise<void> => {
-  await saveFileAs(window);
-};
-
 export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
@@ -26,12 +22,20 @@ export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
 
 export const writeFile = async (project: ProjectFile, fileMetaData: ProjectFileMetaData, sender: WebContents): Promise<void> => {
   try {
-    await fsPromises.writeFile(fileMetaData.path, JSON.stringify(project), 'utf8');
-    sender.send('setProjectFileMetaData', {
-      ...fileMetaData,
-      saved: true,
-      fileLoaded: true,
-    });
+    if (!fileMetaData.path) {
+      const window = BrowserWindow.fromWebContents(sender);
+      if (window) {
+        await saveFileAs(window);
+      }
+    }
+    else {
+      await fsPromises.writeFile(fileMetaData.path, JSON.stringify(project), 'utf8');
+      sender.send('setProjectFileMetaData', {
+        ...fileMetaData,
+        saved: true,
+        fileLoaded: true,
+      });
+    }
   }
   catch (error) {
     console.error(error);
