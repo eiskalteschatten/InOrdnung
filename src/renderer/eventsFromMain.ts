@@ -2,15 +2,15 @@ import { IpcRendererEvent } from 'electron';
 
 import { ProjectInfo } from '../interfaces/project';
 import { getState, dispatch } from '../store';
-import { projectSetProjectInfo } from '../store/actions/projectActions';
+import { projectInfoSetInfo } from '../store/actions/projectInfoActions';
 
 const { ipcRenderer } = window.require('electron');
 
 ipcRenderer.on('updateProjectInfo', (event: IpcRendererEvent, projectInfo: ProjectInfo): void => {
   console.log('ipcrendereron');
   const state = getState();
-  dispatch(projectSetProjectInfo({
-    ...state.project.data.projectInfo,
+  dispatch(projectInfoSetInfo({
+    ...state.projectInfo,
     ...projectInfo,
   }));
 });

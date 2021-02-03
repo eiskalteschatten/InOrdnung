@@ -15,7 +15,7 @@ export const initialState: ProjectFileMetaData = {
   saved: true,
 };
 
-const appReducer: Reducer<ProjectFileMetaData, FileActions> = (
+const fileReducer: Reducer<ProjectFileMetaData, FileActions> = (
   state = initialState,
   action: FileActions
 ): any => {
@@ -37,4 +37,4 @@ const appReducer: Reducer<ProjectFileMetaData, FileActions> = (
   }
 };
 
-export default appReducer;
+export default fileReducer;
