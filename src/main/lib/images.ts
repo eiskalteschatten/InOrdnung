@@ -4,12 +4,11 @@ import path from 'path';
 import FileType from 'file-type';
 
 import config from '../../config';
-import translations from '../../intl';
-import { getLocale } from '../../lib/helper';
+import { getTranslation } from '../../lib/helper';
 
 export const checkIfFileIsImage = (imagePath: string, promptUser = false): boolean => {
   try {
-    const translation = translations[getLocale()];
+    const translation = getTranslation();
     const extension = path.extname(imagePath).replace('.', '').toLowerCase();
 
     if (config.extensions.images.indexOf(extension) <= -1) {

@@ -1,10 +1,9 @@
 import { dialog, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import translations from '../../intl';
-import { getLocale } from '../../lib/helper';
+import { getTranslation } from '../../lib/helper';
 import { selectProjectImage } from '../lib/project';
 
-const translation = translations[getLocale()];
+const translation = getTranslation();
 
 const template: MenuItemConstructorOptions[] = [
   {
