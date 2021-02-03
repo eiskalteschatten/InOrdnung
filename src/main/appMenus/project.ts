@@ -20,6 +20,13 @@ const template: MenuItemConstructorOptions[] = [
           createWindow();
         },
       },
+      {
+        label: translation.menuOpen,
+        accelerator: 'CmdOrCtrl+O',
+        click: (): void => {
+
+        },
+      },
       { type: 'separator' },
       { role: 'close' },
       {
