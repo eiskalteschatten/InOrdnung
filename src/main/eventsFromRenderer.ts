@@ -8,7 +8,10 @@ import { selectProjectImage } from './lib/project';
 ipcMain.on('createNewProject', createProjectWindow);
 
 ipcMain.on('selectProjectImage', async (e: IpcMainEvent): Promise<void> => {
-  await selectProjectImage(e.sender);
+  const window = BrowserWindow.fromWebContents(e.sender);
+  if (window) {
+    await selectProjectImage(window);
+  }
 });
 
 ipcMain.on('handleProjectImageDrop', async (e: IpcMainEvent, imagePath: string): Promise<void> => {

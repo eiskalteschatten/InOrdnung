@@ -1,9 +1,9 @@
-import { WebContents } from 'electron';
+import { BrowserWindow } from 'electron';
 import { encodeImage, getFileType, selectImage } from './images';
 
 
-export const selectProjectImage = async (sender: WebContents): Promise<void> => {
-  const { filePaths, canceled } = await selectImage();
+export const selectProjectImage = async (window: BrowserWindow): Promise<void> => {
+  const { filePaths, canceled } = await selectImage(window);
 
   if (!canceled) {
     const imagePath = filePaths[0];
@@ -11,7 +11,7 @@ export const selectProjectImage = async (sender: WebContents): Promise<void> => 
     if (imagePath) {
       const image = await encodeImage(imagePath);
       const mimeType = await getFileType(imagePath);
-      sender.send('updateProjectInfo', { image: { image, mimeType } });
+      window.webContents.send('updateProjectInfo', { image: { image, mimeType } });
     }
   }
 };

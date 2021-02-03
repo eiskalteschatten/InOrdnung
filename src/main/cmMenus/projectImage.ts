@@ -11,7 +11,7 @@ const template: MenuItemConstructorOptions[] = [
     label: translation.projectChooseImage,
     click: async (item: MenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
       if (focusedWindow?.webContents) {
-        await selectProjectImage(focusedWindow.webContents);
+        await selectProjectImage(focusedWindow);
       }
     },
   },

@@ -1,4 +1,4 @@
-import { dialog } from 'electron';
+import { BrowserWindow, dialog } from 'electron';
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import FileType from 'file-type';
@@ -50,8 +50,8 @@ export const getFileType = async (imagePath: string): Promise<string> => {
   return fileType?.mime ?? '';
 };
 
-export const selectImage = async (): Promise<Electron.OpenDialogReturnValue> =>
-  dialog.showOpenDialog({
+export const selectImage = async (window: BrowserWindow): Promise<Electron.OpenDialogReturnValue> =>
+  dialog.showOpenDialog(window, {
     filters: [
       { name: 'Images', extensions: config.extensions.images },
     ],
