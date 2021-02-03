@@ -41,25 +41,25 @@ const ProjectInfo: React.FC = () => {
         )}
       >
         <div className={styles.formControlWrapper}>
-          <label htmlFor='projectName'>
+          <label htmlFor='name'>
             <FormattedMessage id='projectName' />
           </label>
           <input
             type='text'
             className='form-control'
-            id='projectName'
+            id='name'
             value={projectInfo?.name}
             onChange={handleFieldChange}
           />
         </div>
 
         <div className={styles.formControlWrapper}>
-          <label htmlFor='projectDescription'>
+          <label htmlFor='description'>
             <FormattedMessage id='projectDescription' />
           </label>
           <textarea
             className={clsx('form-control', styles.projectDescription)}
-            id='projectDescription'
+            id='description'
             value={projectInfo?.description}
             onChange={handleFieldChange}
           />
