@@ -15,26 +15,27 @@ export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   });
 
   if (!canceled) {
+    window.setRepresentedFilename(filePath || '');
     window.webContents.send('setProjectFileMetaData', { path: filePath });
     window.webContents.send('saveProject');
   }
 };
 
-export const writeFile = async (project: ProjectFile, fileMetaData: ProjectFileMetaData, sender: WebContents): Promise<void> => {
+export const writeFile = async (project: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
   try {
     if (!fileMetaData.path) {
-      const window = BrowserWindow.fromWebContents(sender);
-      if (window) {
-        await saveFileAs(window);
-      }
+      await saveFileAs(window);
     }
     else {
       await fsPromises.writeFile(fileMetaData.path, JSON.stringify(project), 'utf8');
-      sender.send('setProjectFileMetaData', {
+
+      window.webContents.send('setProjectFileMetaData', {
         ...fileMetaData,
         saved: true,
         fileLoaded: true,
       });
+
+      window.setDocumentEdited(false);
     }
   }
   catch (error) {
