@@ -3,6 +3,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 
 import app from './reducers/appReducer';
 import project from './reducers/projectReducer';
+import file from './reducers/fileReducer';
 
 const devExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
@@ -11,6 +12,7 @@ const composeEnhancers = devExtension && process.env.NODE_ENV === 'development' 
 const reducer = combineReducers({
   app,
   project,
+  file,
 });
 
 const store = createStore(
