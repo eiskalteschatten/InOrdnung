@@ -5,7 +5,7 @@ import { getTranslation } from '../../lib/helper';
 import createWindow from '../windows/project';
 import openWelcomeWindow from '../windows/welcome';
 import openAboutWindow from '../windows/about';
-import { saveFileAs } from '../lib/projectFile';
+import { openFile, saveFileAs } from '../lib/projectFile';
 
 const translation = getTranslation();
 
@@ -16,15 +16,15 @@ const template: MenuItemConstructorOptions[] = [
       {
         label: translation.menuNewProject,
         accelerator: 'CmdOrCtrl+N',
-        click: (): void => {
-          createWindow();
+        click: async (): Promise<void> => {
+          await createWindow();
         },
       },
       {
         label: translation.menuOpen,
         accelerator: 'CmdOrCtrl+O',
-        click: (): void => {
-
+        click: async (): Promise<void> => {
+          await openFile();
         },
       },
       { type: 'separator' },

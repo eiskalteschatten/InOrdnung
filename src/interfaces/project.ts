@@ -18,7 +18,6 @@ export interface ProjectFileMetaData {
   saved?: boolean;
 }
 
-
 export interface Project {
   projectInfo: ProjectInfo;
 }

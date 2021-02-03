@@ -7,7 +7,7 @@ import { selectProjectImage } from './lib/project';
 import { writeFile } from './lib/projectFile';
 import { ProjectFile, ProjectFileMetaData } from '../interfaces/project';
 
-ipcMain.on('createNewProject', createProjectWindow);
+ipcMain.on('createNewProject', () => createProjectWindow());
 
 ipcMain.on('selectProjectImage', async (e: IpcMainEvent): Promise<void> => {
   const window = BrowserWindow.fromWebContents(e.sender);

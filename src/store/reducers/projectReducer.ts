@@ -4,6 +4,7 @@ import { Project } from '../../interfaces/project';
 import { ProjectActions } from '../actions/projectActions';
 
 import {
+  PROJECT_SET_PROJECT,
   PROJECT_SET_PROJECT_INFO,
   PROJECT_DELETE_IMAGE,
 } from '../constants';
@@ -17,6 +18,8 @@ const projectInfoReducer: Reducer<Project, ProjectActions> = (
   action: ProjectActions
 ): any => {
   switch (action.type) {
+    case PROJECT_SET_PROJECT:
+      return action.payload;
     case PROJECT_SET_PROJECT_INFO:
       return {
         ...state,

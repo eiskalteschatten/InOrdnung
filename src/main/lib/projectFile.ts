@@ -4,6 +4,7 @@ import { promises as fsPromises } from 'fs';
 import config from '../../config';
 import { ProjectFile, ProjectFileMetaData } from '../../interfaces/project';
 import { getTranslation } from '../../lib/helper';
+import createProjectWindow from '../windows/project';
 
 const translation = getTranslation();
 
@@ -36,6 +37,27 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
       });
 
       window.setDocumentEdited(false);
+    }
+  }
+  catch (error) {
+    console.error(error);
+  }
+};
+
+export const openFile = async (): Promise<void> => {
+  try {
+    const { filePaths, canceled } = await dialog.showOpenDialog({
+      filters: [
+        { name: translation.projectInOrdnungProjectFile, extensions: [config.extensions.default] },
+      ],
+      properties: ['openFile'],
+    });
+
+    if (!canceled) {
+      const filePath = filePaths[0];
+      const fileContentsString = await fsPromises.readFile(filePath, 'utf8');
+      const fileContents = JSON.parse(fileContentsString);
+      await createProjectWindow(fileContents, filePath);
     }
   }
   catch (error) {

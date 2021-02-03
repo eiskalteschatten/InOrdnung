@@ -4,12 +4,13 @@ import path from 'path';
 import initializeRenderer from '../initializeRenderer';
 import appMenu from '../appMenus/project';
 import { getTranslation } from '../../lib/helper';
+import { ProjectFile } from '../../interfaces/project';
 
 const translation = getTranslation();
 
 export const windows = new Set();
 
-export default async (): Promise<void> => {
+export default async (profileFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
   // if (process.env.NODE_ENV === 'development') {
   //   const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
   //   await installExtension(REDUX_DEVTOOLS);
@@ -51,8 +52,10 @@ export default async (): Promise<void> => {
     newWindow.on('closed', () => closed(newWindow));
 
     newWindow.webContents.on('did-finish-load', (): void => {
-      if (newWindow) {
-        initializeRenderer(newWindow);
+      initializeRenderer(newWindow);
+
+      if (profileFile && filePath) {
+        newWindow.webContents.send('openProject', profileFile, filePath);
       }
     });
 
@@ -63,6 +66,8 @@ export default async (): Promise<void> => {
 
     windows.add(newWindow);
   }
+
+  return newWindow;
 };
 
 const onClose = async (e: Event, window: BrowserWindow | undefined): Promise<void> => {

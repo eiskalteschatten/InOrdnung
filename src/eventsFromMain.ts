@@ -1,9 +1,9 @@
 import { IpcRendererEvent } from 'electron';
 
-import { ProjectInfo, ProjectFileMetaData } from './interfaces/project';
+import { ProjectInfo, ProjectFileMetaData, ProjectFile } from './interfaces/project';
 import { getState, dispatch } from './store';
 import { appSetPlatform } from './store/actions/appActions';
-import { projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions';
+import { projectSetProject, projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions';
 import { fileSetMetaData } from './store/actions/fileActions';
 
 const { ipcRenderer } = window.require('electron');
@@ -32,4 +32,13 @@ ipcRenderer.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: Pro
 ipcRenderer.on('saveProject', (): void => {
   const { project, file } = getState();
   ipcRenderer.send('saveProject', { project }, file);
+});
+
+ipcRenderer.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, filePath: string): void => {
+  dispatch(projectSetProject(projectFile.project));
+  dispatch(fileSetMetaData({
+    path: filePath,
+    fileLoaded: true,
+    saved: true,
+  }));
 });
