@@ -6,6 +6,7 @@ import { getLocale } from '../../lib/helper';
 import createWindow from '../windows/project';
 import openWelcomeWindow from '../windows/welcome';
 import openAboutWindow from '../windows/about';
+import { saveFile, saveFileAs } from '../lib/projectFile';
 
 const translation = translations[getLocale()];
 
@@ -25,15 +26,19 @@ const template: MenuItemConstructorOptions[] = [
       {
         label: translation.menuSave,
         accelerator: 'CmdOrCtrl+S',
-        click: (): void => {
-
+        click: async (item: MenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
+          if (focusedWindow) {
+            await saveFile(focusedWindow);
+          }
         },
       },
       {
         label: translation.menuSaveAs,
         accelerator: 'CmdOrCtrl+Shift+S',
-        click: (): void => {
-
+        click: async (item: MenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
+          if (focusedWindow) {
+            await saveFileAs(focusedWindow);
+          }
         },
       },
     ],
