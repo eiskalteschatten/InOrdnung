@@ -49,3 +49,11 @@ export const getFileType = async (imagePath: string): Promise<string> => {
   const fileType = await FileType.fromFile(imagePath);
   return fileType?.mime ?? '';
 };
+
+export const selectImage = async (): Promise<Electron.OpenDialogReturnValue> =>
+  dialog.showOpenDialog({
+    filters: [
+      { name: 'Images', extensions: config.extensions.images },
+    ],
+    properties: ['openFile'],
+  });

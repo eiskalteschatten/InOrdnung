@@ -2,14 +2,17 @@ import { dialog, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'ele
 
 import translations from '../../intl';
 import { getLocale } from '../../lib/helper';
+import { selectProjectImage } from '../lib/project';
 
 const translation = translations[getLocale()];
 
 const template: MenuItemConstructorOptions[] = [
   {
     label: translation.projectChooseImage,
-    click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
-      focusedWindow?.webContents.send('get-bookcover-color');
+    click: async (item: MenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
+      if (focusedWindow?.webContents) {
+        await selectProjectImage(focusedWindow.webContents);
+      }
     },
   },
   {

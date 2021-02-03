@@ -1,26 +1,14 @@
-import { ipcMain, dialog, IpcMainEvent, BrowserWindow, Menu } from 'electron';
+import { ipcMain, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 
-import config from '../config';
 import createProjectWindow from './windows/project';
 import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
 import projectImageCm from './cmMenus/projectImage';
+import { selectProjectImage } from './lib/project';
 
 ipcMain.on('createNewProject', createProjectWindow);
 
 ipcMain.on('selectProjectImage', async (e: IpcMainEvent): Promise<void> => {
-  const result = await dialog.showOpenDialog({
-    filters: [
-      { name: 'Images', extensions: config.extensions.images },
-    ],
-    properties: ['openFile'],
-  });
-
-  const imagePath = result.filePaths[0];
-  if (imagePath) {
-    const image = await encodeImage(imagePath);
-    const mimeType = await getFileType(imagePath);
-    e.sender.send('updateProjectInfo', { image: { image, mimeType } });
-  }
+  await selectProjectImage(e.sender);
 });
 
 ipcMain.on('handleProjectImageDrop', async (e: IpcMainEvent, imagePath: string): Promise<void> => {
