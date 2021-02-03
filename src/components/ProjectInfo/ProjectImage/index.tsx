@@ -10,7 +10,7 @@ import styles from './ProjectImage.module.scss';
 const { ipcRenderer } = window.require('electron');
 
 const ProjectImage: React.FC = () => {
-  const projectImage = useSelector((state: State) => state.projectInfo.image);
+  const projectImage = useSelector((state: State) => state.project.projectInfo.image);
   const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
 
   const handleOnDragOver = (e: React.DragEvent<HTMLDivElement>): void => {

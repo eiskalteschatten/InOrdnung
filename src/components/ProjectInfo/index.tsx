@@ -6,25 +6,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 
 import { State } from '../../store';
-import { projectInfoSetInfo } from '../../store/actions/projectInfoActions';
+import { projectSetProjectInfo } from '../../store/actions/projectActions';
 import useTranslation from '../../intl/useTranslation';
 import ProjectImage from './ProjectImage';
 
 import styles from './ProjectInfo.module.scss';
 
 const ProjectInfo: React.FC = () => {
-  const projectInfo = useSelector((state: State) => state.projectInfo);
+  const projectInfo = useSelector((state: State) => state.project.projectInfo);
   const dispatch = useDispatch();
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    dispatch(projectInfoSetInfo({
+    dispatch(projectSetProjectInfo({
       ...projectInfo,
       [e.target.id]: e.target.value,
     }));
   };
 
   const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(projectInfoSetInfo({
+    dispatch(projectSetProjectInfo({
       ...projectInfo,
       [e.target.id]: !!e.target.checked,
     }));
