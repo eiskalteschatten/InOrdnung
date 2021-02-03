@@ -7,7 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import App from './App';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import './renderer/eventsFromMain';
+import './eventsFromMain';
 
 import './scss/bootstrap.scss';
 import './scss/index.scss';

@@ -1,10 +1,10 @@
 import { IpcRendererEvent } from 'electron';
 
-import { ProjectInfo, ProjectFileMetaData } from '../interfaces/project';
-import { getState, dispatch } from '../store';
-import { appSetPlatform } from '../store/actions/appActions';
-import { projectSetProjectInfo, projectDeleteImage } from '../store/actions/projectActions';
-import { fileSetMetaData } from '../store/actions/fileActions';
+import { ProjectInfo, ProjectFileMetaData } from './interfaces/project';
+import { getState, dispatch } from './store';
+import { appSetPlatform } from './store/actions/appActions';
+import { projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions';
+import { fileSetMetaData } from './store/actions/fileActions';
 
 const { ipcRenderer } = window.require('electron');
 
