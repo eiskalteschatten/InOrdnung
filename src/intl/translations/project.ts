@@ -12,6 +12,8 @@ export default {
     projectDeleteImageConfirmation: 'Are you sure you want to delete the project image?',
     projectInOrdnungProjectFile: 'InOrdnung Project File',
     projectUntitled: 'Untitled',
+    projectClosedUnsavedProjectConfimration: 'Are you sure you want close this project without saving your changes?',
+    projectClosedUnsavedProjectDetail: 'All of your unsaved changes will be permanently lost.',
   },
   de: {
     createANewProject: 'Ein neues Projekt erstellen',
@@ -26,5 +28,7 @@ export default {
     projectDeleteImageConfirmation: 'Sind Sie sicher, dass Sie das Projektbild löschen wollen?',
     projectInOrdnungProjectFile: 'InOrdnung Projektdatei',
     projectUntitled: 'Ohne Titel',
+    projectClosedUnsavedProjectConfimration: 'Sind Sie sicher, dass Sie dieses Projekt mit ungespeicherten Änderungen schließen?',
+    projectClosedUnsavedProjectDetail: 'Alle Ihrer ungespeicherten Änderugen werden unwiderrufbar verloren.',
   },
 };

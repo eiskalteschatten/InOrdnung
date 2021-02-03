@@ -1,8 +1,11 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, dialog, Menu, nativeTheme } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
 import appMenu from '../appMenus/project';
+import { getTranslation } from '../../lib/helper';
+
+const translation = getTranslation();
 
 export const windows = new Set();
 
@@ -44,7 +47,8 @@ export default async (): Promise<void> => {
         : `file://${path.join(__dirname, '../index.html#project')}`
     );
 
-    newWindow.on('closed', () => onClose(newWindow));
+    newWindow.on('close', (e: Event) => onClose(e, newWindow));
+    newWindow.on('closed', () => closed(newWindow));
 
     newWindow.webContents.on('did-finish-load', (): void => {
       if (newWindow) {
@@ -61,9 +65,22 @@ export default async (): Promise<void> => {
   }
 };
 
-const onClose = async (window: BrowserWindow | undefined): Promise<void> => {
+const onClose = async (e: Event, window: BrowserWindow | undefined): Promise<void> => {
   try {
     if (window) {
+      if (window.isDocumentEdited()) {
+        const result = await dialog.showMessageBox({
+          message: translation.projectClosedUnsavedProjectConfimration,
+          detail: translation.projectClosedUnsavedProjectDetail,
+          buttons: [translation.no, translation.yes],
+          type: 'warning',
+        });
+
+        if (result.response === 0) {
+          e.preventDefault();
+        }
+      }
+
       // const windowBounds = window.getBounds();
 
       // const windowPreferences = {
@@ -74,12 +91,16 @@ const onClose = async (window: BrowserWindow | undefined): Promise<void> => {
       //   windowIsFullScreen: window.isFullScreen(),
       //   windowIsMaximized: window.isMaximized(),
       // };
-
-      windows.delete(window);
-      window = undefined;
     }
   }
   catch (error) {
     console.error(error);
+  }
+};
+
+const closed = (window: BrowserWindow | undefined): void => {
+  if (window) {
+    windows.delete(window);
+    window = undefined;
   }
 };

@@ -24,7 +24,6 @@ const Project: React.FC = () => {
 
   useEffect(() => {
     dispatch(fileSetSaved(false));
-
     ipcRenderer.send('projectIsEdited');
   }, [project]);
 
