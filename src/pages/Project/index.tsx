@@ -34,7 +34,7 @@ const Project: React.FC = () => {
       }
 
       setAutoSaveTimeout(setTimeout(() => {
-        ipcRenderer.send('saveProject', project, file);
+        ipcRenderer.send('saveProject', { project }, file);
       }, 1000));
     }
   }, [project]);

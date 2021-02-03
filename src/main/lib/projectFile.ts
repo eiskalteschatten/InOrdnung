@@ -21,13 +21,13 @@ export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   }
 };
 
-export const writeFile = async (project: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
+export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
   try {
     if (!fileMetaData.path) {
       await saveFileAs(window);
     }
     else {
-      await fsPromises.writeFile(fileMetaData.path, JSON.stringify(project), 'utf8');
+      await fsPromises.writeFile(fileMetaData.path, JSON.stringify(projectFile), 'utf8');
 
       window.webContents.send('setProjectFileMetaData', {
         ...fileMetaData,

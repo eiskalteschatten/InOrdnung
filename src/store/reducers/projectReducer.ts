@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 
-import { ProjectFile } from '../../interfaces/project';
+import { Project } from '../../interfaces/project';
 import { ProjectActions } from '../actions/projectActions';
 
 import {
@@ -8,11 +8,11 @@ import {
   PROJECT_DELETE_IMAGE,
 } from '../constants';
 
-export const initialState: ProjectFile = {
+export const initialState: Project = {
   projectInfo: {},
 };
 
-const projectInfoReducer: Reducer<ProjectFile, ProjectActions> = (
+const projectInfoReducer: Reducer<Project, ProjectActions> = (
   state = initialState,
   action: ProjectActions
 ): any => {

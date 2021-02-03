@@ -35,11 +35,11 @@ ipcMain.on('showProjectImageContextMenu', (e: IpcMainEvent): void => {
   }
 });
 
-ipcMain.on('saveProject', async (e: IpcMainEvent, project: ProjectFile, fileMetaData: ProjectFileMetaData): Promise<void> => {
+ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData): Promise<void> => {
   const window = BrowserWindow.fromWebContents(e.sender);
 
   if (window) {
-    await writeFile(project, fileMetaData, window);
+    await writeFile(projectFile, fileMetaData, window);
   }
 });
 

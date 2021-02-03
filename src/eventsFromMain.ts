@@ -31,5 +31,5 @@ ipcRenderer.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: Pro
 
 ipcRenderer.on('saveProject', (): void => {
   const { project, file } = getState();
-  ipcRenderer.send('saveProject', project, file);
+  ipcRenderer.send('saveProject', { project }, file);
 });
