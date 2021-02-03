@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog, WebContents } from 'electron';
+import { BrowserWindow, dialog } from 'electron';
 import { promises as fsPromises } from 'fs';
 
 import config from '../../config';
