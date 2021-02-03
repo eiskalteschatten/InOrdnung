@@ -1,6 +1,9 @@
 import { BrowserWindow, dialog } from 'electron';
 
 import config from '../../config';
+import { getTranslation } from '../../lib/helper';
+
+const translation = getTranslation();
 
 export const saveFile = async (window: BrowserWindow): Promise<void> => {
   await saveFileAs(window);
@@ -9,7 +12,7 @@ export const saveFile = async (window: BrowserWindow): Promise<void> => {
 export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
-      { name: 'InOrdnung Project File', extensions: [config.extensions.default] },
+      { name: translation.projectInOrdnungProjectFile, extensions: [config.extensions.default] },
     ],
   });
 

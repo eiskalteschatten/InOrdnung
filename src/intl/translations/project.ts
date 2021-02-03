@@ -10,6 +10,7 @@ export default {
     projectChooseImage: 'Choose Image',
     projectDeleteImage: 'Delete Image',
     projectDeleteImageConfirmation: 'Are you sure you want to delete the project image?',
+    projectInOrdnungProjectFile: 'InOrdnung Project File',
   },
   de: {
     createANewProject: 'Ein neues Projekt erstellen',
@@ -22,5 +23,6 @@ export default {
     projectChooseImage: 'Bild auswählen',
     projectDeleteImage: 'Bild löschen',
     projectDeleteImageConfirmation: 'Sind Sie sicher, dass Sie das Projektbild löschen wollen?',
+    projectInOrdnungProjectFile: 'InOrdnung Projektdatei',
   },
 };
