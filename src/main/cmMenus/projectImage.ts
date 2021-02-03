@@ -28,7 +28,7 @@ const template: MenuItemConstructorOptions[] = [
       });
 
       if (result.response === 1) {
-        focusedWindow?.webContents.send('delete-bookcover');
+        focusedWindow?.webContents.send('deleteProjectImage');
       }
     },
   },
