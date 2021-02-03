@@ -34,6 +34,14 @@
     "directories": {
       "buildResources": "build-resources"
     },
+    "fileAssociations": [
+      {
+        "ext": ["inord"],
+        "name": "InOrdnung Project File",
+        "icon": "",
+        "role": "Editor"
+      }
+    ],
     "mac": {
       "target": [
         "dmg"
