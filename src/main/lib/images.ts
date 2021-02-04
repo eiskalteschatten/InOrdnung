@@ -2,6 +2,7 @@ import { BrowserWindow, dialog } from 'electron';
 import { promises as fsPromises } from 'fs';
 import path from 'path';
 import FileType from 'file-type';
+import sharp from 'sharp';
 
 import config from '../../config';
 import { getTranslation } from '../../lib/helper';
@@ -56,3 +57,10 @@ export const selectImage = async (window: BrowserWindow): Promise<Electron.OpenD
     ],
     properties: ['openFile'],
   });
+
+export const createThumbnail = async (image: string): Promise<string> => {
+  const sizes = config.images.recentProjectThumbnail;
+  const imageBuffer = Buffer.from(image);
+  const thumbnailBuffer = await sharp(imageBuffer).resize(sizes.width, sizes.height).toBuffer();
+  return thumbnailBuffer.toString('base64');
+};

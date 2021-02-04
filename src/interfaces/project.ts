@@ -25,3 +25,9 @@ export interface Project {
 export interface ProjectFile {
   project: Project;
 }
+
+export interface RecentProjectsLocalStorage {
+  path: string;
+  thumbnail?: string;
+  thumbnailMimeType?: string;
+}

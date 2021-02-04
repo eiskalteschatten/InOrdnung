@@ -5,6 +5,7 @@ import config from '../../config';
 import { ProjectFile, ProjectFileMetaData } from '../../interfaces/project';
 import { getTranslation } from '../../lib/helper';
 import createProjectWindow from '../windows/project';
+import { createThumbnail } from './images';
 
 const translation = getTranslation();
 
@@ -37,6 +38,7 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
       });
 
       window.setDocumentEdited(false);
+      await addToRecentProjects(window, fileMetaData.path, projectFile.project.projectInfo.image?.image, projectFile.project.projectInfo.image?.mimeType);
     }
   }
   catch (error) {
@@ -68,6 +70,16 @@ export const openFile = async (filePath: string): Promise<void> => {
     const fileContents = JSON.parse(fileContentsString);
     await createProjectWindow(fileContents, filePath);
     app.addRecentDocument(filePath);
+  }
+  catch (error) {
+    console.error(error);
+  }
+};
+
+export const addToRecentProjects = async (window: BrowserWindow, filePath: string, image?: string, mimeType?: string): Promise<void> => {
+  try {
+    const thumbnail = image ? await createThumbnail(image) : undefined;
+    window.webContents.send('addToRecentProjects', filePath, thumbnail, mimeType);
   }
   catch (error) {
     console.error(error);

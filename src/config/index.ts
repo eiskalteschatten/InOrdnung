@@ -13,6 +13,12 @@ export interface Config {
     default: string;
     images: string[];
   };
+  images: {
+    recentProjectThumbnail: {
+      width: number;
+      height: number;
+    };
+  };
 }
 
 export default {
@@ -29,5 +35,11 @@ export default {
   extensions: {
     default: 'inord',
     images: ['jpg', 'jpeg', 'png', 'gif', 'svg'],
+  },
+  images: {
+    recentProjectThumbnail: {
+      width: 200,
+      height: 200,
+    },
   },
 } as Config;

@@ -5,12 +5,14 @@ import initializeRenderer from '../initializeRenderer';
 import appMenu from '../appMenus/project';
 import { getTranslation } from '../../lib/helper';
 import { ProjectFile } from '../../interfaces/project';
+import { createThumbnail } from '../lib/images';
+import { addToRecentProjects } from '../lib/projectFile';
 
 const translation = getTranslation();
 
 export const windows = new Set();
 
-export default async (profileFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
+export default async (projectFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
   // if (process.env.NODE_ENV === 'development') {
   //   const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
   //   await installExtension(REDUX_DEVTOOLS);
@@ -51,11 +53,12 @@ export default async (profileFile?: ProjectFile, filePath?: string): Promise<Bro
     newWindow.on('close', (e: Event) => onClose(e, newWindow));
     newWindow.on('closed', () => closed(newWindow));
 
-    newWindow.webContents.on('did-finish-load', (): void => {
+    newWindow.webContents.on('did-finish-load', async (): Promise<void> => {
       initializeRenderer(newWindow);
 
-      if (profileFile && filePath) {
-        newWindow.webContents.send('openProject', profileFile, filePath);
+      if (projectFile && filePath) {
+        newWindow.webContents.send('openProject', projectFile, filePath);
+        await addToRecentProjects(newWindow, filePath, projectFile.project.projectInfo.image?.image, projectFile.project.projectInfo.image?.mimeType);
       }
     });
 

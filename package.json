@@ -36,7 +36,9 @@
     },
     "fileAssociations": [
       {
-        "ext": ["inord"],
+        "ext": [
+          "inord"
+        ],
         "name": "InOrdnung Project File",
         "icon": "",
         "role": "Editor"
@@ -95,6 +97,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
+    "@types/sharp": "^0.27.1",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
     "concurrently": "^5.3.0",
@@ -123,7 +126,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sharp": "^0.27.1"
   },
   "husky": {
     "hooks": {
