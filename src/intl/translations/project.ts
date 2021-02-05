@@ -29,6 +29,6 @@ export default {
     projectInOrdnungProjectFile: 'InOrdnung Projektdatei',
     projectUntitled: 'Ohne Titel',
     projectClosedUnsavedProjectConfimration: 'Sind Sie sicher, dass Sie dieses Projekt mit ungespeicherten Änderungen schließen?',
-    projectClosedUnsavedProjectDetail: 'Alle Ihrer ungespeicherten Änderugen werden unwiderrufbar verloren.',
+    projectClosedUnsavedProjectDetail: 'Alle Ihrer ungespeicherten Änderugen werden unwiderruflich verloren.',
   },
 };
