@@ -46,6 +46,18 @@
     margin-right: 15px;
   }
 
+  .defaultImage {
+    font-size: 33px;
+    float: left;
+    width: 65px;
+    height: 50px;
+    padding-right: 13px;
+
+    .bi::before {
+      vertical-align: inherit !important;
+    }
+  }
+
   .projectInfo {
     overflow: hidden;
     text-align: left;

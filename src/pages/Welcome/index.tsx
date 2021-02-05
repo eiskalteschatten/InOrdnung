@@ -84,7 +84,9 @@ const Welcome: React.FC = () => {
               {project.thumbnail ? (
                 <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
               ) : (
-                <div>default image here</div>
+                <div className={styles.defaultImage}>
+                  <i className={clsx('bi', 'bi-file-earmark-fill', styles.bi)} />
+                </div>
               )}
 
               <div className={styles.projectInfo}>
