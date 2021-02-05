@@ -29,9 +29,9 @@ ipcRenderer.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: Pro
   }));
 });
 
-ipcRenderer.on('saveProject', (): void => {
+ipcRenderer.on('saveProject', (e: IpcRendererEvent, closeWindow = false): void => {
   const { project, file } = getState();
-  ipcRenderer.send('saveProject', { project }, file);
+  ipcRenderer.send('saveProject', { project }, file, closeWindow);
 });
 
 ipcRenderer.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string): void => {

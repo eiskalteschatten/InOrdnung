@@ -80,12 +80,17 @@ const onClose = async (e: Event, window: BrowserWindow | undefined): Promise<voi
         const result = await dialog.showMessageBox({
           message: translation.projectClosedUnsavedProjectConfimration,
           detail: translation.projectClosedUnsavedProjectDetail,
-          buttons: [translation.no, translation.yes],
+          buttons: [translation.save, translation.dontSave, translation.cancel],
           type: 'warning',
+          defaultId: 0,
         });
 
-        if (result.response === 0) {
+        if (result.response === 2) {
           e.preventDefault();
+        }
+        else if (result.response === 0) {
+          e.preventDefault();
+          window?.webContents.send('saveProject', true);
         }
       }
 
