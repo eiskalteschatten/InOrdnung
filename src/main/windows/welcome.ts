@@ -41,9 +41,12 @@ export default async (): Promise<void> => {
         window = undefined;
       });
 
-      window.webContents.on('did-finish-load', (): void => {
+      window.webContents.on('did-finish-load', async (): Promise<void> => {
         if (window) {
           initializeRenderer(window);
+
+          const recentProjects = await getRecentProjects();
+          window?.webContents.send('getRecentProjects', recentProjects);
         }
       });
 
