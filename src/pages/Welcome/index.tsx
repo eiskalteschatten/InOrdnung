@@ -40,7 +40,7 @@ const Welcome: React.FC = () => {
   };
 
   const handleOpenRecentProject = (filePath: string): void => {
-    console.log(filePath);
+    ipcRenderer.send('openFile', filePath);
   };
 
   return (

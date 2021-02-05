@@ -4,7 +4,7 @@ import createProjectWindow from './windows/project';
 import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
 import projectImageCm from './cmMenus/projectImage';
 import { selectProjectImage } from './lib/project';
-import { writeFile } from './lib/projectFile';
+import { openFile, writeFile } from './lib/projectFile';
 import { ProjectFile, ProjectFileMetaData } from '../interfaces/project';
 
 ipcMain.on('createNewProject', () => createProjectWindow());
@@ -43,7 +43,11 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
   }
 });
 
-ipcMain.on('projectIsEdited', async (e: IpcMainEvent): Promise<void> => {
+ipcMain.on('projectIsEdited', (e: IpcMainEvent): void => {
   const window = BrowserWindow.fromWebContents(e.sender);
   window?.setDocumentEdited(true);
+});
+
+ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
+  await openFile(filePath);
 });
