@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Route, useRouteMatch, Switch } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import isEqual from 'lodash/isEqual';
 
 import { State } from '../../store';
 import { fileSetSaved } from '../../store/actions/fileActions';
+import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
 import Sidebar from '../../components/Sidebar';
 import ProjectInfo from '../../components/ProjectInfo';
 import useTranslation from '../../intl/useTranslation';
@@ -26,7 +28,10 @@ const Project: React.FC = () => {
 
   useEffect(() => {
     dispatch(fileSetSaved(false));
-    ipcRenderer.send('projectIsEdited');
+
+    if (!isEqual(project, projectInitialState)) {
+      ipcRenderer.send('projectIsEdited');
+    }
 
     if (file.fileLoaded) {
       if (autoSaveTimeout) {
