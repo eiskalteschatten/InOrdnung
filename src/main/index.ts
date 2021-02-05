@@ -1,4 +1,5 @@
-import fs from 'fs';
+import path from 'path';
+import { Worker } from 'worker_threads';
 
 import './eventsFromRenderer';
 
@@ -41,7 +42,16 @@ export default (_app: Electron.App): void => {
     await openFile(path);
   });
 
-  if (!fs.existsSync(config.app.storagePath)) {
-    fs.mkdirSync(config.app.storagePath, { recursive: true });
-  }
+  app.on('ready', () => {
+    const worker = new Worker(path.join(__dirname, '/workers/', 'initializeApp.js'));
+
+    worker
+      .on('online', (): void => {
+        worker.postMessage({});
+      })
+      .on('error', console.error)
+      .on('exit', (code: number): void => {
+        console.log(`Worker: initializeApp exited with code ${code}`);
+      });
+  });
 };
