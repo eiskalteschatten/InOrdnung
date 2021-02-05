@@ -3,15 +3,16 @@ import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
 import appMenu from '../appMenus/welcome';
+import { getRecentProjects } from '../lib/projectFile';
 
 let window: BrowserWindow | undefined;
 
 export default async (): Promise<void> => {
   if (!window) {
-    if (process.env.NODE_ENV === 'development') {
-      const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
-      await installExtension(REDUX_DEVTOOLS);
-    }
+    // if (process.env.NODE_ENV === 'development') {
+    //   const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
+    //   await installExtension(REDUX_DEVTOOLS);
+    // }
 
     const browserWindowOptions: BrowserWindowConstructorOptions = {
       width: 800,
@@ -36,7 +37,7 @@ export default async (): Promise<void> => {
           : `file://${path.join(__dirname, '../index.html')}`
       );
 
-      window.on('closed', () => {
+      window.on('closed', (): void => {
         window = undefined;
       });
 
@@ -46,9 +47,12 @@ export default async (): Promise<void> => {
         }
       });
 
-      window.on('focus', () => {
+      window.on('focus', async (): Promise<void> => {
         const menu = Menu.buildFromTemplate(appMenu);
         Menu.setApplicationMenu(menu);
+
+        const recentProjects = await getRecentProjects();
+        window?.webContents.send('getRecentProjects', recentProjects);
       });
     }
   }

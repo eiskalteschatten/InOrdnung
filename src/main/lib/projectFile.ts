@@ -1,10 +1,10 @@
 import { BrowserWindow, dialog, app } from 'electron';
-import { promises as fsPromises } from 'fs';
+import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
 import { Worker } from 'worker_threads';
 
 import config from '../../config';
-import { ProjectFile, ProjectFileMetaData } from '../../interfaces/project';
+import { ProjectFile, ProjectFileMetaData, RecentProjectsLocalStorage } from '../../interfaces/project';
 import { getTranslation } from '../../lib/helper';
 import createProjectWindow from '../windows/project';
 
@@ -39,7 +39,12 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
       });
 
       window.setDocumentEdited(false);
-      await addToRecentProjects(window, fileMetaData.path, projectFile.project.projectInfo.image?.image, projectFile.project.projectInfo.image?.mimeType);
+      await addToRecentProjects(
+        fileMetaData.path,
+        projectFile.project.projectInfo.name,
+        projectFile.project.projectInfo.image?.image,
+        projectFile.project.projectInfo.image?.mimeType
+      );
     }
   }
   catch (error) {
@@ -77,13 +82,13 @@ export const openFile = async (filePath: string): Promise<void> => {
   }
 };
 
-export const addToRecentProjects = async (window: BrowserWindow, filePath: string, image?: string, mimeType?: string): Promise<void> => {
+export const addToRecentProjects = async (filePath: string, projectName?: string, image?: string, mimeType?: string): Promise<void> => {
   try {
     const worker = new Worker(path.join(__dirname, '../workers/', 'addToRecentProjects.js'));
 
     worker
       .on('online', (): void => {
-        worker.postMessage({ filePath, image, mimeType });
+        worker.postMessage({ projectName, filePath, image, mimeType });
       })
       .on('error', console.error)
       .on('exit', (code: number): void => {
@@ -93,4 +98,23 @@ export const addToRecentProjects = async (window: BrowserWindow, filePath: strin
   catch (error) {
     console.error(error);
   }
+};
+
+export const getRecentProjects = async (): Promise<RecentProjectsLocalStorage[]> => {
+  let returnValue = [];
+
+  try {
+    const recentProjectsFilePath = path.resolve(config.app.storagePath, 'recentProjects.json');
+
+    const recentProjectsString = fs.existsSync(recentProjectsFilePath)
+      ? await fsPromises.readFile(recentProjectsFilePath, 'utf8')
+      : '';
+
+    returnValue = recentProjectsString ? JSON.parse(recentProjectsString) : [];
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  return returnValue;
 };

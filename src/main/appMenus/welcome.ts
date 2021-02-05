@@ -89,7 +89,7 @@ const template: MenuItemConstructorOptions[] = [
 
 if (process.platform === 'darwin') {
   template.unshift({
-    label: app.getName(),
+    label: app?.getName(),
     submenu: [
       {
         label: `${translation.menuAbout} ${config.app.name}`,
