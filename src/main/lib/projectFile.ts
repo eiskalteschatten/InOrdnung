@@ -39,6 +39,8 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
       });
 
       window.setDocumentEdited(false);
+      app.addRecentDocument(fileMetaData.path);
+
       await addToRecentProjects(
         fileMetaData.path,
         projectFile.project.projectInfo.name,
