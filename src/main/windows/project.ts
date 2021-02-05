@@ -5,7 +5,6 @@ import initializeRenderer from '../initializeRenderer';
 import appMenu from '../appMenus/project';
 import { getTranslation } from '../../lib/helper';
 import { ProjectFile } from '../../interfaces/project';
-import { createThumbnail } from '../lib/images';
 import { addToRecentProjects } from '../lib/projectFile';
 
 const translation = getTranslation();
