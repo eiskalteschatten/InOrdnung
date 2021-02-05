@@ -82,7 +82,7 @@ export const addToRecentProjects = async (window: BrowserWindow, filePath: strin
     const worker = new Worker(path.join(__dirname, '../workers/', 'addToRecentProjects.js'));
 
     worker
-      .on('online', () => {
+      .on('online', (): void => {
         worker.postMessage({ filePath, image, mimeType });
       })
       .on('error', console.error)

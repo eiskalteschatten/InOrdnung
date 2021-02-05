@@ -15,7 +15,7 @@ parentPort?.on('message', async ({ filePath, image, mimeType }): Promise<void> =
     : '';
 
   let recentProjects: RecentProjectsLocalStorage[] = recentProjectsString ? JSON.parse(recentProjectsString) : [];
-  recentProjects = recentProjects.filter((project: RecentProjectsLocalStorage) => project.path === filePath);
+  recentProjects = recentProjects.filter((project: RecentProjectsLocalStorage) => project.path !== filePath);
 
   recentProjects.unshift({
     path: filePath,
@@ -24,6 +24,5 @@ parentPort?.on('message', async ({ filePath, image, mimeType }): Promise<void> =
   });
 
   await fsPromises.writeFile(recentProjectsFilePath, JSON.stringify(recentProjects), 'utf8');
-
   process.exit(0);
 });
