@@ -43,6 +43,10 @@ const Welcome: React.FC = () => {
     ipcRenderer.send('openFile', filePath);
   };
 
+  const handleOpenFileDialog = (): void => {
+    ipcRenderer.send('openFileDialog');
+  };
+
   return (
     <div className='h-100'>
       {platform === 'darwin' && (<Titlebar />)}
@@ -58,8 +62,12 @@ const Welcome: React.FC = () => {
           </div>
 
           <div className={styles.buttons}>
-            <RoundedButton onClick={handleNewProjectClick}>
-              <i className='bi-file-earmark-plus' />&nbsp;<FormattedMessage id='createANewProject' />
+            <RoundedButton onClick={handleNewProjectClick} className={styles.newButton}>
+              <i className='bi bi-file-earmark-plus' />&nbsp;<FormattedMessage id='createANewProject' />
+            </RoundedButton>
+
+            <RoundedButton onClick={handleOpenFileDialog}>
+              <i className='bi bi-folder2-open' />&nbsp;<FormattedMessage id='openAProject' />
             </RoundedButton>
           </div>
         </Col>
@@ -68,23 +76,22 @@ const Welcome: React.FC = () => {
           'hasDarwinTitlebar': platform === 'darwin',
         })}>
           {recentProjects.map((project: RecentProjectsLocalStorage, index: number) => (
-            <div className={styles.recentProject}>
-              <RoundedButton
-                key={index}
-                onClick={() => handleOpenRecentProject(project.path)}
-              >
-                {project.thumbnail ? (
-                  <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
-                ) : (
-                  <div>default image here</div>
-                )}
+            <RoundedButton
+              key={index}
+              onClick={() => handleOpenRecentProject(project.path)}
+              className={styles.recentProject}
+            >
+              {project.thumbnail ? (
+                <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
+              ) : (
+                <div>default image here</div>
+              )}
 
-                <div className={styles.projectInfo}>
-                  <div className={styles.projectName}>{project.name || untitled}</div>
-                  <div className={styles.projectPath}>{project.path}</div>
-                </div>
-              </RoundedButton>
-            </div>
+              <div className={styles.projectInfo}>
+                <div className={styles.projectName}>{project.name || untitled}</div>
+                <div className={styles.projectPath}>{project.path}</div>
+              </div>
+            </RoundedButton>
           ))}
         </Col>
       </Row>

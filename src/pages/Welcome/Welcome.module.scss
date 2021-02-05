@@ -18,6 +18,10 @@
 .buttons {
   margin-top: 40px;
   text-align: center;
+
+  .newButton {
+    margin-right: 15px;
+  }
 }
 
 .recentProjects {
@@ -31,7 +35,7 @@
 }
 
 .recentProject {
-  margin: 10px 15px;
+  margin: 5px 15px;
 
   .projectImage {
     $size: 50px;
