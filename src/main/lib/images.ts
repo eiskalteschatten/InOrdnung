@@ -60,7 +60,7 @@ export const selectImage = async (window: BrowserWindow): Promise<Electron.OpenD
 
 export const createThumbnail = async (image: string): Promise<string> => {
   const sizes = config.images.recentProjectThumbnail;
-  const imageBuffer = Buffer.from(image);
+  const imageBuffer = Buffer.from(image, 'base64');
   const thumbnailBuffer = await sharp(imageBuffer).resize(sizes.width, sizes.height).toBuffer();
   return thumbnailBuffer.toString('base64');
 };
