@@ -23,8 +23,36 @@
 .recentProjects {
   background: $lightSidebarBgColor;
   padding-top: $macTitlebarSize;
+  padding-left: 0 !important;
 
   @media (prefers-color-scheme: dark) {
     background: $darkSidebarBgColor;
+  }
+}
+
+.recentProject {
+  margin: 10px 15px;
+
+  .projectImage {
+    $size: 50px;
+    width: $size;
+    width: $size;
+    object-fit: cover;
+    float: left;
+    margin-right: 15px;
+  }
+
+  .projectInfo {
+    overflow: hidden;
+    text-align: left;
+
+    .projectName {
+      font-size: .9em;
+    }
+
+    .projectPath {
+      opacity: .7;
+      font-size: .8em;
+    }
   }
 }

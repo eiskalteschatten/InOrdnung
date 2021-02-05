@@ -68,20 +68,23 @@ const Welcome: React.FC = () => {
           'hasDarwinTitlebar': platform === 'darwin',
         })}>
           {recentProjects.map((project: RecentProjectsLocalStorage, index: number) => (
-            <RoundedButton
-              key={index}
-              onClick={() => handleOpenRecentProject(project.path)}
-            >
-              <div className={styles.projectImage}>
+            <div className={styles.recentProject}>
+              <RoundedButton
+                key={index}
+                onClick={() => handleOpenRecentProject(project.path)}
+              >
                 {project.thumbnail ? (
-                  <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.image} />
+                  <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
                 ) : (
                   <div>default image here</div>
                 )}
-              </div>
-              <div className={styles.projectName}>{project.name || untitled}</div>
-              <div className={styles.filePath}>{project.path}</div>
-            </RoundedButton>
+
+                <div className={styles.projectInfo}>
+                  <div className={styles.projectName}>{project.name || untitled}</div>
+                  <div className={styles.projectPath}>{project.path}</div>
+                </div>
+              </RoundedButton>
+            </div>
           ))}
         </Col>
       </Row>
