@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import './eventsFromRenderer';
 
 import config from '../config';
@@ -15,8 +17,9 @@ const onWindowAllClosed = (): void => {
 
 export default (_app: Electron.App): void => {
   app = _app;
-  app.on('window-all-closed', onWindowAllClosed);
   app.setName(config.app.name);
+
+  app.on('window-all-closed', onWindowAllClosed);
 
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
@@ -37,4 +40,8 @@ export default (_app: Electron.App): void => {
   app.on('open-file', async (e: Event, path: string): Promise<void> => {
     await openFile(path);
   });
+
+  if (!fs.existsSync(config.app.storagePath)) {
+    fs.mkdirSync(config.app.storagePath, { recursive: true });
+  }
 };

@@ -1,6 +1,5 @@
 import path from 'path';
 import os from 'os';
-import fs from 'fs';
 
 export interface Config {
   app: {
@@ -30,18 +29,14 @@ let storagePath = '';
 
 switch (process.platform) {
   case 'darwin':
-    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'InOrdnung');
+    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'inordnung');
     break;
   case 'win32':
-    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'Alex Seifert', 'InOrdnung');
+    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'Alex Seifert', 'inordnung');
     break;
   default:
     storagePath = path.join(os.homedir(), '.inordnung');
     break;
-}
-
-if (!fs.existsSync(storagePath)) {
-  fs.mkdirSync(storagePath, { recursive: true });
 }
 
 export default {

@@ -1,11 +1,12 @@
 import { BrowserWindow, dialog, app } from 'electron';
 import { promises as fsPromises } from 'fs';
+import path from 'path';
+import { Worker } from 'worker_threads';
 
 import config from '../../config';
 import { ProjectFile, ProjectFileMetaData } from '../../interfaces/project';
 import { getTranslation } from '../../lib/helper';
 import createProjectWindow from '../windows/project';
-import { createThumbnail } from './images';
 
 const translation = getTranslation();
 
@@ -78,8 +79,16 @@ export const openFile = async (filePath: string): Promise<void> => {
 
 export const addToRecentProjects = async (window: BrowserWindow, filePath: string, image?: string, mimeType?: string): Promise<void> => {
   try {
-    const thumbnail = image ? await createThumbnail(image) : undefined;
-    window.webContents.send('addToRecentProjects', filePath, thumbnail, mimeType);
+    const worker = new Worker(path.join(__dirname, '../workers/', 'addToRecentProjects.js'));
+
+    worker
+      .on('online', () => {
+        worker.postMessage({ filePath, image, mimeType });
+      })
+      .on('error', console.error)
+      .on('exit', (code: number): void => {
+        console.log(`Worker: addToRecentProjects exited with code ${code}`);
+      });
   }
   catch (error) {
     console.error(error);
