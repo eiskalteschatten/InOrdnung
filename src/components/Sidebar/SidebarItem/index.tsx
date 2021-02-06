@@ -6,11 +6,11 @@ import styles from './SidebarItem.module.scss';
 
 export interface Props {
   path: string;
-  iconClass: string;
+  ItemIcon: any;
   title: string;
 }
 
-const SidebarItem: React.FC<Props> = ({ iconClass, title, path }) => {
+const SidebarItem: React.FC<Props> = ({ ItemIcon, title, path }) => {
   const { path: currentPath } = useRouteMatch();
 
   if (path.charAt(path.length -1) === '/') {
@@ -25,7 +25,7 @@ const SidebarItem: React.FC<Props> = ({ iconClass, title, path }) => {
         [styles.selected]: currentPath === path,
       })}
     >
-      <i className={clsx(iconClass, styles.icon)}/>
+      <ItemIcon className={styles.icon} />
       <span className={styles.text}>{title}</span>
     </Link>
   );

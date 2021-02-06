@@ -1,6 +1,8 @@
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
+import Info from '@material-ui/icons/Info';
+
 import useTranslation from '../../intl/useTranslation';
 import SidebarItem, { Props as SidebarItemProp } from './SidebarItem';
 
@@ -11,7 +13,7 @@ const Sidebar: React.FC = () => {
 
   const sidebarItems: SidebarItemProp[] = [{
     path: '/',
-    iconClass: 'bi-info-circle',
+    ItemIcon: Info,
     title: useTranslation('projectInfo'),
   }];
 
@@ -21,7 +23,7 @@ const Sidebar: React.FC = () => {
         <SidebarItem
           key={index}
           path={`${path}${item.path}`}
-          iconClass={item.iconClass}
+          ItemIcon={item.ItemIcon}
           title={item.title}
         />
       ))}

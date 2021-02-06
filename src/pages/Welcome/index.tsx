@@ -8,6 +8,10 @@ import {
   Grid,
 } from '@material-ui/core';
 
+import NoteAdd from '@material-ui/icons/NoteAdd';
+import FolderOpen from '@material-ui/icons/FolderOpen';
+import InsertDriveFile from '@material-ui/icons/InsertDriveFile';
+
 import useTranslation from '../../intl/useTranslation';
 import { State } from '../../store';
 import Titlebar from '../../components/elements/Titlebar';
@@ -64,11 +68,11 @@ const Welcome: React.FC = () => {
 
           <div className={styles.buttons}>
             <RoundedButton onClick={handleNewProjectClick} className={styles.newButton}>
-              <i className='bi bi-file-earmark-plus' />&nbsp;<FormattedMessage id='createANewProject' />
+              <NoteAdd />&nbsp;<FormattedMessage id='createANewProject' />
             </RoundedButton>
 
             <RoundedButton onClick={handleOpenFileDialog}>
-              <i className='bi bi-folder2-open' />&nbsp;<FormattedMessage id='openAProject' />
+              <FolderOpen />&nbsp;<FormattedMessage id='openAProject' />
             </RoundedButton>
           </div>
         </Grid>
@@ -86,7 +90,7 @@ const Welcome: React.FC = () => {
                 <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
               ) : (
                 <div className={styles.defaultImage}>
-                  <i className={clsx('bi', 'bi-file-earmark-fill', styles.bi)} />
+                  <InsertDriveFile />
                 </div>
               )}
 
