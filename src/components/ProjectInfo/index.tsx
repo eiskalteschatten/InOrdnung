@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import MomentUtils from '@date-io/moment';
@@ -16,9 +16,9 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
+import { IntlContext } from '../../intl/IntlContext';
 import { State } from '../../store';
 import { projectSetProjectInfo } from '../../store/actions/projectActions';
-import useTranslation from '../../intl/useTranslation';
 import { getDateLocaleFormat } from '../../lib/dates';
 import ProjectImage from './ProjectImage';
 
@@ -27,6 +27,7 @@ import styles from './ProjectInfo.module.scss';
 const ProjectInfo: React.FC = () => {
   const projectInfo = useSelector((state: State) => state.project.projectInfo);
   const dispatch = useDispatch();
+  const { locale, messages } = useContext(IntlContext);
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     dispatch(projectSetProjectInfo({
@@ -52,7 +53,7 @@ const ProjectInfo: React.FC = () => {
   };
 
   return (
-    <MuiPickersUtilsProvider utils={MomentUtils}>
+    <MuiPickersUtilsProvider utils={MomentUtils} locale={locale}>
       <div className={styles.projectInfo}>
         <ProjectImage />
 
@@ -60,7 +61,7 @@ const ProjectInfo: React.FC = () => {
           <div className={styles.formControlWrapper}>
             <TextField
               id='name'
-              label={useTranslation('projectName')}
+              label={messages.projectName}
               variant='outlined'
               value={projectInfo?.name}
               onChange={handleFieldChange}
@@ -72,7 +73,7 @@ const ProjectInfo: React.FC = () => {
           <div className={styles.formControlWrapper}>
             <TextField
               id='description'
-              label={useTranslation('projectDescription')}
+              label={messages.projectDescription}
               variant='outlined'
               value={projectInfo?.description}
               onChange={handleFieldChange}
@@ -100,7 +101,7 @@ const ProjectInfo: React.FC = () => {
                   id='hasStartDate'
                 />
               }
-              label={useTranslation('projectHasStartDate')}
+              label={messages.projectHasStartDate}
             />
 
             {projectInfo?.hasStartDate && (
@@ -131,7 +132,7 @@ const ProjectInfo: React.FC = () => {
                   id='hasEndDate'
                 />
               }
-              label={useTranslation('projectHasEndDate')}
+              label={messages.projectHasEndDate}
             />
 
             {projectInfo?.hasEndDate && (
