@@ -6,14 +6,7 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: $lightBgColor;
-  color: $lightColor;
   overflow: hidden;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $darkBgColor !important;
-    color: $darkColor !important;
-  }
 }
 
 #root {
