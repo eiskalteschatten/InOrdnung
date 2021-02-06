@@ -216,5 +216,5 @@ export const getDateLocaleFormat = (): string => {
     'zu-ZA': 'yyyy/MM/DD',
   };
 
-  return formats[navigator.language] || 'DD/MM/yyyy';
+  return formats[navigator.languages[1]] || 'DD/MM/yyyy';
 };

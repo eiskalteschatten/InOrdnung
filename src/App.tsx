@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline, createMuiTheme }  from '@material-ui/core';
+import { Localization, enUS, deDE } from '@material-ui/core/locale';
 
 import { IntlProviderWrapper } from './intl/IntlContext';
 import getThemeOptions from './theme';
@@ -18,13 +19,23 @@ const App: React.FC = () => {
 
   const themeOptions = getThemeOptions(theme);
 
+  const getMuiLocale = (): Localization => {
+    switch (locale) {
+      case 'de':
+        return deDE;
+      case 'en':
+      default:
+        return enUS;
+    }
+  };
+
   const muiTheme = createMuiTheme({
     ...themeOptions,
     palette: {
       ...themeOptions.palette,
       theme,
     },
-  });
+  }, getMuiLocale());
 
   useEffect(() => {
     if (window.matchMedia) {
