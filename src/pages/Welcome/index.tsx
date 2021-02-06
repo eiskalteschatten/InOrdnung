@@ -49,7 +49,7 @@ const Welcome: React.FC = () => {
   };
 
   return (
-    <div className='h-100'>
+    <div className={styles.welcome}>
       {platform === 'darwin' && (<Titlebar />)}
 
       <Grid container className={styles.about}>
