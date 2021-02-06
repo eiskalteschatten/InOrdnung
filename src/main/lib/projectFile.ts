@@ -76,7 +76,8 @@ export const openFile = async (filePath: string): Promise<void> => {
   try {
     const fileContentsString = await fsPromises.readFile(filePath, 'utf8');
     const fileContents = JSON.parse(fileContentsString);
-    await createProjectWindow(fileContents, filePath);
+    const window = await createProjectWindow(fileContents, filePath);
+    window.setRepresentedFilename(filePath || '');
     app.addRecentDocument(filePath);
   }
   catch (error) {
