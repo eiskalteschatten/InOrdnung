@@ -16,8 +16,9 @@ $imageHeight: 300px;
 
   &.noImage {
     border: 1px dashed lighten($lightColor, 50%);
+    border-radius: 5px;
     width: $imageWidth;
-  height: $imageHeight;
+    height: $imageHeight;
 
     &:hover {
       background: $lightButtonHoverBg;
