@@ -9,16 +9,15 @@
 
 .formGroup {
   width: 100%;
-  min-width: 400px;
-  max-width: 600px;
+  width: 500px;
 }
 
 .formControlWrapper {
   margin-bottom: 30px;
 }
 
-.projectDescription {
-  min-height: 125px;
+.textField {
+  width: 100%;
 }
 
 .switch {

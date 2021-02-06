@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
   FormControlLabel,
   Switch,
+  TextField,
 } from '@material-ui/core';
 
 import { State } from '../../store';
@@ -37,34 +37,28 @@ const ProjectInfo: React.FC = () => {
     <div className={styles.projectInfo}>
       <ProjectImage />
 
-      <div
-        className={clsx(
-          'form-group',
-          styles.formGroup
-        )}
-      >
+      <div className={styles.formGroup}>
         <div className={styles.formControlWrapper}>
-          <label htmlFor='name'>
-            <FormattedMessage id='projectName' />
-          </label>
-          <input
-            type='text'
-            className='form-control'
+          <TextField
             id='name'
+            label={useTranslation('projectName')}
+            variant='outlined'
             value={projectInfo?.name}
             onChange={handleFieldChange}
+            className={styles.textField}
           />
         </div>
 
         <div className={styles.formControlWrapper}>
-          <label htmlFor='description'>
-            <FormattedMessage id='projectDescription' />
-          </label>
-          <textarea
-            className={clsx('form-control', styles.projectDescription)}
+          <TextField
             id='description'
+            label={useTranslation('projectDescription')}
+            variant='outlined'
             value={projectInfo?.description}
             onChange={handleFieldChange}
+            className={styles.textField}
+            multiline
+            rows={4}
           />
         </div>
       </div>
