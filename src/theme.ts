@@ -2,6 +2,7 @@ import { blue, red, blueGrey } from '@material-ui/core/colors';
 
 export default (type: string): any => ({
   palette: {
+    type,
     primary: {
       main: type === 'dark' ? blue[300] : blue[800],
     },
