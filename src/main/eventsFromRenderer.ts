@@ -4,7 +4,7 @@ import createProjectWindow from './windows/project';
 import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
 import projectImageCm from './cmMenus/projectImage';
 import { selectProjectImage } from './lib/project';
-import { openFile, openFileDialog, writeFile } from './lib/projectFile';
+import { openFile, openFileDialog, saveFileAs, writeFile } from './lib/projectFile';
 import { ProjectFile, ProjectFileMetaData } from '../interfaces/project';
 
 ipcMain.on('createNewProject', () => createProjectWindow());
@@ -39,10 +39,15 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
   const window = BrowserWindow.fromWebContents(e.sender);
 
   if (window) {
-    await writeFile(projectFile, fileMetaData, window);
+    if (!fileMetaData.path) {
+      await saveFileAs(window);
+    }
+    else {
+      await writeFile(projectFile, fileMetaData, window);
 
-    if (closeWindow) {
-      window.close();
+      if (closeWindow) {
+        window.close();
+      }
     }
   }
 });
