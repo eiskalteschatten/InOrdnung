@@ -22,8 +22,8 @@ const App: React.FC = () => {
     ...themeOptions,
     palette: {
       ...themeOptions.palette,
-      theme
-    }
+      theme,
+    },
   });
 
   useEffect(() => {
