@@ -8,6 +8,7 @@
   z-index: 0;
   border: none;
   background: none;
+  font-family: $systemFont;
 
   &::before {
     content: '';
