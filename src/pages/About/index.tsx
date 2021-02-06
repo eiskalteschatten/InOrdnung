@@ -40,14 +40,16 @@ const About: React.FC = () => {
   };
 
   return (
-    <Grid container className={styles.about}>
-      <Grid item>
-        <img src={icon} alt='InOrdnung' />
+    <Grid container className={styles.about} spacing={5}>
+      <Grid item xs={6}>
+        <img src={icon} alt='InOrdnung' className={styles.appIcon} />
       </Grid>
-      <Grid item>
+      <Grid item xs={6}>
         <div className={styles.title}>InOrdnung</div>
 
-        <div><FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick}>Alex Seifert</a></div>
+        <div>
+          <FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick} className={styles.ascomLink}>Alex Seifert</a>
+        </div>
 
         <div className={styles.version}>
           {remote.app.getVersion()}
