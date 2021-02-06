@@ -56,7 +56,7 @@ const Welcome: React.FC = () => {
     <div className={styles.welcome}>
       {platform === 'darwin' && (<Titlebar />)}
 
-      <Grid container className={styles.about}>
+      <Grid container className={styles.welcome}>
         <Grid item xs={7}>
           <div className={styles.iconSection}>
             <img src={icon} alt='InOrdnung' className={styles.icon} />
