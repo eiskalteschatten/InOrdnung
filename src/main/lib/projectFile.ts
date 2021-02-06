@@ -104,7 +104,7 @@ export const addToRecentProjects = async (filePath: string, projectName?: string
 };
 
 export const getRecentProjects = async (): Promise<RecentProjectsLocalStorage[]> => {
-  let returnValue = [];
+  let recentProjects = [];
 
   try {
     const recentProjectsFilePath = path.resolve(config.app.storagePath, 'recentProjects.json');
@@ -113,11 +113,17 @@ export const getRecentProjects = async (): Promise<RecentProjectsLocalStorage[]>
       ? await fsPromises.readFile(recentProjectsFilePath, 'utf8')
       : '';
 
-    returnValue = recentProjectsString ? JSON.parse(recentProjectsString) : [];
+    recentProjects = recentProjectsString ? JSON.parse(recentProjectsString) : [];
+
+    for (const index in recentProjects) {
+      if (!fs.existsSync(recentProjects[index].path)) {
+        delete recentProjects[index];
+      }
+    }
   }
   catch (error) {
     console.error(error);
   }
 
-  return returnValue;
+  return recentProjects;
 };
