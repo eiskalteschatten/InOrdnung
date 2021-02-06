@@ -3,7 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 
-import Form from 'react-bootstrap/Form';
+import {
+  FormControlLabel,
+  Switch,
+} from '@material-ui/core';
 
 import { State } from '../../store';
 import { projectSetProjectInfo } from '../../store/actions/projectActions';
@@ -73,13 +76,16 @@ const ProjectInfo: React.FC = () => {
         )}
       >
         <div className={styles.formControlWrapper}>
-          <Form.Check
-            type='switch'
-            id='hasStartDate'
+          <FormControlLabel
+            control={
+              <Switch
+                checked={projectInfo?.hasStartDate}
+                onChange={handleSwitchChange}
+                className={styles.switch}
+                name='hasStartDate'
+              />
+            }
             label={useTranslation('projectHasStartDate')}
-            className={styles.switch}
-            checked={projectInfo?.hasStartDate}
-            onChange={handleSwitchChange}
           />
 
           {projectInfo?.hasStartDate && (
@@ -101,13 +107,16 @@ const ProjectInfo: React.FC = () => {
         )}
       >
         <div className={styles.formControlWrapper}>
-          <Form.Check
-            type='switch'
-            id='hasEndDate'
+          <FormControlLabel
+            control={
+              <Switch
+                checked={projectInfo?.hasEndDate}
+                onChange={handleSwitchChange}
+                className={styles.switch}
+                name='hasEndDate'
+              />
+            }
             label={useTranslation('projectHasEndDate')}
-            className={styles.switch}
-            checked={projectInfo?.hasEndDate}
-            onChange={handleSwitchChange}
           />
 
           {projectInfo?.hasEndDate && (

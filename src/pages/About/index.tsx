@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IpcRendererEvent } from 'electron';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {
+  Grid,
+} from '@material-ui/core';
 
 import useTranslation from '../../intl/useTranslation';
 
@@ -39,11 +40,11 @@ const About: React.FC = () => {
   };
 
   return (
-    <Row className={styles.about}>
-      <Col>
+    <Grid container className={styles.about}>
+      <Grid item>
         <img src={icon} alt='InOrdnung' />
-      </Col>
-      <Col>
+      </Grid>
+      <Grid item>
         <div className={styles.title}>InOrdnung</div>
 
         <div><FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick}>Alex Seifert</a></div>
@@ -61,8 +62,8 @@ const About: React.FC = () => {
         <div className={styles.legal}>
           Copyright © Alex Seifert 2021.
         </div>
-      </Col>
-    </Row>
+      </Grid>
+    </Grid>
   );
 };
 

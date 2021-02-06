@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { IpcRendererEvent } from 'electron';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {
+  Grid,
+} from '@material-ui/core';
 
 import useTranslation from '../../intl/useTranslation';
 import { State } from '../../store';
@@ -51,8 +52,8 @@ const Welcome: React.FC = () => {
     <div className='h-100'>
       {platform === 'darwin' && (<Titlebar />)}
 
-      <Row className='h-100'>
-        <Col xs={7}>
+      <Grid container className={styles.about}>
+        <Grid item xs={7}>
           <div className={styles.iconSection}>
             <img src={icon} alt='InOrdnung' className={styles.icon} />
 
@@ -70,8 +71,8 @@ const Welcome: React.FC = () => {
               <i className='bi bi-folder2-open' />&nbsp;<FormattedMessage id='openAProject' />
             </RoundedButton>
           </div>
-        </Col>
-        <Col xs={5} className={clsx({
+        </Grid>
+        <Grid item xs={5} className={clsx({
           [styles.recentProjects]: true,
           'hasDarwinTitlebar': platform === 'darwin',
         })}>
@@ -95,8 +96,8 @@ const Welcome: React.FC = () => {
               </div>
             </RoundedButton>
           ))}
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
     </div>
   );
 };
