@@ -71,11 +71,11 @@ const Welcome: React.FC = () => {
 
           <div className={styles.buttons}>
             <RoundedButton onClick={handleNewProjectClick} className={styles.newButton}>
-              <NoteAdd />&nbsp;<FormattedMessage id='createANewProject' />
+              <NoteAdd fontSize='small' />&nbsp;<FormattedMessage id='createANewProject' />
             </RoundedButton>
 
             <RoundedButton onClick={handleOpenFileDialog}>
-              <FolderOpen />&nbsp;<FormattedMessage id='openAProject' />
+              <FolderOpen fontSize='small' />&nbsp;<FormattedMessage id='openAProject' />
             </RoundedButton>
           </div>
         </Grid>
