@@ -39,10 +39,12 @@ export default async (): Promise<void> => {
         }
       });
 
-      window.on('focus', () => {
-        const menu = Menu.buildFromTemplate(appMenu);
-        Menu.setApplicationMenu(menu);
-      });
+      if (process.platform === 'darwin') {
+        window.on('focus', () => {
+          const menu = Menu.buildFromTemplate(appMenu);
+          Menu.setApplicationMenu(menu);
+        });
+      }
     }
   }
   else {
