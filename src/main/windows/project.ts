@@ -57,7 +57,8 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
 
       if (projectFile && filePath) {
         newWindow.webContents.send('openProject', projectFile, filePath);
-        await addToRecentProjects(filePath, projectFile.project.projectInfo.image?.image, projectFile.project.projectInfo.image?.mimeType);
+        const { projectInfo } = projectFile.project;
+        await addToRecentProjects(filePath, projectInfo.name, projectInfo.image?.image, projectInfo.image?.mimeType);
       }
     });
 
