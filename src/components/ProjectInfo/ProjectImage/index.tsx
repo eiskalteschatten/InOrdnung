@@ -3,6 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
 
+import {
+  ButtonBase,
+} from '@material-ui/core';
+
 import { State } from '../../../store';
 
 import styles from './ProjectImage.module.scss';
@@ -38,24 +42,28 @@ const ProjectImage: React.FC = () => {
   };
 
   return (
-    <div
+    <ButtonBase
       className={clsx({
         [styles.projectImage]: true,
         [styles.isDragging]: isDraggingOver,
         [styles.noImage]: !projectImage?.image,
       })}
-      onDragOver={handleOnDragOver}
-      onDragLeave={handleOnDragLeave}
-      onDrop={handleOnDrop}
-      onClick={handleClick}
-      onContextMenu={handleCm}
     >
-      {projectImage ? (
-        <img src={`data:${projectImage.mimeType};base64,${projectImage.image}`} className={styles.image} />
-      ) :(
-        <FormattedMessage id='dragOrClickProjectImage' />
-      )}
-    </div>
+      <div
+        className={styles.dropZone}
+        onDragOver={handleOnDragOver}
+        onDragLeave={handleOnDragLeave}
+        onDrop={handleOnDrop}
+        onClick={handleClick}
+        onContextMenu={handleCm}
+      >
+        {projectImage ? (
+          <img src={`data:${projectImage.mimeType};base64,${projectImage.image}`} className={styles.image} />
+        ) :(
+          <FormattedMessage id='dragOrClickProjectImage' />
+        )}
+      </div>
+    </ButtonBase>
   );
 };
 
