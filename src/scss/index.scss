@@ -22,4 +22,8 @@ a {
   padding-top: $macTitlebarSize;
 }
 
+*:focus {
+  outline: none;
+}
+
 // @import "./dark-mode-overrides.scss";
