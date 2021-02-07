@@ -111,6 +111,8 @@ const ProjectInfo: React.FC = () => {
                 format={getDateLocaleFormat()}
                 value={projectInfo?.startDate}
                 onChange={(date: MaterialUiPickersDate) => handleDateChange('startDate', date)}
+                className={styles.datePicker}
+                disableToolbar
               />
             )}
           </div>
@@ -142,6 +144,8 @@ const ProjectInfo: React.FC = () => {
                 format={getDateLocaleFormat()}
                 value={projectInfo?.endDate}
                 onChange={(date: MaterialUiPickersDate) => handleDateChange('endDate', date)}
+                className={styles.datePicker}
+                disableToolbar
               />
             )}
           </div>
