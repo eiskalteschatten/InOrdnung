@@ -25,7 +25,7 @@ const SidebarItem: React.FC<Props> = ({ ItemIcon, title, path }) => {
         [styles.selected]: location.pathname === path,
       })}
     >
-      <ItemIcon className={styles.icon} />
+      <ItemIcon fontSize='small' className={styles.icon} />
       <span className={styles.text}>{title}</span>
     </Link>
   );
