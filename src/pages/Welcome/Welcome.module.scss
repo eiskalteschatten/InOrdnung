@@ -35,7 +35,9 @@
 }
 
 .recentProject {
-  margin: 5px 15px;
+  margin: 15px;
+  display: block;
+  width: calc(100% - 30px);
 
   .projectImage {
     $size: 50px;
