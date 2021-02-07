@@ -22,12 +22,6 @@ export default (_app: Electron.App): void => {
 
   app.on('window-all-closed', onWindowAllClosed);
 
-  app.on('activate', () => {
-    if (windows.size === 0) {
-      openWelcomeWindow();
-    }
-  });
-
   app.on('did-become-active', () => {
     if (windows.size === 0) {
       openWelcomeWindow();
@@ -39,6 +33,10 @@ export default (_app: Electron.App): void => {
   });
 
   app.on('ready', () => {
+    if (windows.size === 0) {
+      openWelcomeWindow();
+    }
+
     const worker = new Worker(path.join(__dirname, '/workers/', 'initializeApp.js'));
 
     worker
