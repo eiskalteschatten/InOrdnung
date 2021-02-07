@@ -78,7 +78,7 @@ const ProjectInfo: React.FC = () => {
               value={projectInfo?.description}
               onChange={handleFieldChange}
               className={styles.textField}
-              InputLabelProps={{ shrink: !!projectInfo?.name }}
+              InputLabelProps={{ shrink: !!projectInfo?.description }}
               multiline
               rows={4}
             />
