@@ -95,7 +95,7 @@ const ProjectInfo: React.FC = () => {
             <FormControlLabel
               control={
                 <Switch
-                  checked={projectInfo?.hasStartDate}
+                  checked={projectInfo?.hasStartDate ?? false}
                   onChange={handleSwitchChange}
                   className={styles.switch}
                   id='hasStartDate'
@@ -126,7 +126,7 @@ const ProjectInfo: React.FC = () => {
             <FormControlLabel
               control={
                 <Switch
-                  checked={projectInfo?.hasEndDate}
+                  checked={projectInfo?.hasEndDate ?? false}
                   onChange={handleSwitchChange}
                   className={styles.switch}
                   id='hasEndDate'
