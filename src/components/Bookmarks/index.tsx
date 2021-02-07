@@ -77,7 +77,7 @@ const Bookmarks: React.FC = () => {
     <div>
       <div className={styles.toolbar}>
         <RoundedButton onClick={handleNewBookmark} className={styles.newButton}>
-          <Add fontSize='small' />&nbsp;<FormattedMessage id='bookmarksAddBookmark' />
+          <Add fontSize='small' />&nbsp;<FormattedMessage id='bookmarksNewBookmark' />
         </RoundedButton>
       </div>
 

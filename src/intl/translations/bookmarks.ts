@@ -1,13 +1,13 @@
 export default {
   en: {
     bookmarks: 'Bookmarks',
-    bookmarksAddBookmark: 'Add Bookmark',
+    bookmarksNewBookmark: 'New Bookmark',
     bookmarksName: 'Name',
     bookmarksUrl: 'URL',
   },
   de: {
     bookmarks: 'Lesezeichen',
-    bookmarksAddBookmark: 'Lesezeichen hinzufügen',
+    bookmarksNewBookmark: 'Neues Lesezeichen',
     bookmarksName: 'Name',
     bookmarksUrl: 'URL',
   },
