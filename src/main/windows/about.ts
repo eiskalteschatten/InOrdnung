@@ -45,6 +45,9 @@ export default async (): Promise<void> => {
           Menu.setApplicationMenu(menu);
         });
       }
+      else {
+        window.setMenuBarVisibility(false);
+      }
     }
   }
   else {
