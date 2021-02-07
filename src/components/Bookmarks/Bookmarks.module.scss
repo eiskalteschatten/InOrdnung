@@ -1,1 +1,10 @@
 @import "../../scss/variables";
+
+.tableContainer {
+  margin: 10px;
+  width: calc(100% - 20px);
+}
+
+.tableCell {
+  font-size: .9em;
+}
