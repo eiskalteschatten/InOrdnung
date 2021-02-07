@@ -7,7 +7,6 @@
 .iconSection {
   text-align: center;
   margin: 20px 0;
-  padding-top: $macTitlebarSize;
 
   .icon {
     width: 175px;
@@ -30,7 +29,6 @@
 
 .recentProjects {
   background: $lightSidebarBgColor;
-  padding-top: $macTitlebarSize;
   padding-left: 0 !important;
   overflow-y: auto;
   height: 100%;
