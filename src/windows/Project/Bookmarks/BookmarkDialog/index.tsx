@@ -70,6 +70,7 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
           value={editingBookmark?.name ?? ''}
           InputLabelProps={{ shrink: !!editingBookmark?.name }}
           onChange={handleFieldChange}
+          size='small'
         />
 
         <TextField
@@ -81,13 +82,14 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
           value={editingBookmark?.url ?? ''}
           InputLabelProps={{ shrink: !!editingBookmark?.url }}
           onChange={handleFieldChange}
+          size='small'
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel} variant='outlined' color='primary'>
+        <Button onClick={handleCancel} variant='outlined' color='primary' size='small'>
           <FormattedMessage id='cancel' />
         </Button>
-        <Button onClick={handleSave} variant='contained' color='primary'>
+        <Button onClick={handleSave} variant='contained' color='primary' size='small'>
           <FormattedMessage id='save' />
         </Button>
       </DialogActions>
