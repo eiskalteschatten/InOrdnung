@@ -53,10 +53,6 @@ ipcRenderer.on('openBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void =
   }
 });
 
-ipcRenderer.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
-  console.log('edit', bookmark);
-});
-
 ipcRenderer.on('deleteBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
   if (bookmark.id) {
     dispatch(projectDeleteBookmark(bookmark.id));

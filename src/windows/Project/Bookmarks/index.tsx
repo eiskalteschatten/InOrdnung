@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
 import clsx from 'clsx';
+import { IpcRendererEvent } from 'electron';
 
 import {
   Table,
@@ -39,6 +40,13 @@ const Bookmarks: React.FC = () => {
   const [localBookmarks, setLocalBookmarks] = useState<Bookmark[]>();
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
   const [hoverBookmarkId, setHoverBookmarkId] = useState<string>('');
+
+  useEffect(() => {
+    ipcRenderer.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
+      setEditingBookmark(bookmark);
+      setEditDialogOpen(true);
+    });
+  }, []);
 
   useEffect(() => {
     setLocalBookmarks(bookmarks);
