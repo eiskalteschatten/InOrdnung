@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useSelector } from 'react-redux';
+import clsx from 'clsx';
 
 import {
   Table,
@@ -14,8 +15,9 @@ import {
   IconButton,
 } from '@material-ui/core';
 
-import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 import Add from '@material-ui/icons/Add';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
 import { State } from '../../../store';
 import RoundedButton from '../../../components/RoundedButton';
@@ -34,6 +36,7 @@ const Bookmarks: React.FC = () => {
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [localBookmarks, setLocalBookmarks] = useState<Bookmark[]>();
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
+  const [hoverBookmarkId, setHoverBookmarkId] = useState<string>('');
 
   useEffect(() => {
     setLocalBookmarks(bookmarks);
@@ -111,12 +114,27 @@ const Bookmarks: React.FC = () => {
             </TableHead>
             <TableBody>
               {Array.isArray(localBookmarks) && localBookmarks.map((row: any) => (
-                <TableRow key={row.name}>
+                <TableRow
+                  key={row.name}
+                  onMouseEnter={() => setHoverBookmarkId(row.id)}
+                  onMouseLeave={() => setHoverBookmarkId('')}
+                >
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}
                   </TableCell>
                   <TableCell className={styles.tableCell}>{row.url}</TableCell>
                   <TableCell align='right'>
+                    <IconButton
+                      size='small'
+                      href={row.url}
+                      onClick={e=> handleLinkClick(e, row.url)}
+                      className={clsx({
+                        [styles.invisible]: hoverBookmarkId !== row.id,
+                      })}
+                    >
+                      <MoreVertIcon fontSize='small' />
+                    </IconButton>
+
                     {isValidUrl(row.url) && (
                       <IconButton
                         size='small'
