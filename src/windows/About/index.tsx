@@ -7,11 +7,12 @@ import {
 } from '@material-ui/core';
 
 import useTranslation from '../../intl/useTranslation';
+import { handleLinkClick } from '../../lib/links';
 
 import icon from '../../assets/images/icon.svg';
 import styles from './About.module.scss';
 
-const { remote, shell, ipcRenderer } = window.require('electron');
+const { remote, ipcRenderer } = window.require('electron');
 
 interface ProcessVersions {
   node: string;
@@ -27,17 +28,6 @@ const About: React.FC = () => {
     document.title = aboutInOrdnung;
     ipcRenderer.on('processVersions', (event: IpcRendererEvent, versions: ProcessVersions): void => setProcessVersions(versions));
   }, [aboutInOrdnung]);
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
-    e.preventDefault();
-
-    const target = e.target as HTMLAnchorElement;
-    const href = target.getAttribute('href');
-
-    if (href) {
-      shell.openExternal(href);
-    }
-  };
 
   return (
     <Grid container className={styles.about} spacing={5}>
