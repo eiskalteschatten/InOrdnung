@@ -17,6 +17,7 @@ import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 import Add from '@material-ui/icons/Add';
 
 import RoundedButton from '../../../components/RoundedButton';
+import BookmarkDialog from './BookmarkDialog';
 
 import styles from './Bookmarks.module.scss';
 
@@ -35,6 +36,7 @@ type SortDirection = 'asc' | 'desc';
 const Bookmarks: React.FC = () => {
   const [sortBy, setSortBy] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [mockRows, setMockRows] = useState(rows);
 
   const handleSort = (sortId: string): void => {
@@ -70,7 +72,7 @@ const Bookmarks: React.FC = () => {
   };
 
   const handleNewBookmark = (): void => {
-    console.log('add new bookmark');
+    setEditDialogOpen(true);
   };
 
   return (
@@ -125,6 +127,11 @@ const Bookmarks: React.FC = () => {
           </Table>
         </TableContainer>
       </div>
+
+      <BookmarkDialog
+        open={editDialogOpen}
+        handleClose={() => setEditDialogOpen(false)}
+      />
     </div>
   );
 };
