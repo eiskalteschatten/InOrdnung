@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Route, useRouteMatch, Switch } from 'react-router-dom';
+import { Route, useRouteMatch, Switch, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
 import { State } from '../../store';
+import { appSetOpenNewBookmarkDialog } from '../../store/actions/appActions';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
 import Sidebar from './Sidebar';
@@ -18,11 +19,23 @@ const { ipcRenderer } = window.require('electron');
 
 const Project: React.FC = () => {
   const { path } = useRouteMatch();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const project = useSelector((state: State) => state.project);
   const file = useSelector((state: State) => state.file);
-  const untitled = useTranslation('projectUntitled');
-  const dispatch = useDispatch();
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
+  const untitled = useTranslation('projectUntitled');
+
+  useEffect(() => {
+    ipcRenderer.on('newBookmark', (): void => {
+      dispatch(appSetOpenNewBookmarkDialog(true));
+      history.push(`${path}/bookmarks`);
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners('newBookmark');
+    };
+  }, []);
 
   useEffect(() => {
     document.title = project.projectInfo.name || untitled;

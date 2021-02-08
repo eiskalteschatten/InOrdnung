@@ -14,11 +14,23 @@ const template: MenuItemConstructorOptions[] = [
     label: translation.file,
     submenu: [
       {
-        label: translation.menuNewProject,
-        accelerator: 'CmdOrCtrl+N',
-        click: async (): Promise<void> => {
-          await createWindow();
-        },
+        label: translation.new,
+        submenu: [
+          {
+            label: translation.menuNewProject,
+            accelerator: 'CmdOrCtrl+N',
+            click: async (): Promise<void> => {
+              await createWindow();
+            },
+          },
+          { type: 'separator' },
+          {
+            label: translation.bookmarksNewBookmark,
+            click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
+              focusedWindow?.webContents.send('newBookmark');
+            },
+          },
+        ],
       },
       {
         label: translation.menuOpen,

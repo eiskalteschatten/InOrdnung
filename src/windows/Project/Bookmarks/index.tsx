@@ -20,7 +20,8 @@ import Add from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
-import { State } from '../../../store';
+import { dispatch, State } from '../../../store';
+import { appSetOpenNewBookmarkDialog } from '../../../store/actions/appActions';
 import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
@@ -34,6 +35,7 @@ type SortDirection = 'asc' | 'desc';
 
 const Bookmarks: React.FC = () => {
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
+  const openNewBookmarkDialog = useSelector((state: State) => state.app.openNewBookmarkDialog);
   const [sortBy, setSortBy] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
@@ -46,15 +48,18 @@ const Bookmarks: React.FC = () => {
       setEditingBookmark(bookmark);
       setEditDialogOpen(true);
     });
-
-    return () => {
-      ipcRenderer.removeAllListeners('editBookmark');
-    };
   }, []);
 
   useEffect(() => {
     setLocalBookmarks(bookmarks);
   }, [bookmarks]);
+
+  useEffect(() => {
+    if (openNewBookmarkDialog) {
+      setEditDialogOpen(true);
+      dispatch(appSetOpenNewBookmarkDialog(false));
+    }
+  }, [openNewBookmarkDialog]);
 
   const handleSort = (sortId: string): void => {
     let newSortDirection = sortDirection;

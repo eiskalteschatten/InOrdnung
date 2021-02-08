@@ -1,6 +1,7 @@
 export default {
   en: {
     file: 'File',
+    new: 'New',
     menuNewProject: 'New Project',
     menuOpen: 'Open...',
     menuOpenRecent: 'Open Recent',
@@ -18,6 +19,7 @@ export default {
   },
   de: {
     file: 'Datei',
+    new: 'Neu',
     menuNewProject: 'Neues Projekt',
     menuOpen: 'Öffnen...',
     menuOpenRecent: 'Benutzte Dokumente',
