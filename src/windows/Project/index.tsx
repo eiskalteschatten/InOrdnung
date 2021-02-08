@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
 import { State } from '../../store';
-import { appSetOpenNewBookmarkDialog } from '../../store/actions/appActions';
+import { uiSetOpenNewBookmarkDialog } from '../../store/actions/uiActions';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
 import Sidebar from './Sidebar';
@@ -28,7 +28,7 @@ const Project: React.FC = () => {
 
   useEffect(() => {
     ipcRenderer.on('newBookmark', (): void => {
-      dispatch(appSetOpenNewBookmarkDialog(true));
+      dispatch(uiSetOpenNewBookmarkDialog(true));
       history.push(`${path}/bookmarks`);
     });
 

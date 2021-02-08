@@ -21,7 +21,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
 import { dispatch, State } from '../../../store';
-import { appSetOpenNewBookmarkDialog } from '../../../store/actions/appActions';
+import { uiSetOpenNewBookmarkDialog } from '../../../store/actions/uiActions';
 import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
@@ -35,7 +35,7 @@ type SortDirection = 'asc' | 'desc';
 
 const Bookmarks: React.FC = () => {
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
-  const openNewBookmarkDialog = useSelector((state: State) => state.app.openNewBookmarkDialog);
+  const openNewBookmarkDialog = useSelector((state: State) => state.ui.openNewBookmarkDialog);
   const [sortBy, setSortBy] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
@@ -61,7 +61,7 @@ const Bookmarks: React.FC = () => {
   useEffect(() => {
     if (openNewBookmarkDialog) {
       setEditDialogOpen(true);
-      dispatch(appSetOpenNewBookmarkDialog(false));
+      dispatch(uiSetOpenNewBookmarkDialog(false));
     }
   }, [openNewBookmarkDialog]);
 
