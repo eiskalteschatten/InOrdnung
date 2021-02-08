@@ -46,10 +46,7 @@ const projectReducer: Reducer<Project, ProjectActions> = (
         bookmarks = [action.payload];
       }
 
-      return {
-        ...state,
-        bookmarks,
-      };
+      return { ...state, bookmarks };
     default:
       return state;
   }
