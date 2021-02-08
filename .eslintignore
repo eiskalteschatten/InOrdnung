@@ -6,7 +6,7 @@ test-results
 *.spec.js
 jasmine-runner-api.js
 
-src/public/
+src/public/**/*
 
 *.min.js
 
