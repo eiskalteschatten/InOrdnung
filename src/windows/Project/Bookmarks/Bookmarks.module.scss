@@ -1,0 +1,17 @@
+@import "../../../scss/variables";
+
+$marginSize: 10px;
+
+.toolbar {
+  text-align: right;
+  margin: $marginSize;
+}
+
+.tableWrapper {
+  margin: $marginSize;
+  width: calc(100% - 20px);
+}
+
+.tableCell {
+  font-size: .85em !important;
+}

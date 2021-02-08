@@ -6,9 +6,11 @@ import isEqual from 'lodash/isEqual';
 import { State } from '../../store';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
-import Sidebar from '../../components/Sidebar';
-import ProjectInfo from '../../components/ProjectInfo';
+import Sidebar from './Sidebar';
 import useTranslation from '../../intl/useTranslation';
+
+import ProjectInfo from './ProjectInfo';
+import Bookmarks from './Bookmarks';
 
 import styles from './Project.module.scss';
 
@@ -51,6 +53,7 @@ const Project: React.FC = () => {
       <div className={styles.rightView}>
         <Switch>
           <Route exact path={`${path}`} component={ProjectInfo} />
+          <Route path={`${path}/bookmarks`} component={Bookmarks} />
         </Switch>
       </div>
     </div>

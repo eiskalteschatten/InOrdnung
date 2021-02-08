@@ -1,17 +1,17 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 
 import styles from './SidebarItem.module.scss';
 
 export interface Props {
   path: string;
-  iconClass: string;
+  ItemIcon: any;
   title: string;
 }
 
-const SidebarItem: React.FC<Props> = ({ iconClass, title, path }) => {
-  const { path: currentPath } = useRouteMatch();
+const SidebarItem: React.FC<Props> = ({ ItemIcon, title, path }) => {
+  const location = useLocation();
 
   if (path.charAt(path.length -1) === '/') {
     path = path.slice(0, -1);
@@ -22,10 +22,10 @@ const SidebarItem: React.FC<Props> = ({ iconClass, title, path }) => {
       to={path}
       className={clsx({
         [styles.sidebarItem]: true,
-        [styles.selected]: currentPath === path,
+        [styles.selected]: location.pathname === path,
       })}
     >
-      <i className={clsx(iconClass, styles.icon)}/>
+      <ItemIcon fontSize='small' className={styles.icon} />
       <span className={styles.text}>{title}</span>
     </Link>
   );

@@ -1,5 +1,9 @@
 @import "../../scss/variables";
 
+.welcome {
+  height: 100%;
+}
+
 .iconSection {
   text-align: center;
   margin: 20px 0;
@@ -26,7 +30,8 @@
 .recentProjects {
   background: $lightSidebarBgColor;
   padding-left: 0 !important;
-  overflow: auto;
+  padding-top: 10px;
+  overflow-y: auto;
   height: 100%;
 
   @media (prefers-color-scheme: dark) {
@@ -52,12 +57,7 @@
     font-size: 33px;
     float: left;
     width: 65px;
-    height: 50px;
     padding-right: 13px;
-
-    .bi::before {
-      vertical-align: inherit !important;
-    }
   }
 
   .projectInfo {
@@ -65,12 +65,17 @@
     text-align: left;
 
     .projectName {
-      font-size: .9em;
+      font-size: 1.2em;
+      margin-bottom: 6px;
     }
 
     .projectPath {
       opacity: .7;
       font-size: .8em;
     }
+  }
+
+  &:first-of-type {
+    margin-top: 0px;
   }
 }

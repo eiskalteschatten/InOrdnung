@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { IpcRendererEvent } from 'electron';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {
+  Grid,
+} from '@material-ui/core';
 
 import useTranslation from '../../intl/useTranslation';
 
@@ -39,14 +40,16 @@ const About: React.FC = () => {
   };
 
   return (
-    <Row className={styles.about}>
-      <Col>
-        <img src={icon} alt='InOrdnung' />
-      </Col>
-      <Col>
+    <Grid container className={styles.about} spacing={5}>
+      <Grid item xs={6}>
+        <img src={icon} alt='InOrdnung' className={styles.appIcon} />
+      </Grid>
+      <Grid item xs={6}>
         <div className={styles.title}>InOrdnung</div>
 
-        <div><FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick}>Alex Seifert</a></div>
+        <div>
+          <FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick} className={styles.ascomLink}>Alex Seifert</a>
+        </div>
 
         <div className={styles.version}>
           {remote.app.getVersion()}
@@ -61,8 +64,8 @@ const About: React.FC = () => {
         <div className={styles.legal}>
           Copyright © Alex Seifert 2021.
         </div>
-      </Col>
-    </Row>
+      </Grid>
+    </Grid>
   );
 };
 

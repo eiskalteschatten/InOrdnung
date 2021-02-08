@@ -1,4 +1,4 @@
-@import "../../../scss/variables";
+@import "../../scss/variables";
 
 .titlebar {
   height: $macTitlebarSize;
@@ -7,6 +7,6 @@
   position: fixed;
   top: 0;
   -webkit-app-region: drag;
-  -webkit-user-select: none;
+  user-select: none;
   z-index: 1000;
 }

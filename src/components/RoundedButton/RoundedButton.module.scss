@@ -1,4 +1,4 @@
-@import "../../../scss/variables";
+@import "../../scss/variables";
 
 .roundedButton {
   position: relative;
@@ -8,6 +8,7 @@
   z-index: 0;
   border: none;
   background: none;
+  font-family: $systemFont;
 
   &::before {
     content: '';
@@ -46,6 +47,11 @@
         background: $darkButtonActiveBg;
       }
     }
+  }
+
+  .wrapper {
+    display: flex;
+    align-items: center;
   }
 
   @media (prefers-color-scheme: dark) {

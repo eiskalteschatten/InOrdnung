@@ -4,13 +4,18 @@ import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { IpcRendererEvent } from 'electron';
 
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {
+  Grid,
+} from '@material-ui/core';
+
+import NoteAdd from '@material-ui/icons/NoteAdd';
+import FolderOpen from '@material-ui/icons/FolderOpen';
+import InsertDriveFile from '@material-ui/icons/InsertDriveFile';
 
 import useTranslation from '../../intl/useTranslation';
 import { State } from '../../store';
-import Titlebar from '../../components/elements/Titlebar';
-import RoundedButton from '../../components/elements/RoundedButton';
+import Titlebar from '../../components/Titlebar';
+import RoundedButton from '../../components/RoundedButton';
 import { RecentProjectsLocalStorage } from '../../interfaces/project';
 
 import icon from '../../assets/images/icon.svg';
@@ -48,11 +53,11 @@ const Welcome: React.FC = () => {
   };
 
   return (
-    <div className='h-100'>
+    <div className={styles.welcome}>
       {platform === 'darwin' && (<Titlebar />)}
 
-      <Row className='h-100'>
-        <Col xs={7}>
+      <Grid container className={styles.welcome}>
+        <Grid item xs={7}>
           <div className={clsx({
             [styles.iconSection]: true,
             'hasDarwinTitlebar': platform === 'darwin',
@@ -66,15 +71,15 @@ const Welcome: React.FC = () => {
 
           <div className={styles.buttons}>
             <RoundedButton onClick={handleNewProjectClick} className={styles.newButton}>
-              <i className='bi bi-file-earmark-plus' />&nbsp;<FormattedMessage id='createANewProject' />
+              <NoteAdd fontSize='small' />&nbsp;<FormattedMessage id='createANewProject' />
             </RoundedButton>
 
             <RoundedButton onClick={handleOpenFileDialog}>
-              <i className='bi bi-folder2-open' />&nbsp;<FormattedMessage id='openAProject' />
+              <FolderOpen fontSize='small' />&nbsp;<FormattedMessage id='openAProject' />
             </RoundedButton>
           </div>
-        </Col>
-        <Col xs={5} className={clsx({
+        </Grid>
+        <Grid item xs={5} className={clsx({
           [styles.recentProjects]: true,
           'hasDarwinTitlebar': platform === 'darwin',
         })}>
@@ -88,7 +93,7 @@ const Welcome: React.FC = () => {
                 <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
               ) : (
                 <div className={styles.defaultImage}>
-                  <i className={clsx('bi', 'bi-file-earmark-fill', styles.bi)} />
+                  <InsertDriveFile />
                 </div>
               )}
 
@@ -98,8 +103,8 @@ const Welcome: React.FC = () => {
               </div>
             </RoundedButton>
           ))}
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
     </div>
   );
 };

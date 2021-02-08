@@ -1,4 +1,4 @@
-@import "../../scss/variables";
+@import "../../../scss/variables";
 
 .projectInfo {
   display: flex;
@@ -9,16 +9,15 @@
 
 .formGroup {
   width: 100%;
-  min-width: 400px;
-  max-width: 600px;
+  width: 500px;
 }
 
 .formControlWrapper {
   margin-bottom: 30px;
 }
 
-.projectDescription {
-  min-height: 125px;
+.textField, .datePicker {
+  width: 100%;
 }
 
 .switch {

@@ -15,7 +15,9 @@ const RoundedButton: React.FC<Props> = ({ onClick, children, className }) => {
       className={clsx(styles.roundedButton, className)}
       onClick={onClick}
     >
-      {children}
+      <div className={styles.wrapper}>
+        {children}
+      </div>
     </button>
   );
 };

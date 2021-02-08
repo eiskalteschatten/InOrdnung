@@ -1,10 +1,13 @@
-@import "../../../scss/variables";
+@import "../../../../scss/variables";
 
 .sidebarItem {
   color: $lightColor;
   padding: 5px 10px;
+  margin: 5px 0;
   border-radius: 5px;
-  display: block;
+  display: flex;
+  align-items: center;
+  font-size: .9em;
 
   &:hover {
     background: $lightButtonHoverBg;
@@ -24,6 +27,10 @@
     }
   }
 
+  &:first-of-type {
+    margin-top: 0;
+  }
+
   @media (prefers-color-scheme: dark) {
     color: $darkColor;
   }
@@ -31,8 +38,5 @@
 
 .icon {
   margin-right: 8px;
-}
-
-.text {
-  font-size: .9em;
+  float: left;
 }
