@@ -21,7 +21,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
 import { dispatch, State } from '../../../store';
-import { uiSetOpenNewBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
+import { uiSetOpenEditBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
 import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
@@ -35,8 +35,7 @@ const Bookmarks: React.FC = () => {
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
   const sortBy = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortBy);
   const sortDirection = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortDirection);
-  const openNewBookmarkDialog = useSelector((state: State) => state.ui.openNewBookmarkDialog);
-  const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+  const openEditBookmarkDialog = useSelector((state: State) => state.ui.openEditBookmarkDialog);
   const [localBookmarks, setLocalBookmarks] = useState<Bookmark[]>();
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
   const [hoverBookmarkId, setHoverBookmarkId] = useState<string>('');
@@ -44,7 +43,7 @@ const Bookmarks: React.FC = () => {
   useEffect(() => {
     ipcRenderer.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
       setEditingBookmark(bookmark);
-      setEditDialogOpen(true);
+      dispatch(uiSetOpenEditBookmarkDialog(true));
     });
 
     return () => {
@@ -55,13 +54,6 @@ const Bookmarks: React.FC = () => {
   useEffect(() => {
     setLocalBookmarks(bookmarks);
   }, [bookmarks]);
-
-  useEffect(() => {
-    if (openNewBookmarkDialog) {
-      setEditDialogOpen(true);
-      dispatch(uiSetOpenNewBookmarkDialog(false));
-    }
-  }, [openNewBookmarkDialog]);
 
   const handleSort = (newSortBy: string): void => {
     let newSortDirection = sortDirection;
@@ -103,7 +95,7 @@ const Bookmarks: React.FC = () => {
   return (
     <div>
       <div className={styles.toolbar}>
-        <RoundedButton onClick={() => setEditDialogOpen(true)} className={styles.newButton}>
+        <RoundedButton onClick={() => dispatch(uiSetOpenEditBookmarkDialog(true))} className={styles.newButton}>
           <Add fontSize='small' />&nbsp;<FormattedMessage id='bookmarksNewBookmark' />
         </RoundedButton>
       </div>
@@ -176,8 +168,8 @@ const Bookmarks: React.FC = () => {
       </div>
 
       <BookmarkDialog
-        open={editDialogOpen}
-        handleClose={() => setEditDialogOpen(false)}
+        open={openEditBookmarkDialog}
+        handleClose={() => dispatch(uiSetOpenEditBookmarkDialog(false))}
         bookmark={editingBookmark}
       />
     </div>

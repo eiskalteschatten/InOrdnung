@@ -7,6 +7,7 @@ import {
 export interface AppSetPlatform extends Action<typeof APP_SET_PLATFORM> {
   platform: string;
 }
+
 export type AppActions =
   AppSetPlatform;
 

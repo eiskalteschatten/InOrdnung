@@ -4,17 +4,17 @@ import { BookmarkSortingOptions } from '../../interfaces/bookmarks';
 import { UiActions } from '../actions/uiActions';
 
 import {
-  UI_OPEN_NEW_BOOKMARK_DIALOG,
+  UI_OPEN_EDIT_BOOKMARK_DIALOG,
   UI_SET_BOOKMARKS_SORTING_OPTIONS,
 } from '../constants';
 
 export interface UiState {
-  openNewBookmarkDialog: boolean;
+  openEditBookmarkDialog: boolean;
   bookmarksSortingOptions: BookmarkSortingOptions;
 }
 
 export const initialState: UiState = {
-  openNewBookmarkDialog: false,
+  openEditBookmarkDialog: false,
   bookmarksSortingOptions: {},
 };
 
@@ -23,10 +23,10 @@ const uiReducer: Reducer<UiState, UiActions> = (
   action: UiActions
 ): any => {
   switch (action.type) {
-    case UI_OPEN_NEW_BOOKMARK_DIALOG:
+    case UI_OPEN_EDIT_BOOKMARK_DIALOG:
       return {
         ...state,
-        openNewBookmarkDialog: action.payload,
+        openEditBookmarkDialog: action.payload,
       };
     case UI_SET_BOOKMARKS_SORTING_OPTIONS:
       return {
