@@ -38,13 +38,18 @@ const App: React.FC = () => {
   }, getMuiLocale());
 
   useEffect(() => {
+    const themeChange = (e: any): void => {
+      setTheme(e.matches ? 'dark' : 'light');
+    };
+
     if (window.matchMedia) {
       setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e: any): void => {
-        setTheme(e.matches ? 'dark' : 'light');
-      });
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', themeChange);
     }
+
+    return () => {
+      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', themeChange);
+    };
   }, []);
 
   return (
