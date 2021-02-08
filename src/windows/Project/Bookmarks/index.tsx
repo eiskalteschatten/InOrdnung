@@ -27,6 +27,8 @@ import { handleLinkClick, isValidUrl } from '../../../lib/links';
 
 import styles from './Bookmarks.module.scss';
 
+const { ipcRenderer } = window.require('electron');
+
 type SortDirection = 'asc' | 'desc';
 
 const Bookmarks: React.FC = () => {
@@ -74,14 +76,10 @@ const Bookmarks: React.FC = () => {
     }));
   };
 
-  const handleNewBookmark = (): void => {
-    setEditDialogOpen(true);
-  };
-
   return (
     <div>
       <div className={styles.toolbar}>
-        <RoundedButton onClick={handleNewBookmark} className={styles.newButton}>
+        <RoundedButton onClick={() => setEditDialogOpen(true)} className={styles.newButton}>
           <Add fontSize='small' />&nbsp;<FormattedMessage id='bookmarksNewBookmark' />
         </RoundedButton>
       </div>
@@ -118,6 +116,7 @@ const Bookmarks: React.FC = () => {
                   key={row.name}
                   onMouseEnter={() => setHoverBookmarkId(row.id)}
                   onMouseLeave={() => setHoverBookmarkId('')}
+                  onContextMenu={() => ipcRenderer.send('showBookmarkMenu', row)}
                 >
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}
@@ -126,8 +125,7 @@ const Bookmarks: React.FC = () => {
                   <TableCell align='right'>
                     <IconButton
                       size='small'
-                      href={row.url}
-                      onClick={e=> handleLinkClick(e, row.url)}
+                      onClick={() => ipcRenderer.send('showBookmarkMenu', row)}
                       className={clsx({
                         [styles.invisible]: hoverBookmarkId !== row.id,
                       })}
@@ -139,7 +137,7 @@ const Bookmarks: React.FC = () => {
                       <IconButton
                         size='small'
                         href={row.url}
-                        onClick={e=> handleLinkClick(e, row.url)}
+                        onClick={e => handleLinkClick(e, row.url)}
                         edge='end'
                       >
                         <OpenInBrowser fontSize='small' />

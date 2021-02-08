@@ -3,9 +3,11 @@ import { ipcMain, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 import createProjectWindow from './windows/project';
 import { checkIfFileIsImage, encodeImage, getFileType } from './lib/images';
 import projectImageCm from './cmMenus/projectImage';
+import bookmarkMenuCm from './cmMenus/bookmarkMenu';
 import { selectProjectImage } from './lib/project';
 import { openFile, openFileDialog, saveFileAs, writeFile } from './lib/projectFile';
 import { ProjectFile, ProjectFileMetaData } from '../interfaces/project';
+import { Bookmark } from '../interfaces/bookmarks';
 
 ipcMain.on('createNewProject', () => createProjectWindow());
 
@@ -63,4 +65,13 @@ ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> 
 
 ipcMain.on('openFileDialog', async (): Promise<void> => {
   await openFileDialog();
+});
+
+ipcMain.on('showBookmarkMenu', (e: IpcMainEvent, bookmark: Bookmark): void => {
+  const window = BrowserWindow.fromWebContents(e.sender);
+
+  if (window) {
+    const menu = Menu.buildFromTemplate(bookmarkMenuCm(bookmark));
+    menu.popup({ window });
+  }
 });

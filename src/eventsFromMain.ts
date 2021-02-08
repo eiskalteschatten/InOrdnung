@@ -6,8 +6,11 @@ import { getState, dispatch } from './store';
 import { appSetPlatform } from './store/actions/appActions';
 import { projectSetProject, projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions/projectInfoActions';
 import { fileSetMetaData } from './store/actions/fileActions';
+import { projectDeleteBookmark } from './store/actions/projectActions/bookmarkActions';
+import { Bookmark } from './interfaces/bookmarks';
+import { isValidUrl } from './lib/links';
 
-const { ipcRenderer } = window.require('electron');
+const { ipcRenderer, shell } = window.require('electron');
 
 ipcRenderer.on('appSetPlatform', (e: IpcRendererEvent, platform: string): any =>
   dispatch(appSetPlatform(platform)));
@@ -42,4 +45,20 @@ ipcRenderer.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, pa
     fileLoaded: true,
     saved: true,
   }));
+});
+
+ipcRenderer.on('openBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
+  if (bookmark.url && isValidUrl(bookmark.url)) {
+    shell.openExternal(bookmark.url);
+  }
+});
+
+ipcRenderer.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
+  console.log('edit', bookmark);
+});
+
+ipcRenderer.on('deleteBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
+  if (bookmark.id) {
+    dispatch(projectDeleteBookmark(bookmark.id));
+  }
 });
