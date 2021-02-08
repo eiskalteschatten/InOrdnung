@@ -44,11 +44,11 @@ const Project: React.FC = () => {
   useEffect(() => {
     dispatch(fileSetSaved(false));
 
-    if (!isEqual(project, projectInitialState)) {
-      ipcRenderer.send('projectIsEdited');
-    }
-
     if (file.fileLoaded) {
+      if (!isEqual(project, projectInitialState)) {
+        ipcRenderer.send('projectIsEdited');
+      }
+
       if (autoSaveTimeout) {
         clearTimeout(autoSaveTimeout);
       }
