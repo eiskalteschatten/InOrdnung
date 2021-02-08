@@ -67,6 +67,7 @@ const ProjectInfo: React.FC = () => {
               onChange={handleFieldChange}
               className={styles.textField}
               InputLabelProps={{ shrink: !!projectInfo?.name }}
+              fullWidth
             />
           </div>
 
@@ -80,6 +81,7 @@ const ProjectInfo: React.FC = () => {
               className={styles.textField}
               InputLabelProps={{ shrink: !!projectInfo?.description }}
               multiline
+              fullWidth
               rows={4}
             />
           </div>
@@ -113,6 +115,7 @@ const ProjectInfo: React.FC = () => {
                 onChange={(date: MaterialUiPickersDate) => handleDateChange('startDate', date)}
                 className={styles.datePicker}
                 disableToolbar
+                fullWidth
               />
             )}
           </div>
@@ -146,6 +149,7 @@ const ProjectInfo: React.FC = () => {
                 onChange={(date: MaterialUiPickersDate) => handleDateChange('endDate', date)}
                 className={styles.datePicker}
                 disableToolbar
+                fullWidth
               />
             )}
           </div>
