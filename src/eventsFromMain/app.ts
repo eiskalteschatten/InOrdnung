@@ -1,14 +1,16 @@
 import { IpcRendererEvent } from 'electron';
 
-import { ProjectFileMetaData, ProjectFile } from './interfaces/project';
-import { ProjectInfo } from './interfaces/projectInfo';
-import { getState, dispatch } from './store';
-import { appSetPlatform } from './store/actions/appActions';
-import { projectSetProject, projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions/projectInfoActions';
-import { fileSetMetaData } from './store/actions/fileActions';
-import { projectDeleteBookmark } from './store/actions/projectActions/bookmarkActions';
-import { Bookmark } from './interfaces/bookmarks';
-import { isValidUrl } from './lib/links';
+import { ProjectFileMetaData, ProjectFile } from '../interfaces/project';
+import { ProjectInfo } from '../interfaces/projectInfo';
+import { Bookmark } from '../interfaces/bookmarks';
+import { isValidUrl } from '../lib/links';
+
+import { getState, dispatch } from '../store';
+import { appSetPlatform } from '../store/actions/appActions';
+import { projectSetProjectInfo, projectDeleteImage } from '../store/actions/projectActions/projectInfoActions';
+import { fileSetMetaData } from '../store/actions/fileActions';
+import { projectDeleteBookmark } from '../store/actions/projectActions/bookmarkActions';
+import { projectSetProject } from '../store/actions/projectActions';
 
 const { ipcRenderer, shell } = window.require('electron');
 

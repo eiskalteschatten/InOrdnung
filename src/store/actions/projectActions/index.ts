@@ -36,3 +36,5 @@ export type ProjectActions =
   ProjectDeleteImage |
   ProjectSetBookmarks |
   ProjectAddBookmark;
+
+export const projectSetProject = (payload: Project): ProjectSetProject => ({ type: PROJECT_SET_PROJECT, payload });
