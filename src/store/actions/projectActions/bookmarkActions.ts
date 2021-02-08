@@ -1,3 +1,5 @@
+import { remove } from 'lodash';
+
 import { ProjectAddBookmark, ProjectSetBookmarks } from '.';
 import { ReduxThunk } from '../../interfaces';
 import { Bookmark } from '../../../interfaces/bookmarks';
@@ -29,13 +31,6 @@ export const projectDeleteBookmark = (id: string): ReduxThunk<void, typeof PROJE
   (dispatch: any, getState: Function): ProjectSetBookmarks => {
     const state = getState();
     const { bookmarks } = state.project;
-
-    for (const index in bookmarks) {
-      if (bookmarks[index].id === id) {
-        delete bookmarks[index];
-        break;
-      }
-    }
-
+    remove(bookmarks, (bookmark: Bookmark): boolean => bookmark.id === id);
     return dispatch({ type: PROJECT_SET_BOOKMARKS, payload: bookmarks });
   };
