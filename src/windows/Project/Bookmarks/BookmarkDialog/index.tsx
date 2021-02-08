@@ -58,6 +58,17 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
     handleClose();
   };
 
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    switch (e.key) {
+      case 'Enter':
+        handleSave();
+        break;
+      case 'Esc':
+        handleClose();
+        break;
+    }
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
@@ -79,8 +90,8 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
           InputLabelProps={{ shrink: !!editingBookmark?.name }}
           onChange={handleFieldChange}
           size='small'
+          onKeyDown={onKeyDown}
         />
-
         <TextField
           margin='dense'
           id='url'
@@ -91,6 +102,7 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
           InputLabelProps={{ shrink: !!editingBookmark?.url }}
           onChange={handleFieldChange}
           size='small'
+          onKeyDown={onKeyDown}
         />
       </DialogContent>
       <DialogActions>
