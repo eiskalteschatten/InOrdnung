@@ -20,11 +20,11 @@ import { projectAddBookmark, projectEditBookmark } from '../../../../store/actio
 
 interface Props {
   open: boolean;
-  handleClose: () => void;
+  close: () => void;
   bookmark?: Bookmark;
 }
 
-const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
+const BookmarkDialog: React.FC<Props> = ({ open, close, bookmark }) => {
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
   const dispatch = useDispatch();
 
@@ -34,16 +34,16 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
     });
   }, [bookmark]);
 
+  const handleClose = (): void => {
+    setEditingBookmark(undefined);
+    close();
+  };
+
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEditingBookmark({
       ...editingBookmark,
       [e.target.id]: e.target.value,
     });
-  };
-
-  const handleCancel = (): void => {
-    setEditingBookmark(undefined);
-    handleClose();
   };
 
   const handleSave = (): void => {
@@ -54,7 +54,6 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
       dispatch(projectEditBookmark(editingBookmark));
     }
 
-    setEditingBookmark(undefined);
     handleClose();
   };
 
@@ -106,7 +105,7 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleCancel} variant='outlined' color='primary' size='small'>
+        <Button onClick={handleClose} variant='outlined' color='primary' size='small'>
           <FormattedMessage id='cancel' />
         </Button>
         <Button onClick={handleSave} variant='contained' color='primary' size='small'>

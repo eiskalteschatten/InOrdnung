@@ -169,7 +169,7 @@ const Bookmarks: React.FC = () => {
 
       <BookmarkDialog
         open={openEditBookmarkDialog}
-        handleClose={() => dispatch(uiSetOpenEditBookmarkDialog(false))}
+        close={() => dispatch(uiSetOpenEditBookmarkDialog(false))}
         bookmark={editingBookmark}
       />
     </div>
