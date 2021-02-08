@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { useSelector } from 'react-redux';
 
 import {
   Table,
@@ -16,30 +17,26 @@ import {
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 import Add from '@material-ui/icons/Add';
 
+import { State } from '../../../store';
 import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
 
 import styles from './Bookmarks.module.scss';
 
-function createData(name: string, url: string) {
-  return { name, url };
-}
-
-const rows = [
-  createData('AlexSeifert.com', 'https://www.alexseifert.com'),
-  createData('History Rhymes', 'https://www.historyrhymes.info'),
-  createData('Developer\'s Notebook', 'https://www.developers-notebook.com'),
-];
-
 type SortDirection = 'asc' | 'desc';
 
 const Bookmarks: React.FC = () => {
+  const bookmarks = useSelector((state: State) => state.project?.bookmarks);
   const [sortBy, setSortBy] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
+  const [localBookmarks, setLocalBookmarks] = useState<Bookmark[]>();
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
-  const [mockRows, setMockRows] = useState(rows);
+
+  useEffect(() => {
+    setLocalBookmarks(bookmarks);
+  }, [bookmarks]);
 
   const handleSort = (sortId: string): void => {
     let newSortDirection = sortDirection;
@@ -51,7 +48,7 @@ const Bookmarks: React.FC = () => {
 
     setSortBy(sortId);
 
-    setMockRows(mockRows.sort((rowA: any, rowB: any) => {
+    setLocalBookmarks(localBookmarks?.sort((rowA: any, rowB: any) => {
       if (newSortDirection === 'asc') {
         if (rowA[sortId] > rowB[sortId]) {
           return 1;
@@ -112,7 +109,7 @@ const Bookmarks: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {mockRows.map((row: any) => (
+              {Array.isArray(localBookmarks) && localBookmarks.map((row: any) => (
                 <TableRow key={row.name}>
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}
