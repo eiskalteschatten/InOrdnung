@@ -18,7 +18,7 @@ import {
 
 import { IntlContext } from '../../../intl/IntlContext';
 import { State } from '../../../store';
-import { projectSetProjectInfo } from '../../../store/actions/projectActions';
+import { projectSetProjectInfo } from '../../../store/actions/projectActions/projectInfoActions';
 import { getDateLocaleFormat } from '../../../lib/dates';
 import ProjectImage from './ProjectImage';
 

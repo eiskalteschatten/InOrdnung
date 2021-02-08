@@ -4,7 +4,7 @@ import { ProjectFileMetaData, ProjectFile } from './interfaces/project';
 import { ProjectInfo } from './interfaces/projectInfo';
 import { getState, dispatch } from './store';
 import { appSetPlatform } from './store/actions/appActions';
-import { projectSetProject, projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions';
+import { projectSetProject, projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions/projectInfoActions';
 import { fileSetMetaData } from './store/actions/fileActions';
 
 const { ipcRenderer } = window.require('electron');
