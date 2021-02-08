@@ -37,11 +37,18 @@ const projectReducer: Reducer<Project, ProjectActions> = (
         bookmarks: action.payload,
       };
     case PROJECT_ADD_BOOKMARK:
+      let { bookmarks } = state;
+
+      if (Array.isArray(state.bookmarks)) {
+        bookmarks.push(action.payload);
+      }
+      else {
+        bookmarks = [action.payload];
+      }
+
       return {
         ...state,
-        bookmarks: Array.isArray(state.bookmarks)
-          ? state.bookmarks.push(action.payload)
-          : [action.payload],
+        bookmarks,
       };
     default:
       return state;

@@ -54,6 +54,7 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
       dispatch(projectEditBookmark(editingBookmark));
     }
 
+    setEditingBookmark(undefined);
     handleClose();
   };
 
