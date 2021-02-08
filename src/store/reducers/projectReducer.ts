@@ -7,13 +7,16 @@ import {
   PROJECT_SET_PROJECT,
   PROJECT_SET_PROJECT_INFO,
   PROJECT_DELETE_IMAGE,
+  PROJECT_SET_BOOKMARKS,
+  PROJECT_ADD_BOOKMARK,
 } from '../constants';
 
 export const initialState: Project = {
   projectInfo: {},
+  bookmarks: [],
 };
 
-const projectInfoReducer: Reducer<Project, ProjectActions> = (
+const projectReducer: Reducer<Project, ProjectActions> = (
   state = initialState,
   action: ProjectActions
 ): any => {
@@ -28,9 +31,21 @@ const projectInfoReducer: Reducer<Project, ProjectActions> = (
     case PROJECT_DELETE_IMAGE:
       delete state.projectInfo.image;
       return state;
+    case PROJECT_SET_BOOKMARKS:
+      return {
+        ...state,
+        bookmarks: action.payload,
+      };
+    case PROJECT_ADD_BOOKMARK:
+      return {
+        ...state,
+        bookmarks: Array.isArray(state.bookmarks)
+          ? state.bookmarks.push(action.payload)
+          : [action.payload],
+      };
     default:
       return state;
   }
 };
 
-export default projectInfoReducer;
+export default projectReducer;
