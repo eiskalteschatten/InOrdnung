@@ -4,7 +4,7 @@ export interface Bookmark {
   url?: string;
 }
 
-export interface BookmarkSorting {
+export interface BookmarkSortingOptions {
   sortBy?: string;
-  sortDirection?: string;
+  sortDirection?: 'asc' | 'desc';
 }

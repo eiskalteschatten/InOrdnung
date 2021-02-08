@@ -21,7 +21,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
 import { dispatch, State } from '../../../store';
-import { uiSetOpenNewBookmarkDialog } from '../../../store/actions/uiActions';
+import { uiSetOpenNewBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
 import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
@@ -31,13 +31,11 @@ import styles from './Bookmarks.module.scss';
 
 const { ipcRenderer } = window.require('electron');
 
-type SortDirection = 'asc' | 'desc';
-
 const Bookmarks: React.FC = () => {
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
+  const sortBy = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortBy);
+  const sortDirection = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortDirection);
   const openNewBookmarkDialog = useSelector((state: State) => state.ui.openNewBookmarkDialog);
-  const [sortBy, setSortBy] = useState<string>('');
-  const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [editDialogOpen, setEditDialogOpen] = useState<boolean>(false);
   const [localBookmarks, setLocalBookmarks] = useState<Bookmark[]>();
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
@@ -65,30 +63,35 @@ const Bookmarks: React.FC = () => {
     }
   }, [openNewBookmarkDialog]);
 
-  const handleSort = (sortId: string): void => {
+  const handleSort = (newSortBy: string): void => {
     let newSortDirection = sortDirection;
 
-    if (sortBy === sortId) {
+    const sortOptions = {
+      sortBy: newSortBy,
+      sortDirection,
+    };
+
+    if (sortBy === newSortBy) {
       newSortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
-      setSortDirection(newSortDirection);
+      sortOptions.sortDirection = newSortDirection;
     }
 
-    setSortBy(sortId);
+    dispatch(uiSetBookmarksSortingOptions(sortOptions));
 
     setLocalBookmarks(localBookmarks?.sort((rowA: any, rowB: any) => {
       if (newSortDirection === 'asc') {
-        if (rowA[sortId] > rowB[sortId]) {
+        if (rowA[newSortBy] > rowB[newSortBy]) {
           return 1;
         }
-        else if (rowA[sortId] < rowB[sortId]) {
+        else if (rowA[newSortBy] < rowB[newSortBy]) {
           return -1;
         }
       }
       else {
-        if (rowA[sortId] > rowB[sortId]) {
+        if (rowA[newSortBy] > rowB[newSortBy]) {
           return -1;
         }
-        else if (rowA[sortId] < rowB[sortId]) {
+        else if (rowA[newSortBy] < rowB[newSortBy]) {
           return 1;
         }
       }
