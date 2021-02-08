@@ -1,6 +1,7 @@
 import { Action } from 'redux';
 
-import { Project, ProjectInfo } from '../../interfaces/project';
+import { Project } from '../../interfaces/project';
+import { ProjectInfo } from '../../interfaces/projectInfo';
 
 import {
   PROJECT_SET_PROJECT,
