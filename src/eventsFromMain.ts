@@ -1,6 +1,7 @@
 import { IpcRendererEvent } from 'electron';
 
-import { ProjectInfo, ProjectFileMetaData, ProjectFile } from './interfaces/project';
+import { ProjectFileMetaData, ProjectFile } from './interfaces/project';
+import { ProjectInfo } from './interfaces/projectInfo';
 import { getState, dispatch } from './store';
 import { appSetPlatform } from './store/actions/appActions';
 import { projectSetProject, projectSetProjectInfo, projectDeleteImage } from './store/actions/projectActions';
