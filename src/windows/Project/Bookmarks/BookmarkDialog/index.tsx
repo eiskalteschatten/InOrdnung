@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -12,9 +12,9 @@ import {
   Button,
 } from '@material-ui/core';
 
-import { State } from '../../../../store';
 import { Bookmark } from '../../../../interfaces/bookmarks';
 import useTranslation from '../../../../intl/useTranslation';
+import { projectAddBookmark, projectEditBookmark } from '../../../../store/actions/projectActions/bookmarkActions';
 
 // import styles from './BookmarkDialog.module.scss';
 
@@ -26,6 +26,7 @@ interface Props {
 
 const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEditingBookmark(bookmark ? bookmark : {
@@ -46,6 +47,12 @@ const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
   };
 
   const handleSave = (): void => {
+    if (!bookmark && editingBookmark) {
+      dispatch(projectAddBookmark(editingBookmark));
+    }
+    else if (editingBookmark) {
+      dispatch(projectEditBookmark(editingBookmark));
+    }
 
     handleClose();
   };
