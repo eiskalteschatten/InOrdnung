@@ -46,6 +46,10 @@ const Bookmarks: React.FC = () => {
       setEditingBookmark(bookmark);
       setEditDialogOpen(true);
     });
+
+    return () => {
+      ipcRenderer.removeAllListeners('editBookmark');
+    };
   }, []);
 
   useEffect(() => {

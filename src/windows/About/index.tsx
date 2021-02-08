@@ -28,6 +28,10 @@ const About: React.FC = () => {
   useEffect(() => {
     document.title = aboutInOrdnung;
     ipcRenderer.on('processVersions', (event: IpcRendererEvent, versions: ProcessVersions): void => setProcessVersions(versions));
+
+    return () => {
+      ipcRenderer.removeAllListeners('processVersions');
+    };
   }, [aboutInOrdnung]);
 
   return (

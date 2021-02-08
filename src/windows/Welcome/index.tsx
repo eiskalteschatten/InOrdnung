@@ -33,6 +33,10 @@ const Welcome: React.FC = () => {
     ipcRenderer.on('getRecentProjects', (e: IpcRendererEvent, _recentProjects: RecentProjectsLocalStorage[]): void => {
       setRecentProjects(_recentProjects);
     });
+
+    return () => {
+      ipcRenderer.removeAllListeners('getRecentProjects');
+    };
   }, []);
 
   useEffect(() => {
