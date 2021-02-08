@@ -16,7 +16,7 @@ import {
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 import Add from '@material-ui/icons/Add';
 
-import RoundedButton from '../elements/RoundedButton';
+import RoundedButton from '../../../components/RoundedButton';
 
 import styles from './Bookmarks.module.scss';
 

@@ -14,8 +14,8 @@ import InsertDriveFile from '@material-ui/icons/InsertDriveFile';
 
 import useTranslation from '../../intl/useTranslation';
 import { State } from '../../store';
-import Titlebar from '../../components/elements/Titlebar';
-import RoundedButton from '../../components/elements/RoundedButton';
+import Titlebar from '../../components/Titlebar';
+import RoundedButton from '../../components/RoundedButton';
 import { RecentProjectsLocalStorage } from '../../interfaces/project';
 
 import icon from '../../assets/images/icon.svg';

@@ -7,7 +7,7 @@ import {
   ButtonBase,
 } from '@material-ui/core';
 
-import { State } from '../../../store';
+import { State } from '../../../../store';
 
 import styles from './ProjectImage.module.scss';
 

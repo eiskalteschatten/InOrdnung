@@ -8,9 +8,9 @@ import { Localization, enUS, deDE } from '@material-ui/core/locale';
 import { IntlProviderWrapper } from './intl/IntlContext';
 import getThemeOptions from './theme';
 
-import Welcome from './pages/Welcome';
-import Project from './pages/Project';
-import About from './pages/About';
+import Welcome from './windows/Welcome';
+import Project from './windows/Project';
+import About from './windows/About';
 
 const App: React.FC = () => {
   // TODO: allow the saved locale from the DB to override the system's settings

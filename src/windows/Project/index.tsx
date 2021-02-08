@@ -6,11 +6,11 @@ import isEqual from 'lodash/isEqual';
 import { State } from '../../store';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
-import Sidebar from '../../components/Sidebar';
+import Sidebar from './Sidebar';
 import useTranslation from '../../intl/useTranslation';
 
-import ProjectInfo from '../../components/ProjectInfo';
-import Bookmarks from '../../components/Bookmarks';
+import ProjectInfo from './ProjectInfo';
+import Bookmarks from './Bookmarks';
 
 import styles from './Project.module.scss';
 

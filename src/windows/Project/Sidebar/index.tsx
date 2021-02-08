@@ -4,7 +4,7 @@ import { useRouteMatch } from 'react-router-dom';
 import Info from '@material-ui/icons/Info';
 import Bookmark from '@material-ui/icons/Bookmark';
 
-import useTranslation from '../../intl/useTranslation';
+import useTranslation from '../../../intl/useTranslation';
 import SidebarItem, { Props as SidebarItemProp } from './SidebarItem';
 
 import styles from './Sidebar.module.scss';

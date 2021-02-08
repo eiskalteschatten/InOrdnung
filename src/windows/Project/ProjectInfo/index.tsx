@@ -16,10 +16,10 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
-import { IntlContext } from '../../intl/IntlContext';
-import { State } from '../../store';
-import { projectSetProjectInfo } from '../../store/actions/projectActions';
-import { getDateLocaleFormat } from '../../lib/dates';
+import { IntlContext } from '../../../intl/IntlContext';
+import { State } from '../../../store';
+import { projectSetProjectInfo } from '../../../store/actions/projectActions';
+import { getDateLocaleFormat } from '../../../lib/dates';
 import ProjectImage from './ProjectImage';
 
 import styles from './ProjectInfo.module.scss';
