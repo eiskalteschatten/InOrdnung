@@ -1,15 +1,9 @@
-export interface ProjectImage {
-  image: string;
-  mimeType: string;
-}
-export interface ProjectInfo {
-  name?: string;
-  description?: string;
-  image?: ProjectImage;
-  hasStartDate?: boolean;
-  startDate?: string;
-  hasEndDate?: boolean;
-  endDate?: string;
+import { ProjectInfo } from './projectInfo';
+import { Bookmark } from './bookmarks';
+
+export interface Project {
+  projectInfo: ProjectInfo;
+  bookmarks: Bookmark[];
 }
 
 export interface ProjectFileMetaData {
@@ -17,11 +11,6 @@ export interface ProjectFileMetaData {
   path: string;
   saved?: boolean;
 }
-
-export interface Project {
-  projectInfo: ProjectInfo;
-}
-
 export interface ProjectFile {
   project: Project;
 }
