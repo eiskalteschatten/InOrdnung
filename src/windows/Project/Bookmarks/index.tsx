@@ -21,6 +21,7 @@ import { State } from '../../../store';
 import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
+import { handleLinkClick, isValidUrl } from '../../../lib/links';
 
 import styles from './Bookmarks.module.scss';
 
@@ -116,9 +117,16 @@ const Bookmarks: React.FC = () => {
                   </TableCell>
                   <TableCell className={styles.tableCell}>{row.url}</TableCell>
                   <TableCell align='right'>
-                    <IconButton size='small'>
-                      <OpenInBrowser fontSize='small' />
-                    </IconButton>
+                    {isValidUrl(row.url) && (
+                      <IconButton
+                        size='small'
+                        href={row.url}
+                        onClick={e=> handleLinkClick(e, row.url)}
+                        edge='end'
+                      >
+                        <OpenInBrowser fontSize='small' />
+                      </IconButton>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

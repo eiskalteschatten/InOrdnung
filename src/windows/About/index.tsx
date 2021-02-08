@@ -23,6 +23,7 @@ interface ProcessVersions {
 const About: React.FC = () => {
   const [processVersions, setProcessVersions] = useState<ProcessVersions>();
   const aboutInOrdnung = useTranslation('aboutInOrdnung');
+  const asCom = 'https://www.alexseifert.com';
 
   useEffect(() => {
     document.title = aboutInOrdnung;
@@ -38,7 +39,7 @@ const About: React.FC = () => {
         <div className={styles.title}>InOrdnung</div>
 
         <div>
-          <FormattedMessage id='by' /> <a href='https://www.alexseifert.com' onClick={handleLinkClick} className={styles.ascomLink}>Alex Seifert</a>
+          <FormattedMessage id='by' /> <a href={asCom} onClick={e => handleLinkClick(e, asCom)} className={styles.ascomLink}>Alex Seifert</a>
         </div>
 
         <div className={styles.version}>
