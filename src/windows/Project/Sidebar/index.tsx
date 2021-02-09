@@ -2,6 +2,7 @@ import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 
 import Info from '@material-ui/icons/Info';
+import CheckBox from '@material-ui/icons/CheckBox';
 import Bookmark from '@material-ui/icons/Bookmark';
 
 import useTranslation from '../../../intl/useTranslation';
@@ -17,6 +18,11 @@ const Sidebar: React.FC = () => {
       path: '/',
       ItemIcon: Info,
       title: useTranslation('projectInfo'),
+    },
+    {
+      path: '/tasks',
+      ItemIcon: CheckBox,
+      title: useTranslation('tasks'),
     },
     {
       path: '/bookmarks',
