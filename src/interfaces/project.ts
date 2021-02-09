@@ -1,8 +1,10 @@
 import { ProjectInfo } from './projectInfo';
+import { Task } from './tasks';
 import { Bookmark } from './bookmarks';
 
 export interface Project {
   projectInfo: ProjectInfo;
+  tasks: Task[];
   bookmarks: Bookmark[];
 }
 

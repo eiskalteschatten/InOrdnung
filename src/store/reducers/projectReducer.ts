@@ -13,6 +13,7 @@ import {
 
 export const initialState: Project = {
   projectInfo: {},
+  tasks: [],
   bookmarks: [],
 };
 
