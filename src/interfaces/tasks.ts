@@ -6,4 +6,5 @@ export interface Task {
   dueDate?: string;
   hasDueTime?: boolean;
   dueTime?: string;
+  completed?: boolean;
 }
