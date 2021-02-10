@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
 import { State } from '../../store';
-import { uiSetOpenEditBookmarkDialog } from '../../store/actions/uiActions';
+import { uiSetOpenEditBookmarkDialog, uiSetOpenEditTaskDialog } from '../../store/actions/uiActions';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
 import Sidebar from './Sidebar';
@@ -33,8 +33,14 @@ const Project: React.FC = () => {
       history.push(`${path}/bookmarks`);
     });
 
+    ipcRenderer.on('newTask', (): void => {
+      dispatch(uiSetOpenEditTaskDialog(true));
+      history.push(`${path}/tasks`);
+    });
+
     return () => {
       ipcRenderer.removeAllListeners('newBookmark');
+      ipcRenderer.removeAllListeners('newTask');
     };
   }, []);
 

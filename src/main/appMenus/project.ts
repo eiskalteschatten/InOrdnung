@@ -25,6 +25,12 @@ const template: MenuItemConstructorOptions[] = [
           },
           { type: 'separator' },
           {
+            label: translation.tasksNewTask,
+            click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
+              focusedWindow?.webContents.send('newTask');
+            },
+          },
+          {
             label: translation.bookmarksNewBookmark,
             click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
               focusedWindow?.webContents.send('newBookmark');
