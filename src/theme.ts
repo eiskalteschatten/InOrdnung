@@ -28,5 +28,8 @@ export default (type: string): any => ({
       '"Segoe UI Symbol"',
     ].join(','),
     fontSize: 16,
+    button: {
+      textTransform: 'none',
+    },
   },
 });
