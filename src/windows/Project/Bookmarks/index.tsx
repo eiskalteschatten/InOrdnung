@@ -95,7 +95,7 @@ const Bookmarks: React.FC = () => {
   return (
     <div>
       <div className={styles.toolbar}>
-        <RoundedButton onClick={() => dispatch(uiSetOpenEditBookmarkDialog(true))}>
+        <RoundedButton onClick={() => dispatch(uiSetOpenEditBookmarkDialog(true))} variant='contained'>
           <Add fontSize='small' />&nbsp;<FormattedMessage id='bookmarksNewBookmark' />
         </RoundedButton>
       </div>

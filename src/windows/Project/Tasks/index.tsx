@@ -15,7 +15,7 @@ const Tasks: React.FC = () => {
   return (
     <div>
       <div className={styles.toolbar}>
-        <RoundedButton onClick={() => dispatch(uiSetOpenEditTaskDialog(true))}>
+        <RoundedButton onClick={() => dispatch(uiSetOpenEditTaskDialog(true))} variant='contained'>
           <Add fontSize='small' />&nbsp;<FormattedMessage id='tasksNewTask' />
         </RoundedButton>
       </div>
