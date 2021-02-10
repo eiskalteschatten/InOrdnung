@@ -83,7 +83,7 @@ const BookmarkDialog: React.FC<Props> = ({ open, close, bookmark }) => {
           margin='dense'
           id='name'
           label={useTranslation('bookmarksName')}
-          variant='filled'
+          variant='outlined'
           fullWidth
           value={editingBookmark?.name ?? ''}
           InputLabelProps={{ shrink: !!editingBookmark?.name }}
@@ -95,7 +95,7 @@ const BookmarkDialog: React.FC<Props> = ({ open, close, bookmark }) => {
           margin='dense'
           id='url'
           label={useTranslation('bookmarksUrl')}
-          variant='filled'
+          variant='outlined'
           fullWidth
           value={editingBookmark?.url ?? ''}
           InputLabelProps={{ shrink: !!editingBookmark?.url }}
