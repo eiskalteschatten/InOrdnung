@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { IpcRendererEvent } from 'electron';
 
@@ -21,7 +21,7 @@ import Add from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
-import { dispatch, State } from '../../../store';
+import { State } from '../../../store';
 import { uiSetOpenEditBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
@@ -32,6 +32,7 @@ import styles from './Bookmarks.module.scss';
 const { ipcRenderer } = window.require('electron');
 
 const Bookmarks: React.FC = () => {
+  const dispatch = useDispatch();
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
   const sortBy = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortBy);
   const sortDirection = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortDirection);
