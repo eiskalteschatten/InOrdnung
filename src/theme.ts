@@ -27,7 +27,7 @@ export default (type: string): any => ({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(','),
-    fontSize: 16,
+    fontSize: 15,
     button: {
       textTransform: 'none',
     },

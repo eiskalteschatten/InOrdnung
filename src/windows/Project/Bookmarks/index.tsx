@@ -13,6 +13,7 @@ import {
   TableHead,
   TableRow,
   Paper,
+  Button,
   IconButton,
 } from '@material-ui/core';
 
@@ -22,7 +23,6 @@ import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
 import { dispatch, State } from '../../../store';
 import { uiSetOpenEditBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
-import RoundedButton from '../../../components/RoundedButton';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import BookmarkDialog from './BookmarkDialog';
 import { handleLinkClick, isValidUrl } from '../../../lib/links';
@@ -95,9 +95,14 @@ const Bookmarks: React.FC = () => {
   return (
     <div>
       <div className={styles.toolbar}>
-        <RoundedButton onClick={() => dispatch(uiSetOpenEditBookmarkDialog(true))} variant='contained'>
+        <Button
+          onClick={() => dispatch(uiSetOpenEditBookmarkDialog(true))}
+          variant='contained'
+          color='primary'
+          size='small'
+        >
           <Add fontSize='small' />&nbsp;<FormattedMessage id='bookmarksNewBookmark' />
-        </RoundedButton>
+        </Button>
       </div>
 
       <div className={styles.tableWrapper}>
