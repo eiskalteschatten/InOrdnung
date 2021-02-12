@@ -7,6 +7,8 @@ import {
   PROJECT_SET_PROJECT,
   PROJECT_SET_PROJECT_INFO,
   PROJECT_DELETE_IMAGE,
+  PROJECT_SET_TASKS,
+  PROJECT_ADD_TASK,
   PROJECT_SET_BOOKMARKS,
   PROJECT_ADD_BOOKMARK,
 } from '../constants';
@@ -32,6 +34,22 @@ const projectReducer: Reducer<Project, ProjectActions> = (
     case PROJECT_DELETE_IMAGE:
       delete state.projectInfo.image;
       return state;
+    case PROJECT_SET_TASKS:
+      return {
+        ...state,
+        tasks: action.payload,
+      };
+    case PROJECT_ADD_TASK:
+      let { tasks } = state;
+
+      if (Array.isArray(state.tasks)) {
+        tasks.push(action.payload);
+      }
+      else {
+        tasks = [action.payload];
+      }
+
+      return { ...state, tasks };
     case PROJECT_SET_BOOKMARKS:
       return {
         ...state,
