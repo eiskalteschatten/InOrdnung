@@ -155,7 +155,6 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
                 format={getDateLocaleFormat()}
                 value={editingTask?.dueDate}
                 onChange={(date: MaterialUiPickersDate) => handleDateChange('dueDate', date)}
-                // className={styles.datePicker}
                 disableToolbar
                 fullWidth
               />
