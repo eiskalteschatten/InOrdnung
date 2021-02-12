@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import { IpcRendererEvent } from 'electron';
 import clsx from 'clsx';
+import moment from 'moment';
 
 import {
   Table,
@@ -23,6 +24,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { State } from '../../../store';
 import { uiSetOpenEditTaskDialog, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
 import { Task } from '../../../interfaces/tasks';
+import { getDateLocaleFormat } from '../../../lib/dates';
 import TaskDialog from './TaskDialog';
 
 import styles from './Tasks.module.scss';
@@ -150,8 +152,14 @@ const Tasks: React.FC = () => {
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}
                   </TableCell>
-                  <TableCell className={styles.tableCell}>{row.note}</TableCell>
-                  <TableCell className={styles.tableCell}>{row.dueDate}</TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.note}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.hasDueDate && (
+                      <>{moment(row.dueDate).format(getDateLocaleFormat())}</>
+                    )}
+                  </TableCell>
                   <TableCell align='right'>
                     <IconButton
                       size='small'
