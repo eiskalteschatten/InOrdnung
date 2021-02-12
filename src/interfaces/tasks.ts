@@ -4,7 +4,5 @@ export interface Task {
   note?: string;
   hasDueDate?: boolean;
   dueDate?: string;
-  hasDueTime?: boolean;
-  dueTime?: string;
   completed?: boolean;
 }
