@@ -101,9 +101,8 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
           InputLabelProps={{ shrink: !!editingTask?.note }}
           onChange={handleFieldChange}
           size='small'
-          onKeyDown={onKeyDown}
           multiline
-          rows={2}
+          rows={3}
         />
       </DialogContent>
       <DialogActions>
