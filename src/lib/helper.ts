@@ -41,3 +41,8 @@ export const sortStrings = (a: string, b: string, sortDirection = 'desc'): numbe
 
   return 0;
 };
+
+export const sortBooleans = (a: boolean, b: boolean, sortDirection = 'desc'): number =>
+  sortDirection === 'asc'
+    ? a === b ? 0 : a ? -1 : 1
+    : a === b ? 0 : a ? 1 : -1;

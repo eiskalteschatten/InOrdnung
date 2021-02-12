@@ -24,6 +24,7 @@ import Add from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import DoneIcon from '@material-ui/icons/Done';
 
 import { State } from '../../../store';
 import { uiSetOpenEditTaskDialog, uiSetShowCompletedTasks, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
@@ -31,7 +32,7 @@ import { projectEditTask } from '../../../store/actions/projectActions/taskActio
 import { Task } from '../../../interfaces/tasks';
 import { getDateLocaleFormat } from '../../../lib/dates';
 import useTranslation from '../../../intl/useTranslation';
-import { sortStrings } from '../../../lib/helper';
+import { sortBooleans, sortStrings } from '../../../lib/helper';
 import TaskDialog from './TaskDialog';
 
 import styles from './Tasks.module.scss';
@@ -86,6 +87,9 @@ const Tasks: React.FC = () => {
         const dateB = getTime(rowB.dueDate, rowA.hasDueDate);
         return newSortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       }
+      else if (newSortBy === 'completed') {
+        return sortBooleans(rowA.completed, rowB.completed, newSortDirection);
+      }
       else {
         return sortStrings(rowA[newSortBy], rowB[newSortBy], newSortDirection);
       }
@@ -134,7 +138,15 @@ const Tasks: React.FC = () => {
           <Table size='small'>
             <TableHead>
               <TableRow>
-                <TableCell />
+                <TableCell>
+                  <TableSortLabel
+                    active={sortBy === 'completed'}
+                    direction={sortDirection}
+                    onClick={() => handleSort('completed')}
+                  >
+                    <DoneIcon fontSize='small' />
+                  </TableSortLabel>
+                </TableCell>
                 <TableCell>
                   <TableSortLabel
                     active={sortBy === 'name'}
