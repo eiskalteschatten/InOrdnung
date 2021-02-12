@@ -24,8 +24,9 @@ import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 import { State } from '../../../store';
 import { uiSetOpenEditBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
 import { Bookmark } from '../../../interfaces/bookmarks';
-import BookmarkDialog from './BookmarkDialog';
 import { handleLinkClick, isValidUrl } from '../../../lib/links';
+import { sortStrings } from '../../../lib/helper';
+import BookmarkDialog from './BookmarkDialog';
 
 import styles from './Bookmarks.module.scss';
 
@@ -71,26 +72,7 @@ const Bookmarks: React.FC = () => {
 
     dispatch(uiSetBookmarksSortingOptions(sortOptions));
 
-    setLocalBookmarks(localBookmarks?.sort((rowA: any, rowB: any) => {
-      if (newSortDirection === 'asc') {
-        if (rowA[newSortBy] > rowB[newSortBy]) {
-          return 1;
-        }
-        else if (rowA[newSortBy] < rowB[newSortBy]) {
-          return -1;
-        }
-      }
-      else {
-        if (rowA[newSortBy] > rowB[newSortBy]) {
-          return -1;
-        }
-        else if (rowA[newSortBy] < rowB[newSortBy]) {
-          return 1;
-        }
-      }
-
-      return 0;
-    }));
+    setLocalBookmarks(localBookmarks?.sort((rowA: any, rowB: any) => sortStrings(rowA[newSortBy], rowB[newSortBy], newSortDirection)));
   };
 
   return (

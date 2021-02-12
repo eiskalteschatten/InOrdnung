@@ -27,6 +27,7 @@ import { State } from '../../../store';
 import { uiSetOpenEditTaskDialog, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
 import { Task } from '../../../interfaces/tasks';
 import { getDateLocaleFormat } from '../../../lib/dates';
+import { sortStrings } from '../../../lib/helper';
 import TaskDialog from './TaskDialog';
 
 import styles from './Tasks.module.scss';
@@ -82,24 +83,7 @@ const Tasks: React.FC = () => {
         return newSortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       }
       else {
-        if (newSortDirection === 'asc') {
-          if (rowA[newSortBy] > rowB[newSortBy]) {
-            return 1;
-          }
-          else if (rowA[newSortBy] < rowB[newSortBy]) {
-            return -1;
-          }
-        }
-        else {
-          if (rowA[newSortBy] > rowB[newSortBy]) {
-            return -1;
-          }
-          else if (rowA[newSortBy] < rowB[newSortBy]) {
-            return 1;
-          }
-        }
-
-        return 0;
+        return sortStrings(rowA[newSortBy], rowB[newSortBy], newSortDirection);
       }
     }));
   };
@@ -154,9 +138,9 @@ const Tasks: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Array.isArray(localTasks) && localTasks.map((row: any) => (
+              {Array.isArray(localTasks) && localTasks.map((row: any, index: number) => (
                 <TableRow
-                  key={row.name}
+                  key={index}
                   onMouseEnter={() => setHoverTaskId(row.id)}
                   onMouseLeave={() => setHoverTaskId('')}
                   onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
