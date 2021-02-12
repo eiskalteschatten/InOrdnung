@@ -19,6 +19,6 @@ export default {
     tasksName: 'Name',
     tasksNote: 'Notiz',
     tasksDueDate: 'Fälligkeitstag',
-    tasksShowCompletedTasks: 'Fertige Aufgaben anzeigen',
+    tasksShowCompletedTasks: 'Erledigte Aufgaben anzeigen',
   },
 };
