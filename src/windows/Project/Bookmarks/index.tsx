@@ -133,9 +133,9 @@ const Bookmarks: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Array.isArray(localBookmarks) && localBookmarks.map((row: any) => (
+              {Array.isArray(localBookmarks) && localBookmarks.map((row: any, index: number) => (
                 <TableRow
-                  key={row.name}
+                  key={index}
                   onMouseEnter={() => setHoverBookmarkId(row.id)}
                   onMouseLeave={() => setHoverBookmarkId('')}
                   onContextMenu={() => ipcRenderer.send('showBookmarkMenu', row)}
