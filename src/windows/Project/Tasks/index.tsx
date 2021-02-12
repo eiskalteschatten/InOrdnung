@@ -79,7 +79,6 @@ const Tasks: React.FC = () => {
         const getTime = (date?: string): number => date ? new Date(date).getTime() : 0;
         const dateA = getTime(rowA.dueDate);
         const dateB = getTime(rowB.dueDate);
-        console.log('test', rowA.dueDate, dateA, rowB.dueDate, dateB);
         return newSortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       }
       else {
