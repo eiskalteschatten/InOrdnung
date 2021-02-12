@@ -71,19 +71,19 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
   };
 
   const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(projectEditTask({
+    setEditingTask({
       ...editingTask,
       [e.target.id]: !!e.target.checked,
-    }));
+    });
   };
 
   const handleDateChange = (id: string, date: MaterialUiPickersDate): void => {
     const saveDate = moment(date).format('yyyy-MM-DD');
 
-    dispatch(projectEditTask({
+    setEditingTask({
       ...editingTask,
       [id]: saveDate?.toString(),
-    }));
+    });
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
