@@ -123,7 +123,7 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
         <TextField
           margin='dense'
           id='note'
-          label={useTranslation('tasksNotes')}
+          label={useTranslation('tasksNote')}
           variant='outlined'
           fullWidth
           value={editingTask?.note ?? ''}

@@ -6,3 +6,16 @@ $marginSize: 10px;
   text-align: right;
   margin: $marginSize;
 }
+
+.tableWrapper {
+  margin: $marginSize;
+  width: calc(100% - 20px);
+}
+
+.tableCell {
+  font-size: .85em !important;
+}
+
+.invisible {
+  opacity: 0;
+}
