@@ -6,6 +6,7 @@ import {
   UI_OPEN_EDIT_TASK_DIALOG,
   UI_OPEN_EDIT_BOOKMARK_DIALOG,
   UI_SET_TASKS_SORTING_OPTIONS,
+  UI_SET_TASKS_SHOW_COMPLETED_TASKS,
   UI_SET_BOOKMARKS_SORTING_OPTIONS,
 } from '../constants';
 
@@ -22,6 +23,10 @@ export interface UiSetTasksSortingOptions extends Action<typeof UI_SET_TASKS_SOR
   payload: SortingOptions;
 }
 
+export interface UiSetShowCompletedTasks extends Action<typeof UI_SET_TASKS_SHOW_COMPLETED_TASKS> {
+  payload: boolean;
+}
+
 export interface UiSetBookmarksSortingOptions extends Action<typeof UI_SET_BOOKMARKS_SORTING_OPTIONS> {
   payload: SortingOptions;
 }
@@ -31,9 +36,11 @@ export type UiActions =
   UiOpenEditTaskDialog |
   UiOpenEditBookmarkDialog |
   UiSetTasksSortingOptions |
+  UiSetShowCompletedTasks |
   UiSetBookmarksSortingOptions;
 
 export const uiSetOpenEditTaskDialog = (payload: boolean): UiOpenEditTaskDialog => ({ type: UI_OPEN_EDIT_TASK_DIALOG, payload });
 export const uiSetOpenEditBookmarkDialog = (payload: boolean): UiOpenEditBookmarkDialog => ({ type: UI_OPEN_EDIT_BOOKMARK_DIALOG, payload });
 export const uiSetTasksSortingOptions = (payload: SortingOptions): UiSetTasksSortingOptions => ({ type: UI_SET_TASKS_SORTING_OPTIONS, payload });
+export const uiSetShowCompletedTasks = (payload: boolean): UiSetShowCompletedTasks => ({ type: UI_SET_TASKS_SHOW_COMPLETED_TASKS, payload });
 export const uiSetBookmarksSortingOptions = (payload: SortingOptions): UiSetBookmarksSortingOptions => ({ type: UI_SET_BOOKMARKS_SORTING_OPTIONS, payload });

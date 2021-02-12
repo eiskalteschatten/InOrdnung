@@ -16,6 +16,8 @@ import {
   Paper,
   Button,
   IconButton,
+  FormControlLabel,
+  Switch,
 } from '@material-ui/core';
 
 import Add from '@material-ui/icons/Add';
@@ -24,10 +26,11 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import { State } from '../../../store';
-import { uiSetOpenEditTaskDialog, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
+import { uiSetOpenEditTaskDialog, uiSetShowCompletedTasks, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
 import { projectEditTask } from '../../../store/actions/projectActions/taskActions';
 import { Task } from '../../../interfaces/tasks';
 import { getDateLocaleFormat } from '../../../lib/dates';
+import useTranslation from '../../../intl/useTranslation';
 import { sortStrings } from '../../../lib/helper';
 import TaskDialog from './TaskDialog';
 
@@ -41,6 +44,7 @@ const Tasks: React.FC = () => {
   const sortBy = useSelector((state: State) => state.ui.tasksSortingOptions.sortBy);
   const sortDirection = useSelector((state: State) => state.ui.tasksSortingOptions.sortDirection);
   const openEditTaskDialog = useSelector((state: State) => state.ui.openEditTaskDialog);
+  const showCompletedTasks = useSelector((state: State) => state.ui.showCompletedTasks);
   const [localTasks, setLocalTasks] = useState<Task[]>();
   const [editingTask, setEditingTask] = useState<Task | undefined>();
   const [hoverTaskId, setHoverTaskId] = useState<string>('');
@@ -95,9 +99,26 @@ const Tasks: React.FC = () => {
     }));
   };
 
+  const handleShowHideCompletedTasks = (): void => {
+    dispatch(uiSetShowCompletedTasks(!showCompletedTasks));
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
+        <FormControlLabel
+          control={
+            <Switch
+              checked={showCompletedTasks}
+              onChange={handleShowHideCompletedTasks}
+              id='hasDueDate'
+              size='small'
+            />
+          }
+          label={<div className={styles.showCompletedTasks}>{useTranslation('tasksShowCompletedTasks')}</div>}
+          className={styles.showCompletedTasksSwitch}
+        />
+
         <Button
           onClick={() => dispatch(uiSetOpenEditTaskDialog(true))}
           variant='contained'
@@ -146,50 +167,54 @@ const Tasks: React.FC = () => {
             </TableHead>
             <TableBody>
               {Array.isArray(localTasks) && localTasks.map((row: any, index: number) => (
-                <TableRow
-                  key={index}
-                  onMouseEnter={() => setHoverTaskId(row.id)}
-                  onMouseLeave={() => setHoverTaskId('')}
-                  onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
-                  className={clsx({
-                    [styles.completedTask]: row.completed,
-                  })}
-                >
-                  <TableCell width={35}>
-                    <IconButton
-                      size='small'
-                      onClick={() => handleToggleCompleted(row)}
-                    >
-                      {row.completed ? (
-                        <CheckBoxIcon fontSize='small' />
-                      ) : (
-                        <CheckBoxOutlineBlankIcon fontSize='small' />
-                      )}
-                    </IconButton>
-                  </TableCell>
-                  <TableCell component='th' scope='row'  className={styles.tableCell}>
-                    {row.name}
-                  </TableCell>
-                  <TableCell className={styles.tableCell}>
-                    {row.note}
-                  </TableCell>
-                  <TableCell className={styles.tableCell}>
-                    {row.hasDueDate && (
-                      <>{moment(row.dueDate).format(getDateLocaleFormat())}</>
-                    )}
-                  </TableCell>
-                  <TableCell align='right'>
-                    <IconButton
-                      size='small'
-                      onClick={() => ipcRenderer.send('showTaskMenu', row)}
+                <>
+                  {(showCompletedTasks || !row.completed) && (
+                    <TableRow
+                      key={index}
+                      onMouseEnter={() => setHoverTaskId(row.id)}
+                      onMouseLeave={() => setHoverTaskId('')}
+                      onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
                       className={clsx({
-                        [styles.invisible]: hoverTaskId !== row.id,
+                        [styles.completedTask]: row.completed,
                       })}
                     >
-                      <MoreVertIcon fontSize='small' />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
+                      <TableCell width={35}>
+                        <IconButton
+                          size='small'
+                          onClick={() => handleToggleCompleted(row)}
+                        >
+                          {row.completed ? (
+                            <CheckBoxIcon fontSize='small' />
+                          ) : (
+                            <CheckBoxOutlineBlankIcon fontSize='small' />
+                          )}
+                        </IconButton>
+                      </TableCell>
+                      <TableCell component='th' scope='row'  className={styles.tableCell}>
+                        {row.name}
+                      </TableCell>
+                      <TableCell className={styles.tableCell}>
+                        {row.note}
+                      </TableCell>
+                      <TableCell className={styles.tableCell}>
+                        {row.hasDueDate && (
+                          <>{moment(row.dueDate).format(getDateLocaleFormat())}</>
+                        )}
+                      </TableCell>
+                      <TableCell align='right'>
+                        <IconButton
+                          size='small'
+                          onClick={() => ipcRenderer.send('showTaskMenu', row)}
+                          className={clsx({
+                            [styles.invisible]: hoverTaskId !== row.id,
+                          })}
+                        >
+                          <MoreVertIcon fontSize='small' />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </>
               ))}
             </TableBody>
           </Table>

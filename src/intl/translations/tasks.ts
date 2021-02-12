@@ -8,6 +8,7 @@ export default {
     tasksName: 'Name',
     tasksNote: 'Note',
     tasksDueDate: 'Due date',
+    tasksShowCompletedTasks: 'Show Completed Tasks',
   },
   de: {
     tasks: 'Aufgaben',
@@ -18,5 +19,6 @@ export default {
     tasksName: 'Name',
     tasksNote: 'Notiz',
     tasksDueDate: 'Fälligkeitstag',
+    tasksShowCompletedTasks: 'Fertige Aufgaben anzeigen',
   },
 };

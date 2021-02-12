@@ -7,6 +7,7 @@ import {
   UI_OPEN_EDIT_TASK_DIALOG,
   UI_OPEN_EDIT_BOOKMARK_DIALOG,
   UI_SET_TASKS_SORTING_OPTIONS,
+  UI_SET_TASKS_SHOW_COMPLETED_TASKS,
   UI_SET_BOOKMARKS_SORTING_OPTIONS,
 } from '../constants';
 
@@ -14,6 +15,7 @@ export interface UiState {
   openEditTaskDialog: boolean;
   openEditBookmarkDialog: boolean;
   tasksSortingOptions: SortingOptions;
+  showCompletedTasks: boolean;
   bookmarksSortingOptions: SortingOptions;
 }
 
@@ -21,6 +23,7 @@ export const initialState: UiState = {
   openEditTaskDialog: false,
   openEditBookmarkDialog: false,
   tasksSortingOptions: {},
+  showCompletedTasks: false,
   bookmarksSortingOptions: {},
 };
 
@@ -43,6 +46,11 @@ const uiReducer: Reducer<UiState, UiActions> = (
       return {
         ...state,
         tasksSortingOptions: action.payload,
+      };
+    case UI_SET_TASKS_SHOW_COMPLETED_TASKS:
+      return {
+        ...state,
+        showCompletedTasks: action.payload,
       };
     case UI_SET_BOOKMARKS_SORTING_OPTIONS:
       return {
