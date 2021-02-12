@@ -20,6 +20,8 @@ import {
 
 import Add from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import { State } from '../../../store';
 import { uiSetOpenEditTaskDialog, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
@@ -72,24 +74,33 @@ const Tasks: React.FC = () => {
     dispatch(uiSetTasksSortingOptions(sortOptions));
 
     setLocalTasks(localTasks?.sort((rowA: any, rowB: any) => {
-      if (newSortDirection === 'asc') {
-        if (rowA[newSortBy] > rowB[newSortBy]) {
-          return 1;
-        }
-        else if (rowA[newSortBy] < rowB[newSortBy]) {
-          return -1;
-        }
+      if (newSortBy === 'dueDate') {
+        const getTime = (date?: string): number => date ? new Date(date).getTime() : 0;
+        const dateA = getTime(rowA.dueDate);
+        const dateB = getTime(rowB.dueDate);
+        console.log('test', rowA.dueDate, dateA, rowB.dueDate, dateB);
+        return newSortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       }
       else {
-        if (rowA[newSortBy] > rowB[newSortBy]) {
-          return -1;
+        if (newSortDirection === 'asc') {
+          if (rowA[newSortBy] > rowB[newSortBy]) {
+            return 1;
+          }
+          else if (rowA[newSortBy] < rowB[newSortBy]) {
+            return -1;
+          }
         }
-        else if (rowA[newSortBy] < rowB[newSortBy]) {
-          return 1;
+        else {
+          if (rowA[newSortBy] > rowB[newSortBy]) {
+            return -1;
+          }
+          else if (rowA[newSortBy] < rowB[newSortBy]) {
+            return 1;
+          }
         }
-      }
 
-      return 0;
+        return 0;
+      }
     }));
   };
 
@@ -111,6 +122,7 @@ const Tasks: React.FC = () => {
           <Table size='small'>
             <TableHead>
               <TableRow>
+                <TableCell />
                 <TableCell>
                   <TableSortLabel
                     active={sortBy === 'name'}
@@ -149,6 +161,18 @@ const Tasks: React.FC = () => {
                   onMouseLeave={() => setHoverTaskId('')}
                   onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
                 >
+                  <TableCell width={35}>
+                    <IconButton
+                      size='small'
+                      onClick={() => console.log('complete!')}
+                    >
+                      {row.completed ? (
+                        <CheckBoxIcon fontSize='small' />
+                      ) : (
+                        <CheckBoxOutlineBlankIcon fontSize='small' />
+                      )}
+                    </IconButton>
+                  </TableCell>
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}
                   </TableCell>
