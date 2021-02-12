@@ -1,23 +1,26 @@
 import { Reducer } from 'redux';
 
-import { BookmarkSortingOptions } from '../../interfaces/bookmarks';
+import { SortingOptions } from '../../interfaces/ui';
 import { UiActions } from '../actions/uiActions';
 
 import {
   UI_OPEN_EDIT_TASK_DIALOG,
   UI_OPEN_EDIT_BOOKMARK_DIALOG,
+  UI_SET_TASKS_SORTING_OPTIONS,
   UI_SET_BOOKMARKS_SORTING_OPTIONS,
 } from '../constants';
 
 export interface UiState {
   openEditTaskDialog: boolean;
   openEditBookmarkDialog: boolean;
-  bookmarksSortingOptions: BookmarkSortingOptions;
+  tasksSortingOptions: SortingOptions;
+  bookmarksSortingOptions: SortingOptions;
 }
 
 export const initialState: UiState = {
   openEditTaskDialog: false,
   openEditBookmarkDialog: false,
+  tasksSortingOptions: {},
   bookmarksSortingOptions: {},
 };
 
@@ -35,6 +38,11 @@ const uiReducer: Reducer<UiState, UiActions> = (
       return {
         ...state,
         openEditBookmarkDialog: action.payload,
+      };
+    case UI_SET_TASKS_SORTING_OPTIONS:
+      return {
+        ...state,
+        tasksSortingOptions: action.payload,
       };
     case UI_SET_BOOKMARKS_SORTING_OPTIONS:
       return {
