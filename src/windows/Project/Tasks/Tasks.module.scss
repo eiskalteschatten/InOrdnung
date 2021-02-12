@@ -19,3 +19,8 @@ $marginSize: 10px;
 .invisible {
   opacity: 0;
 }
+
+.completedTask {
+  opacity: .5;
+  text-decoration: line-through;
+}

@@ -25,6 +25,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
 import { State } from '../../../store';
 import { uiSetOpenEditTaskDialog, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
+import { projectEditTask } from '../../../store/actions/projectActions/taskActions';
 import { Task } from '../../../interfaces/tasks';
 import { getDateLocaleFormat } from '../../../lib/dates';
 import { sortStrings } from '../../../lib/helper';
@@ -87,6 +88,13 @@ const Tasks: React.FC = () => {
     }));
   };
 
+  const handleToggleCompleted = (task: Task): void => {
+    dispatch(projectEditTask({
+      ...task,
+      completed: !task.completed,
+    }));
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
@@ -143,11 +151,14 @@ const Tasks: React.FC = () => {
                   onMouseEnter={() => setHoverTaskId(row.id)}
                   onMouseLeave={() => setHoverTaskId('')}
                   onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
+                  className={clsx({
+                    [styles.completedTask]: row.completed,
+                  })}
                 >
                   <TableCell width={35}>
                     <IconButton
                       size='small'
-                      onClick={() => console.log('complete!')}
+                      onClick={() => handleToggleCompleted(row)}
                     >
                       {row.completed ? (
                         <CheckBoxIcon fontSize='small' />
