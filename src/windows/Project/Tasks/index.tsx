@@ -76,9 +76,9 @@ const Tasks: React.FC = () => {
 
     setLocalTasks(localTasks?.sort((rowA: any, rowB: any) => {
       if (newSortBy === 'dueDate') {
-        const getTime = (date?: string): number => date ? new Date(date).getTime() : 0;
-        const dateA = getTime(rowA.dueDate);
-        const dateB = getTime(rowB.dueDate);
+        const getTime = (date?: string, hasDueDate = false): number => date && hasDueDate ? new Date(date).getTime() : 0;
+        const dateA = getTime(rowA.dueDate, rowA.hasDueDate);
+        const dateB = getTime(rowB.dueDate, rowA.hasDueDate);
         return newSortDirection === 'asc' ? dateA - dateB : dateB - dateA;
       }
       else {
