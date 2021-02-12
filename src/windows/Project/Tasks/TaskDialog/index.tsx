@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
+import MomentUtils from '@date-io/moment';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
+import moment from 'moment';
 
 import {
   Dialog,
@@ -10,13 +13,22 @@ import {
   DialogTitle,
   TextField,
   Button,
+  FormControlLabel,
+  Switch,
 } from '@material-ui/core';
+
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 import { Task } from '../../../../interfaces/tasks';
 import useTranslation from '../../../../intl/useTranslation';
+import { IntlContext } from '../../../../intl/IntlContext';
 import { projectAddTask, projectEditTask } from '../../../../store/actions/projectActions/taskActions';
+import { getDateLocaleFormat } from '../../../../lib/dates';
 
-// import styles from './TaskDialog.module.scss';
+import styles from './TaskDialog.module.scss';
 
 interface Props {
   open: boolean;
@@ -27,6 +39,7 @@ interface Props {
 const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
   const [editingTask, setEditingTask] = useState<Task | undefined>();
   const dispatch = useDispatch();
+  const { locale, messages } = useContext(IntlContext);
 
   useEffect(() => {
     setEditingTask(task ? task : {
@@ -55,6 +68,22 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
     }
 
     handleClose();
+  };
+
+  const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(projectEditTask({
+      ...editingTask,
+      [e.target.id]: !!e.target.checked,
+    }));
+  };
+
+  const handleDateChange = (id: string, date: MaterialUiPickersDate): void => {
+    const saveDate = moment(date).format('yyyy-MM-DD');
+
+    dispatch(projectEditTask({
+      ...editingTask,
+      [id]: saveDate?.toString(),
+    }));
   };
 
   const onKeyDown = (e: React.KeyboardEvent) => {
@@ -104,6 +133,35 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
           multiline
           rows={3}
         />
+
+        <MuiPickersUtilsProvider utils={MomentUtils} locale={locale}>
+          <div className={styles.formControlWrapper}>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={editingTask?.hasDueDate ?? false}
+                  onChange={handleSwitchChange}
+                  className={styles.switch}
+                  id='hasDueDate'
+                />
+              }
+              label={messages.tasksDueDate}
+            />
+
+            {editingTask?.hasDueDate && (
+              <KeyboardDatePicker
+                margin='normal'
+                id='dueDate'
+                format={getDateLocaleFormat()}
+                value={editingTask?.dueDate}
+                onChange={(date: MaterialUiPickersDate) => handleDateChange('dueDate', date)}
+                // className={styles.datePicker}
+                disableToolbar
+                fullWidth
+              />
+            )}
+          </div>
+        </MuiPickersUtilsProvider>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} variant='outlined' color='primary' size='small'>

@@ -5,6 +5,7 @@ export default {
     tasksEditTask: 'Edit Task',
     tasksName: 'Name',
     tasksNotes: 'Note',
+    tasksDueDate: 'Due date',
   },
   de: {
     tasks: 'Aufgaben',
@@ -12,5 +13,6 @@ export default {
     tasksEditTask: 'Aufgabe bearbeiten',
     tasksName: 'Name',
     tasksNotes: 'Notiz',
+    tasksDueDate: 'Fälligkeitstag',
   },
 };
