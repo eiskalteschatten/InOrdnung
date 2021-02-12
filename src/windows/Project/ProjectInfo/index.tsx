@@ -99,7 +99,6 @@ const ProjectInfo: React.FC = () => {
                 <Switch
                   checked={projectInfo?.hasStartDate ?? false}
                   onChange={handleSwitchChange}
-                  className={styles.switch}
                   id='hasStartDate'
                 />
               }
@@ -133,7 +132,6 @@ const ProjectInfo: React.FC = () => {
                 <Switch
                   checked={projectInfo?.hasEndDate ?? false}
                   onChange={handleSwitchChange}
-                  className={styles.switch}
                   id='hasEndDate'
                 />
               }
