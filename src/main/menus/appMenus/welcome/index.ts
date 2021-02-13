@@ -1,6 +1,7 @@
-import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
+import { shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import menuBuilder from '../../menuBuilder';
+import appMenuItems from './app';
 import fileMenuItems from './file';
 import editMenuItems from './edit';
 
@@ -11,6 +12,7 @@ import openAboutWindow from '../../../windows/about';
 const translation = getTranslation();
 
 const template: MenuItemConstructorOptions[] = [
+  menuBuilder(appMenuItems),
   menuBuilder(fileMenuItems),
   menuBuilder(editMenuItems),
   {
@@ -52,40 +54,6 @@ const template: MenuItemConstructorOptions[] = [
 ];
 
 if (process.platform === 'darwin') {
-  template.unshift({
-    label: app?.getName(),
-    submenu: [
-      {
-        label: `${translation.menuAbout} ${config.app.name}`,
-        click: (): void => {
-          openAboutWindow();
-        },
-      },
-      {
-        label: translation.menuCheckForUpdates,
-        click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-          focusedWindow?.webContents.send('check-for-updates');
-        },
-      },
-      // { type: 'separator' },
-      // {
-      //   label: translation.preferences,
-      //   accelerator: 'Cmd+,',
-      //   click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-      //     focusedWindow?.webContents.send('open-preferences');
-      //   },
-      // },
-      { type: 'separator' },
-      { role: 'services', submenu: [] },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideOthers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' },
-    ],
-  });
-
   // Window menu
   template[4].submenu = [
     { role: 'minimize' },

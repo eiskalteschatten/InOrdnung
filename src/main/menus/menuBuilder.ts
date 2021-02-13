@@ -2,7 +2,7 @@ import { MenuItemConstructorOptions } from 'electron';
 
 export interface MenuItem {
   platforms?: string[];
-  item: MenuItemConstructorOptions | null;
+  item: MenuItemConstructorOptions;
   submenu?: MenuItem[];
 }
 
