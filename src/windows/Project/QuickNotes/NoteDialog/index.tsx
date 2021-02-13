@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { debounce } from 'lodash';
 
 import {
   Dialog,
@@ -41,18 +42,18 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
       ...editingQuickNote,
       [e.target.id]: e.target.value,
     });
+
+    // handleSave();
   };
 
-  const handleSave = (): void => {
+  const handleSave = debounce((): void => {
     if (!quickNote && editingQuickNote) {
       dispatch(projectAddQuickNote(editingQuickNote));
     }
     else if (editingQuickNote) {
       dispatch(projectEditQuickNote(editingQuickNote));
     }
-
-    handleClose();
-  };
+  }, 500);
 
   return (
     <Dialog
