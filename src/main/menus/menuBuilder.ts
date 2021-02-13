@@ -2,18 +2,22 @@ import { MenuItemConstructorOptions } from 'electron';
 
 export interface MenuItem {
   platforms?: string[];
-  item: MenuItemConstructorOptions;
+  item: MenuItemConstructorOptions | null;
   submenu?: MenuItem[];
 }
 
 const buildMenuItem = (menuItem: MenuItem): MenuItemConstructorOptions => {
-  const item = Object.assign({}, menuItem.item);
+  if (!menuItem.platforms || menuItem.platforms?.includes(process.platform)) {
+    const item = Object.assign({}, menuItem.item);
 
-  if (menuItem.submenu) {
-    item.submenu = buildMenu(menuItem.submenu);
+    if (menuItem.submenu) {
+      item.submenu = buildMenu(menuItem.submenu);
+    }
+
+    return item;
   }
 
-  return item;
+  return {};
 };
 
 const buildMenu = (menuItems: MenuItem[]): MenuItemConstructorOptions[] => {
