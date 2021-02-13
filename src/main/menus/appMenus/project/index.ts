@@ -1,16 +1,14 @@
-import { shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
+import { MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import menuBuilder from '../../menuBuilder';
 import appMenuItems from './app';
 import editMenuItems from './edit';
 import viewMenuItems from './view';
 import windowMenuItems from './window';
+import helpMenuItems from './help';
 
-import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
 import createWindow from '../../../windows/project';
-import openWelcomeWindow from '../../../windows/welcome';
-import openAboutWindow from '../../../windows/about';
 import { openFileDialog, saveFileAs } from '../../../lib/projectFile';
 
 const translation = getTranslation();
@@ -90,57 +88,11 @@ const template: MenuItemConstructorOptions[] = [
   menuBuilder(editMenuItems),
   menuBuilder(viewMenuItems),
   menuBuilder(windowMenuItems),
-  {
-    role: 'help',
-    submenu: [
-      {
-        label: translation.welcomeToInOrdung,
-        click: (): void => {
-          openWelcomeWindow();
-        },
-      },
-      { type: 'separator' },
-      {
-        label: translation.menuSubmitFeedback,
-        click: (): void => {
-          shell.openExternal('https://www.alexseifert.com/contact');
-        },
-      },
-      {
-        label: translation.aboutAlexSeifert,
-        click: (): void => {
-          shell.openExternal('https://www.alexseifert.com');
-        },
-      },
-    ],
-  },
+  menuBuilder(helpMenuItems),
 ];
 
 if (process.platform === 'darwin') {
   template.unshift(menuBuilder(appMenuItems));
-}
-else {
-  // Help menu
-  const helpMenu = template[4].submenu as MenuItemConstructorOptions[];
-  template[4].submenu = [
-    helpMenu[0],
-    {
-      label: translation.menuCheckForUpdates,
-      click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
-        focusedWindow?.webContents.send('check-for-updates');
-      },
-    },
-    { type: 'separator' },
-    helpMenu[2],
-    { type: 'separator' },
-    helpMenu[3],
-    {
-      label: `${translation.menuAbout} ${config.app.name}`,
-      click: (): void => {
-        openAboutWindow();
-      },
-    },
-  ];
 }
 
 export default template;
