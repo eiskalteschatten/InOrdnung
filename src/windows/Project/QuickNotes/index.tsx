@@ -8,8 +8,6 @@ import {
   Paper,
 } from '@material-ui/core';
 
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-
 import { State } from '../../../store';
 import { uiSetOpenEditQuickNoteDialog } from '../../../store/actions/uiActions';
 import useTranslation from '../../../intl/useTranslation';
@@ -37,6 +35,17 @@ const QuickNotes: React.FC = () => {
     dispatch(uiSetOpenEditQuickNoteDialog(true));
   };
 
+  useEffect(() => {
+    ipcRenderer.on('editQuickNote', (e: IpcRendererEvent, quickNote: QuickNote): void => {
+      setEditingQuickNote(quickNote);
+      dispatch(uiSetOpenEditQuickNoteDialog(true));
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners('editQuickNote');
+    };
+  }, []);
+
   return (
     <div>
       <div className={styles.newQuickNoteWrapper}>
@@ -61,6 +70,7 @@ const QuickNotes: React.FC = () => {
               md={4}
               lg={3}
               onClick={() => handleOpenNote(quickNote)}
+              onContextMenu={() => ipcRenderer.send('showQuickNoteMenu', quickNote)}
             >
               <Paper className={styles.quickNote}>
                 <div className={styles.title}>{quickNote.title}</div>
