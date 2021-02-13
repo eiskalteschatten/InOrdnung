@@ -72,7 +72,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
   return newWindow;
 };
 
-const onClose = async (e: Event, window: BrowserWindow | undefined): Promise<void> => {
+const onClose = async (e: Event, window?: BrowserWindow): Promise<void> => {
   try {
     if (window) {
       if (window.isDocumentEdited()) {
@@ -110,7 +110,7 @@ const onClose = async (e: Event, window: BrowserWindow | undefined): Promise<voi
   }
 };
 
-const closed = (window: BrowserWindow | undefined): void => {
+const closed = (window?: BrowserWindow): void => {
   if (window) {
     windows.delete(window);
     window = undefined;

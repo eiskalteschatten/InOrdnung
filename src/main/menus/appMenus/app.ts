@@ -19,7 +19,7 @@ const submenuItems: MenuItem[] = [
   {
     item: {
       label: translation.menuCheckForUpdates,
-      click: (item: ElectronMenuItem, focusedWindow: BrowserWindow | undefined): void => {
+      click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
         focusedWindow?.webContents.send('check-for-updates');
       },
     },
