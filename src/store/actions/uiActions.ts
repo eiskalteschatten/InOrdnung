@@ -36,7 +36,6 @@ export interface UiSetBookmarksSortingOptions extends Action<typeof UI_SET_BOOKM
   payload: SortingOptions;
 }
 
-
 export type UiActions =
   UiSetPreferences |
   UiOpenEditTaskDialog |
