@@ -1,7 +1,7 @@
 import { getTranslation } from '../../../../lib/helper';
 import createProjectWindow from '../../../windows/project';
 import { openFileDialog } from '../../../lib/projectFile';
-import { MenuItem } from '../../menuBuilder';
+import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 
 const translation = getTranslation();
 
@@ -39,6 +39,10 @@ const submenuItems: MenuItem[] = [
   },
   { item: { type: 'separator' } },
   { item: { role: 'close' } },
+  {
+    platforms: nonMacPlatforms,
+    item: { role: 'quit' },
+  },
 ];
 
 const menuItem: MenuItem = {

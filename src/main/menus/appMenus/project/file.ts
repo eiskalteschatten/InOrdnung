@@ -3,7 +3,7 @@ import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
 import { getTranslation } from '../../../../lib/helper';
 import createProjectWindow from '../../../windows/project';
 import { openFileDialog, saveFileAs } from '../../../lib/projectFile';
-import { MenuItem } from '../../menuBuilder';
+import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 
 const translation = getTranslation();
 
@@ -92,6 +92,10 @@ const submenuItems: MenuItem[] = [
         }
       },
     },
+  },
+  {
+    platforms: nonMacPlatforms,
+    item: { role: 'quit' },
   },
 ];
 
