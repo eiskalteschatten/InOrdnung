@@ -156,14 +156,14 @@ if (process.platform === 'darwin') {
           focusedWindow?.webContents.send('check-for-updates');
         },
       },
-      { type: 'separator' },
-      {
-        label: translation.preferences,
-        accelerator: 'Cmd+,',
-        click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-          focusedWindow?.webContents.send('open-preferences');
-        },
-      },
+      // { type: 'separator' },
+      // {
+      //   label: translation.preferences,
+      //   accelerator: 'Cmd+,',
+      //   click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
+      //     focusedWindow?.webContents.send('open-preferences');
+      //   },
+      // },
       { type: 'separator' },
       { role: 'services', submenu: [] },
       { type: 'separator' },
@@ -197,16 +197,16 @@ if (process.platform === 'darwin') {
 }
 else {
   // Edit menu
-  (template[1].submenu as MenuItemConstructorOptions[]).push(
-    { type: 'separator' },
-    {
-      label: translation.preferences,
-      accelerator: 'Ctrl+,',
-      click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-        focusedWindow?.webContents.send('open-preferences');
-      },
-    }
-  );
+  // (template[1].submenu as MenuItemConstructorOptions[]).push(
+  //   { type: 'separator' },
+  //   {
+  //     label: translation.preferences,
+  //     accelerator: 'Ctrl+,',
+  //     click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
+  //       focusedWindow?.webContents.send('open-preferences');
+  //     },
+  //   }
+  // );
 
 
   // Help menu
