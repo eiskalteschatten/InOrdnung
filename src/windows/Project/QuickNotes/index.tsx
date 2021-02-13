@@ -75,7 +75,7 @@ const QuickNotes: React.FC = () => {
               <Paper className={styles.quickNote}>
                 <div onClick={() => handleOpenNote(quickNote)} className={styles.noteContents}>
                   <div className={styles.title}>{quickNote.title}</div>
-                  <div>{quickNote.note}</div>
+                  <div className={styles.note}>{quickNote.note}</div>
                 </div>
 
                 <div className={styles.toolbarWrapper}>

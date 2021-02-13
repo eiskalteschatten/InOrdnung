@@ -17,12 +17,13 @@
 }
 
 .quickNote {
+  $maxHeight: 200px;
+
   height: 100%;
   width: 100%;
   padding: 10px;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 200px;
+  max-height: $maxHeight;
   cursor: pointer;
   background: $yellowNoteLight !important;
   color: #000000 !important;
@@ -42,6 +43,12 @@
   .title {
     font-weight: bold;
     margin-bottom: 10px;
+  }
+
+  .note {
+    white-space: pre-line;
+    overflow: auto;
+    max-height: calc(#{$maxHeight} / 2);
   }
 
   .toolbarWrapper {
