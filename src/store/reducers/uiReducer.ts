@@ -5,6 +5,7 @@ import { UiActions } from '../actions/uiActions';
 
 import {
   UI_SET_PREFERENCES,
+  UI_SET_SIDEBAR_WIDTH,
   UI_OPEN_EDIT_TASK_DIALOG,
   UI_OPEN_EDIT_BOOKMARK_DIALOG,
   UI_SET_TASKS_SORTING_OPTIONS,
@@ -36,6 +37,11 @@ const uiReducer: Reducer<UiState, UiActions> = (
       return {
         ...state,
         openEditTaskDialog: action.payload,
+      };
+    case UI_SET_SIDEBAR_WIDTH:
+      return {
+        ...state,
+        sidebarWidth: action.payload,
       };
     case UI_OPEN_EDIT_BOOKMARK_DIALOG:
       return {

@@ -4,6 +4,7 @@ export interface SortingOptions {
 }
 
 export interface UiPreferences {
+  sidebarWidth?: number;
   openEditTaskDialog: boolean;
   openEditBookmarkDialog: boolean;
   tasksSortingOptions: SortingOptions;
