@@ -18,7 +18,7 @@ export interface UiSetPreferences extends Action<typeof UI_SET_PREFERENCES> {
 }
 
 export interface UiSetSidebarWidth extends Action<typeof UI_SET_SIDEBAR_WIDTH> {
-  payload: number;
+  payload: number | undefined;
 }
 
 export interface UiOpenEditTaskDialog extends Action<typeof UI_OPEN_EDIT_TASK_DIALOG> {
@@ -51,7 +51,7 @@ export type UiActions =
   UiSetBookmarksSortingOptions;
 
 export const uiSetPreferences = (payload: UiPreferences): UiSetPreferences => ({ type: UI_SET_PREFERENCES, payload });
-export const uiSetSidebarWidth = (payload: number): UiSetSidebarWidth => ({ type: UI_SET_SIDEBAR_WIDTH, payload });
+export const uiSetSidebarWidth = (payload?: number): UiSetSidebarWidth => ({ type: UI_SET_SIDEBAR_WIDTH, payload });
 export const uiSetOpenEditTaskDialog = (payload: boolean): UiOpenEditTaskDialog => ({ type: UI_OPEN_EDIT_TASK_DIALOG, payload });
 export const uiSetOpenEditBookmarkDialog = (payload: boolean): UiOpenEditBookmarkDialog => ({ type: UI_OPEN_EDIT_BOOKMARK_DIALOG, payload });
 export const uiSetTasksSortingOptions = (payload: SortingOptions): UiSetTasksSortingOptions => ({ type: UI_SET_TASKS_SORTING_OPTIONS, payload });

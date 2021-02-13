@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import Info from '@material-ui/icons/Info';
 import CheckBox from '@material-ui/icons/CheckBox';
 import Bookmark from '@material-ui/icons/Bookmark';
 
 import useTranslation from '../../../intl/useTranslation';
+import { State } from '../../../store';
 import SidebarItem, { Props as SidebarItemProp } from './SidebarItem';
 import SidebarDragger from './SidebarDragger';
 
@@ -13,6 +15,13 @@ import styles from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {
   const { path } = useRouteMatch();
+  const savedSidebarWidth = useSelector((state: State) => state.ui.sidebarWidth);
+  const [sidebarWidth, setSidebarWidth] = useState<number | undefined>(savedSidebarWidth);
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setSidebarWidth(savedSidebarWidth);
+  }, [savedSidebarWidth]);
 
   const sidebarItems: SidebarItemProp[] = [
     {
@@ -33,7 +42,11 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <div className={styles.sidebar}>
+    <div
+      className={styles.sidebar}
+      style={{ width: sidebarWidth }}
+      ref={sidebarRef}
+    >
       {sidebarItems.map((item, index: number) => (
         <SidebarItem
           key={index}
@@ -43,7 +56,10 @@ const Sidebar: React.FC = () => {
         />
       ))}
 
-      <SidebarDragger />
+      <SidebarDragger
+        sidebarRef={sidebarRef}
+        setSidebarWidth={setSidebarWidth}
+      />
     </div>
   );
 };
