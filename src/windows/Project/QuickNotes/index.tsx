@@ -26,7 +26,8 @@ const QuickNotes: React.FC = () => {
 
   const handleNewNoteClick = (e: React.MouseEvent<HTMLInputElement>): void => {
     e.preventDefault();
-    console.log('onclick');
+    dispatch(uiSetOpenEditQuickNoteDialog(true));
+    (e.target as HTMLInputElement).blur();
   };
 
   return (
@@ -38,6 +39,7 @@ const QuickNotes: React.FC = () => {
           className={styles.newQuickNote}
           onClick={handleNewNoteClick}
           size='small'
+          InputLabelProps={{ shrink: false }}
         />
       </div>
 

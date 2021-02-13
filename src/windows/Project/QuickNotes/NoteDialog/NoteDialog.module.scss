@@ -1,0 +1,22 @@
+.dialog {
+  background: #ffeb3b !important;
+  color: #000000 !important;
+
+  @media (prefers-color-scheme: dark) {
+    background: #ffef62 !important;
+  }
+}
+
+.title {
+  margin-bottom: 13px;
+}
+
+.titleField {
+  color: #000000 !important;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.textField {
+  color: #000000 !important;
+}

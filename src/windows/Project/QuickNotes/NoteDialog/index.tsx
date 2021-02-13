@@ -6,15 +6,14 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
-  TextField,
+  InputBase,
 } from '@material-ui/core';
 
 import { QuickNote } from '../../../../interfaces/quickNotes';
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddQuickNote, projectEditQuickNote } from '../../../../store/actions/projectActions/quickNoteActions';
 
-// import styles from './BookmarkDialog.module.scss';
+import styles from './NoteDialog.module.scss';
 
 interface Props {
   open: boolean;
@@ -56,30 +55,35 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>
-        <TextField
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      fullWidth
+      PaperProps={{ className: styles.dialog }}
+    >
+      <DialogContent>
+        <InputBase
           margin='dense'
           id='title'
-          label={useTranslation('quickNotesTitle')}
           fullWidth
           value={editingQuickNote?.title ?? ''}
-          InputLabelProps={{ shrink: !!editingQuickNote?.title }}
+          inputProps={{ className: styles.titleField }}
           onChange={handleFieldChange}
-          size='small'
+          placeholder={useTranslation('quickNotesTitle')}
+          className={styles.title}
         />
-      </DialogTitle>
-      <DialogContent>
-        <TextField
+
+        <InputBase
           margin='dense'
           autoFocus
           id='note'
-          label={useTranslation('quickNotesNote')}
           fullWidth
           value={editingQuickNote?.note ?? ''}
-          InputLabelProps={{ shrink: !!editingQuickNote?.note }}
+          inputProps={{ className: styles.textField }}
           onChange={handleFieldChange}
-          size='small'
+          multiline
+          rows={10}
+          placeholder={useTranslation('quickNotesNote')}
         />
       </DialogContent>
       <DialogActions>
