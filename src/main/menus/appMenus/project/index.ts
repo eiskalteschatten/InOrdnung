@@ -1,5 +1,9 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
+import menuBuilder from '../../menuBuilder';
+import appMenuItems from '../app';
+import editMenuItems from '../edit';
+
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
 import createWindow from '../../../windows/project';
@@ -81,20 +85,8 @@ const template: MenuItemConstructorOptions[] = [
       },
     ],
   },
-  {
-    label: translation.edit,
-    submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
-      { type: 'separator' },
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' },
-      { role: 'pasteAndMatchStyle' },
-      { role: 'delete' },
-      { role: 'selectAll' },
-    ],
-  },
+  menuBuilder(appMenuItems),
+  menuBuilder(editMenuItems),
   {
     label: translation.view,
     submenu: [
@@ -147,52 +139,6 @@ const template: MenuItemConstructorOptions[] = [
 ];
 
 if (process.platform === 'darwin') {
-  template.unshift({
-    label: app?.getName(),
-    submenu: [
-      {
-        label: `${translation.menuAbout} ${config.app.name}`,
-        click: (): void => {
-          openAboutWindow();
-        },
-      },
-      {
-        label: translation.menuCheckForUpdates,
-        click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-          focusedWindow?.webContents.send('check-for-updates');
-        },
-      },
-      // { type: 'separator' },
-      // {
-      //   label: translation.preferences,
-      //   accelerator: 'Cmd+,',
-      //   click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
-      //     focusedWindow?.webContents.send('open-preferences');
-      //   },
-      // },
-      { type: 'separator' },
-      { role: 'services', submenu: [] },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideOthers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' },
-    ],
-  });
-
-  // Edit menu
-  (template[2].submenu as MenuItemConstructorOptions[]).push(
-    { type: 'separator' },
-    {
-      label: 'Speech',
-      submenu: [
-        { role: 'startSpeaking' },
-        { role: 'stopSpeaking' },
-      ],
-    }
-  );
-
   // Window menu
   template[4].submenu = [
     { role: 'minimize' },

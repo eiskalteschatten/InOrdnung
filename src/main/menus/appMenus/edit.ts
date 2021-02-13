@@ -1,5 +1,5 @@
-import { getTranslation } from '../../../../lib/helper';
-import { MenuItem } from '../../menuBuilder';
+import { getTranslation } from '../../../lib/helper';
+import { MenuItem } from '../menuBuilder';
 
 const translation = getTranslation();
 
@@ -8,6 +8,8 @@ const submenuItems: MenuItem[] = [
   { item: { role: 'copy' } },
   { item: { role: 'paste' } },
   { item: { role: 'pasteAndMatchStyle' } },
+  { item: { role: 'delete' } },
+  { item: { role: 'selectAll' } },
   {
     platforms: ['darwin'],
     item: { type: 'separator' },
