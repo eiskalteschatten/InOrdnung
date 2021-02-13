@@ -1,9 +1,9 @@
 import { shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import menuBuilder from '../../menuBuilder';
-import appMenuItems from '../app';
+import appMenuItems from './app';
 import fileMenuItems from './file';
-import editMenuItems from '../edit';
+import editMenuItems from './edit';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';

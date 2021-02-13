@@ -1,9 +1,9 @@
 import { app, BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
 
-import config from '../../../config';
-import { getTranslation } from '../../../lib/helper';
-import { MenuItem } from '../menuBuilder';
-import openAboutWindow from '../../windows/about';
+import config from '../../../../config';
+import { getTranslation } from '../../../../lib/helper';
+import { MenuItem } from '../../menuBuilder';
+import openAboutWindow from '../../../windows/about';
 
 const translation = getTranslation();
 

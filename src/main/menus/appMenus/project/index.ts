@@ -1,8 +1,8 @@
 import { shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import menuBuilder from '../../menuBuilder';
-import appMenuItems from '../app';
-import editMenuItems from '../edit';
+import appMenuItems from './app';
+import editMenuItems from './edit';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
