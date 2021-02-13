@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
-import clsx from 'clsx';
 import { IpcRendererEvent } from 'electron';
 
 import {
@@ -11,13 +9,20 @@ import {
 import Add from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+import { State } from '../../../store';
 import useTranslation from '../../../intl/useTranslation';
+import { QuickNote } from '../../../interfaces/quickNotes';
+import NoteDialog from './NoteDialog';
 
 import styles from './QuickNotes.module.scss';
 
 const { ipcRenderer } = window.require('electron');
 
 const QuickNotes: React.FC = () => {
+  const dispatch = useDispatch();
+  const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
+  const openEditQuickNotDialog = useSelector((state: State) => state.ui.openEditQuickNotDialog);
+
   const handleNewNoteClick = (e: React.MouseEvent<HTMLInputElement>): void => {
     e.preventDefault();
     console.log('onclick');
@@ -34,6 +39,12 @@ const QuickNotes: React.FC = () => {
           size='small'
         />
       </div>
+
+      <NoteDialog
+        open={openEditQuickNotDialog}
+        close={() => dispatch(uiSetOpenEditBookmarkDialog(false))}
+        quickNote={editingQuickNote}
+      />
     </div>
   );
 };
