@@ -1,0 +1,12 @@
+@import "../../../scss/variables";
+
+.newQuickNoteWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+
+  .newQuickNote {
+    width: 100%;
+    max-width: 600px;
+  }
+}
