@@ -7,6 +7,14 @@
   }
 }
 
+.closeButton {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  z-index: 1000;
+  color: #000000;
+}
+
 .title {
   margin-bottom: 13px;
 }

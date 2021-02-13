@@ -6,7 +6,6 @@ import {
   TextField,
 } from '@material-ui/core';
 
-import Add from '@material-ui/icons/Add';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import { State } from '../../../store';

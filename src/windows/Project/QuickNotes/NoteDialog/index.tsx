@@ -8,7 +8,10 @@ import {
   DialogActions,
   DialogContent,
   InputBase,
+  IconButton,
 } from '@material-ui/core';
+
+import CloseIcon from '@material-ui/icons/Close';
 
 import { QuickNote } from '../../../../interfaces/quickNotes';
 import useTranslation from '../../../../intl/useTranslation';
@@ -63,6 +66,13 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
       PaperProps={{ className: styles.dialog }}
     >
       <DialogContent>
+        <IconButton
+          className={styles.closeButton}
+          onClick={handleClose}
+        >
+          <CloseIcon />
+        </IconButton>
+
         <InputBase
           margin='dense'
           id='title'
