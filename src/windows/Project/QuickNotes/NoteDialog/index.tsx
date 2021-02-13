@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -28,7 +28,6 @@ interface Props {
 const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
   const quickNotes = useSelector((state: State) => state.project.quickNotes);
   const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
-  const [noteExists, setNoteExists] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -37,10 +36,13 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
     });
   }, [quickNote]);
 
-  useEffect(() => {
+  const noteExists = useMemo(() => {
     if (quickNotes) {
       const quickNoteIds = quickNotes.map(({ id }) => id);
-      setNoteExists(quickNoteIds.some(id => id === editingQuickNote?.id));
+      return quickNoteIds.some(id => id === editingQuickNote?.id);
+    }
+    else {
+      return false;
     }
   }, [quickNotes, editingQuickNote]);
 
@@ -60,11 +62,9 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
 
   const handleSave = (): void => {
     if (editingQuickNote && !noteExists) {
-      console.log('add');
       dispatch(projectAddQuickNote(editingQuickNote));
     }
     else if (editingQuickNote) {
-      console.log('edit');
       dispatch(projectEditQuickNote(editingQuickNote));
     }
   };
