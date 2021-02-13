@@ -26,11 +26,17 @@
   cursor: pointer;
   background: $yellowNoteLight !important;
   color: #000000 !important;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
     .toolbarWrapper {
       opacity: 1;
     }
+  }
+
+  .noteContents {
+    flex: 1 1 auto;
   }
 
   .title {

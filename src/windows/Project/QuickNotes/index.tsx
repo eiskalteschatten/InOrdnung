@@ -73,7 +73,7 @@ const QuickNotes: React.FC = () => {
               onContextMenu={() => ipcRenderer.send('showQuickNoteMenu', quickNote)}
             >
               <Paper className={styles.quickNote}>
-                <div onClick={() => handleOpenNote(quickNote)}>
+                <div onClick={() => handleOpenNote(quickNote)} className={styles.noteContents}>
                   <div className={styles.title}>{quickNote.title}</div>
                   <div>{quickNote.note}</div>
                 </div>
