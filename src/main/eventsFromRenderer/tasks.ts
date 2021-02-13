@@ -1,6 +1,6 @@
 import { ipcMain, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 
-import taskMenuCm from '../cmMenus/taskMenu';
+import taskMenuCm from '../menus/cmMenus/taskMenu';
 import { Task } from '../../interfaces/tasks';
 
 ipcMain.on('showTaskMenu', (e: IpcMainEvent, task: Task): void => {

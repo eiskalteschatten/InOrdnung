@@ -1,7 +1,7 @@
 import { dialog, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import { Bookmark } from '../../interfaces/bookmarks';
-import { getTranslation } from '../../lib/helper';
+import { Bookmark } from '../../../interfaces/bookmarks';
+import { getTranslation } from '../../../lib/helper';
 
 const translation = getTranslation();
 

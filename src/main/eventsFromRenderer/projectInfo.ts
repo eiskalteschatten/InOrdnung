@@ -1,7 +1,7 @@
 import { ipcMain, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 
 import { checkIfFileIsImage, encodeImage, getFileType } from '../lib/images';
-import projectImageCm from '../cmMenus/projectImage';
+import projectImageCm from '../menus/cmMenus/projectImage';
 import { selectProjectImage } from '../lib/project';
 
 ipcMain.on('selectProjectImage', async (e: IpcMainEvent): Promise<void> => {

@@ -1,6 +1,6 @@
 import { ipcMain, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 
-import bookmarkMenuCm from '../cmMenus/bookmarkMenu';
+import bookmarkMenuCm from '../menus/cmMenus/bookmarkMenu';
 import { Bookmark } from '../../interfaces/bookmarks';
 
 ipcMain.on('showBookmarkMenu', (e: IpcMainEvent, bookmark: Bookmark): void => {

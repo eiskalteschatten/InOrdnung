@@ -1,7 +1,7 @@
 import { dialog, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import { QuickNote } from '../../interfaces/quickNotes';
-import { getTranslation } from '../../lib/helper';
+import { QuickNote } from '../../../interfaces/quickNotes';
+import { getTranslation } from '../../../lib/helper';
 
 const translation = getTranslation();
 
