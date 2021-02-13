@@ -62,7 +62,7 @@ const QuickNotes: React.FC = () => {
 
       <div className={styles.gridWrapper}>
         <Grid container spacing={2}>
-          {quickNotes.map((quickNote: QuickNote) => (
+          {quickNotes?.map((quickNote: QuickNote) => (
             <Grid
               item
               key={quickNote.id}
