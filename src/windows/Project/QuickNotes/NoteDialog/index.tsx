@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { debounce } from 'lodash';
 
 import {
   Dialog,
@@ -13,9 +12,10 @@ import {
 
 import CloseIcon from '@material-ui/icons/Close';
 
+import { State } from '../../../../store';
+import { projectAddQuickNote, projectEditQuickNote } from '../../../../store/actions/projectActions/quickNoteActions';
 import { QuickNote } from '../../../../interfaces/quickNotes';
 import useTranslation from '../../../../intl/useTranslation';
-import { projectAddQuickNote, projectEditQuickNote } from '../../../../store/actions/projectActions/quickNoteActions';
 
 import styles from './NoteDialog.module.scss';
 
@@ -26,7 +26,9 @@ interface Props {
 }
 
 const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
+  const quickNotes = useSelector((state: State) => state.project.quickNotes);
   const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
+  const [noteExists, setNoteExists] = useState<boolean>(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,6 +36,13 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
       id: uuidv4(),
     });
   }, [quickNote]);
+
+  useEffect(() => {
+    if (quickNotes) {
+      const quickNoteIds = quickNotes.map(({ id }) => id);
+      setNoteExists(quickNoteIds.some(id => id === editingQuickNote?.id));
+    }
+  }, [quickNotes, editingQuickNote]);
 
   const handleClose = (): void => {
     setEditingQuickNote(undefined);
@@ -46,17 +55,19 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
       [e.target.id]: e.target.value,
     });
 
-    // handleSave();
+    handleSave();
   };
 
-  const handleSave = debounce((): void => {
-    if (!quickNote && editingQuickNote) {
+  const handleSave = (): void => {
+    if (editingQuickNote && !noteExists) {
+      console.log('add');
       dispatch(projectAddQuickNote(editingQuickNote));
     }
     else if (editingQuickNote) {
+      console.log('edit');
       dispatch(projectEditQuickNote(editingQuickNote));
     }
-  }, 500);
+  };
 
   return (
     <Dialog

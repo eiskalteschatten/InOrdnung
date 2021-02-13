@@ -8,11 +8,11 @@
 }
 
 .closeButton {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  z-index: 1000;
-  color: #000000;
+  position: absolute !important;
+  top: 2px !important;
+  right: 2px !important;
+  z-index: 1000 !important;
+  color: #000000 !important;
 }
 
 .title {
