@@ -1,9 +1,11 @@
+@import "../variables";
+
 .dialog {
-  background: #ffeb3b !important;
+  background: $yellowNoteLight !important;
   color: #000000 !important;
 
   @media (prefers-color-scheme: dark) {
-    background: #ffef62 !important;
+    background: $yellowNoteDark !important;
   }
 }
 
