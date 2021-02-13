@@ -23,6 +23,7 @@ const Project: React.FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const project = useSelector((state: State) => state.project);
+  const ui = useSelector((state: State) => state.ui);
   const file = useSelector((state: State) => state.file);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
   const untitled = useTranslation('projectUntitled');
@@ -61,10 +62,10 @@ const Project: React.FC = () => {
       }
 
       setAutoSaveTimeout(setTimeout(() => {
-        ipcRenderer.send('saveProject', { project }, file);
+        ipcRenderer.send('saveProject', { project, ui }, file);
       }, 1000));
     }
-  }, [project]);
+  }, [project, ui]);
 
   return (
     <div className={styles.projectLayout}>
