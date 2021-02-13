@@ -1,4 +1,4 @@
-import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
+import { shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import menuBuilder from '../../menuBuilder';
 import appMenuItems from '../app';
@@ -85,7 +85,6 @@ const template: MenuItemConstructorOptions[] = [
       },
     ],
   },
-  menuBuilder(appMenuItems),
   menuBuilder(editMenuItems),
   {
     label: translation.view,
@@ -139,6 +138,8 @@ const template: MenuItemConstructorOptions[] = [
 ];
 
 if (process.platform === 'darwin') {
+  template.unshift(menuBuilder(appMenuItems));
+
   // Window menu
   template[4].submenu = [
     { role: 'minimize' },
@@ -154,7 +155,7 @@ else {
   //   {
   //     label: translation.preferences,
   //     accelerator: 'Ctrl+,',
-  //     click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
+  //     click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
   //       focusedWindow?.webContents.send('open-preferences');
   //     },
   //   }
@@ -167,7 +168,7 @@ else {
     helpMenu[0],
     {
       label: translation.menuCheckForUpdates,
-      click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
+      click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
         focusedWindow?.webContents.send('check-for-updates');
       },
     },

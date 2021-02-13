@@ -12,7 +12,6 @@ import openAboutWindow from '../../../windows/about';
 const translation = getTranslation();
 
 const template: MenuItemConstructorOptions[] = [
-  menuBuilder(appMenuItems),
   menuBuilder(fileMenuItems),
   menuBuilder(editMenuItems),
   {
@@ -54,6 +53,8 @@ const template: MenuItemConstructorOptions[] = [
 ];
 
 if (process.platform === 'darwin') {
+  template.unshift(menuBuilder(appMenuItems));
+
   // Window menu
   template[4].submenu = [
     { role: 'minimize' },
@@ -69,7 +70,7 @@ else {
   //   {
   //     label: translation.preferences,
   //     accelerator: 'Ctrl+,',
-  //     click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
+  //     click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
   //       focusedWindow?.webContents.send('open-preferences');
   //     },
   //   }
@@ -81,7 +82,7 @@ else {
   template[4].submenu = [
     {
       label: translation.menuCheckForUpdates,
-      click: (item: MenuItem, focusedWindow: BrowserWindow | undefined): void => {
+      click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
         focusedWindow?.webContents.send('check-for-updates');
       },
     },
