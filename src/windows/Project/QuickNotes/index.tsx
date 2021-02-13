@@ -32,6 +32,11 @@ const QuickNotes: React.FC = () => {
     (e.target as HTMLInputElement).blur();
   };
 
+  const handleOpenNote = (quickNote: QuickNote): void => {
+    setEditingQuickNote(quickNote);
+    dispatch(uiSetOpenEditQuickNoteDialog(true));
+  };
+
   return (
     <div>
       <div className={styles.newQuickNoteWrapper}>
@@ -55,6 +60,7 @@ const QuickNotes: React.FC = () => {
               sm={6}
               md={4}
               lg={3}
+              onClick={() => handleOpenNote(quickNote)}
             >
               <Paper className={styles.quickNote}>
                 <div className={styles.title}>{quickNote.title}</div>
