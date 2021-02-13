@@ -22,8 +22,8 @@ export default (_app: Electron.App): void => {
 
   app.on('window-all-closed', onWindowAllClosed);
 
-  app.on('did-become-active', () => {
-    if (windows.size === 0) {
+  app.on('activate', (e: Event, hasVisibleWindows: boolean): void => {
+    if (!hasVisibleWindows) {
       openWelcomeWindow();
     }
   });
@@ -32,7 +32,7 @@ export default (_app: Electron.App): void => {
     await openFile(path);
   });
 
-  app.on('ready', () => {
+  app.on('ready', async (): Promise<void> => {
     if (windows.size === 0) {
       openWelcomeWindow();
     }
@@ -47,5 +47,10 @@ export default (_app: Electron.App): void => {
       .on('exit', (code: number): void => {
         console.log(`Worker: initializeApp exited with code ${code}`);
       });
+
+    if (process.env.NODE_ENV === 'development') {
+      const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
+      await installExtension(REDUX_DEVTOOLS);
+    }
   });
 };

@@ -12,11 +12,6 @@ const translation = getTranslation();
 export const windows = new Set();
 
 export default async (projectFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
-  // if (process.env.NODE_ENV === 'development') {
-  //   const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
-  //   await installExtension(REDUX_DEVTOOLS);
-  // }
-
   // const preferences = load window preferences here;
 
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;

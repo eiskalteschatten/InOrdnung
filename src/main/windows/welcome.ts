@@ -9,11 +9,6 @@ let window: BrowserWindow | undefined;
 
 export default async (): Promise<void> => {
   if (!window) {
-    if (process.env.NODE_ENV === 'development') {
-      const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
-      await installExtension(REDUX_DEVTOOLS);
-    }
-
     const browserWindowOptions: BrowserWindowConstructorOptions = {
       width: 800,
       height: 400,
