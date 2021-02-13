@@ -1,6 +1,7 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import fileMenu from './file';
+import menuBuilder from '../../menuBuilder';
+import fileMenuItems from './file';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
@@ -9,7 +10,7 @@ import openAboutWindow from '../../../windows/about';
 const translation = getTranslation();
 
 const template: MenuItemConstructorOptions[] = [
-  fileMenu,
+  menuBuilder(fileMenuItems),
   {
     label: translation.edit,
     submenu: [

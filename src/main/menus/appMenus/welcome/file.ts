@@ -1,51 +1,32 @@
-import { MenuItemConstructorOptions } from 'electron';
-
 import { getTranslation } from '../../../../lib/helper';
 import createProjectWindow from '../../../windows/project';
 import { openFileDialog } from '../../../lib/projectFile';
+import { MenuItem } from '../../menuBuilder';
 
 const translation = getTranslation();
 
-const menu: MenuItemConstructorOptions = {
-  label: translation.file,
-  submenu: [
-    {
+const submenuItems: MenuItem[] = [
+  {
+    item: {
       label: translation.menuNewProject,
       accelerator: 'CmdOrCtrl+N',
       click: async (): Promise<void> => {
         await createProjectWindow();
       },
     },
-    {
+  },
+  {
+    item: {
       label: translation.menuOpen,
       accelerator: 'CmdOrCtrl+O',
       click: async (): Promise<void> => {
         await openFileDialog();
       },
     },
-    { type: 'separator' },
-    { role: 'close' },
-  ],
-};
-
-const menuDarwin: MenuItemConstructorOptions = {
-  label: translation.file,
-  submenu: [
-    {
-      label: translation.menuNewProject,
-      accelerator: 'CmdOrCtrl+N',
-      click: async (): Promise<void> => {
-        await createProjectWindow();
-      },
-    },
-    {
-      label: translation.menuOpen,
-      accelerator: 'CmdOrCtrl+O',
-      click: async (): Promise<void> => {
-        await openFileDialog();
-      },
-    },
-    {
+  },
+  {
+    platforms: ['darwin'],
+    item: {
       label: translation.menuOpenRecent,
       role: 'recentDocuments',
       submenu:[
@@ -55,9 +36,20 @@ const menuDarwin: MenuItemConstructorOptions = {
         },
       ],
     },
-    { type: 'separator' },
-    { role: 'close' },
-  ],
+  },
+  {
+    item: { type: 'separator' },
+  },
+  {
+    item: { role: 'close' },
+  },
+];
+
+const menuItem: MenuItem = {
+  item: {
+    label: translation.file,
+  },
+  submenu: submenuItems,
 };
 
-export default process.platform === 'darwin' ? menuDarwin : menu;
+export default menuItem;
