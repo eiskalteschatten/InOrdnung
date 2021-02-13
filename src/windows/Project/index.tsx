@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
 import { State } from '../../store';
-import { uiSetOpenEditBookmarkDialog, uiSetOpenEditTaskDialog } from '../../store/actions/uiActions';
+import { uiSetOpenEditBookmarkDialog, uiSetOpenEditQuickNoteDialog, uiSetOpenEditTaskDialog } from '../../store/actions/uiActions';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
 import Sidebar from './Sidebar';
@@ -30,19 +30,25 @@ const Project: React.FC = () => {
   const untitled = useTranslation('projectUntitled');
 
   useEffect(() => {
-    ipcRenderer.on('newBookmark', (): void => {
-      dispatch(uiSetOpenEditBookmarkDialog(true));
-      history.push(`${path}/bookmarks`);
-    });
-
     ipcRenderer.on('newTask', (): void => {
       dispatch(uiSetOpenEditTaskDialog(true));
       history.push(`${path}/tasks`);
     });
 
+    ipcRenderer.on('newQuickNote', (): void => {
+      dispatch(uiSetOpenEditQuickNoteDialog(true));
+      history.push(`${path}/quick-notes`);
+    });
+
+    ipcRenderer.on('newBookmark', (): void => {
+      dispatch(uiSetOpenEditBookmarkDialog(true));
+      history.push(`${path}/bookmarks`);
+    });
+
     return () => {
-      ipcRenderer.removeAllListeners('newBookmark');
       ipcRenderer.removeAllListeners('newTask');
+      ipcRenderer.removeAllListeners('newQuickNote');
+      ipcRenderer.removeAllListeners('newBookmark');
     };
   }, []);
 

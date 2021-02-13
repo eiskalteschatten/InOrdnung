@@ -31,6 +31,12 @@ const template: MenuItemConstructorOptions[] = [
             },
           },
           {
+            label: translation.quickNotesNewQuickNote,
+            click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
+              focusedWindow?.webContents.send('newQuickNote');
+            },
+          },
+          {
             label: translation.bookmarksNewBookmark,
             click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
               focusedWindow?.webContents.send('newBookmark');
