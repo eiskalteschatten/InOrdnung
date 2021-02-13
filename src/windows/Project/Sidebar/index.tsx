@@ -7,6 +7,7 @@ import Bookmark from '@material-ui/icons/Bookmark';
 
 import useTranslation from '../../../intl/useTranslation';
 import SidebarItem, { Props as SidebarItemProp } from './SidebarItem';
+import SidebarDragger from './SidebarDragger';
 
 import styles from './Sidebar.module.scss';
 
@@ -41,6 +42,8 @@ const Sidebar: React.FC = () => {
           title={item.title}
         />
       ))}
+
+      <SidebarDragger />
     </div>
   );
 };
