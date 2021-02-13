@@ -23,6 +23,9 @@ export interface Config {
       height: number;
     };
   };
+  welcomeWindow: {
+    recentProjectsLimit: number;
+  };
 }
 
 let storagePath = '';
@@ -60,5 +63,8 @@ export default {
       width: 200,
       height: 200,
     },
+  },
+  welcomeWindow: {
+    recentProjectsLimit: 5,
   },
 } as Config;

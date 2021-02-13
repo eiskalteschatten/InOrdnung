@@ -31,6 +31,10 @@ parentPort?.on('message', async ({ projectName, filePath, image, mimeType }): Pr
     thumbnailMimeType: mimeType,
   });
 
+  if (recentProjects.length > 5) {
+    recentProjects = recentProjects.slice(0, config.welcomeWindow.recentProjectsLimit);
+  }
+
   await fsPromises.writeFile(recentProjectsFilePath, JSON.stringify(recentProjects), 'utf8');
   await fsPromises.unlink(pathToLockFile);
 
