@@ -87,7 +87,7 @@ const Welcome: React.FC = () => {
           [styles.recentProjects]: true,
           'hasDarwinTitlebar': platform === 'darwin',
         })}>
-          {recentProjects.map((project: RecentProjectsLocalStorage, index: number) => (
+          {recentProjects?.map((project: RecentProjectsLocalStorage, index: number) => (
             <RoundedButton
               key={index}
               onClick={() => handleOpenRecentProject(project.path)}
