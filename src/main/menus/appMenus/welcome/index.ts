@@ -1,45 +1,15 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
+import fileMenu from './file';
+
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
-import createProjectWindow from '../../../windows/project';
 import openAboutWindow from '../../../windows/about';
-import { openFileDialog } from '../../../lib/projectFile';
 
 const translation = getTranslation();
 
 const template: MenuItemConstructorOptions[] = [
-  {
-    label: translation.file,
-    submenu: [
-      {
-        label: translation.menuNewProject,
-        accelerator: 'CmdOrCtrl+N',
-        click: async (): Promise<void> => {
-          await createProjectWindow();
-        },
-      },
-      {
-        label: translation.menuOpen,
-        accelerator: 'CmdOrCtrl+O',
-        click: async (): Promise<void> => {
-          await openFileDialog();
-        },
-      },
-      {
-        label: translation.menuOpenRecent,
-        role: 'recentDocuments',
-        submenu:[
-          {
-            label: translation.menuClearMenu,
-            role: 'clearRecentDocuments',
-          },
-        ],
-      },
-      { type: 'separator' },
-      { role: 'close' },
-    ],
-  },
+  fileMenu,
   {
     label: translation.edit,
     submenu: [
