@@ -13,6 +13,7 @@ import { uiSetOpenEditQuickNoteDialog } from '../../../store/actions/uiActions';
 import useTranslation from '../../../intl/useTranslation';
 import { QuickNote } from '../../../interfaces/quickNotes';
 import NoteDialog from './NoteDialog';
+import NoteToolbar from './NoteToolbar';
 
 import styles from './QuickNotes.module.scss';
 
@@ -69,12 +70,17 @@ const QuickNotes: React.FC = () => {
               sm={6}
               md={4}
               lg={3}
-              onClick={() => handleOpenNote(quickNote)}
               onContextMenu={() => ipcRenderer.send('showQuickNoteMenu', quickNote)}
             >
               <Paper className={styles.quickNote}>
-                <div className={styles.title}>{quickNote.title}</div>
-                <div>{quickNote.note}</div>
+                <div onClick={() => handleOpenNote(quickNote)}>
+                  <div className={styles.title}>{quickNote.title}</div>
+                  <div>{quickNote.note}</div>
+                </div>
+
+                <div className={styles.toolbarWrapper}>
+                  <NoteToolbar quickNote={quickNote} />
+                </div>
               </Paper>
             </Grid>
           ))}

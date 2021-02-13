@@ -27,9 +27,20 @@
   background: $yellowNoteLight !important;
   color: #000000 !important;
 
+  &:hover {
+    .toolbarWrapper {
+      opacity: 1;
+    }
+  }
+
   .title {
     font-weight: bold;
     margin-bottom: 10px;
+  }
+
+  .toolbarWrapper {
+    opacity: 0;
+    transition: opacity 100ms;
   }
 
   @media (prefers-color-scheme: dark) {
