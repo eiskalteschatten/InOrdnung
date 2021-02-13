@@ -6,6 +6,7 @@ import {
   UI_SET_PREFERENCES,
   UI_SET_SIDEBAR_WIDTH,
   UI_OPEN_EDIT_TASK_DIALOG,
+  UI_OPEN_EDIT_QUICK_NOTE_DIALOG,
   UI_OPEN_EDIT_BOOKMARK_DIALOG,
   UI_SET_TASKS_SORTING_OPTIONS,
   UI_SET_TASKS_SHOW_COMPLETED_TASKS,
@@ -22,6 +23,10 @@ export interface UiSetSidebarWidth extends Action<typeof UI_SET_SIDEBAR_WIDTH> {
 }
 
 export interface UiOpenEditTaskDialog extends Action<typeof UI_OPEN_EDIT_TASK_DIALOG> {
+  payload: boolean;
+}
+
+export interface UiOpenEditQuickNoteDialog extends Action<typeof UI_OPEN_EDIT_QUICK_NOTE_DIALOG> {
   payload: boolean;
 }
 
@@ -45,6 +50,7 @@ export type UiActions =
   UiSetPreferences |
   UiSetSidebarWidth |
   UiOpenEditTaskDialog |
+  UiOpenEditQuickNoteDialog |
   UiOpenEditBookmarkDialog |
   UiSetTasksSortingOptions |
   UiSetShowCompletedTasks |
@@ -53,6 +59,7 @@ export type UiActions =
 export const uiSetPreferences = (payload: UiPreferences): UiSetPreferences => ({ type: UI_SET_PREFERENCES, payload });
 export const uiSetSidebarWidth = (payload?: number): UiSetSidebarWidth => ({ type: UI_SET_SIDEBAR_WIDTH, payload });
 export const uiSetOpenEditTaskDialog = (payload: boolean): UiOpenEditTaskDialog => ({ type: UI_OPEN_EDIT_TASK_DIALOG, payload });
+export const uiSetOpenEditQuickNoteDialog = (payload: boolean): UiOpenEditQuickNoteDialog => ({ type: UI_OPEN_EDIT_QUICK_NOTE_DIALOG, payload });
 export const uiSetOpenEditBookmarkDialog = (payload: boolean): UiOpenEditBookmarkDialog => ({ type: UI_OPEN_EDIT_BOOKMARK_DIALOG, payload });
 export const uiSetTasksSortingOptions = (payload: SortingOptions): UiSetTasksSortingOptions => ({ type: UI_SET_TASKS_SORTING_OPTIONS, payload });
 export const uiSetShowCompletedTasks = (payload: boolean): UiSetShowCompletedTasks => ({ type: UI_SET_TASKS_SHOW_COMPLETED_TASKS, payload });

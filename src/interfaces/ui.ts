@@ -6,6 +6,7 @@ export interface SortingOptions {
 export interface UiPreferences {
   sidebarWidth?: number;
   openEditTaskDialog: boolean;
+  openEditQuickNoteDialog: boolean;
   openEditBookmarkDialog: boolean;
   tasksSortingOptions: SortingOptions;
   showCompletedTasks: boolean;
