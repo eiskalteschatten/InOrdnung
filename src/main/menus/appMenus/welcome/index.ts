@@ -4,6 +4,7 @@ import menuBuilder from '../../menuBuilder';
 import appMenuItems from './app';
 import fileMenuItems from './file';
 import editMenuItems from './edit';
+import viewMenuItems from './view';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
@@ -14,19 +15,7 @@ const translation = getTranslation();
 const template: MenuItemConstructorOptions[] = [
   menuBuilder(fileMenuItems),
   menuBuilder(editMenuItems),
-  {
-    label: translation.view,
-    submenu: [
-      {
-        label: translation.menuDevelopment,
-        submenu: [
-          { role: 'reload' },
-          { role: 'forceReload' },
-          { role: 'toggleDevTools' },
-        ],
-      },
-    ],
-  },
+  menuBuilder(viewMenuItems),
   {
     role: 'window',
     submenu: [

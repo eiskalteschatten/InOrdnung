@@ -3,6 +3,7 @@ import { shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'elec
 import menuBuilder from '../../menuBuilder';
 import appMenuItems from './app';
 import editMenuItems from './edit';
+import viewMenuItems from './view';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
@@ -86,25 +87,7 @@ const template: MenuItemConstructorOptions[] = [
     ],
   },
   menuBuilder(editMenuItems),
-  {
-    label: translation.view,
-    submenu: [
-      { role: 'resetZoom' },
-      { role: 'zoomIn' },
-      { role: 'zoomOut' },
-      { type: 'separator' },
-      { role: 'togglefullscreen' },
-      { type: 'separator' },
-      {
-        label: translation.menuDevelopment,
-        submenu: [
-          { role: 'reload' },
-          { role: 'forceReload' },
-          { role: 'toggleDevTools' },
-        ],
-      },
-    ],
-  },
+  menuBuilder(viewMenuItems),
   {
     role: 'window',
     submenu: [
