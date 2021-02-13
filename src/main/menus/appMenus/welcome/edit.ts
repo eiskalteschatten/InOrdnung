@@ -25,7 +25,7 @@ const submenuItems: MenuItem[] = [
   },
   // {
   //   platforms: nonMacPlatforms,
-  //   item: { role: 'selectAll' },
+  //   item: { type: 'separator' },
   // },
   // {
   //   platforms: nonMacPlatforms,
