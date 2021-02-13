@@ -1,9 +1,10 @@
 import { Reducer } from 'redux';
 
-import { SortingOptions } from '../../interfaces/ui';
+import { UiPreferences } from '../../interfaces/ui';
 import { UiActions } from '../actions/uiActions';
 
 import {
+  UI_SET_PREFERENCES,
   UI_OPEN_EDIT_TASK_DIALOG,
   UI_OPEN_EDIT_BOOKMARK_DIALOG,
   UI_SET_TASKS_SORTING_OPTIONS,
@@ -11,13 +12,7 @@ import {
   UI_SET_BOOKMARKS_SORTING_OPTIONS,
 } from '../constants';
 
-export interface UiState {
-  openEditTaskDialog: boolean;
-  openEditBookmarkDialog: boolean;
-  tasksSortingOptions: SortingOptions;
-  showCompletedTasks: boolean;
-  bookmarksSortingOptions: SortingOptions;
-}
+export type UiState = UiPreferences;
 
 export const initialState: UiState = {
   openEditTaskDialog: false,
@@ -32,6 +27,11 @@ const uiReducer: Reducer<UiState, UiActions> = (
   action: UiActions
 ): any => {
   switch (action.type) {
+    case UI_SET_PREFERENCES:
+      return {
+        ...state,
+        ...action.payload,
+      };
     case UI_OPEN_EDIT_TASK_DIALOG:
       return {
         ...state,

@@ -1,6 +1,7 @@
 import { ProjectInfo } from './projectInfo';
 import { Task } from './tasks';
 import { Bookmark } from './bookmarks';
+import { UiPreferences } from './ui';
 
 export interface Project {
   projectInfo: ProjectInfo;
@@ -15,6 +16,7 @@ export interface ProjectFileMetaData {
 }
 export interface ProjectFile {
   project: Project;
+  ui: UiPreferences;
 }
 
 export interface RecentProjectsLocalStorage {
