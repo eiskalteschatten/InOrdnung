@@ -4,6 +4,8 @@ import { IpcRendererEvent } from 'electron';
 
 import {
   TextField,
+  Grid,
+  Paper,
 } from '@material-ui/core';
 
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -22,6 +24,7 @@ const QuickNotes: React.FC = () => {
   const dispatch = useDispatch();
   const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
   const openEditQuickNoteDialog = useSelector((state: State) => state.ui.openEditQuickNoteDialog);
+  const quickNotes = useSelector((state: State) => state.project.quickNotes);
 
   const handleNewNoteClick = (e: React.MouseEvent<HTMLInputElement>): void => {
     e.preventDefault();
@@ -40,6 +43,26 @@ const QuickNotes: React.FC = () => {
           size='small'
           InputLabelProps={{ shrink: false }}
         />
+      </div>
+
+      <div className={styles.gridWrapper}>
+        <Grid container spacing={2}>
+          {quickNotes.map((quickNote: QuickNote) => (
+            <Grid
+              item
+              key={quickNote.id}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+            >
+              <Paper className={styles.quickNote}>
+                <div className={styles.title}>{quickNote.title}</div>
+                <div>{quickNote.note}</div>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
       </div>
 
       <NoteDialog
