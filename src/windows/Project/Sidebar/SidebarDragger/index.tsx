@@ -1,5 +1,6 @@
 import React, { useCallback, MutableRefObject } from 'react';
 import { useDispatch } from 'react-redux';
+import { debounce } from 'lodash';
 
 import { makeStyles, Theme } from '@material-ui/core/styles';
 
@@ -29,19 +30,16 @@ const SidebarDragger: React.FC<Props> = ({ sidebarRef, setSidebarWidth }) => {
   const dispatch = useDispatch();
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const minWidth = 200;
     const rect = sidebarRef.current?.getBoundingClientRect();
     const startCursorX = e.pageX;
 
-    const handleMouseMove = (e: any): void => {
+    const handleMouseMove = debounce((e: any): void => {
       if (rect) {
-        const newWidth = Math.floor(rect.width + (e.pageX - startCursorX));
-        console.log('rect.width', rect.width);
-        console.log('startCursorX', startCursorX);
-        console.log('pageX', e.pageX);
-        console.log('newWidth', newWidth);
+        const newWidth = Math.max(rect.width + (e.pageX - startCursorX), minWidth);
         setSidebarWidth(newWidth);
       }
-    };
+    }, 1);
 
     const handleMouseUp = (): void => {
       document.removeEventListener('mousemove', handleMouseMove);
