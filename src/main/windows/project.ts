@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, dialog, Menu, nativeTheme } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, dialog, Menu, nativeTheme, screen } from 'electron';
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
@@ -19,9 +19,13 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
 
   // const preferences = load window preferences here;
 
+  const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
+  const defaultWidth = Math.floor(screenWidth * 0.6);
+  const defaultHeight = Math.floor(screenHeight * 0.75);
+
   const browserWindowOptions: BrowserWindowConstructorOptions = {
-    width: 1000, // preferences.windowWidth || 1000,
-    height: 650, // preferences.windowHeight || 650,
+    width: defaultWidth, // preferences.windowWidth || defaultWidth,
+    height: defaultHeight, // preferences.windowHeight || defaultHeight,
     icon: path.join(__dirname, '../../assets/images/icon128.png'),
     webPreferences: {
       nodeIntegration: true,
