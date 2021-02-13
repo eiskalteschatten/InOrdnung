@@ -1,10 +1,10 @@
 import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import config from '../../config';
-import { getTranslation } from '../../lib/helper';
-import createProjectWindow from '../windows/project';
-import openAboutWindow from '../windows/about';
-import { openFileDialog } from '../lib/projectFile';
+import config from '../../../../config';
+import { getTranslation } from '../../../../lib/helper';
+import createProjectWindow from '../../../windows/project';
+import openAboutWindow from '../../../windows/about';
+import { openFileDialog } from '../../../lib/projectFile';
 
 const translation = getTranslation();
 

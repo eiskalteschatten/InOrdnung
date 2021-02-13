@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, dialog, Menu, nativeThe
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../appMenus/project';
+import appMenu from '../menus/appMenus/project';
 import { getTranslation } from '../../lib/helper';
 import { ProjectFile } from '../../interfaces/project';
 import { addToRecentProjects } from '../lib/projectFile';

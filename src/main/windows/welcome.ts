@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } fro
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../appMenus/welcome';
+import appMenu from '../menus/appMenus/welcome';
 import { getRecentProjects } from '../lib/projectFile';
 
 let window: BrowserWindow | undefined;
