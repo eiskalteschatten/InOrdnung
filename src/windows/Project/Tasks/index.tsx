@@ -178,11 +178,11 @@ const Tasks: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {Array.isArray(localTasks) && localTasks.map((row: any, index: number) => (
+              {Array.isArray(localTasks) && localTasks.map((row: any) => (
                 <>
                   {(showCompletedTasks || !row.completed) && (
                     <TableRow
-                      key={index}
+                      key={row.id}
                       onMouseEnter={() => setHoverTaskId(row.id)}
                       onMouseLeave={() => setHoverTaskId('')}
                       onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
