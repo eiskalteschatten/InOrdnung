@@ -2,6 +2,7 @@ import { app, shell, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 
 
 import menuBuilder from '../../menuBuilder';
 import fileMenuItems from './file';
+import editMenuItems from './edit';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
@@ -11,15 +12,7 @@ const translation = getTranslation();
 
 const template: MenuItemConstructorOptions[] = [
   menuBuilder(fileMenuItems),
-  {
-    label: translation.edit,
-    submenu: [
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' },
-      { role: 'pasteAndMatchStyle' },
-    ],
-  },
+  menuBuilder(editMenuItems),
   {
     label: translation.view,
     submenu: [
@@ -92,18 +85,6 @@ if (process.platform === 'darwin') {
       { role: 'quit' },
     ],
   });
-
-  // Edit menu
-  (template[2].submenu as MenuItemConstructorOptions[]).push(
-    { type: 'separator' },
-    {
-      label: 'Speech',
-      submenu: [
-        { role: 'startSpeaking' },
-        { role: 'stopSpeaking' },
-      ],
-    }
-  );
 
   // Window menu
   template[4].submenu = [

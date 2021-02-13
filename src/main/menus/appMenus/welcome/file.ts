@@ -37,12 +37,8 @@ const submenuItems: MenuItem[] = [
       ],
     },
   },
-  {
-    item: { type: 'separator' },
-  },
-  {
-    item: { role: 'close' },
-  },
+  { item: { type: 'separator' } },
+  { item: { role: 'close' } },
 ];
 
 const menuItem: MenuItem = {
