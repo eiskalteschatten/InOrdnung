@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 
 import Info from '@material-ui/icons/Info';
 import CheckBox from '@material-ui/icons/CheckBox';
+import Note from '@material-ui/icons/Note';
 import Bookmark from '@material-ui/icons/Bookmark';
 
 import useTranslation from '../../../intl/useTranslation';
@@ -33,6 +34,11 @@ const Sidebar: React.FC = () => {
       path: '/tasks',
       ItemIcon: CheckBox,
       title: useTranslation('tasks'),
+    },
+    {
+      path: '/quick-notes',
+      ItemIcon: Note,
+      title: useTranslation('quickNotes'),
     },
     {
       path: '/bookmarks',

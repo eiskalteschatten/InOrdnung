@@ -3,6 +3,7 @@ import appMenu from './translations/appMenu';
 import welcome from './translations/welcome';
 import project from './translations/project';
 import tasks from './translations/tasks';
+import quickNotes from './translations/quickNotes';
 import bookmarks from './translations/bookmarks';
 import about from './translations/about';
 import errors from './translations/errors';
@@ -13,6 +14,7 @@ export default {
   ...welcome.de,
   ...project.de,
   ...tasks.de,
+  ...quickNotes.de,
   ...bookmarks.de,
   ...about.de,
   ...errors.de,

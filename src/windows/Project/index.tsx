@@ -12,6 +12,7 @@ import useTranslation from '../../intl/useTranslation';
 
 import ProjectInfo from './ProjectInfo';
 import Tasks from './Tasks';
+import QuickNotes from './QuickNotes';
 import Bookmarks from './Bookmarks';
 
 import styles from './Project.module.scss';
@@ -75,6 +76,7 @@ const Project: React.FC = () => {
         <Switch>
           <Route exact path={`${path}`} component={ProjectInfo} />
           <Route path={`${path}/tasks`} component={Tasks} />
+          <Route path={`${path}/quick-notes`} component={QuickNotes} />
           <Route path={`${path}/bookmarks`} component={Bookmarks} />
         </Switch>
       </div>
