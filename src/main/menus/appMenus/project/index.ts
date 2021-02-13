@@ -4,6 +4,7 @@ import menuBuilder from '../../menuBuilder';
 import appMenuItems from './app';
 import editMenuItems from './edit';
 import viewMenuItems from './view';
+import windowMenuItems from './window';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
@@ -88,12 +89,7 @@ const template: MenuItemConstructorOptions[] = [
   },
   menuBuilder(editMenuItems),
   menuBuilder(viewMenuItems),
-  {
-    role: 'window',
-    submenu: [
-      { role: 'minimize' },
-    ],
-  },
+  menuBuilder(windowMenuItems),
   {
     role: 'help',
     submenu: [
@@ -122,14 +118,6 @@ const template: MenuItemConstructorOptions[] = [
 
 if (process.platform === 'darwin') {
   template.unshift(menuBuilder(appMenuItems));
-
-  // Window menu
-  template[4].submenu = [
-    { role: 'minimize' },
-    { role: 'zoom' },
-    { type: 'separator' },
-    { role: 'front' },
-  ];
 }
 else {
   // Edit menu
