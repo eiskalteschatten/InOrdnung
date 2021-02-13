@@ -72,7 +72,10 @@ const submenuItems: MenuItem[] = [
     },
   },
   { item: { type: 'separator' } },
-  { item: { role: 'close' } },
+  {
+    platforms: ['darwin'],
+    item: { role: 'close' },
+  },
   {
     item:  {
       label: translation.menuSave,

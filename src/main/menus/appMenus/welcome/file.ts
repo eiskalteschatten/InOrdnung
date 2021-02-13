@@ -38,10 +38,9 @@ const submenuItems: MenuItem[] = [
     },
   },
   { item: { type: 'separator' } },
-  { item: { role: 'close' } },
   {
-    platforms: nonMacPlatforms,
-    item: { type: 'separator' },
+    platforms: ['darwin'],
+    item: { role: 'close' },
   },
   {
     platforms: nonMacPlatforms,
