@@ -1,5 +1,5 @@
 export interface QuickNote {
   id?: string;
-  name?: string;
+  title?: string;
   note?: string;
 }

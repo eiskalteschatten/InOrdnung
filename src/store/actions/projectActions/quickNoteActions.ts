@@ -12,7 +12,7 @@ import {
 export const projectSetQuickNotes = (payload: QuickNote[]): ProjectSetQuickNotes => ({ type: PROJECT_SET_QUICK_NOTES, payload });
 export const projectAddQuickNote = (payload: QuickNote): ProjectAddQuickNote => ({ type: PROJECT_ADD_QUICK_NOTE, payload });
 
-export const projectEditTask = (quickNote: QuickNote): ReduxThunk<void, typeof PROJECT_SET_QUICK_NOTES> =>
+export const projectEditQuickNote = (quickNote: QuickNote): ReduxThunk<void, typeof PROJECT_SET_QUICK_NOTES> =>
   (dispatch: any, getState: Function): ProjectSetQuickNotes => {
     const state = getState();
     const { quickNotes } = state.project;
@@ -27,7 +27,7 @@ export const projectEditTask = (quickNote: QuickNote): ReduxThunk<void, typeof P
     return dispatch({ type: PROJECT_SET_QUICK_NOTES, payload: quickNotes });
   };
 
-export const projectDeleteTask = (id: string): ReduxThunk<void, typeof PROJECT_SET_QUICK_NOTES> =>
+export const projectDeleteQuickNote = (id: string): ReduxThunk<void, typeof PROJECT_SET_QUICK_NOTES> =>
   (dispatch: any, getState: Function): ProjectSetQuickNotes => {
     const state = getState();
     const { quickNotes } = state.project;
