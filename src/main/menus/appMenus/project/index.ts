@@ -120,19 +120,6 @@ if (process.platform === 'darwin') {
   template.unshift(menuBuilder(appMenuItems));
 }
 else {
-  // Edit menu
-  // (template[1].submenu as MenuItemConstructorOptions[]).push(
-  //   { type: 'separator' },
-  //   {
-  //     label: translation.preferences,
-  //     accelerator: 'Ctrl+,',
-  //     click: (item: MenuItem, focusedWindow?: BrowserWindow): void => {
-  //       focusedWindow?.webContents.send('open-preferences');
-  //     },
-  //   }
-  // );
-
-
   // Help menu
   const helpMenu = template[4].submenu as MenuItemConstructorOptions[];
   template[4].submenu = [

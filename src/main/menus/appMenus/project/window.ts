@@ -1,7 +1,6 @@
 import { MenuItem } from '../../menuBuilder';
 
 const submenuItems: MenuItem[] = [
-  { item: { role: 'minimize' } },
   {
     platforms: ['darwin'],
     item: { role: 'minimize' },

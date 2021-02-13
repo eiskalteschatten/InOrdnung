@@ -33,3 +33,5 @@ const buildMenu = (menuItems: MenuItem[]): MenuItemConstructorOptions[] => {
 };
 
 export default (menuItem: MenuItem): MenuItemConstructorOptions => buildMenuItem(menuItem);
+
+export const nonMacPlatforms = ['aix', 'freebsd', 'linux', 'openbsd', 'sunos', 'win32'];

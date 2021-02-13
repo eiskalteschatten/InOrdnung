@@ -1,3 +1,5 @@
+// import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
+
 import { getTranslation } from '../../../../lib/helper';
 import { MenuItem } from '../../menuBuilder';
 
@@ -21,6 +23,20 @@ const submenuItems: MenuItem[] = [
       { item: { role: 'stopSpeaking' } },
     ],
   },
+  // {
+  //   platforms: nonMacPlatforms,
+  //   item: { role: 'selectAll' },
+  // },
+  // {
+  //   platforms: nonMacPlatforms,
+  //   item: {
+  //     label: translation.preferences,
+  //     accelerator: 'Ctrl+,',
+  //     click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+  //       focusedWindow?.webContents.send('open-preferences');
+  //     },
+  //   },
+  // },
 ];
 
 const menuItem: MenuItem = {
