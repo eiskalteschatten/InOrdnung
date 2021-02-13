@@ -95,6 +95,10 @@ const submenuItems: MenuItem[] = [
   },
   {
     platforms: nonMacPlatforms,
+    item: { type: 'separator' },
+  },
+  {
+    platforms: nonMacPlatforms,
     item: { role: 'quit' },
   },
 ];
