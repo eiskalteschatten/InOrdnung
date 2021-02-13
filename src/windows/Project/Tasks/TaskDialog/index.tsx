@@ -28,7 +28,7 @@ import { IntlContext } from '../../../../intl/IntlContext';
 import { projectAddTask, projectEditTask } from '../../../../store/actions/projectActions/taskActions';
 import { getDateLocaleFormat } from '../../../../lib/dates';
 
-import styles from './TaskDialog.module.scss';
+// import styles from './TaskDialog.module.scss';
 
 interface Props {
   open: boolean;
@@ -135,30 +135,28 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
         />
 
         <MuiPickersUtilsProvider utils={MomentUtils} locale={locale}>
-          <div className={styles.formControlWrapper}>
-            <FormControlLabel
-              control={
-                <Switch
-                  checked={editingTask?.hasDueDate ?? false}
-                  onChange={handleSwitchChange}
-                  id='hasDueDate'
-                />
-              }
-              label={messages.tasksDueDate}
-            />
-
-            {editingTask?.hasDueDate && (
-              <KeyboardDatePicker
-                margin='normal'
-                id='dueDate'
-                format={getDateLocaleFormat()}
-                value={editingTask?.dueDate}
-                onChange={(date: MaterialUiPickersDate) => handleDateChange('dueDate', date)}
-                disableToolbar
-                fullWidth
+          <FormControlLabel
+            control={
+              <Switch
+                checked={editingTask?.hasDueDate ?? false}
+                onChange={handleSwitchChange}
+                id='hasDueDate'
               />
-            )}
-          </div>
+            }
+            label={messages.tasksDueDate}
+          />
+
+          {editingTask?.hasDueDate && (
+            <KeyboardDatePicker
+              margin='normal'
+              id='dueDate'
+              format={getDateLocaleFormat()}
+              value={editingTask?.dueDate}
+              onChange={(date: MaterialUiPickersDate) => handleDateChange('dueDate', date)}
+              disableToolbar
+              fullWidth
+            />
+          )}
         </MuiPickersUtilsProvider>
       </DialogContent>
       <DialogActions>
