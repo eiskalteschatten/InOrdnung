@@ -12,7 +12,7 @@ import { QuickNote } from '../../../../interfaces/quickNotes';
 import styles from './NoteToolbar.module.scss';
 
 interface Props {
-  quickNote: QuickNote;
+  quickNote?: QuickNote;
 }
 
 const NoteToolbar: React.FC<Props> = ({ quickNote }) => {

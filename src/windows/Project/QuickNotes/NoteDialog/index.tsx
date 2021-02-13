@@ -16,6 +16,7 @@ import { State } from '../../../../store';
 import { projectAddQuickNote, projectEditQuickNote } from '../../../../store/actions/projectActions/quickNoteActions';
 import { QuickNote } from '../../../../interfaces/quickNotes';
 import useTranslation from '../../../../intl/useTranslation';
+import NoteToolbar from '../NoteToolbar';
 
 import styles from './NoteDialog.module.scss';
 
@@ -109,6 +110,7 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
         />
       </DialogContent>
       <DialogActions>
+        <NoteToolbar quickNote={editingQuickNote} />
       </DialogActions>
     </Dialog>
   );
