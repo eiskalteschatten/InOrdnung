@@ -63,7 +63,7 @@ const ProjectInfo: React.FC = () => {
               id='name'
               label={messages.projectName}
               variant='outlined'
-              value={projectInfo?.name}
+              value={projectInfo?.name ?? ''}
               onChange={handleFieldChange}
               className={styles.textField}
               InputLabelProps={{ shrink: !!projectInfo?.name }}
@@ -76,7 +76,7 @@ const ProjectInfo: React.FC = () => {
               id='description'
               label={messages.projectDescription}
               variant='outlined'
-              value={projectInfo?.description}
+              value={projectInfo?.description ?? ''}
               onChange={handleFieldChange}
               className={styles.textField}
               InputLabelProps={{ shrink: !!projectInfo?.description }}
