@@ -24,7 +24,6 @@
   padding: 10px;
   overflow: hidden;
   max-height: $maxHeight;
-  cursor: pointer;
   background: $yellowNoteLight !important;
   color: #000000 !important;
   display: flex;
@@ -38,6 +37,7 @@
 
   .noteContents {
     flex: 1 1 auto;
+    cursor: pointer;
   }
 
   .title {
