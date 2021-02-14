@@ -5,6 +5,7 @@ import project from './translations/project';
 import tasks from './translations/tasks';
 import quickNotes from './translations/quickNotes';
 import bookmarks from './translations/bookmarks';
+import kanban from './translations/kanban';
 import about from './translations/about';
 import errors from './translations/errors';
 
@@ -16,6 +17,7 @@ export default {
   ...tasks.de,
   ...quickNotes.de,
   ...bookmarks.de,
+  ...kanban.de,
   ...about.de,
   ...errors.de,
 };

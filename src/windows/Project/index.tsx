@@ -14,6 +14,7 @@ import ProjectInfo from './ProjectInfo';
 import Tasks from './Tasks';
 import QuickNotes from './QuickNotes';
 import Bookmarks from './Bookmarks';
+import Kanban from './Kanban';
 
 import styles from './Project.module.scss';
 
@@ -84,6 +85,7 @@ const Project: React.FC = () => {
           <Route path={`${path}/tasks`} component={Tasks} />
           <Route path={`${path}/quick-notes`} component={QuickNotes} />
           <Route path={`${path}/bookmarks`} component={Bookmarks} />
+          <Route path={`${path}/kanban`} component={Kanban} />
         </Switch>
       </div>
     </div>

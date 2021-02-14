@@ -1,0 +1,8 @@
+@import "../../../scss/variables";
+
+$marginSize: 10px;
+
+.toolbar {
+  text-align: right;
+  margin: $marginSize;
+}

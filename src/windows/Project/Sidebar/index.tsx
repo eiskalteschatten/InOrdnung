@@ -6,6 +6,7 @@ import Info from '@material-ui/icons/Info';
 import CheckBox from '@material-ui/icons/CheckBox';
 import Note from '@material-ui/icons/Note';
 import Bookmark from '@material-ui/icons/Bookmark';
+import ViewWeek from '@material-ui/icons/ViewWeek';
 
 import useTranslation from '../../../intl/useTranslation';
 import { State } from '../../../store';
@@ -44,6 +45,11 @@ const Sidebar: React.FC = () => {
       path: '/bookmarks',
       ItemIcon: Bookmark,
       title: useTranslation('bookmarks'),
+    },
+    {
+      path: '/kanban',
+      ItemIcon: ViewWeek,
+      title: useTranslation('kanbanBoard'),
     },
   ];
 
