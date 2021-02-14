@@ -23,7 +23,6 @@ export const projectEditQuickNote = (quickNote: QuickNote): ReduxThunk<void, typ
         break;
       }
     }
-
     return dispatch({ type: PROJECT_SET_QUICK_NOTES, payload: quickNotes });
   };
 

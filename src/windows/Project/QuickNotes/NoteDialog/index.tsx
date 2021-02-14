@@ -53,20 +53,18 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
   };
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setEditingQuickNote({
+    const newNoteData = {
       ...editingQuickNote,
       [e.target.id]: e.target.value,
-    });
+    };
 
-    handleSave();
-  };
+    setEditingQuickNote(newNoteData);
 
-  const handleSave = (): void => {
-    if (editingQuickNote && !noteExists) {
-      dispatch(projectAddQuickNote(editingQuickNote));
+    if (newNoteData && !noteExists) {
+      dispatch(projectAddQuickNote(newNoteData));
     }
-    else if (editingQuickNote) {
-      dispatch(projectEditQuickNote(editingQuickNote));
+    else if (newNoteData) {
+      dispatch(projectEditQuickNote(newNoteData));
     }
   };
 
