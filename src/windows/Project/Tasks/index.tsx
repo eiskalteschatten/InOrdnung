@@ -179,54 +179,51 @@ const Tasks: React.FC = () => {
             </TableHead>
             <TableBody>
               {Array.isArray(localTasks) && localTasks.map((row: any) => (
-                <>
-                  {(showCompletedTasks || !row.completed) && (
-                    <TableRow
-                      key={row.id}
-                      onMouseEnter={() => setHoverTaskId(row.id)}
-                      onMouseLeave={() => setHoverTaskId('')}
-                      onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
+                <TableRow
+                  key={row.id}
+                  onMouseEnter={() => setHoverTaskId(row.id)}
+                  onMouseLeave={() => setHoverTaskId('')}
+                  onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
+                  className={clsx({
+                    [styles.completedTask]: row.completed,
+                    [styles.hiddenTask]: !showCompletedTasks && row.completed,
+                  })}
+                >
+                  <TableCell width={35}>
+                    <IconButton
+                      size='small'
+                      onClick={() => handleToggleCompleted(row)}
+                    >
+                      {row.completed ? (
+                        <CheckBoxIcon fontSize='small' />
+                      ) : (
+                        <CheckBoxOutlineBlankIcon fontSize='small' />
+                      )}
+                    </IconButton>
+                  </TableCell>
+                  <TableCell component='th' scope='row'  className={styles.tableCell}>
+                    {row.name}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.note}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.hasDueDate && (
+                      <>{moment(row.dueDate).format(getDateLocaleFormat())}</>
+                    )}
+                  </TableCell>
+                  <TableCell align='right'>
+                    <IconButton
+                      size='small'
+                      onClick={() => ipcRenderer.send('showTaskMenu', row)}
                       className={clsx({
-                        [styles.completedTask]: row.completed,
+                        [styles.invisible]: hoverTaskId !== row.id,
                       })}
                     >
-                      <TableCell width={35}>
-                        <IconButton
-                          size='small'
-                          onClick={() => handleToggleCompleted(row)}
-                        >
-                          {row.completed ? (
-                            <CheckBoxIcon fontSize='small' />
-                          ) : (
-                            <CheckBoxOutlineBlankIcon fontSize='small' />
-                          )}
-                        </IconButton>
-                      </TableCell>
-                      <TableCell component='th' scope='row'  className={styles.tableCell}>
-                        {row.name}
-                      </TableCell>
-                      <TableCell className={styles.tableCell}>
-                        {row.note}
-                      </TableCell>
-                      <TableCell className={styles.tableCell}>
-                        {row.hasDueDate && (
-                          <>{moment(row.dueDate).format(getDateLocaleFormat())}</>
-                        )}
-                      </TableCell>
-                      <TableCell align='right'>
-                        <IconButton
-                          size='small'
-                          onClick={() => ipcRenderer.send('showTaskMenu', row)}
-                          className={clsx({
-                            [styles.invisible]: hoverTaskId !== row.id,
-                          })}
-                        >
-                          <MoreVertIcon fontSize='small' />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
-                  )}
-                </>
+                      <MoreVertIcon fontSize='small' />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
               ))}
             </TableBody>
           </Table>
