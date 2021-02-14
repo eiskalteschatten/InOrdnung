@@ -53,7 +53,6 @@ const Tasks: React.FC = () => {
   useEffect(() => {
     ipcRenderer.on('editTask', (e: IpcRendererEvent, task: Task): void => {
       setEditingTask(task);
-      dispatch(uiSetOpenEditTaskDialog(true));
     });
 
     return () => {
@@ -64,6 +63,12 @@ const Tasks: React.FC = () => {
   useEffect(() => {
     setLocalTasks(tasks);
   }, [tasks]);
+
+  useEffect(() => {
+    if (editingTask) {
+      dispatch(uiSetOpenEditTaskDialog(true));
+    }
+  }, [editingTask]);
 
   const handleSort = (newSortBy: string): void => {
     let newSortDirection = sortDirection;

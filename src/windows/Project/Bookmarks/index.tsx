@@ -45,7 +45,6 @@ const Bookmarks: React.FC = () => {
   useEffect(() => {
     ipcRenderer.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
       setEditingBookmark(bookmark);
-      dispatch(uiSetOpenEditBookmarkDialog(true));
     });
 
     return () => {
@@ -56,6 +55,12 @@ const Bookmarks: React.FC = () => {
   useEffect(() => {
     setLocalBookmarks(bookmarks);
   }, [bookmarks]);
+
+  useEffect(() => {
+    if (editingBookmark) {
+      dispatch(uiSetOpenEditBookmarkDialog(true));
+    }
+  }, [editingBookmark]);
 
   const handleSort = (newSortBy: string): void => {
     let newSortDirection = sortDirection;

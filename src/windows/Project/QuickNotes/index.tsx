@@ -33,19 +33,23 @@ const QuickNotes: React.FC = () => {
 
   const handleOpenNote = (quickNote: QuickNote): void => {
     setEditingQuickNote(quickNote);
-    dispatch(uiSetOpenEditQuickNoteDialog(true));
   };
 
   useEffect(() => {
     ipcRenderer.on('editQuickNote', (e: IpcRendererEvent, quickNote: QuickNote): void => {
       setEditingQuickNote(quickNote);
-      dispatch(uiSetOpenEditQuickNoteDialog(true));
     });
 
     return () => {
       ipcRenderer.removeAllListeners('editQuickNote');
     };
   }, []);
+
+  useEffect(() => {
+    if (editingQuickNote) {
+      dispatch(uiSetOpenEditQuickNoteDialog(true));
+    }
+  }, [editingQuickNote]);
 
   return (
     <div>
