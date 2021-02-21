@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Delta, Sources } from 'quill';
 import ReactQuill from 'react-quill';
+import clsx from 'clsx';
 
 import QuillToolbar from './QuillToolbar';
 
 import '../../scss/quill.scss';
-// import styles from './QuillEditor.module.scss';
+import styles from './QuillEditor.module.scss';
 
 const formats = [
   'header',
@@ -32,26 +33,25 @@ interface Props {
 }
 
 const QuillEditor: React.FC<Props> = ({ value, onChange, placeholder, className }) => {
+  const editorRef = useRef<ReactQuill>(null);
+
   return (
-    <>
-      <QuillToolbar />
+    <div className={clsx(styles.container, className)}>
+      <QuillToolbar editorRef={editorRef} />
       <ReactQuill
+        ref={editorRef}
         value={value}
         onChange={onChange}
         theme='bubble'
         placeholder={placeholder}
-        className={className}
         formats={formats}
         modules={{
-          toolbar: {
-            container: '#toolbar',
-          },
           clipboard: {
             matchVisual: false,
           },
         }}
       />
-    </>
+    </div>
   );
 };
 

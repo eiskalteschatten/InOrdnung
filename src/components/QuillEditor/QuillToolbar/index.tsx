@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { RefObject } from 'react';
+import ReactQuill from 'react-quill';
 
 import {
 
 } from '@material-ui/core';
 
-// import styles from './QuillToolbar.module.scss';
+import FormatBold from '@material-ui/icons/FormatBold';
+import FormatItalic from '@material-ui/icons/FormatItalic';
 
-const QuillToolbar: React.FC = () => {
+import RoundedButton from '../../RoundedButton';
+
+import styles from './QuillToolbar.module.scss';
+
+interface Props {
+  editorRef: RefObject<ReactQuill>;
+}
+
+const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
   return (
-    <div id='toolbar'>
-      <select className='ql-header' defaultValue={''} onChange={e => e.persist()}>
+    <div className={styles.toolbar}>
+      {/* <select className='ql-header' defaultValue={''} onChange={e => e.persist()}>
         <option value='1' />
         <option value='2' />
         <option selected />
@@ -24,7 +34,19 @@ const QuillToolbar: React.FC = () => {
         <option value='violet' />
         <option value='#d0d1d2' />
         <option selected />
-      </select>
+      </select> */}
+      <RoundedButton
+        onClick={() => console.log('fjdks')}
+        size='small'
+      >
+        <FormatBold fontSize='small' />
+      </RoundedButton>
+      <RoundedButton
+        onClick={() => console.log('fjdks')}
+        size='small'
+      >
+        <FormatItalic fontSize='small' />
+      </RoundedButton>
     </div>
   );
 };

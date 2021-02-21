@@ -32,6 +32,10 @@
     opacity: 1;
   }
 
+  &.small {
+    padding: 0.2em;
+  }
+
   .wrapper {
     display: flex;
     align-items: center;
