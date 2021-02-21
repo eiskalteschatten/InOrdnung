@@ -55,17 +55,16 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
       setIsBeingDragged(isBeingDragged);
     };
 
-    const handleMouseUp = (e: any): void => {
-      e.preventDefault();
-
+    const handleMouseUp = (): void => {
       if (!isBeingDragged) {
         handleOpenTask();
       }
 
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
       // const rect = sidebarRef.current?.getBoundingClientRect();
       // dispatch(uiSetSidebarWidth(rect?.width));
+
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
       isBeingDragged = false;
       setIsBeingDragged(isBeingDragged);
       setCoordinates({});
