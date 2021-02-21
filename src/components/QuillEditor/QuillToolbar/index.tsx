@@ -108,25 +108,25 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <ToolbarDivider />
 
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'align', value: 'left' })}
         size='small'
       >
         <FormatAlignLeft fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'align', value: 'center' })}
         size='small'
       >
         <FormatAlignCenter fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'align', value: 'right' })}
         size='small'
       >
         <FormatAlignRight fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'align', value: 'justify' })}
         size='small'
       >
         <FormatAlignJustify fontSize='small' />
