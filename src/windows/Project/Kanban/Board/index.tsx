@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
 
 import {
   Button,
@@ -9,7 +8,6 @@ import {
 
 import Add from '@material-ui/icons/Add';
 
-import { projectAddKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
 import { uiOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
 import { KanbanBoard } from '../../../../interfaces/kanban';
 import { Context } from '../KanbanContextWrapper';
