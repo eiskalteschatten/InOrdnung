@@ -3,7 +3,6 @@ export interface KanbanTask {
   taskNumber?: string;
   title?: string;
   description?: string;
-  boardId?: string;
   columnId?: string;
   finished?: boolean;
   createdAt?: Date;
