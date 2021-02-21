@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 
 import CloseIcon from '@material-ui/icons/Close';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
@@ -74,6 +75,10 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
     }
 
     handleClose();
+  };
+
+  const handleDelete = (): void => {
+
   };
 
   return (
@@ -147,6 +152,15 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
         </Grid>
       </DialogContent>
       <DialogActions>
+        {!context.isNewTask && (
+          <IconButton
+            className={styles.deleteButton}
+            onClick={handleDelete}
+          >
+            <DeleteIcon fontSize='small' />
+          </IconButton>
+        )}
+
         <Button onClick={handleClose} variant='outlined' color='primary' size='small'>
           <FormattedMessage id='cancel' />
         </Button>
