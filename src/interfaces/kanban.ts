@@ -10,7 +10,19 @@ export interface KanbanTask {
   updatedAt?: Date;
 }
 
+export interface KanbanBoardColumn {
+  id?: string;
+  name?: string;
+  isDoneColumn?: boolean;
+}
+
+export interface KanbanBoard {
+  id?: string;
+  name?: string;
+  columns?: KanbanBoardColumn[];
+}
+
 export interface Kanban {
   tasks: KanbanTask[];
-  // boards
+  boards: KanbanBoard[];
 }
