@@ -6,6 +6,9 @@ export default {
     kanbanDone: 'Done',
     kanbanNewTask: 'New Task',
     kanbanCreateTaskInColumn: 'Create task in this column',
+    kanbanEditTask: 'Edit Task',
+    kanbanTitle: 'Title',
+    kanbanDescription: 'Description',
   },
   de: {
     kanbanBoard: 'Kanban Board',
@@ -14,5 +17,8 @@ export default {
     kanbanDone: 'Fertig',
     kanbanNewTask: 'Neue Aufgabe',
     kanbanCreateTaskInColumn: 'Aufgabe in dieser Spalte erstellen',
+    kanbanEditTask: 'Aufgabe bearbeiten',
+    kanbanTitle: 'Titel',
+    kanbanDescription: 'Beschreibung',
   },
 };
