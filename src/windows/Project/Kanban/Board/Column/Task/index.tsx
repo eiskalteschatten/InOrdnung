@@ -42,14 +42,9 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     let isBeingDragged = false;
 
     const handleMouseMove = (e: any): void => {
-      const rect = taskRef.current?.getBoundingClientRect();
-
-      if (rect) {
-        const x = e.pageX - diffX;
-        const y = e.pageY - diffY;
-        setCoordinates({ x, y });
-      }
-
+      const x = e.pageX - diffX;
+      const y = e.pageY - diffY;
+      setCoordinates({ x, y });
       isBeingDragged = true;
       setIsBeingDragged(isBeingDragged);
     };
