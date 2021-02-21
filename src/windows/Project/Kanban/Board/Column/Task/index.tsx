@@ -40,6 +40,7 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     const startRect = taskRef.current?.getBoundingClientRect();
     const diffX = e.pageX - (startRect?.left ?? 0);
     const diffY = e.pageY - (startRect?.top ?? 0);
+    let isBeingDragged = false;
 
     const handleMouseMove = (e: any): void => {
       const rect = taskRef.current?.getBoundingClientRect();
@@ -49,23 +50,30 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
         const y = e.pageY - diffY;
         setCoordinates({ x, y });
       }
+
+      isBeingDragged = true;
+      setIsBeingDragged(isBeingDragged);
     };
 
     const handleMouseUp = (e: any): void => {
       e.preventDefault();
 
+      if (!isBeingDragged) {
+        handleOpenTask();
+      }
+
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
       // const rect = sidebarRef.current?.getBoundingClientRect();
       // dispatch(uiSetSidebarWidth(rect?.width));
-      setIsBeingDragged(false);
+      isBeingDragged = false;
+      setIsBeingDragged(isBeingDragged);
       setCoordinates({});
     };
 
     e.preventDefault();
     e.stopPropagation();
 
-    setIsBeingDragged(true);
     setTaskRect(startRect);
 
     document.addEventListener('mousemove', handleMouseMove);
@@ -78,7 +86,6 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
         [styles.task]: true,
         [styles.dragging]: isBeingDragged,
       })}
-      onClick={handleOpenTask}
       onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
       onMouseDown={handleMouseDown}
       style={{
