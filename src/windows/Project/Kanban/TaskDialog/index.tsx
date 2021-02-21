@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.bubble.css';
 
 import {
   Dialog,
@@ -124,6 +123,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
               onChange={handleDescriptionChange}
               theme='bubble'
               placeholder={useTranslation('kanbanDescription')}
+              className={styles.descriptionEditor}
             />
           </Grid>
           <Grid item xs={3}>

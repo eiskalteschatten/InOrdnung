@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 import './eventsFromMain';
 
 import './scss/index.scss';
+import './scss/quill.scss';
 
 ReactDOM.render(
   <React.StrictMode>
