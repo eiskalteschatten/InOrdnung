@@ -1,10 +1,6 @@
 import React, { RefObject } from 'react';
 import ReactQuill from 'react-quill';
 
-import {
-
-} from '@material-ui/core';
-
 import FormatBold from '@material-ui/icons/FormatBold';
 import FormatItalic from '@material-ui/icons/FormatItalic';
 
@@ -16,16 +12,12 @@ interface Props {
   editorRef: RefObject<ReactQuill>;
 }
 
+const ToolbarDivider: React.FC = () => (<div className={styles.divider} />);
+
 const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
   return (
     <div className={styles.toolbar}>
-      {/* <select className='ql-header' defaultValue={''} onChange={e => e.persist()}>
-        <option value='1' />
-        <option value='2' />
-        <option selected />
-      </select>
-      <button className='ql-bold' />
-      <button className='ql-italic' />
+      {/*
       <select className='ql-color'>
         <option value='red' />
         <option value='green' />
@@ -35,6 +27,19 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
         <option value='#d0d1d2' />
         <option selected />
       </select> */}
+      <select
+        id='columnId'
+        // value={context.editColumnId}
+        onChange={() => console.log('fdsfds')}
+        className={styles.select}
+      >
+        <option selected>Body</option>
+        <option value='1'>Header 1</option>
+        <option value='2'>Header 2</option>
+      </select>
+
+      <ToolbarDivider />
+
       <RoundedButton
         onClick={() => console.log('fjdks')}
         size='small'
