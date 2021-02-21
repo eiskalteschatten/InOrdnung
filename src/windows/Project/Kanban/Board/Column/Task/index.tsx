@@ -15,8 +15,8 @@ interface Props {
 const Task: React.FC<Props> = ({ task }) => {
   return (
     <Paper className={styles.task}>
-      {task.title}
-      {task.id}
+      <div className={styles.title}>{task.title}</div>
+      <div className={styles.description}>{task.description}</div>
     </Paper>
   );
 };

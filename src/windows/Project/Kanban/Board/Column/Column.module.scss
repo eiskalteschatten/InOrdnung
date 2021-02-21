@@ -5,6 +5,7 @@
   padding: 10px;
   margin: 10px;
   background-color: $lightSidebarBgColor !important;
+  user-select: none;
 
   &:hover {
     .createButton {
