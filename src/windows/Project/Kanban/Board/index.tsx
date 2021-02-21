@@ -10,6 +10,7 @@ import {
 import Add from '@material-ui/icons/Add';
 
 import { projectAddKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
+import { uiOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
 import { KanbanBoard } from '../../../../interfaces/kanban';
 import Column from './Column';
 
@@ -29,11 +30,15 @@ const Board: React.FC<Props> = ({ board }) => {
     }));
   };
 
+  const handleOpenTaskDialog = (columnId?: string): void => {
+    dispatch(uiOpenEditKanbanTaskDialog(true));
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
         <Button
-          onClick={() => handleCreateTask(board.columns?.[0]?.id)}
+          onClick={() => handleOpenTaskDialog(board.columns?.[0]?.id)}
           variant='contained'
           color='primary'
           size='small'
@@ -48,7 +53,7 @@ const Board: React.FC<Props> = ({ board }) => {
           <Column
             key={column.id}
             column={column}
-            handleCreateTask={handleCreateTask}
+            handleOpenTaskDialog={handleOpenTaskDialog}
           />
         ))}
       </div>
