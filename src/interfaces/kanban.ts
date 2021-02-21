@@ -4,7 +4,7 @@ export interface KanbanTask {
   title?: string;
   description?: string;
   boardId?: string;
-  column?: number;
+  columnId?: string;
   finished?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
