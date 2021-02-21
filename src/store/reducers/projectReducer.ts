@@ -2,6 +2,7 @@ import { Reducer } from 'redux';
 
 import { Project } from '../../interfaces/project';
 import { ProjectActions } from '../actions/projectActions';
+import defaultKanbanBoard from '../defaults/defaultKanbanBoard';
 
 import {
   PROJECT_SET_PROJECT,
@@ -24,7 +25,7 @@ export const initialState: Project = {
   bookmarks: [],
   kanban: {
     tasks: [],
-    boards: [],
+    boards: [defaultKanbanBoard],
   },
 };
 
