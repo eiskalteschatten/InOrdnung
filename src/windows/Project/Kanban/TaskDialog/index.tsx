@@ -88,6 +88,8 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
       open={open}
       onClose={close}
       classes={{ paper: styles.paper }}
+      disableBackdropClick
+      disableEscapeKeyDown
     >
       <DialogTitle>
         <IconButton
