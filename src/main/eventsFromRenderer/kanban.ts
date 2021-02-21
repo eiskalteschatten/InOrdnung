@@ -1,20 +1,19 @@
-import { ipcMain, IpcMainEvent, dialog } from 'electron';
+import { ipcMain, IpcMainEvent, dialog, BrowserWindow, Menu } from 'electron';
 
-// import bookmarkMenuCm from '../menus/cmMenus/bookmarkMenu';
-// import { KanbanTask } from '../../interfaces/kanban';
+import kanbanTaskMenuCm from '../menus/cmMenus/kanbanTaskMenu';
+import { KanbanTask } from '../../interfaces/kanban';
 import { getTranslation } from '../../lib/helper';
 
 const translation = getTranslation();
 
+ipcMain.on('showKanbanMenu', (e: IpcMainEvent, task: KanbanTask): void => {
+  const window = BrowserWindow.fromWebContents(e.sender);
 
-// ipcMain.on('showKanbanMenu', (e: IpcMainEvent, task: KanbanTask): void => {
-//   const window = BrowserWindow.fromWebContents(e.sender);
-
-//   if (window) {
-//     const menu = Menu.buildFromTemplate(bookmarkMenuCm(bookmark));
-//     menu.popup({ window });
-//   }
-// });
+  if (window) {
+    const menu = Menu.buildFromTemplate(kanbanTaskMenuCm(task));
+    menu.popup({ window });
+  }
+});
 
 ipcMain.on('deleteKanbanTask', async (e: IpcMainEvent, taskId: string): Promise<void> => {
   const result = await dialog.showMessageBox({

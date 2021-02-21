@@ -11,6 +11,8 @@ import { KanbanTask } from '../../../../../../interfaces/kanban';
 
 import styles from './Task.module.scss';
 
+const { ipcRenderer } = window.require('electron');
+
 interface Props {
   task: KanbanTask;
   columnId: string;
@@ -28,7 +30,11 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
   };
 
   return (
-    <Paper className={styles.task} onClick={handleOpenTask}>
+    <Paper
+      className={styles.task}
+      onClick={handleOpenTask}
+      onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
+    >
       <div className={styles.title}>{task.title}</div>
       <div className={styles.description}>{task.description}</div>
     </Paper>

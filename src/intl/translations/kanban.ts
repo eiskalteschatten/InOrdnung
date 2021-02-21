@@ -11,6 +11,7 @@ export default {
     kanbanDescription: 'Description',
     kanbanStatus: 'Status',
     kanbanDeleteTaskConfirmation: 'Are you sure you want to delete this task?',
+    kanbanDeleteTask: 'Delete Task',
   },
   de: {
     kanbanBoard: 'Kanban Board',
@@ -24,5 +25,6 @@ export default {
     kanbanDescription: 'Beschreibung',
     kanbanStatus: 'Status',
     kanbanDeleteTaskConfirmation: 'Sind Sie sicher, dass Sie diese Aufgabe löschen wollen?',
+    kanbanDeleteTask: 'Aufgabe löschen',
   },
 };
