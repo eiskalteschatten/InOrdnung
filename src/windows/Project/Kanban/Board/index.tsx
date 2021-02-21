@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
+import { IpcRendererEvent } from 'electron';
 
 import {
   Button,
@@ -9,11 +10,13 @@ import {
 import Add from '@material-ui/icons/Add';
 
 import { uiOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
-import { KanbanBoard } from '../../../../interfaces/kanban';
+import { KanbanBoard, KanbanTask } from '../../../../interfaces/kanban';
 import { Context } from '../KanbanContextWrapper';
 import Column from './Column';
 
 import styles from './Board.module.scss';
+
+const { ipcRenderer } = window.require('electron');
 
 interface Props {
   board: KanbanBoard;
@@ -22,6 +25,19 @@ interface Props {
 const Board: React.FC<Props> = ({ board }) => {
   const dispatch = useDispatch();
   const context = useContext(Context);
+
+  useEffect(() => {
+    ipcRenderer.on('editKanbanTask', (e: IpcRendererEvent, task: KanbanTask): void => {
+      context.setIsNewTask(false);
+      context.setEditColumnId(task.columnId || '');
+      context.setEditingTask(task);
+      dispatch(uiOpenEditKanbanTaskDialog(true));
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners('editKanbanTask');
+    };
+  }, []);
 
   const handleOpenNewTask = (columnId?: string): void => {
     context.setIsNewTask(true);
