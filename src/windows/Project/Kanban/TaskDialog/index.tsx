@@ -41,7 +41,6 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
   }, [context]);
 
   const handleClose = (): void => {
-    context.setEditingTask(undefined);
     close();
   };
 

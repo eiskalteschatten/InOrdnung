@@ -23,8 +23,9 @@ const Board: React.FC<Props> = ({ board }) => {
   const dispatch = useDispatch();
   const context = useContext(Context);
 
-  const handleOpenTaskDialog = (columnId?: string): void => {
+  const handleOpenNewTask = (columnId?: string): void => {
     context.setIsNewTask(true);
+    context.setEditingTask(undefined);
     context.setEditColumnId(columnId || '');
     dispatch(uiOpenEditKanbanTaskDialog(true));
   };
@@ -33,7 +34,7 @@ const Board: React.FC<Props> = ({ board }) => {
     <div>
       <div className={styles.toolbar}>
         <Button
-          onClick={() => handleOpenTaskDialog(board.columns?.[0]?.id)}
+          onClick={() => handleOpenNewTask(board.columns?.[0]?.id)}
           variant='contained'
           color='primary'
           size='small'
@@ -48,7 +49,7 @@ const Board: React.FC<Props> = ({ board }) => {
           <Column
             key={column.id}
             column={column}
-            handleOpenTaskDialog={handleOpenTaskDialog}
+            handleOpenNewTask={handleOpenNewTask}
           />
         ))}
       </div>

@@ -17,10 +17,10 @@ import styles from './Column.module.scss';
 
 interface Props {
   column: KanbanBoardColumn;
-  handleOpenTaskDialog: (columnId?: string) => void;
+  handleOpenNewTask: (columnId?: string) => void;
 }
 
-const Column: React.FC<Props> = ({ column, handleOpenTaskDialog }) => {
+const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
   const allTasks = useSelector((state: State) => state.project?.kanban?.tasks);
   const tasks = useMemo(() => allTasks.filter(task => task.columnId === column.id), [allTasks]);
 
@@ -39,7 +39,7 @@ const Column: React.FC<Props> = ({ column, handleOpenTaskDialog }) => {
       </div>
 
       <RoundedButton
-        onClick={() => handleOpenTaskDialog(column.id)}
+        onClick={() => handleOpenNewTask(column.id)}
         className={styles.createButton}
       >
         <Add fontSize='small' />&nbsp;<FormattedMessage id='kanbanCreateTaskInColumn' />
