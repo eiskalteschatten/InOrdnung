@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { State } from '../../../store';
 import { uiOpenEditKanbanTaskDialog } from '../../../store/actions/uiActions';
+import { KanbanContextWrapper } from './KanbanContextWrapper';
 import Board from './Board';
 import TaskDialog from './TaskDialog';
 
@@ -14,7 +15,7 @@ const Kanban: React.FC = () => {
   const openEditTaskDialog = useSelector((state: State) => state.ui.openEditKanbanTaskDialog);
 
   return (
-    <div>
+    <KanbanContextWrapper>
       {/*
         Assume the default board is at index 0 until users can
         add/edit/delete boards themselves.
@@ -27,7 +28,7 @@ const Kanban: React.FC = () => {
         open={openEditTaskDialog}
         close={() => dispatch(uiOpenEditKanbanTaskDialog(false))}
       />
-    </div>
+    </KanbanContextWrapper>
   );
 };
 

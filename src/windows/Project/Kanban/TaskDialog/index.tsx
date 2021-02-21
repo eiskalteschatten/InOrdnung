@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,6 +15,7 @@ import {
 import { KanbanTask } from '../../../../interfaces/kanban';
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
+import { Context } from '../KanbanContextWrapper';
 
 // import styles from './TaskDialog.module.scss';
 
@@ -25,12 +26,14 @@ interface Props {
 }
 
 const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
-  const [editingTask, setEditingTask] = useState<KanbanTask | undefined>();
   const dispatch = useDispatch();
+  const context = useContext(Context);
+  const [editingTask, setEditingTask] = useState<KanbanTask | undefined>();
 
   useEffect(() => {
     setEditingTask(task ? task : {
       id: uuidv4(),
+      columnId: context.editColumnId,
     });
   }, [task]);
 

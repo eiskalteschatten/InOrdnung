@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,6 +12,7 @@ import Add from '@material-ui/icons/Add';
 import { projectAddKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
 import { uiOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
 import { KanbanBoard } from '../../../../interfaces/kanban';
+import { Context } from '../KanbanContextWrapper';
 import Column from './Column';
 
 import styles from './Board.module.scss';
@@ -22,15 +23,10 @@ interface Props {
 
 const Board: React.FC<Props> = ({ board }) => {
   const dispatch = useDispatch();
-
-  const handleCreateTask = (columnId?: string): void => {
-    dispatch(projectAddKanbanTask({
-      id: uuidv4(),
-      columnId,
-    }));
-  };
+  const context = useContext(Context);
 
   const handleOpenTaskDialog = (columnId?: string): void => {
+    context.setEditColumnId(columnId || '');
     dispatch(uiOpenEditKanbanTaskDialog(true));
   };
 
