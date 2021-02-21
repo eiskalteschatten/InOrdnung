@@ -15,7 +15,7 @@ export const projectAddKanbanTask = (payload: KanbanTask): ProjectAddKanbanTask 
 export const projectEditKanbanTask = (task: KanbanTask): ReduxThunk<void, typeof PROJECT_KANBAN_TASKS_SET> =>
   (dispatch: any, getState: Function): ProjectSetKanbanTasks => {
     const state = getState();
-    const { kanbanTasks } = state.project;
+    const kanbanTasks = [...state.project?.kanban?.tasks ?? []];
 
     for (const index in kanbanTasks) {
       if (kanbanTasks[index].id === task.id) {
