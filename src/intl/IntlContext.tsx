@@ -9,12 +9,28 @@ import deMessages from './de';
 const { defaultLocale } = config.intl;
 const availableLocales = ['en', 'de'];
 
-const allMessages: any = {
+interface Messages {
+  [key: string]: string;
+}
+
+interface AllMessages {
+  [lang: string]: Messages;
+}
+
+const allMessages: AllMessages = {
   en: enMessages,
   de: deMessages,
 };
 
-const Context = createContext({
+interface IContext {
+  locale: string;
+  defaultLocale: string;
+  availableLocales: string[];
+  messages: Messages;
+  switchLocale: (switchToLocale: string) => void;
+}
+
+const Context = createContext<IContext>({
   locale: defaultLocale,
   defaultLocale,
   availableLocales,
