@@ -106,8 +106,8 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
         )}
       </DialogTitle>
       <DialogContent>
-        <Grid container spacing={4}>
-          <Grid item xs={9}>
+        <Grid container>
+          <Grid item xs={9} className={styles.leftSide}>
             <TextField
               autoFocus
               margin='dense'
