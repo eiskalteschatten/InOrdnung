@@ -112,7 +112,7 @@ const projectReducer: Reducer<Project, ProjectActions> = (
         },
       };
     case PROJECT_KANBAN_TASKS_ADD:
-      let { kanban: { tasks: kanbanTasks } } = state;
+      let kanbanTasks = [...state.kanban?.tasks ?? []];
 
       if (Array.isArray(kanbanTasks)) {
         kanbanTasks.push(action.payload);
