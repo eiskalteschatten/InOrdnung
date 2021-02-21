@@ -28,6 +28,7 @@ const QuillEditor: React.FC<Props> = ({ value, onChange, placeholder, className 
         theme='bubble'
         placeholder={placeholder}
         modules={{
+          toolbar: false,
           clipboard: {
             matchVisual: false,
           },
