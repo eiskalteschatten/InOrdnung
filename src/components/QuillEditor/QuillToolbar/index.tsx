@@ -1,4 +1,4 @@
-import React, { RefObject } from 'react';
+import React, { RefObject, useEffect, useReducer } from 'react';
 import ReactQuill from 'react-quill';
 
 import FormatBold from '@material-ui/icons/FormatBold';
@@ -18,6 +18,29 @@ import RoundedButton from '../../RoundedButton';
 
 import styles from './QuillToolbar.module.scss';
 
+interface State {
+  [format: string]: boolean | string | number;
+}
+
+interface Action {
+  type: string;
+  value?: boolean | string | number;
+}
+
+const initialState = {
+  bold: false,
+  italic: false,
+  underline: false,
+  strike: false,
+};
+
+const reducer = (state: State, action: Action) => {
+  return {
+    ...state,
+    [action.type]: action.value ? action.value : !state[action.type],
+  };
+};
+
 interface Props {
   editorRef: RefObject<ReactQuill>;
 }
@@ -25,9 +48,14 @@ interface Props {
 const ToolbarDivider: React.FC = () => (<div className={styles.divider} />);
 
 const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
-  const handleFormatChange = (format: string): void => {
-    // editorRef.current.quill.format(format, true);
-  };
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const editor = editorRef.current?.getEditor();
+    for (const [key, value] of Object.entries(state)) {
+      editor?.format(key, value);
+    }
+  }, [state]);
 
   return (
     <div className={styles.toolbar}>
@@ -49,25 +77,25 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <ToolbarDivider />
 
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'bold' })}
         size='small'
       >
         <FormatBold fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'italic' })}
         size='small'
       >
         <FormatItalic fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'underline' })}
         size='small'
       >
         <FormatUnderlined fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'strike' })}
         size='small'
       >
         <FormatStrikethrough fontSize='small' />
@@ -103,13 +131,13 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <ToolbarDivider />
 
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'list', value: 'bullet' })}
         size='small'
       >
         <FormatListBulleted fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'list', value: 'ordered' })}
         size='small'
       >
         <FormatListNumbered fontSize='small' />
@@ -118,13 +146,13 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <ToolbarDivider />
 
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'code-block' })}
         size='small'
       >
         <Code fontSize='small' />
       </RoundedButton>
       <RoundedButton
-        onClick={() => console.log('fjdks')}
+        onClick={() => dispatch({ type: 'blockquote' })}
         size='small'
       >
         <Quote fontSize='small' />
