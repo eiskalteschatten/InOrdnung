@@ -11,6 +11,7 @@ import Add from '@material-ui/icons/Add';
 import { State } from '../../../../../store';
 import { KanbanBoardColumn, KanbanTask } from '../../../../../interfaces/kanban';
 import RoundedButton from '../../../../../components/RoundedButton';
+import Task from './Task';
 
 import styles from './Column.module.scss';
 
@@ -34,10 +35,7 @@ const Column: React.FC<Props> = ({ column, handleCreateTask }) => {
 
       <div className={styles.tasks}>
         {tasks?.map(task => (
-          <div key={task.id}>
-            {task.title}
-            {task.id}
-          </div>
+          <Task key={task.id} task={task} />
         ))}
       </div>
 

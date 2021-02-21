@@ -4,6 +4,17 @@
   width: 275px;
   padding: 10px;
   margin: 10px;
+  background-color: $lightSidebarBgColor !important;
+
+  &:hover {
+    .createButton {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $darkSidebarBgColor !important;
+  }
 }
 
 .title {
@@ -11,9 +22,11 @@
 }
 
 .tasks {
-  min-height: 50px;
+  margin: 15px 0;
 }
 
 .createButton {
   width: 100%;
+  opacity: 0;
+  transition: opacity 200ms;
 }
