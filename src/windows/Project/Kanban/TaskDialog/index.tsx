@@ -35,7 +35,7 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
       id: uuidv4(),
       columnId: context.editColumnId,
     });
-  }, [task]);
+  }, [task, context]);
 
   const handleClose = (): void => {
     setEditingTask(undefined);
