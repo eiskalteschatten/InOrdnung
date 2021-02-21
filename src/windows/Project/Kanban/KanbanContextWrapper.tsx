@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-const Context = createContext({
+export const Context = createContext({
   editColumnId: '',
   setEditColumnId: (columnId: string) => {},  // eslint-disable-line @typescript-eslint/no-unused-vars
 });
@@ -9,7 +9,7 @@ interface Props {
   children?: any;
 }
 
-const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
+export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
   const [editColumnId, setEditColumnId] = useState<string>('');
 
   return (
@@ -21,5 +21,3 @@ const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
     </Context.Provider>
   );
 };
-
-export { KanbanContextWrapper, Context };
