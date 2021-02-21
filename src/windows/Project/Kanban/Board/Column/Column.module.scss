@@ -18,8 +18,18 @@
   }
 }
 
-.title {
-  font-weight: bold;
+.top {
+  display: flex;
+  align-items: center;
+
+  .title {
+    font-weight: bold;
+    flex: 1 1 auto;
+  }
+
+  .count {
+    font-size: .8em;
+  }
 }
 
 .tasks {

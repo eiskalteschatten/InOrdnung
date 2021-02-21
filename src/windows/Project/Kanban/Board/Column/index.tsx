@@ -26,7 +26,17 @@ const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
 
   return (
     <Paper elevation={0} className={styles.column}>
-      <div className={styles.title}>{column.name}</div>
+      <div className={styles.top}>
+        <div className={styles.title}>{column.name}</div>
+        <div className={styles.count}>
+          {tasks?.length}&nbsp;
+          {tasks?.length === 1 ? (
+            <FormattedMessage id='kanbanTask' />
+          ) : (
+            <FormattedMessage id='kanbanTasks' />
+          )}
+        </div>
+      </div>
 
       <div className={styles.tasks}>
         {tasks?.map(task => (
