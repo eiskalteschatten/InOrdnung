@@ -42,7 +42,7 @@ switch (process.platform) {
     break;
 }
 
-export default {
+const config: Config = {
   app: {
     name: 'InOrdnung',
     version: '1.0.0',
@@ -67,4 +67,6 @@ export default {
   welcomeWindow: {
     recentProjectsLimit: 5,
   },
-} as Config;
+};
+
+export default config;

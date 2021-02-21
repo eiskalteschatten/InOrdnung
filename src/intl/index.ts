@@ -5,7 +5,9 @@ interface Translations {
   [key: string]: any;
 }
 
-export default {
+const translations: Translations = {
   en,
   de,
-} as Translations;
+};
+
+export default translations;
