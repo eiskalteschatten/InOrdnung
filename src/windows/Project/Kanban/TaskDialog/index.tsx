@@ -2,6 +2,8 @@ import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.bubble.css';
 
 import {
   Dialog,
@@ -46,14 +48,17 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
     }
   }, [context]);
 
-  const handleClose = (): void => {
-    close();
-  };
-
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     context.setEditingTask({
       ...context.editingTask,
       [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleDescriptionChange = (value: string): void => {
+    context.setEditingTask({
+      ...context.editingTask,
+      description: value,
     });
   };
 
@@ -76,19 +81,19 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
       dispatch(projectEditKanbanTask(context.editingTask));
     }
 
-    handleClose();
+    close();
   };
 
   return (
     <Dialog
       open={open}
-      onClose={handleClose}
+      onClose={close}
       classes={{ paper: styles.paper }}
     >
       <DialogTitle>
         <IconButton
           className={styles.closeButton}
-          onClick={handleClose}
+          onClick={close}
         >
           <CloseIcon />
         </IconButton>
@@ -114,18 +119,11 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
               onChange={handleFieldChange}
               size='small'
             />
-            <TextField
-              margin='dense'
-              id='description'
-              label={useTranslation('kanbanDescription')}
-              variant='outlined'
-              fullWidth
-              value={context.editingTask?.description ?? ''}
-              InputLabelProps={{ shrink: !!context.editingTask?.description }}
-              onChange={handleFieldChange}
-              size='small'
-              multiline
-              rows={15}
+            <ReactQuill
+              value={context.editingTask?.description}
+              defaultValue=''
+              onChange={handleDescriptionChange}
+              theme='bubble'
             />
           </Grid>
           <Grid item xs={3}>
@@ -159,7 +157,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
           </IconButton>
         )}
 
-        <Button onClick={handleClose} variant='outlined' color='primary' size='small'>
+        <Button onClick={close} variant='outlined' color='primary' size='small'>
           <FormattedMessage id='cancel' />
         </Button>
         <Button onClick={handleSave} variant='contained' color='primary' size='small'>

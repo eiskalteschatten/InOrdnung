@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useDispatch } from 'react-redux';
+import ReactMarkdown from 'react-markdown/with-html';
 
 import {
   Paper,
@@ -36,7 +37,12 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
       onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
     >
       <div className={styles.title}>{task.title}</div>
-      <div className={styles.description}>{task.description}</div>
+      <div className={styles.description}>
+        <ReactMarkdown
+          source={task.description || ''}
+          escapeHtml={false}
+        />
+      </div>
     </Paper>
   );
 };
