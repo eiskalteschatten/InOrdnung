@@ -1,7 +1,7 @@
-import { ipcMain, IpcMainEvent, BrowserWindow, dialog } from 'electron';
+import { ipcMain, IpcMainEvent, dialog } from 'electron';
 
 // import bookmarkMenuCm from '../menus/cmMenus/bookmarkMenu';
-import { KanbanTask } from '../../interfaces/kanban';
+// import { KanbanTask } from '../../interfaces/kanban';
 import { getTranslation } from '../../lib/helper';
 
 const translation = getTranslation();
@@ -16,7 +16,7 @@ const translation = getTranslation();
 //   }
 // });
 
-ipcMain.on('deleteKanbanTask', async (e: IpcMainEvent, task: KanbanTask): Promise<void> => {
+ipcMain.on('deleteKanbanTask', async (e: IpcMainEvent, taskId: string): Promise<void> => {
   const result = await dialog.showMessageBox({
     message: translation.kanbanDeleteTaskConfirmation,
     detail: translation.youCantUndoThisAction,
@@ -27,6 +27,6 @@ ipcMain.on('deleteKanbanTask', async (e: IpcMainEvent, task: KanbanTask): Promis
   });
 
   if (result.response === 1) {
-    e.sender.send('deleteKanbanTask', task);
+    e.sender.send('deleteKanbanTask', taskId);
   }
 });

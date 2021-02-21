@@ -30,7 +30,7 @@ export const projectEditKanbanTask = (task: KanbanTask): ReduxThunk<void, typeof
 export const projectDeleteKanbanTask = (id: string): ReduxThunk<void, typeof PROJECT_KANBAN_TASKS_SET> =>
   (dispatch: any, getState: Function): ProjectSetKanbanTasks => {
     const state = getState();
-    const { kanbanTasks } = state.project;
+    const kanbanTasks = [...state.project?.kanban?.tasks ?? []];
     remove(kanbanTasks, (task: KanbanTask): boolean => task.id === id);
     return dispatch({ type: PROJECT_KANBAN_TASKS_SET, payload: kanbanTasks });
   };
