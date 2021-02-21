@@ -34,7 +34,7 @@ const initialState = {
   strike: false,
 };
 
-const reducer = (state: State, action: Action) => {
+const reducer = (state: State, action: Action): State => {
   return {
     ...state,
     [action.type]: action.value ? action.value : !state[action.type],
@@ -57,15 +57,19 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
     }
   }, [state]);
 
+  const handleHeaderChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+    dispatch({ type: 'header', value: e.target.value });
+  };
+
   return (
     <div className={styles.toolbar}>
       <select
         id='columnId'
-        // value={context.editColumnId}
-        onChange={() => console.log('fdsfds')}
+        value={state.header as string}
+        onChange={handleHeaderChange}
         className={styles.select}
       >
-        <option selected>Body</option>
+        <option value='' selected>Body</option>
         <option value='1'>Header 1</option>
         <option value='2'>Header 2</option>
         <option value='3'>Header 3</option>
