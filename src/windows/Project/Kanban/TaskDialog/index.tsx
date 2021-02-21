@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
@@ -15,7 +15,6 @@ import {
 import { KanbanTask } from '../../../../interfaces/kanban';
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
-import { getDateLocaleFormat } from '../../../../lib/dates';
 
 // import styles from './TaskDialog.module.scss';
 
