@@ -24,6 +24,7 @@ const Board: React.FC<Props> = ({ board }) => {
   const context = useContext(Context);
 
   const handleOpenTaskDialog = (columnId?: string): void => {
+    context.setIsNewTask(true);
     context.setEditColumnId(columnId || '');
     dispatch(uiOpenEditKanbanTaskDialog(true));
   };

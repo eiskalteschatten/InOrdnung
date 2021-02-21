@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
@@ -12,7 +12,6 @@ import {
   Button,
 } from '@material-ui/core';
 
-import { KanbanTask } from '../../../../interfaces/kanban';
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
 import { Context } from '../KanbanContextWrapper';
@@ -22,19 +21,20 @@ import { Context } from '../KanbanContextWrapper';
 interface Props {
   open: boolean;
   close: () => void;
-  task?: KanbanTask;
 }
 
-const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
+const TaskDialog: React.FC<Props> = ({ open, close }) => {
   const dispatch = useDispatch();
   const context = useContext(Context);
 
   useEffect(() => {
-    context.setEditingTask(task ? task : {
-      id: uuidv4(),
-      columnId: context.editColumnId,
-    });
-  }, [task, context]);
+    if (!context.editingTask) {
+      context.setEditingTask({
+        id: uuidv4(),
+        columnId: context.editColumnId,
+      });
+    }
+  }, [context]);
 
   const handleClose = (): void => {
     context.setEditingTask(undefined);
@@ -49,7 +49,7 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
   };
 
   const handleSave = (): void => {
-    if (!task && context.editingTask) {
+    if (context.isNewTask && context.editingTask) {
       dispatch(projectAddKanbanTask(context.editingTask));
     }
     else if (context.editingTask) {
@@ -62,10 +62,10 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>
-        {task ? (
-          <FormattedMessage id='kanbanEditTask' />
-        ) : (
+        {context.isNewTask ? (
           <FormattedMessage id='kanbanNewTask' />
+        ) : (
+          <FormattedMessage id='kanbanEditTask' />
         )}
       </DialogTitle>
       <DialogContent>

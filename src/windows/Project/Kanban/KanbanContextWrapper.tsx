@@ -7,14 +7,20 @@ interface IContext {
   setEditColumnId: (columnId: string) => void;
   editingTask: KanbanTask | undefined;
   setEditingTask: (task?: KanbanTask) => void;
+  isNewTask: boolean;
+  setIsNewTask: (isNewTask: boolean) => void;
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export const Context = createContext<IContext>({
   editColumnId: '',
-  setEditColumnId: (columnId: string) => {},  // eslint-disable-line @typescript-eslint/no-unused-vars
+  setEditColumnId: (columnId: string) => {},
   editingTask: undefined,
-  setEditingTask: (task?: KanbanTask) => {},  // eslint-disable-line @typescript-eslint/no-unused-vars
+  setEditingTask: (task?: KanbanTask) => {},
+  isNewTask: false,
+  setIsNewTask: (isNewTask: boolean) => {},
 });
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 interface Props {
   children?: any;
@@ -23,6 +29,7 @@ interface Props {
 export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
   const [editColumnId, setEditColumnId] = useState<string>('');
   const [editingTask, setEditingTask] = useState<KanbanTask | undefined>();
+  const [isNewTask, setIsNewTask] = useState<boolean>(false);
 
   return (
     <Context.Provider value={{
@@ -30,6 +37,8 @@ export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
       setEditColumnId,
       editingTask,
       setEditingTask,
+      isNewTask,
+      setIsNewTask,
     }}>
       {children}
     </Context.Provider>

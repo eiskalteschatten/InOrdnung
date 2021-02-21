@@ -30,7 +30,11 @@ const Column: React.FC<Props> = ({ column, handleOpenTaskDialog }) => {
 
       <div className={styles.tasks}>
         {tasks?.map(task => (
-          <Task key={task.id} task={task} />
+          <Task
+            key={task.id}
+            task={task}
+            columnId={column.id || ''}
+          />
         ))}
       </div>
 
