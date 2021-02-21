@@ -9,6 +9,7 @@ export default {
     kanbanEditTask: 'Edit Task',
     kanbanTitle: 'Title',
     kanbanDescription: 'Description',
+    kanbanStatus: 'Status',
   },
   de: {
     kanbanBoard: 'Kanban Board',
@@ -20,5 +21,6 @@ export default {
     kanbanEditTask: 'Aufgabe bearbeiten',
     kanbanTitle: 'Titel',
     kanbanDescription: 'Beschreibung',
+    kanbanStatus: 'Status',
   },
 };

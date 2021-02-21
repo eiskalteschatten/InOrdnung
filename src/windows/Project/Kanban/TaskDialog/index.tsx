@@ -8,15 +8,19 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   TextField,
+  FormControl,
+  Select,
   Button,
+  InputLabel,
 } from '@material-ui/core';
 
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
 import { Context } from '../KanbanContextWrapper';
 
-// import styles from './TaskDialog.module.scss';
+import styles from './TaskDialog.module.scss';
 
 interface Props {
   open: boolean;
@@ -48,6 +52,17 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
     });
   };
 
+  const handleStatusChange = (e: React.ChangeEvent<{ value: unknown }>): void => {
+    const columnId = e.target.value as string;
+
+    context.setEditingTask({
+      ...context.editingTask,
+      columnId,
+    });
+
+    context.setEditColumnId(columnId);
+  };
+
   const handleSave = (): void => {
     if (context.isNewTask && context.editingTask) {
       dispatch(projectAddKanbanTask(context.editingTask));
@@ -60,7 +75,11 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      classes={{ paper: styles.paper }}
+    >
       <DialogTitle>
         {context.isNewTask ? (
           <FormattedMessage id='kanbanNewTask' />
@@ -69,31 +88,54 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
         )}
       </DialogTitle>
       <DialogContent>
-        <TextField
-          autoFocus
-          margin='dense'
-          id='title'
-          label={useTranslation('kanbanTitle')}
-          variant='outlined'
-          fullWidth
-          value={context.editingTask?.title ?? ''}
-          InputLabelProps={{ shrink: !!context.editingTask?.title }}
-          onChange={handleFieldChange}
-          size='small'
-        />
-        <TextField
-          margin='dense'
-          id='description'
-          label={useTranslation('kanbanDescription')}
-          variant='outlined'
-          fullWidth
-          value={context.editingTask?.description ?? ''}
-          InputLabelProps={{ shrink: !!context.editingTask?.description }}
-          onChange={handleFieldChange}
-          size='small'
-          multiline
-          rows={3}
-        />
+        <Grid container spacing={4}>
+          <Grid item xs={9}>
+            <TextField
+              autoFocus
+              margin='dense'
+              id='title'
+              label={useTranslation('kanbanTitle')}
+              variant='outlined'
+              fullWidth
+              value={context.editingTask?.title ?? ''}
+              InputLabelProps={{ shrink: !!context.editingTask?.title }}
+              onChange={handleFieldChange}
+              size='small'
+            />
+            <TextField
+              margin='dense'
+              id='description'
+              label={useTranslation('kanbanDescription')}
+              variant='outlined'
+              fullWidth
+              value={context.editingTask?.description ?? ''}
+              InputLabelProps={{ shrink: !!context.editingTask?.description }}
+              onChange={handleFieldChange}
+              size='small'
+              multiline
+              rows={15}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <FormControl variant='outlined' fullWidth size='small' margin='dense'>
+              <InputLabel>{useTranslation('kanbanStatus')}</InputLabel>
+              <Select
+                id='columnId'
+                value={context.editColumnId}
+                onChange={handleStatusChange}
+                fullWidth
+                label={useTranslation('kanbanStatus')}
+                native
+              >
+                {context.editBoard?.columns?.map(column => (
+                  <option value={column.id} key={column.id}>
+                    {column.name}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} variant='outlined' color='primary' size='small'>
