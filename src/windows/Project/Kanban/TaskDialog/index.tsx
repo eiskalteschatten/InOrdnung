@@ -14,7 +14,10 @@ import {
   Select,
   Button,
   InputLabel,
+  IconButton,
 } from '@material-ui/core';
+
+import CloseIcon from '@material-ui/icons/Close';
 
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
@@ -80,6 +83,13 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
       classes={{ paper: styles.paper }}
     >
       <DialogTitle>
+        <IconButton
+          className={styles.closeButton}
+          onClick={handleClose}
+        >
+          <CloseIcon />
+        </IconButton>
+
         {context.isNewTask ? (
           <FormattedMessage id='kanbanNewTask' />
         ) : (
