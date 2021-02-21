@@ -6,7 +6,7 @@ import {
 
 import { KanbanBoardColumn } from '../../../../../interfaces/kanban';
 
-// import styles from './Column.module.scss';
+import styles from './Column.module.scss';
 
 interface Props {
   column: KanbanBoardColumn;
@@ -15,8 +15,12 @@ interface Props {
 const Column: React.FC<Props> = ({ column }) => {
 
   return (
-    <Paper>
-      {column.name}
+    <Paper elevation={0} className={styles.column}>
+      <div className={styles.title}>{column.name}</div>
+
+      <div className={styles.tasks}>
+
+      </div>
     </Paper>
   );
 };

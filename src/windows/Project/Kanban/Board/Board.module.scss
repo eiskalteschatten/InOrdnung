@@ -1,2 +1,6 @@
 @import "../../../../scss/variables";
 
+.board {
+  display: flex;
+  flex-direction: row;
+}

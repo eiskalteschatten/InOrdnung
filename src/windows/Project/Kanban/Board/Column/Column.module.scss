@@ -1,2 +1,15 @@
 @import "../../../../../scss/variables";
 
+.column {
+  width: 275px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.tasks {
+  min-height: 50px;
+}
