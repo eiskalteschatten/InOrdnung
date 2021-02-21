@@ -36,6 +36,14 @@
     padding: 0.2em;
   }
 
+  &.selected {
+    background: $lightButtonHoverBg;
+
+    @media (prefers-color-scheme: dark) {
+      background: $darkButtonHoverBg;
+    }
+  }
+
   .wrapper {
     display: flex;
     align-items: center;

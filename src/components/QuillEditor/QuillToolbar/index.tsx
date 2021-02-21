@@ -83,24 +83,28 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <RoundedButton
         onClick={() => dispatch({ type: 'bold' })}
         size='small'
+        selected={Boolean(state.bold)}
       >
         <FormatBold fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'italic' })}
         size='small'
+        selected={Boolean(state.italic)}
       >
         <FormatItalic fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'underline' })}
         size='small'
+        selected={Boolean(state.underline)}
       >
         <FormatUnderlined fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'strike' })}
         size='small'
+        selected={Boolean(state.strike)}
       >
         <FormatStrikethrough fontSize='small' />
       </RoundedButton>
@@ -110,24 +114,28 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <RoundedButton
         onClick={() => dispatch({ type: 'align', value: 'left' })}
         size='small'
+        selected={!state.align || state.align === 'left'}
       >
         <FormatAlignLeft fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'align', value: 'center' })}
         size='small'
+        selected={state.align === 'center'}
       >
         <FormatAlignCenter fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'align', value: 'right' })}
         size='small'
+        selected={state.align === 'right'}
       >
         <FormatAlignRight fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'align', value: 'justify' })}
         size='small'
+        selected={state.align === 'justify'}
       >
         <FormatAlignJustify fontSize='small' />
       </RoundedButton>
@@ -137,12 +145,14 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <RoundedButton
         onClick={() => dispatch({ type: 'list', value: 'bullet' })}
         size='small'
+        selected={state.list === 'bullet'}
       >
         <FormatListBulleted fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'list', value: 'ordered' })}
         size='small'
+        selected={state.list === 'ordered'}
       >
         <FormatListNumbered fontSize='small' />
       </RoundedButton>
@@ -152,12 +162,14 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <RoundedButton
         onClick={() => dispatch({ type: 'code-block' })}
         size='small'
+        selected={Boolean(state['code-block'])}
       >
         <Code fontSize='small' />
       </RoundedButton>
       <RoundedButton
         onClick={() => dispatch({ type: 'blockquote' })}
         size='small'
+        selected={Boolean(state.blockquote)}
       >
         <Quote fontSize='small' />
       </RoundedButton>
