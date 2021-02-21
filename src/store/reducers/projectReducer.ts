@@ -13,6 +13,8 @@ import {
   PROJECT_ADD_QUICK_NOTE,
   PROJECT_SET_BOOKMARKS,
   PROJECT_ADD_BOOKMARK,
+  PROJECT_KANBAN_TASKS_SET,
+  PROJECT_KANBAN_TASKS_ADD,
 } from '../constants';
 
 export const initialState: Project = {
@@ -20,6 +22,9 @@ export const initialState: Project = {
   tasks: [],
   quickNotes: [],
   bookmarks: [],
+  kanban: {
+    tasks: [],
+  },
 };
 
 const projectReducer: Reducer<Project, ProjectActions> = (
@@ -86,14 +91,42 @@ const projectReducer: Reducer<Project, ProjectActions> = (
     case PROJECT_ADD_BOOKMARK:
       let { bookmarks } = state;
 
-      if (Array.isArray(state.bookmarks)) {
+      if (Array.isArray(bookmarks)) {
         bookmarks.push(action.payload);
       }
       else {
         bookmarks = [action.payload];
       }
-
       return { ...state, bookmarks };
+
+
+    // Kanban
+    case PROJECT_KANBAN_TASKS_SET:
+      return {
+        ...state,
+        kanban: {
+          ...state.kanban,
+          tasks: action.payload,
+        },
+      };
+    case PROJECT_KANBAN_TASKS_ADD:
+      let { kanban: { tasks: kanbanTasks } } = state;
+
+      if (Array.isArray(kanbanTasks)) {
+        kanbanTasks.push(action.payload);
+      }
+      else {
+        kanbanTasks = [action.payload];
+      }
+
+      return {
+        ...state,
+        kanban: {
+          ...state.kanban,
+          tasks: kanbanTasks,
+        },
+      };
+
     default:
       return state;
   }

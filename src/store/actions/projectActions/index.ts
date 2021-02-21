@@ -5,6 +5,7 @@ import { ProjectInfo } from '../../../interfaces/projectInfo';
 import { Task } from '../../../interfaces/tasks';
 import { QuickNote } from '../../../interfaces/quickNotes';
 import { Bookmark } from '../../../interfaces/bookmarks';
+import { KanbanTask } from '../../../interfaces/kanban';
 
 import {
   PROJECT_SET_PROJECT,
@@ -16,6 +17,8 @@ import {
   PROJECT_ADD_QUICK_NOTE,
   PROJECT_SET_BOOKMARKS,
   PROJECT_ADD_BOOKMARK,
+  PROJECT_KANBAN_TASKS_SET,
+  PROJECT_KANBAN_TASKS_ADD,
 } from '../../constants';
 
 // Project
@@ -61,6 +64,17 @@ export interface ProjectAddBookmark extends Action<typeof PROJECT_ADD_BOOKMARK> 
   payload: Bookmark;
 }
 
+
+// Kanban
+export interface ProjectSetKanbanTasks extends Action<typeof PROJECT_KANBAN_TASKS_SET> {
+  payload: KanbanTask[];
+}
+
+export interface ProjectAddKanbanTask extends Action<typeof PROJECT_KANBAN_TASKS_ADD> {
+  payload: KanbanTask;
+}
+
+
 export type ProjectActions =
   ProjectSetProject |
   ProjectSetProjectInfo |
@@ -70,6 +84,9 @@ export type ProjectActions =
   ProjectSetQuickNotes |
   ProjectAddQuickNote |
   ProjectSetBookmarks |
-  ProjectAddBookmark;
+  ProjectAddBookmark |
+  ProjectSetKanbanTasks |
+  ProjectAddKanbanTask;
+
 
 export const projectSetProject = (payload: Project): ProjectSetProject => ({ type: PROJECT_SET_PROJECT, payload });

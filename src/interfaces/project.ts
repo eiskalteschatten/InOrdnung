@@ -3,12 +3,14 @@ import { Task } from './tasks';
 import { Bookmark } from './bookmarks';
 import { UiPreferences } from './ui';
 import { QuickNote } from './quickNotes';
+import { Kanban } from './kanban';
 
 export interface Project {
   projectInfo: ProjectInfo;
   tasks: Task[];
   quickNotes: QuickNote[];
   bookmarks: Bookmark[];
+  kanban: Kanban;
 }
 
 export interface ProjectFileMetaData {

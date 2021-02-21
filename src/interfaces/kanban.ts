@@ -9,3 +9,8 @@ export interface KanbanTask {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface Kanban {
+  tasks: KanbanTask[];
+  // boards
+}
