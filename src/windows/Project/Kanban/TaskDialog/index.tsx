@@ -28,33 +28,32 @@ interface Props {
 const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
   const dispatch = useDispatch();
   const context = useContext(Context);
-  const [editingTask, setEditingTask] = useState<KanbanTask | undefined>();
 
   useEffect(() => {
-    setEditingTask(task ? task : {
+    context.setEditingTask(task ? task : {
       id: uuidv4(),
       columnId: context.editColumnId,
     });
   }, [task, context]);
 
   const handleClose = (): void => {
-    setEditingTask(undefined);
+    context.setEditingTask(undefined);
     close();
   };
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setEditingTask({
-      ...editingTask,
+    context.setEditingTask({
+      ...context.editingTask,
       [e.target.id]: e.target.value,
     });
   };
 
   const handleSave = (): void => {
-    if (!task && editingTask) {
-      dispatch(projectAddKanbanTask(editingTask));
+    if (!task && context.editingTask) {
+      dispatch(projectAddKanbanTask(context.editingTask));
     }
-    else if (editingTask) {
-      dispatch(projectEditKanbanTask(editingTask));
+    else if (context.editingTask) {
+      dispatch(projectEditKanbanTask(context.editingTask));
     }
 
     handleClose();
@@ -77,8 +76,8 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
           label={useTranslation('kanbanTitle')}
           variant='outlined'
           fullWidth
-          value={editingTask?.title ?? ''}
-          InputLabelProps={{ shrink: !!editingTask?.title }}
+          value={context.editingTask?.title ?? ''}
+          InputLabelProps={{ shrink: !!context.editingTask?.title }}
           onChange={handleFieldChange}
           size='small'
         />
@@ -88,8 +87,8 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
           label={useTranslation('kanbanDescription')}
           variant='outlined'
           fullWidth
-          value={editingTask?.description ?? ''}
-          InputLabelProps={{ shrink: !!editingTask?.description }}
+          value={context.editingTask?.description ?? ''}
+          InputLabelProps={{ shrink: !!context.editingTask?.description }}
           onChange={handleFieldChange}
           size='small'
           multiline
