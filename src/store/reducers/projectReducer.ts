@@ -24,6 +24,7 @@ export const initialState: Project = {
   bookmarks: [],
   kanban: {
     tasks: [],
+    boards: [],
   },
 };
 
