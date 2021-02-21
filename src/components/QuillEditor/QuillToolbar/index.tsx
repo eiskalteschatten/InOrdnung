@@ -3,6 +3,8 @@ import ReactQuill from 'react-quill';
 
 import FormatBold from '@material-ui/icons/FormatBold';
 import FormatItalic from '@material-ui/icons/FormatItalic';
+import FormatUnderlined from '@material-ui/icons/FormatUnderlined';
+import FormatStrikethrough from '@material-ui/icons/FormatStrikethrough';
 
 import RoundedButton from '../../RoundedButton';
 
@@ -51,6 +53,18 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
         size='small'
       >
         <FormatItalic fontSize='small' />
+      </RoundedButton>
+      <RoundedButton
+        onClick={() => console.log('fjdks')}
+        size='small'
+      >
+        <FormatUnderlined fontSize='small' />
+      </RoundedButton>
+      <RoundedButton
+        onClick={() => console.log('fjdks')}
+        size='small'
+      >
+        <FormatStrikethrough fontSize='small' />
       </RoundedButton>
     </div>
   );
