@@ -100,6 +100,7 @@ const ProjectInfo: React.FC = () => {
                   checked={projectInfo?.hasStartDate ?? false}
                   onChange={handleSwitchChange}
                   id='hasStartDate'
+                  color='primary'
                 />
               }
               label={messages.projectHasStartDate}
@@ -133,6 +134,7 @@ const ProjectInfo: React.FC = () => {
                   checked={projectInfo?.hasEndDate ?? false}
                   onChange={handleSwitchChange}
                   id='hasEndDate'
+                  color='primary'
                 />
               }
               label={messages.projectHasEndDate}

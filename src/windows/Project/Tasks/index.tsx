@@ -122,6 +122,7 @@ const Tasks: React.FC = () => {
               onChange={handleShowHideCompletedTasks}
               id='hasDueDate'
               size='small'
+              color='primary'
             />
           }
           label={<div className={styles.showCompletedTasks}>{useTranslation('tasksShowCompletedTasks')}</div>}

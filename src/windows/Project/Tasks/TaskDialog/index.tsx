@@ -141,6 +141,7 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
                 checked={editingTask?.hasDueDate ?? false}
                 onChange={handleSwitchChange}
                 id='hasDueDate'
+                color='primary'
               />
             }
             label={messages.tasksDueDate}
