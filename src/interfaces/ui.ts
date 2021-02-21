@@ -8,6 +8,7 @@ export interface UiPreferences {
   openEditTaskDialog: boolean;
   openEditQuickNoteDialog: boolean;
   openEditBookmarkDialog: boolean;
+  openEditKanbanTaskDialog: boolean;
   tasksSortingOptions: SortingOptions;
   showCompletedTasks: boolean;
   bookmarksSortingOptions: SortingOptions;
