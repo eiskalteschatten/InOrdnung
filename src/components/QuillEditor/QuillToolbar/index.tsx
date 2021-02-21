@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useReducer } from 'react';
+import React, { RefObject, useEffect, useReducer, useState } from 'react';
 import ReactQuill from 'react-quill';
 
 import FormatBold from '@material-ui/icons/FormatBold';
@@ -18,24 +18,21 @@ import RoundedButton from '../../RoundedButton';
 
 import styles from './QuillToolbar.module.scss';
 
+type Format = boolean | string | number;
+
 interface State {
-  [format: string]: boolean | string | number;
+  [format: string]: Format;
 }
 
 interface Action {
   type: string;
-  value?: boolean | string | number;
+  value?: Format;
 }
 
-const initialState = {
-  bold: false,
-  italic: false,
-  underline: false,
-  strike: false,
-};
+const initialState = {};
 
 const reducer = (state: State, action: Action): State => {
-  return {
+  return action.type === 'initialState' ? initialState : {
     ...state,
     [action.type]: action.value ? action.value : !state[action.type],
   };
@@ -49,12 +46,37 @@ const ToolbarDivider: React.FC = () => (<div className={styles.divider} />);
 
 const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [header, setHeader] = useState<Format>();
 
   useEffect(() => {
     const editor = editorRef.current?.getEditor();
-    for (const [key, value] of Object.entries(state)) {
-      editor?.format(key, value);
+
+    const updateFormats = () => {
+      const format = editor?.getFormat();
+      if (format) {
+        dispatch({ type: 'initialState' });
+
+        for (const [type, value] of Object.entries(format)) {
+          dispatch({ type, value });
+        }
+      }
+    };
+
+    editor?.on('selection-change', updateFormats);
+
+    return () => {
+      editor?.off('selection-change', updateFormats);
+    };
+  }, [editorRef]);
+
+  useEffect(() => {
+    const editor = editorRef.current?.getEditor();
+
+    for (const [format, value] of Object.entries(state)) {
+      editor?.format(format, value);
     }
+
+    setHeader(state.header || '');
   }, [state]);
 
   const handleHeaderChange = (e: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -65,7 +87,7 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
     <div className={styles.toolbar}>
       <select
         id='columnId'
-        value={state.header as string}
+        value={header as string}
         onChange={handleHeaderChange}
         className={styles.select}
       >
@@ -112,9 +134,9 @@ const QuillToolbar: React.FC<Props> = ({ editorRef }) => {
       <ToolbarDivider />
 
       <RoundedButton
-        onClick={() => dispatch({ type: 'align', value: 'left' })}
+        onClick={() => dispatch({ type: 'align', value: '' })}
         size='small'
-        selected={!state.align || state.align === 'left'}
+        selected={!state.align || state.align === ''}
       >
         <FormatAlignLeft fontSize='small' />
       </RoundedButton>
