@@ -121,7 +121,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
             <QuillEditor
               value={context.editingTask?.description ?? ''}
               onChange={handleDescriptionChange}
-              placeholder={useTranslation('kanbanDescription')}
+              placeholder={`${useTranslation('kanbanDescription')}...`}
               className={styles.descriptionEditor}
             />
           </Grid>
