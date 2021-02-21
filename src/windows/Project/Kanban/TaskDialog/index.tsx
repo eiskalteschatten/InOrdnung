@@ -120,10 +120,10 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
               size='small'
             />
             <ReactQuill
-              value={context.editingTask?.description}
-              defaultValue=''
+              value={context.editingTask?.description ?? ''}
               onChange={handleDescriptionChange}
               theme='bubble'
+              placeholder={useTranslation('kanbanDescription')}
             />
           </Grid>
           <Grid item xs={3}>
