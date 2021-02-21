@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
-import ReactQuill from 'react-quill';
 
 import {
   Dialog,
@@ -23,6 +22,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
+import QuillEditor from '../../../../components/QuillEditor';
 import { Context } from '../KanbanContextWrapper';
 
 import styles from './TaskDialog.module.scss';
@@ -118,10 +118,9 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
               onChange={handleFieldChange}
               size='small'
             />
-            <ReactQuill
+            <QuillEditor
               value={context.editingTask?.description ?? ''}
               onChange={handleDescriptionChange}
-              theme='bubble'
               placeholder={useTranslation('kanbanDescription')}
               className={styles.descriptionEditor}
             />
