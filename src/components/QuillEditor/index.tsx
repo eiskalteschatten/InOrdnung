@@ -8,23 +8,6 @@ import QuillToolbar from './QuillToolbar';
 import '../../scss/quill.scss';
 import styles from './QuillEditor.module.scss';
 
-const formats = [
-  'header',
-  'font',
-  'size',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'link',
-  'image',
-  'color',
-];
-
 interface Props {
   value: string;
   onChange: (content: string, delta: Delta, source: Sources, editor: any) => void;
@@ -44,7 +27,6 @@ const QuillEditor: React.FC<Props> = ({ value, onChange, placeholder, className 
         onChange={onChange}
         theme='bubble'
         placeholder={placeholder}
-        formats={formats}
         modules={{
           clipboard: {
             matchVisual: false,
