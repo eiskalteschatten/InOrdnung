@@ -13,12 +13,6 @@
     background: #dddddd;
   }
 
-  &.dragging {
-    cursor: grabbing;
-    position: absolute;
-    z-indeX: 10000;
-  }
-
   @media (prefers-color-scheme: dark) {
     &:hover {
       background: #555555;
