@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 
 import { projectEditKanbanTask } from '../../../../../../store/actions/projectActions/kanbanActions';
-import { uiOpenEditKanbanTaskDialog } from '../../../../../../store/actions/uiActions';
+import { uiSetOpenEditKanbanTaskDialog } from '../../../../../../store/actions/uiActions';
 import { Context } from '../../../KanbanContextWrapper';
 import { KanbanTask } from '../../../../../../interfaces/kanban';
 
@@ -30,7 +30,7 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     context.setIsNewTask(false);
     context.setEditColumnId(columnId);
     context.setEditingTask(task);
-    dispatch(uiOpenEditKanbanTaskDialog(true));
+    dispatch(uiSetOpenEditKanbanTaskDialog(true));
   };
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>): void => {

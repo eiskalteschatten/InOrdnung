@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { State } from '../../../store';
-import { uiOpenEditKanbanTaskDialog } from '../../../store/actions/uiActions';
+import { uiSetOpenEditKanbanTaskDialog } from '../../../store/actions/uiActions';
 import { KanbanContextWrapper } from './KanbanContextWrapper';
 import Board from './Board';
 import TaskDialog from './TaskDialog';
@@ -26,7 +26,7 @@ const Kanban: React.FC = () => {
 
       <TaskDialog
         open={openEditTaskDialog}
-        close={() => dispatch(uiOpenEditKanbanTaskDialog(false))}
+        close={() => dispatch(uiSetOpenEditKanbanTaskDialog(false))}
       />
     </KanbanContextWrapper>
   );

@@ -9,7 +9,7 @@ import {
 
 import Add from '@material-ui/icons/Add';
 
-import { uiOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
+import { uiSetOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
 import { KanbanBoard, KanbanTask } from '../../../../interfaces/kanban';
 import { Context } from '../KanbanContextWrapper';
 import Column from './Column';
@@ -31,7 +31,7 @@ const Board: React.FC<Props> = ({ board }) => {
       context.setIsNewTask(false);
       context.setEditColumnId(task.columnId || '');
       context.setEditingTask(task);
-      dispatch(uiOpenEditKanbanTaskDialog(true));
+      dispatch(uiSetOpenEditKanbanTaskDialog(true));
     });
 
     return () => {
@@ -43,7 +43,7 @@ const Board: React.FC<Props> = ({ board }) => {
     context.setIsNewTask(true);
     context.setEditingTask(undefined);
     context.setEditColumnId(columnId || '');
-    dispatch(uiOpenEditKanbanTaskDialog(true));
+    dispatch(uiSetOpenEditKanbanTaskDialog(true));
   };
 
   return (

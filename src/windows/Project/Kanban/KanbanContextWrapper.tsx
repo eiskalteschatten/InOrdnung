@@ -28,7 +28,7 @@ export const Context = createContext<IContext>({
   setEditColumnId: (columnId: string) => {},
   editingTask: undefined,
   setEditingTask: (task?: KanbanTask) => {},
-  isNewTask: false,
+  isNewTask: true,
   setIsNewTask: (isNewTask: boolean) => {},
   draggingTask: undefined,
   setDraggingTask: (task?: DraggingTask) => {},
@@ -42,7 +42,7 @@ interface Props {
 export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
   const [editColumnId, setEditColumnId] = useState<string>('');
   const [editingTask, setEditingTask] = useState<KanbanTask>();
-  const [isNewTask, setIsNewTask] = useState<boolean>(false);
+  const [isNewTask, setIsNewTask] = useState<boolean>(true);
   const [draggingTask, setDraggingTask] = useState<DraggingTask>();
 
   const boards = useSelector((state: State) => state.project?.kanban?.boards);
