@@ -1,5 +1,10 @@
 @import "../../../../../../scss/variables";
 
+.taskWrapper {
+  padding-top: 0;
+  transition: padding 100ms;
+}
+
 .task {
   padding: 8px 10px;
   margin: 10px 0;
@@ -22,6 +27,10 @@
       background: #616161;
     }
   }
+}
+
+.noPointerEvents {
+  pointer-events: none;
 }
 
 .title {

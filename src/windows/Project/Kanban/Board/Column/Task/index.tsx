@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import ReactMarkdown from 'react-markdown/with-html';
-import clsx from 'clsx';
 
 import {
   Paper,
@@ -23,6 +22,8 @@ interface Props {
 const Task: React.FC<Props> = ({ task, columnId }) => {
   const dispatch = useDispatch();
   const context = useContext(Context);
+  const [dragStyles, setDragStyles] = useState<React.CSSProperties | undefined>({});
+  const [dragTimeout, setDragTimeout] = useState<NodeJS.Timeout>();
 
   const handleOpenTask = (): void => {
     context.setIsNewTask(false);
@@ -38,24 +39,60 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     });
   };
 
+  const handleOnDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (dragTimeout) {
+      clearTimeout(dragTimeout);
+    }
+
+    if (task.id !== context.draggingTask?.task.id) {
+      const additionalHeight = context.draggingTask?.rect.height ? context.draggingTask?.rect.height + 10 : 0;
+
+      setDragStyles({
+        paddingTop: additionalHeight,
+      });
+    }
+  };
+
+  const handleOnDragLeaveDrop = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    setDragTimeout(setTimeout(() =>
+      setDragStyles({
+        paddingTop: 0,
+      })
+    , 100));
+  };
+
   return (
-    <Paper
-      className={clsx({
-        [styles.task]: true,
-      })}
-      onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
-      onClick={handleOpenTask}
-      draggable
-      onDragStart={handleDragStart}
+    <div
+      onDragOver={handleOnDragOver}
+      onDragLeave={handleOnDragLeaveDrop}
+      onDrop={handleOnDragLeaveDrop}
+      style={dragStyles}
+      className={styles.taskWrapper}
     >
-      <div className={styles.title}>{task.title}</div>
-      <div className={styles.description}>
-        <ReactMarkdown
-          source={task.description || ''}
-          escapeHtml={false}
-        />
-      </div>
-    </Paper>
+      <Paper
+        className={styles.task}
+        onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
+        onClick={handleOpenTask}
+        draggable
+        onDragStart={handleDragStart}
+      >
+        <div className={styles.noPointerEvents}>
+          <div className={styles.title}>{task.title}</div>
+          <div className={styles.description}>
+            <ReactMarkdown
+              source={task.description || ''}
+              escapeHtml={false}
+            />
+          </div>
+        </div>
+      </Paper>
+    </div>
   );
 };
 
