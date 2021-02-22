@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { KanbanBoard, KanbanTask } from '../../../interfaces/kanban';
@@ -6,7 +6,6 @@ import { State } from '../../../store';
 
 interface IContext {
   editBoard?: KanbanBoard;
-  setEditBoard: (board: KanbanBoard) => void;
   editColumnId: string;
   setEditColumnId: (columnId: string) => void;
   editingTask: KanbanTask | undefined;
@@ -18,7 +17,6 @@ interface IContext {
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const Context = createContext<IContext>({
   editBoard: undefined,
-  setEditBoard: (board: KanbanBoard) => {},
   editColumnId: '',
   setEditColumnId: (columnId: string) => {},
   editingTask: undefined,
@@ -33,23 +31,20 @@ interface Props {
 }
 
 export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
-  const [editBoard, setEditBoard] = useState<KanbanBoard | undefined>();
   const [editColumnId, setEditColumnId] = useState<string>('');
   const [editingTask, setEditingTask] = useState<KanbanTask | undefined>();
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
 
   const boards = useSelector((state: State) => state.project?.kanban?.boards);
 
-  useEffect(() => {
-    setEditBoard(boards.find(board =>
+  const editBoard = useMemo(() =>
+    boards.find(board =>
       board.columns?.some(({ id }) => id === editColumnId)
-    ));
-  }, [editColumnId]);
+    ), [editColumnId]);
 
   return (
     <Context.Provider value={{
       editBoard,
-      setEditBoard,
       editColumnId,
       setEditColumnId,
       editingTask,
