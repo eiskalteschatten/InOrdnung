@@ -31,6 +31,13 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     dispatch(uiOpenEditKanbanTaskDialog(true));
   };
 
+  const handleDragStart = (e: React.DragEvent<HTMLDivElement>): void => {
+    context.setDraggingTask({
+      rect: e.currentTarget.getBoundingClientRect(),
+      task,
+    });
+  };
+
   return (
     <Paper
       className={clsx({
@@ -39,6 +46,7 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
       onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
       onClick={handleOpenTask}
       draggable
+      onDragStart={handleDragStart}
     >
       <div className={styles.title}>{task.title}</div>
       <div className={styles.description}>

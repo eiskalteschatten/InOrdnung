@@ -4,6 +4,11 @@ import { useSelector } from 'react-redux';
 import { KanbanBoard, KanbanTask } from '../../../interfaces/kanban';
 import { State } from '../../../store';
 
+interface DraggingTask {
+  rect: DOMRect;
+  task: KanbanTask;
+}
+
 interface IContext {
   editBoard?: KanbanBoard;
   editColumnId: string;
@@ -12,6 +17,8 @@ interface IContext {
   setEditingTask: (task?: KanbanTask) => void;
   isNewTask: boolean;
   setIsNewTask: (isNewTask: boolean) => void;
+  draggingTask?: DraggingTask;
+  setDraggingTask: (task?: DraggingTask) => void;
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -23,6 +30,8 @@ export const Context = createContext<IContext>({
   setEditingTask: (task?: KanbanTask) => {},
   isNewTask: false,
   setIsNewTask: (isNewTask: boolean) => {},
+  draggingTask: undefined,
+  setDraggingTask: (task?: DraggingTask) => {},
 });
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
@@ -32,8 +41,9 @@ interface Props {
 
 export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
   const [editColumnId, setEditColumnId] = useState<string>('');
-  const [editingTask, setEditingTask] = useState<KanbanTask | undefined>();
+  const [editingTask, setEditingTask] = useState<KanbanTask>();
   const [isNewTask, setIsNewTask] = useState<boolean>(false);
+  const [draggingTask, setDraggingTask] = useState<DraggingTask>();
 
   const boards = useSelector((state: State) => state.project?.kanban?.boards);
 
@@ -51,6 +61,8 @@ export const KanbanContextWrapper: React.FC<Props> = ({ children }) => {
       setEditingTask,
       isNewTask,
       setIsNewTask,
+      draggingTask,
+      setDraggingTask,
     }}>
       {children}
     </Context.Provider>

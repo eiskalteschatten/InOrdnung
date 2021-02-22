@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
@@ -11,6 +11,7 @@ import Add from '@material-ui/icons/Add';
 import { State } from '../../../../../store';
 import { KanbanBoardColumn } from '../../../../../interfaces/kanban';
 import RoundedButton from '../../../../../components/RoundedButton';
+import { Context } from '../../KanbanContextWrapper';
 import Task from './Task';
 
 import styles from './Column.module.scss';
@@ -23,12 +24,13 @@ interface Props {
 const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
   const allTasks = useSelector((state: State) => state.project?.kanban?.tasks);
   const tasks = useMemo(() => allTasks.filter(task => task.columnId === column.id), [allTasks]);
+  const context = useContext(Context);
 
   // https://www.digitalocean.com/community/tutorials/js-drag-and-drop-vanilla-js
 
   const handleOnDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
-    console.log('drag over', column.id);
+    console.log('drag over', context.draggingTask);
   };
 
   const handleOnDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
@@ -39,6 +41,7 @@ const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
   const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
     e.preventDefault();
     console.log('drop', column.id);
+    context.setDraggingTask(undefined);
   };
 
   return (
