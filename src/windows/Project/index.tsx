@@ -4,11 +4,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import isEqual from 'lodash/isEqual';
 
 import { State } from '../../store';
-import { uiSetOpenEditBookmarkDialog, uiSetOpenEditQuickNoteDialog, uiSetOpenEditTaskDialog } from '../../store/actions/uiActions';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
 import Sidebar from './Sidebar';
 import useTranslation from '../../intl/useTranslation';
+
+import {
+  uiSetOpenEditBookmarkDialog,
+  uiSetOpenEditQuickNoteDialog,
+  uiSetOpenEditTaskDialog,
+} from '../../store/actions/uiActions';
 
 import ProjectInfo from './ProjectInfo';
 import Tasks from './Tasks';
