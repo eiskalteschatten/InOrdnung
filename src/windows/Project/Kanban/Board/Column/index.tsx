@@ -24,8 +24,31 @@ const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
   const allTasks = useSelector((state: State) => state.project?.kanban?.tasks);
   const tasks = useMemo(() => allTasks.filter(task => task.columnId === column.id), [allTasks]);
 
+  // https://www.digitalocean.com/community/tutorials/js-drag-and-drop-vanilla-js
+
+  const handleOnDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault();
+    console.log('drag over', column.id);
+  };
+
+  const handleOnDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault();
+    console.log('drag leave', column.id);
+  };
+
+  const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+    e.preventDefault();
+    console.log('drop', column.id);
+  };
+
   return (
-    <Paper elevation={0} className={styles.column}>
+    <Paper
+      elevation={0}
+      className={styles.column}
+      onDragOver={handleOnDragOver}
+      onDragLeave={handleOnDragLeave}
+      onDrop={handleOnDrop}
+    >
       <div className={styles.top}>
         <div className={styles.title}>{column.name}</div>
         <div className={styles.count}>
