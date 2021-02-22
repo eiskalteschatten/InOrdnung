@@ -6,6 +6,7 @@ import {
   Paper,
 } from '@material-ui/core';
 
+import { projectEditKanbanTask } from '../../../../../../store/actions/projectActions/kanbanActions';
 import { uiOpenEditKanbanTaskDialog } from '../../../../../../store/actions/uiActions';
 import { Context } from '../../../KanbanContextWrapper';
 import { KanbanTask } from '../../../../../../interfaces/kanban';
@@ -56,9 +57,29 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     }
   };
 
-  const handleOnDragLeaveDrop = (e: React.DragEvent<HTMLDivElement>): void => {
+  const handleOnDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
     e.stopPropagation();
+
+    setDragTimeout(setTimeout(() =>
+      setDragStyles({
+        paddingTop: 0,
+      })
+    , 100));
+  };
+
+  const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    context.setDraggingTask(undefined);
+
+    if (context.draggingTask?.task) {
+      dispatch(projectEditKanbanTask({
+        ...context.draggingTask.task,
+        columnId: task.columnId,
+      }));
+    }
 
     setDragTimeout(setTimeout(() =>
       setDragStyles({
@@ -70,8 +91,8 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
   return (
     <div
       onDragOver={handleOnDragOver}
-      onDragLeave={handleOnDragLeaveDrop}
-      onDrop={handleOnDragLeaveDrop}
+      onDragLeave={handleOnDragLeave}
+      onDrop={handleOnDrop}
       style={dragStyles}
       className={styles.taskWrapper}
     >
