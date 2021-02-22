@@ -13,8 +13,16 @@
     }
   }
 
+  &.dragOver {
+    background-color: darken($lightSidebarBgColor, 5%) !important;
+  }
+
   @media (prefers-color-scheme: dark) {
     background-color: $darkSidebarBgColor !important;
+
+    &.dragOver {
+      background-color: lighten($darkSidebarBgColor, 5%) !important;
+    }
   }
 }
 

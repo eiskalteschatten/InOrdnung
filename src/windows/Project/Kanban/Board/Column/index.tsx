@@ -1,6 +1,7 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import clsx from 'clsx';
 
 import {
   Paper,
@@ -25,29 +26,35 @@ const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
   const allTasks = useSelector((state: State) => state.project?.kanban?.tasks);
   const tasks = useMemo(() => allTasks.filter(task => task.columnId === column.id), [allTasks]);
   const context = useContext(Context);
+  const [dragOver, setDragOver] = useState<boolean>(false);
 
   // https://www.digitalocean.com/community/tutorials/js-drag-and-drop-vanilla-js
 
   const handleOnDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
+    setDragOver(true);
     console.log('drag over', context.draggingTask);
   };
 
   const handleOnDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
-    console.log('drag leave', column.id);
+    setDragOver(false);
   };
 
   const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
     e.preventDefault();
-    console.log('drop', column.id);
+    setDragOver(false);
     context.setDraggingTask(undefined);
+    console.log('drop', column.id);
   };
 
   return (
     <Paper
       elevation={0}
-      className={styles.column}
+      className={clsx({
+        [styles.column]: true,
+        [styles.dragOver]: dragOver,
+      })}
       onDragOver={handleOnDragOver}
       onDragLeave={handleOnDragLeave}
       onDrop={handleOnDrop}
