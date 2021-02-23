@@ -23,8 +23,7 @@ interface Props {
 }
 
 const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
-  const allTasks = useSelector((state: State) => state.project?.kanban?.tasks);
-  const tasks = useMemo(() => allTasks.filter(task => task.columnId === column.id), [allTasks]);
+  const tasks = column?.tasks ?? [];
   const context = useContext(Context);
   const dispatch = useDispatch();
 
