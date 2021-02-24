@@ -21,6 +21,22 @@
   padding-right: 25px;
 }
 
+.descriptionHeader {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.descriptionLabel {
+  font-weight: bold;
+  font-size: 1.2em;
+  flex: 1 1 auto;
+}
+
+.descriptionEditButton {
+  margin-left: 10px;
+}
+
 .descriptionEditor {
   margin-top: 10px;
 }

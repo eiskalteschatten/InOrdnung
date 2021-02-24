@@ -1,7 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
+import ReactMarkdown from 'react-markdown/with-html';
 
 import {
   Dialog,
@@ -19,10 +20,12 @@ import {
 
 import CloseIcon from '@material-ui/icons/Close';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 
 import useTranslation from '../../../../intl/useTranslation';
 import { projectAddKanbanTask, projectEditKanbanTask } from '../../../../store/actions/projectActions/kanbanActions';
 import QuillEditor from '../../../../components/QuillEditor';
+import RoundedButton from '../../../../components/RoundedButton';
 import { Context } from '../KanbanContextWrapper';
 
 import styles from './TaskDialog.module.scss';
@@ -37,6 +40,7 @@ interface Props {
 const TaskDialog: React.FC<Props> = ({ open, close }) => {
   const dispatch = useDispatch();
   const context = useContext(Context);
+  const [editingDescription, setEditingDescription] = useState<boolean>(false);
 
   useEffect(() => {
     if (!context.editingTask) {
@@ -72,6 +76,11 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
     context.setEditColumnId(columnId);
   };
 
+  const handleClose = (): void => {
+    setEditingDescription(false);
+    close();
+  };
+
   const handleSave = (): void => {
     if (context.isNewTask && context.editingTask) {
       dispatch(projectAddKanbanTask(context.editingTask));
@@ -80,13 +89,13 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
       dispatch(projectEditKanbanTask(context.editingTask));
     }
 
-    close();
+    handleClose();
   };
 
   return (
     <Dialog
       open={open}
-      onClose={close}
+      onClose={handleClose}
       classes={{ paper: styles.paper }}
       disableBackdropClick
       disableEscapeKeyDown
@@ -94,7 +103,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
       <DialogTitle>
         <IconButton
           className={styles.closeButton}
-          onClick={close}
+          onClick={handleClose}
         >
           <CloseIcon />
         </IconButton>
@@ -119,13 +128,48 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
               InputLabelProps={{ shrink: !!context.editingTask?.title }}
               onChange={handleFieldChange}
               size='small'
+              onClick={() => setEditingDescription(false)}
             />
-            <QuillEditor
-              value={context.editingTask?.description ?? ''}
-              onChange={handleDescriptionChange}
-              placeholder={`${useTranslation('kanbanDescription')}...`}
-              className={styles.descriptionEditor}
-            />
+
+            <div className={styles.descriptionHeader}>
+              <span className={styles.descriptionLabel}>
+                <FormattedMessage id='kanbanDescription' />
+              </span>
+
+              {editingDescription ? (
+                <RoundedButton
+                  onClick={() => setEditingDescription(false)}
+                  className={styles.descriptionEditButton}
+                  size='small'
+                >
+                  <CloseIcon fontSize='small' />&nbsp;<FormattedMessage id='kanbanCloseEditor' />
+                </RoundedButton>
+              ) : (
+                <RoundedButton
+                  onClick={() => setEditingDescription(true)}
+                  className={styles.descriptionEditButton}
+                  size='small'
+                >
+                  <EditIcon fontSize='small' />&nbsp;<FormattedMessage id='kanbanEditTask' />
+                </RoundedButton>
+              )}
+            </div>
+
+            {editingDescription ? (
+              <QuillEditor
+                value={context.editingTask?.description ?? ''}
+                onChange={handleDescriptionChange}
+                placeholder={`${useTranslation('kanbanDescription')}...`}
+                className={styles.descriptionEditor}
+              />
+            ) : (
+              <div onDoubleClick={() => setEditingDescription(true)}>
+                <ReactMarkdown
+                  source={context.editingTask?.description ?? ''}
+                  escapeHtml={false}
+                />
+              </div>
+            )}
           </Grid>
           <Grid item xs={3}>
             <FormControl variant='outlined' fullWidth size='small' margin='dense'>
@@ -158,7 +202,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
           </IconButton>
         )}
 
-        <Button onClick={close} variant='outlined' color='primary' size='small'>
+        <Button onClick={handleClose} variant='outlined' color='primary' size='small'>
           <FormattedMessage id='cancel' />
         </Button>
         <Button onClick={handleSave} variant='contained' color='primary' size='small'>

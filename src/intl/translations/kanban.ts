@@ -14,6 +14,7 @@ export default {
     kanbanDeleteTask: 'Delete Task',
     kanbanTask: 'Task',
     kanbanTasks: 'Tasks',
+    kanbanCloseEditor: 'Close Editor',
   },
   de: {
     kanbanBoard: 'Kanban Board',
@@ -30,5 +31,6 @@ export default {
     kanbanDeleteTask: 'Aufgabe löschen',
     kanbanTask: 'Aufgabe',
     kanbanTasks: 'Aufgaben',
+    kanbanCloseEditor: 'Editor schließen',
   },
 };
