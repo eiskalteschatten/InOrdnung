@@ -27,7 +27,8 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import DoneIcon from '@material-ui/icons/Done';
 
 import { State } from '../../../store';
-import { uiSetOpenEditTaskDialog, uiSetShowCompletedTasks, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
+import { uiSetShowCompletedTasks, uiSetTasksSortingOptions } from '../../../store/actions/uiActions';
+import { uiSetOpenEditTaskDialog } from '../../../store/actions/uiTempActions';
 import { projectEditTask } from '../../../store/actions/projectActions/taskActions';
 import { Task } from '../../../interfaces/tasks';
 import { getDateLocaleFormat } from '../../../lib/dates';

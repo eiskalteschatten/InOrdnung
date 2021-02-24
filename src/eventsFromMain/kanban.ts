@@ -2,7 +2,7 @@ import { IpcRendererEvent } from 'electron';
 
 import { dispatch } from '../store';
 import { projectDeleteKanbanTask } from '../store/actions/projectActions/kanbanActions';
-import { uiSetOpenEditKanbanTaskDialog } from '../store/actions/uiActions';
+import { uiSetOpenEditKanbanTaskDialog } from '../store/actions/uiTempActions';
 
 const { ipcRenderer } = window.require('electron');
 

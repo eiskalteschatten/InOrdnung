@@ -22,7 +22,8 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import OpenInBrowser from '@material-ui/icons/OpenInBrowser';
 
 import { State } from '../../../store';
-import { uiSetOpenEditBookmarkDialog, uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
+import { uiSetBookmarksSortingOptions } from '../../../store/actions/uiActions';
+import { uiSetOpenEditBookmarkDialog } from '../../../store/actions/uiTempActions';
 import { Bookmark } from '../../../interfaces/bookmarks';
 import { handleLinkClick, isValidUrl } from '../../../lib/links';
 import { sortStrings } from '../../../lib/helper';

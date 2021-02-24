@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 
 import { State } from '../../../store';
-import { uiSetOpenEditQuickNoteDialog } from '../../../store/actions/uiActions';
+import { uiSetOpenEditQuickNoteDialog } from '../../../store/actions/uiTempActions';
 import useTranslation from '../../../intl/useTranslation';
 import { QuickNote } from '../../../interfaces/quickNotes';
 import NoteDialog from './NoteDialog';

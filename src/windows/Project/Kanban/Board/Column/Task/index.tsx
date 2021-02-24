@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 
 import { projectEditKanbanTask } from '../../../../../../store/actions/projectActions/kanbanActions';
-import { uiSetOpenEditKanbanTaskDialog } from '../../../../../../store/actions/uiActions';
+import { uiSetOpenEditKanbanTaskDialog } from '../../../../../../store/actions/uiTempActions';
 import { Context } from '../../../KanbanContextWrapper';
 import { KanbanTask } from '../../../../../../interfaces/kanban';
 

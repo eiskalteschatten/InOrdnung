@@ -13,7 +13,7 @@ import {
   uiSetOpenEditBookmarkDialog,
   uiSetOpenEditQuickNoteDialog,
   uiSetOpenEditTaskDialog,
-} from '../../store/actions/uiActions';
+} from '../../store/actions/uiTempActions';
 
 import ProjectInfo from './ProjectInfo';
 import Tasks from './Tasks';

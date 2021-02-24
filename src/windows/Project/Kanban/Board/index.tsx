@@ -9,7 +9,7 @@ import {
 
 import Add from '@material-ui/icons/Add';
 
-import { uiSetOpenEditKanbanTaskDialog } from '../../../../store/actions/uiActions';
+import { uiSetOpenEditKanbanTaskDialog } from '../../../../store/actions/uiTempActions';
 import { KanbanBoard, KanbanTask } from '../../../../interfaces/kanban';
 import { Context } from '../KanbanContextWrapper';
 import Column from './Column';
