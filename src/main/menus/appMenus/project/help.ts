@@ -19,7 +19,7 @@ const submenuItems: MenuItem[] = [
   },
   { item: { type: 'separator' } },
   {
-    platforms: nonMacPlatforms,
+    platforms: ['win32'],
     item: {
       label: translation.menuCheckForUpdates,
       click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
