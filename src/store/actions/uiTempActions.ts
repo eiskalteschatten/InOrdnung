@@ -1,7 +1,5 @@
 import { Action } from 'redux';
 
-import { SortingOptions, UiPreferences } from '../../interfaces/ui';
-
 import {
   UI_OPEN_EDIT_TASK_DIALOG,
   UI_OPEN_EDIT_QUICK_NOTE_DIALOG,
