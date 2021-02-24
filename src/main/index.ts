@@ -1,5 +1,6 @@
 import path from 'path';
 import { Worker } from 'worker_threads';
+import updateElectronApp from 'update-electron-app';
 
 import './eventsFromRenderer';
 
@@ -7,6 +8,9 @@ import config from '../config';
 import openWelcomeWindow from './windows/welcome';
 import { windows } from './windows/project';
 import { openFile } from './lib/projectFile';
+
+
+updateElectronApp();
 
 let app: Electron.App;
 

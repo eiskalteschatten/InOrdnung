@@ -1,4 +1,4 @@
-import { app, BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
+import { app, autoUpdater } from 'electron';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../../lib/helper';
@@ -19,8 +19,8 @@ const submenuItems: MenuItem[] = [
   {
     item: {
       label: translation.menuCheckForUpdates,
-      click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-        focusedWindow?.webContents.send('check-for-updates');
+      click: (): void => {
+        autoUpdater.checkForUpdates();
       },
     },
   },
