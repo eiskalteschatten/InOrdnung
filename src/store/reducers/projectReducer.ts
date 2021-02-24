@@ -24,7 +24,6 @@ export const initialState: Project = {
   quickNotes: [],
   bookmarks: [],
   kanban: {
-    tasks: [],
     boards: [defaultKanbanBoard],
   },
 };
