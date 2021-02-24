@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useContext, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -8,6 +8,7 @@ import {
 
 import Add from '@material-ui/icons/Add';
 
+import { State } from '../../../../../store';
 import { projectEditKanbanTask } from '../../../../../store/actions/projectActions/kanbanActions';
 import { KanbanBoardColumn } from '../../../../../interfaces/kanban';
 import RoundedButton from '../../../../../components/RoundedButton';
@@ -22,7 +23,8 @@ interface Props {
 }
 
 const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
-  const tasks = column?.tasks ?? [];
+  const allTasks = useSelector((state: State) => state.project?.kanban?.tasks);
+  const tasks = useMemo(() => allTasks?.filter(task => task.columnId === column.id), [allTasks]);
   const context = useContext(Context);
   const dispatch = useDispatch();
 

@@ -12,7 +12,6 @@ export interface KanbanBoardColumn {
   id?: string;
   name?: string;
   isDoneColumn?: boolean;
-  tasks?: KanbanTask[];
 }
 
 export interface KanbanBoard {
@@ -23,4 +22,5 @@ export interface KanbanBoard {
 
 export interface Kanban {
   boards: KanbanBoard[];
+  tasks?: KanbanTask[];
 }
