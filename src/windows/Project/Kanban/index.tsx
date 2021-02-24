@@ -12,7 +12,7 @@ import TaskDialog from './TaskDialog';
 const Kanban: React.FC = () => {
   const dispatch = useDispatch();
   const boards = useSelector((state: State) => state.project?.kanban?.boards);
-  const openEditTaskDialog = useSelector((state: State) => state.ui.openEditKanbanTaskDialog);
+  const openEditTaskDialog = useSelector((state: State) => state.uiTemp.openEditKanbanTaskDialog);
 
   return (
     <KanbanContextWrapper>

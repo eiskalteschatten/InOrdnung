@@ -45,7 +45,7 @@ const Tasks: React.FC = () => {
   const tasks = useSelector((state: State) => state.project?.tasks);
   const sortBy = useSelector((state: State) => state.ui.tasksSortingOptions.sortBy);
   const sortDirection = useSelector((state: State) => state.ui.tasksSortingOptions.sortDirection);
-  const openEditTaskDialog = useSelector((state: State) => state.ui.openEditTaskDialog);
+  const openEditTaskDialog = useSelector((state: State) => state.uiTemp.openEditTaskDialog);
   const showCompletedTasks = useSelector((state: State) => state.ui.showCompletedTasks);
   const [localTasks, setLocalTasks] = useState<Task[]>();
   const [editingTask, setEditingTask] = useState<Task | undefined>();

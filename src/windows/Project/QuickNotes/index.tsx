@@ -22,7 +22,7 @@ const { ipcRenderer } = window.require('electron');
 const QuickNotes: React.FC = () => {
   const dispatch = useDispatch();
   const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
-  const openEditQuickNoteDialog = useSelector((state: State) => state.ui.openEditQuickNoteDialog);
+  const openEditQuickNoteDialog = useSelector((state: State) => state.uiTemp.openEditQuickNoteDialog);
   const quickNotes = useSelector((state: State) => state.project.quickNotes);
 
   const handleNewNoteClick = (e: React.MouseEvent<HTMLInputElement>): void => {
