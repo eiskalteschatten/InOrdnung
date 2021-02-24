@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import ReactMarkdown from 'react-markdown/with-html';
 
 import {
   Paper,
@@ -10,6 +9,7 @@ import { projectEditKanbanTask } from '../../../../../../store/actions/projectAc
 import { uiSetOpenEditKanbanTaskDialog } from '../../../../../../store/actions/uiTempActions';
 import { Context } from '../../../KanbanContextWrapper';
 import { KanbanTask } from '../../../../../../interfaces/kanban';
+import { stripHtml } from '../../../../../../lib/helper';
 
 import styles from './Task.module.scss';
 
@@ -105,12 +105,11 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
       >
         <div className={styles.noPointerEvents}>
           <div className={styles.title}>{task.title}</div>
-          <div className={styles.description}>
-            <ReactMarkdown
-              source={task.description || ''}
-              escapeHtml={false}
-            />
-          </div>
+          {task.description && (
+            <div className={styles.description}>
+              {stripHtml(task.description)}
+            </div>
+          )}
         </div>
       </Paper>
     </div>

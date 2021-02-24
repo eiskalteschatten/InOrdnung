@@ -46,3 +46,9 @@ export const sortBooleans = (a: boolean, b: boolean, sortDirection = 'desc'): nu
   sortDirection === 'asc'
     ? a === b ? 0 : a ? -1 : 1
     : a === b ? 0 : a ? 1 : -1;
+
+export const stripHtml = (html: string): string => {
+  const temp = document.createElement('DIV');
+  temp.innerHTML = html.replace(/<p>/g, ' ');
+  return temp.textContent || temp.innerText || '';
+};
