@@ -38,7 +38,7 @@ const Bookmarks: React.FC = () => {
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
   const sortBy = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortBy);
   const sortDirection = useSelector((state: State) => state.ui.bookmarksSortingOptions.sortDirection);
-  const openEditBookmarkDialog = useSelector((state: State) => state.ui.openEditBookmarkDialog);
+  const openEditBookmarkDialog = useSelector((state: State) => state.uiTemp.openEditBookmarkDialog);
   const [localBookmarks, setLocalBookmarks] = useState<Bookmark[]>();
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
   const [hoverBookmarkId, setHoverBookmarkId] = useState<string>('');

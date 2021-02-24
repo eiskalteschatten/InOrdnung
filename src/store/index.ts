@@ -3,6 +3,7 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 
 import app from './reducers/appReducer';
 import ui from './reducers/uiReducer';
+import uiTemp from './reducers/uiTempReducer';
 import project from './reducers/projectReducer';
 import file from './reducers/fileReducer';
 
@@ -13,6 +14,7 @@ const composeEnhancers = devExtension && process.env.NODE_ENV === 'development' 
 const reducer = combineReducers({
   app,
   ui,
+  uiTemp,
   project,
   file,
 });
