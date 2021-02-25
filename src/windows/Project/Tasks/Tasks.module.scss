@@ -1,6 +1,6 @@
 @import "../../../scss/variables";
 
-$marginSize: 10px;
+$marginSize: 20px;
 
 .toolbar {
   text-align: right;
@@ -9,7 +9,7 @@ $marginSize: 10px;
 
 .tableWrapper {
   margin: $marginSize;
-  width: calc(100% - 20px);
+  width: calc(100% - 40px);
 }
 
 .tableCell {
