@@ -11,3 +11,20 @@
     background: $darkSidebarBgColor;
   }
 }
+
+.projectInfo {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.image {
+  max-width: 65%;
+  border-radius: 5px;
+  margin-bottom: 10px;;
+}
+
+.projectName {
+  font-size: 1.3em;
+  font-weight: bold;
+  margin-bottom: 50px;
+}

@@ -18,6 +18,7 @@ import styles from './Sidebar.module.scss';
 const Sidebar: React.FC = () => {
   const { path } = useRouteMatch();
   const savedSidebarWidth = useSelector((state: State) => state.ui.sidebarWidth);
+  const projectInfo = useSelector((state: State) => state.project.projectInfo);
   const [sidebarWidth, setSidebarWidth] = useState<number | undefined>(savedSidebarWidth);
   const sidebarRef = useRef<HTMLDivElement | null>(null);
 
@@ -59,19 +60,31 @@ const Sidebar: React.FC = () => {
       style={{ width: sidebarWidth }}
       ref={sidebarRef}
     >
-      {sidebarItems.map((item, index: number) => (
-        <SidebarItem
-          key={index}
-          path={`${path}${item.path}`}
-          ItemIcon={item.ItemIcon}
-          title={item.title}
-        />
-      ))}
+      <div className={styles.projectInfo}>
+        {projectInfo.image && (
+          <img src={`data:${projectInfo.image.mimeType};base64,${projectInfo.image.image}`} className={styles.image} />
+        )}
 
-      <SidebarDragger
-        sidebarRef={sidebarRef}
-        setSidebarWidth={setSidebarWidth}
-      />
+        {projectInfo.name && (
+          <div className={styles.projectName}>{projectInfo.name}</div>
+        )}
+      </div>
+
+      <div>
+        {sidebarItems.map((item, index: number) => (
+          <SidebarItem
+            key={index}
+            path={`${path}${item.path}`}
+            ItemIcon={item.ItemIcon}
+            title={item.title}
+          />
+        ))}
+
+        <SidebarDragger
+          sidebarRef={sidebarRef}
+          setSidebarWidth={setSidebarWidth}
+        />
+      </div>
     </div>
   );
 };
