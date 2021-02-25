@@ -6,6 +6,10 @@ export default {
     save: 'Save',
     dontSave: 'Don\'t Save',
     cancel: 'Cancel',
+    updateAvailable: 'Update Available',
+    newVersionRestart: 'A new version has been downloaded. Restart the application to apply the updates.',
+    restart: 'Restart',
+    later: 'Later',
   },
   de: {
     yes: 'Ja',
@@ -14,5 +18,9 @@ export default {
     save: 'Speichern',
     dontSave: 'Nicht speichern',
     cancel: 'Abbrechen',
+    updateAvailable: 'Aktualisierung verfügbar',
+    newVersionRestart: 'Eine neue Version wurde heruntergeladen. Starten Sie die Applikation neu, um die Aktualisierung anzuwenden.',
+    restart: 'Neu starten',
+    later: 'Später',
   },
 };

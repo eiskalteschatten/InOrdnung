@@ -1,5 +1,6 @@
 import path from 'path';
 import { Worker } from 'worker_threads';
+import { autoUpdater, dialog } from 'electron';
 import updateElectronApp from 'update-electron-app';
 
 import './eventsFromRenderer';
@@ -8,6 +9,7 @@ import config from '../config';
 import openWelcomeWindow from './windows/welcome';
 import { windows } from './windows/project';
 import { openFile } from './lib/projectFile';
+import { getTranslation } from '../lib/helper';
 
 
 updateElectronApp();
@@ -19,6 +21,8 @@ const onWindowAllClosed = (): void => {
     app.quit();
   }
 };
+
+const translation = getTranslation();
 
 export default (_app: Electron.App): void => {
   app = _app;
@@ -56,5 +60,23 @@ export default (_app: Electron.App): void => {
       const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
       await installExtension(REDUX_DEVTOOLS);
     }
+  });
+
+  autoUpdater.on('update-downloaded', async (event: Event, releaseNotes: string, releaseName: string): Promise<void> => {
+    const result = await dialog.showMessageBox({
+      type: 'info',
+      buttons: [translation.restart, translation.later],
+      title: translation.updateAvailable,
+      message: process.platform === 'win32' ? releaseNotes : releaseName,
+      detail: translation.newVersionRestart,
+    });
+
+    if (result.response === 0) {
+      autoUpdater.quitAndInstall();
+    }
+  });
+
+  autoUpdater.on('error', (error: Error): void => {
+    console.error('There was a problem updating the application', error.message);
   });
 };
