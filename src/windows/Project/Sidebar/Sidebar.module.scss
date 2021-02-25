@@ -5,6 +5,10 @@
   overflow: auto;
   padding: 10px 10px 10px 0;
   position: relative;
+
+  &.darwin {
+    padding-top: 40px;
+  }
 }
 
 .projectInfo {
@@ -12,7 +16,7 @@
   margin-top: 10px;
   margin-left: 15px;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .projectImageWrapper {

@@ -6,8 +6,8 @@ import isEqual from 'lodash/isEqual';
 import { State } from '../../store';
 import { fileSetSaved } from '../../store/actions/fileActions';
 import { initialState as projectInitialState } from '../../store/reducers/projectReducer';
-import Sidebar from './Sidebar';
 import useTranslation from '../../intl/useTranslation';
+import Titlebar from '../../components/Titlebar';
 
 import {
   uiSetOpenEditBookmarkDialog,
@@ -15,6 +15,7 @@ import {
   uiSetOpenEditTaskDialog,
 } from '../../store/actions/uiTempActions';
 
+import Sidebar from './Sidebar';
 import ProjectInfo from './ProjectInfo';
 import Tasks from './Tasks';
 import QuickNotes from './QuickNotes';
@@ -29,6 +30,7 @@ const Project: React.FC = () => {
   const { path } = useRouteMatch();
   const history = useHistory();
   const dispatch = useDispatch();
+  const platform = useSelector((state: State) => state.app.platform);
   const project = useSelector((state: State) => state.project);
   const ui = useSelector((state: State) => state.ui);
   const file = useSelector((state: State) => state.file);
@@ -82,6 +84,8 @@ const Project: React.FC = () => {
 
   return (
     <div className={styles.projectLayout}>
+      {platform === 'darwin' && (<Titlebar />)}
+
       <Sidebar />
 
       <div className={styles.rightView}>

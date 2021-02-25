@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
+import clsx from 'clsx';
 
 import Info from '@material-ui/icons/Info';
 import CheckBox from '@material-ui/icons/CheckBox';
@@ -18,6 +19,7 @@ import styles from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {
   const { path } = useRouteMatch();
+  const platform = useSelector((state: State) => state.app.platform);
   const savedSidebarWidth = useSelector((state: State) => state.ui.sidebarWidth);
   const projectInfo = useSelector((state: State) => state.project.projectInfo);
   const [sidebarWidth, setSidebarWidth] = useState<number | undefined>(savedSidebarWidth);
@@ -57,7 +59,10 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={styles.sidebar}
+      className={clsx({
+        [styles.sidebar]: true,
+        [styles.darwin]: platform === 'darwin',
+      })}
       style={{ width: sidebarWidth }}
       ref={sidebarRef}
     >
