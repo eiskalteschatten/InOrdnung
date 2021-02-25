@@ -5,9 +5,14 @@
   overflow: auto;
   padding: 10px 10px 10px 0;
   position: relative;
+  background-color: $lightSidebarBgColor;
 
   &.darwin {
     padding-top: 40px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $darkSidebarBgColor;
   }
 }
 
