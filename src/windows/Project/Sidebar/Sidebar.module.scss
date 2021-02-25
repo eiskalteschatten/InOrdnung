@@ -1,31 +1,35 @@
 @import "../../../scss/variables";
 
 .sidebar {
-  background: $lightSidebarBgColor;
   min-width: 200px;
   overflow: auto;
   padding: 10px 10px 10px 0;
   position: relative;
-  backdrop-filter: blur(5px);
-
-  @media (prefers-color-scheme: dark) {
-    background: $darkSidebarBgColor;
-  }
 }
 
 .projectInfo {
-  text-align: center;
-  margin-top: 5px;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 15px;
+  align-items: center;
+  margin-bottom: 50px;
 }
 
-.image {
-  max-width: 65%;
-  border-radius: 5px;
-  margin-bottom: 10px;;
+.projectImageWrapper {
+  margin-right: 10px;
+  $size: 50px;
+  width: $size;
+  height: $size;
+
+  .projectImage {
+    width: $size;
+    height: $size;
+    object-fit: cover;
+    border-radius: 3px;
+  }
 }
 
 .projectName {
-  font-size: 1.3em;
+  font-size: 1em;
   font-weight: bold;
-  margin-bottom: 50px;
 }

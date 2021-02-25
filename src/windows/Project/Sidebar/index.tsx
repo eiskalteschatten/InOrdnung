@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 
 import Info from '@material-ui/icons/Info';
 import CheckBox from '@material-ui/icons/CheckBox';
@@ -62,11 +63,17 @@ const Sidebar: React.FC = () => {
     >
       <div className={styles.projectInfo}>
         {projectInfo.image && (
-          <img src={`data:${projectInfo.image.mimeType};base64,${projectInfo.image.image}`} className={styles.image} />
+          <div className={styles.projectImageWrapper}>
+            <img src={`data:${projectInfo.image.mimeType};base64,${projectInfo.image.image}`} className={styles.projectImage} />
+          </div>
         )}
 
-        {projectInfo.name && (
+        {projectInfo.name ? (
           <div className={styles.projectName}>{projectInfo.name}</div>
+        ) : (
+          <div className={styles.projectName}>
+            <FormattedMessage id='menuNewProject' />
+          </div>
         )}
       </div>
 
