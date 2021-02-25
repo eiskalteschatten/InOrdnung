@@ -150,7 +150,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
                   className={styles.descriptionEditButton}
                   size='small'
                 >
-                  <EditIcon fontSize='small' />&nbsp;<FormattedMessage id='kanbanEditTask' />
+                  <EditIcon fontSize='small' />&nbsp;<FormattedMessage id='kanbanEditDescription' />
                 </RoundedButton>
               )}
             </div>
