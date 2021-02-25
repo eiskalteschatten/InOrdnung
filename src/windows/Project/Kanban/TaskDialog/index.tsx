@@ -163,7 +163,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
                 className={styles.descriptionEditor}
               />
             ) : (
-              <div onDoubleClick={() => setEditingDescription(true)}>
+              <div onDoubleClick={() => setEditingDescription(true)} className='ql-editor'>
                 <ReactMarkdown
                   source={context.editingTask?.description ?? ''}
                   escapeHtml={false}
