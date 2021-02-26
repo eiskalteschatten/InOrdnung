@@ -5,6 +5,7 @@ export default (type: string): any => ({
     type,
     primary: {
       main: type === 'dark' ? blue[300] : blue[800],
+      dark: type === 'dark' ? blueGrey[800] : blueGrey[100],
     },
     secondary: {
       main: blueGrey[100],

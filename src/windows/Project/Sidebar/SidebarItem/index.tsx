@@ -9,6 +9,7 @@ import styles from './SidebarItem.module.scss';
 const useStyles = makeStyles((theme: Theme) => ({
   selected: {
     color: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.dark,
     borderLeft: `5px solid ${theme.palette.primary.main}`,
   },
 }));
