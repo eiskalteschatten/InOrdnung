@@ -11,19 +11,16 @@
   border-left: 5px solid transparent;
   transition: opacity 100ms;
 
-  &:hover {
-    color: inherit;
-    text-decoration: none;
-    opacity: 1;
+  &:not(.selected) {
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+      opacity: 1;
+    }
   }
 
   &:active, &.selected {
     opacity: 1;
-    border-left: 5px solid $lightColor;
-
-    @media (prefers-color-scheme: dark) {
-      border-left: 5px solid $darkColor;
-    }
   }
 
   &:first-of-type {
