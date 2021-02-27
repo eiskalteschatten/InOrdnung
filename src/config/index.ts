@@ -32,13 +32,13 @@ let storagePath = '';
 
 switch (process.platform) {
   case 'darwin':
-    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'inordnung');
+    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'InOrdnung');
     break;
   case 'win32':
-    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'Alex Seifert', 'inordnung');
+    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'Alex Seifert', 'InOrdnung');
     break;
   default:
-    storagePath = path.join(os.homedir(), '.inordnung');
+    storagePath = path.join(os.homedir(), '.InOrdnung');
     break;
 }
 
