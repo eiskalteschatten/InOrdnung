@@ -81,6 +81,10 @@ const Bookmarks: React.FC = () => {
     setLocalBookmarks(localBookmarks?.sort((rowA: any, rowB: any) => sortStrings(rowA[newSortBy], rowB[newSortBy], newSortDirection)));
   };
 
+  const handleDoubleClick = (bookmark: Bookmark): void => {
+    setEditingBookmark(bookmark);
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
@@ -127,6 +131,7 @@ const Bookmarks: React.FC = () => {
                   onMouseEnter={() => setHoverBookmarkId(row.id)}
                   onMouseLeave={() => setHoverBookmarkId('')}
                   onContextMenu={() => ipcRenderer.send('showBookmarkMenu', row)}
+                  onDoubleClick={() => handleDoubleClick(row)}
                 >
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}

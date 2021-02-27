@@ -113,6 +113,10 @@ const Tasks: React.FC = () => {
     dispatch(uiSetShowCompletedTasks(!showCompletedTasks));
   };
 
+  const handleDoubleClick = (task: Task): void => {
+    setEditingTask(task);
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
@@ -195,6 +199,7 @@ const Tasks: React.FC = () => {
                     [styles.completedTask]: row.completed,
                     [styles.hiddenTask]: !showCompletedTasks && row.completed,
                   })}
+                  onDoubleClick={() => handleDoubleClick(row)}
                 >
                   <TableCell width={35}>
                     <IconButton
