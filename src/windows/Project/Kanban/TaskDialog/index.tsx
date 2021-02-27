@@ -194,12 +194,13 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
       </DialogContent>
       <DialogActions>
         {!context.isNewTask && (
-          <IconButton
+          <RoundedButton
             className={styles.deleteButton}
             onClick={() => ipcRenderer.send('deleteKanbanTask', context.editingTask?.id)}
+            size='small'
           >
             <DeleteIcon fontSize='small' />
-          </IconButton>
+          </RoundedButton>
         )}
 
         <Button onClick={handleClose} variant='outlined' color='primary' size='small'>
