@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown/with-html';
+import clsx from 'clsx';
 
 import {
   Dialog,
@@ -163,7 +164,10 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
                 className={styles.descriptionEditor}
               />
             ) : (
-              <div onDoubleClick={() => setEditingDescription(true)} className='ql-editor'>
+              <div
+                onDoubleClick={() => setEditingDescription(true)}
+                className={clsx('ql-editor', styles.descriptionPreview)}
+              >
                 <ReactMarkdown
                   source={context.editingTask?.description ?? ''}
                   escapeHtml={false}
