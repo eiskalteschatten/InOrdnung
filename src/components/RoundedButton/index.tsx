@@ -22,9 +22,10 @@ interface Props {
   variant?: 'standard' | 'contained';
   size?: 'small' | 'standard';
   selected?: boolean;
+  dark?: boolean;
 }
 
-const RoundedButton: React.FC<Props> = ({ onClick, children, className, variant, size, selected }) => {
+const RoundedButton: React.FC<Props> = ({ onClick, children, className, variant, size, selected, dark }) => {
   const classes = useStyles();
 
   return (
@@ -36,6 +37,7 @@ const RoundedButton: React.FC<Props> = ({ onClick, children, className, variant,
         [classes.contained]: variant === 'contained',
         [styles.small]: size === 'small',
         [styles.selected]: selected,
+        [styles.dark]: dark,
       })}
       onClick={onClick}
     >

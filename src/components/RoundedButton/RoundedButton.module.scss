@@ -73,6 +73,22 @@
     }
   }
 
+  &.dark {
+    color: #000000;
+
+    &:hover {
+      &::before {
+        background: $lightButtonHoverBg;
+      }
+    }
+
+    &:active {
+      &::before {
+        background: $lightButtonActiveBg;
+      }
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     color: #ffffff;
   }

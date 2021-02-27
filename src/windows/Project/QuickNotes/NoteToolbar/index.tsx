@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {
-  IconButton,
-} from '@material-ui/core';
-
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import { QuickNote } from '../../../../interfaces/quickNotes';
+import RoundedButton from '../../../../components/RoundedButton';
 
 import styles from './NoteToolbar.module.scss';
 
@@ -27,9 +24,13 @@ const NoteToolbar: React.FC<Props> = ({ quickNote }) => {
 
       </div>
       <div className={styles.rightSide}>
-        <IconButton size='small' color='inherit' onClick={handleDeleteNote}>
+        <RoundedButton
+          size='small'
+          onClick={handleDeleteNote}
+          dark
+        >
           <DeleteIcon fontSize='small' />
-        </IconButton>
+        </RoundedButton>
       </div>
     </div>
   );
