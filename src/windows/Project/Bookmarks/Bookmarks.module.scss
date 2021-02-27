@@ -19,3 +19,15 @@ $marginSize: 20px;
 .invisible {
   opacity: 0;
 }
+
+.url {
+  color: $lightColor;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    color: $darkColor;
+  }
+}

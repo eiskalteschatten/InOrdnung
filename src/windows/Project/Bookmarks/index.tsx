@@ -131,7 +131,11 @@ const Bookmarks: React.FC = () => {
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
                     {row.name}
                   </TableCell>
-                  <TableCell className={styles.tableCell}>{row.url}</TableCell>
+                  <TableCell className={styles.tableCell}>
+                    <a href={row.url} onClick={e => handleLinkClick(e, row.url)} className={styles.url}>
+                      {row.url}
+                    </a>
+                  </TableCell>
                   <TableCell align='right'>
                     <IconButton
                       size='small'
