@@ -38,7 +38,7 @@ switch (process.platform) {
     storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'Alex Seifert', 'InOrdnung');
     break;
   default:
-    storagePath = path.join(os.homedir(), '.InOrdnung');
+    storagePath = path.join(os.homedir(), '.inordnung');
     break;
 }
 
