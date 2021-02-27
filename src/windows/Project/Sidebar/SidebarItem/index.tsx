@@ -2,7 +2,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  Theme,
+  ButtonBase,
+} from '@material-ui/core';
 
 import styles from './SidebarItem.module.scss';
 
@@ -10,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   selected: {
     color: theme.palette.primary.main,
     backgroundColor: theme.palette.primary.dark,
-    borderLeft: `5px solid ${theme.palette.primary.main}`,
+    borderLeft: `5px solid ${theme.palette.primary.main} !important`,
   },
 }));
 
@@ -29,7 +33,8 @@ const SidebarItem: React.FC<Props> = ({ ItemIcon, title, path }) => {
   }
 
   return (
-    <Link
+    <ButtonBase
+      component={Link}
       to={path}
       className={clsx({
         [styles.sidebarItem]: true,
@@ -39,7 +44,7 @@ const SidebarItem: React.FC<Props> = ({ ItemIcon, title, path }) => {
     >
       <ItemIcon fontSize='small' className={styles.icon} />
       <span className={styles.text}>{title}</span>
-    </Link>
+    </ButtonBase>
   );
 };
 

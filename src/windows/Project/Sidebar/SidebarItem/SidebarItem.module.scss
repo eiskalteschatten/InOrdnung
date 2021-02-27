@@ -2,14 +2,14 @@
 
 .sidebarItem {
   color: $lightColor;
-  padding: 10px 12px;
-  display: flex;
+  padding: 10px 12px !important;
+  display: flex !important;
   align-items: center;
-  font-size: .9em;
+  justify-content: left !important;
   opacity: .6;
-  border-left: 5px solid transparent;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-left: 5px solid transparent !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
   transition: opacity 100ms;
 
   &:not(.selected) {
