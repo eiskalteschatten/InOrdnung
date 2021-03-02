@@ -6,6 +6,7 @@ import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 import moment from 'moment';
 
 import {
+  Grid,
   FormControlLabel,
   Switch,
   TextField,
@@ -54,39 +55,44 @@ const ProjectInfo: React.FC = () => {
 
   return (
     <MuiPickersUtilsProvider utils={MomentUtils} locale={locale}>
-      <div className={styles.projectInfo}>
-        <ProjectImage />
+      <Grid container justify='center' className={styles.projectInfo}>
+        <Grid item>
+          <ProjectImage />
+        </Grid>
+        <Grid item>
+          <div className={styles.formGroup}>
+            <div className={styles.formControlWrapper}>
+              <TextField
+                id='name'
+                label={messages.projectName}
+                variant='outlined'
+                value={projectInfo?.name ?? ''}
+                onChange={handleFieldChange}
+                className={styles.textField}
+                InputLabelProps={{ shrink: !!projectInfo?.name }}
+                fullWidth
+              />
+            </div>
 
-        <div className={styles.formGroup}>
-          <div className={styles.formControlWrapper}>
-            <TextField
-              id='name'
-              label={messages.projectName}
-              variant='outlined'
-              value={projectInfo?.name ?? ''}
-              onChange={handleFieldChange}
-              className={styles.textField}
-              InputLabelProps={{ shrink: !!projectInfo?.name }}
-              fullWidth
-            />
+            <div className={styles.formControlWrapper}>
+              <TextField
+                id='description'
+                label={messages.projectDescription}
+                variant='outlined'
+                value={projectInfo?.description ?? ''}
+                onChange={handleFieldChange}
+                className={styles.textField}
+                InputLabelProps={{ shrink: !!projectInfo?.description }}
+                multiline
+                fullWidth
+                rows={7}
+              />
+            </div>
           </div>
+        </Grid>
+      </Grid>
 
-          <div className={styles.formControlWrapper}>
-            <TextField
-              id='description'
-              label={messages.projectDescription}
-              variant='outlined'
-              value={projectInfo?.description ?? ''}
-              onChange={handleFieldChange}
-              className={styles.textField}
-              InputLabelProps={{ shrink: !!projectInfo?.description }}
-              multiline
-              fullWidth
-              rows={4}
-            />
-          </div>
-        </div>
-
+      <div className={styles.secondHalf}>
         <div
           className={clsx(
             'form-group',
