@@ -26,7 +26,7 @@ export default async (): Promise<void> => {
       window.loadURL(
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000/about'
-          : `file://${path.join(__dirname, '../index.html#about')}`
+          : `file://${path.join(__dirname, '../../index.html#about')}`
       );
 
       window.on('closed', () => {

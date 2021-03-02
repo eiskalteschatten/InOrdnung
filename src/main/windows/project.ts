@@ -54,7 +54,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     newWindow.loadURL(
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000/project'
-        : `file://${path.join(__dirname, '../index.html#project')}`
+        : `file://${path.join(__dirname, '../../index.html#project')}`
     );
 
     newWindow.on('close', (e: Event) => onClose(e, newWindow));
