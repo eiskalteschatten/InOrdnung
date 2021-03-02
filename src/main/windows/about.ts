@@ -12,6 +12,7 @@ export default async (): Promise<void> => {
       width: 450,
       height: 250,
       resizable: false,
+      icon: path.join(__dirname, '../../assets/images/icon128.png'),
       webPreferences: {
         nodeIntegration: true,
         enableRemoteModule: true,
