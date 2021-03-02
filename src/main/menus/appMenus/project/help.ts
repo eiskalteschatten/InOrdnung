@@ -11,7 +11,7 @@ const translation = getTranslation();
 const submenuItems: MenuItem[] = [
   {
     item: {
-      label: translation.welcomeToInOrdung,
+      label: translation.welcomeToInOrdnung,
       click: (): void => {
         openWelcomeWindow();
       },

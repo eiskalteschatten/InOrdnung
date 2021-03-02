@@ -1,11 +1,11 @@
 export default {
   en: {
-    welcomeToInOrdung: 'Welcome to InOrdnung',
+    welcomeToInOrdnung: 'Welcome to InOrdnung',
     createANewProject: 'Create a new project',
     openAProject: 'Open a Project',
   },
   de: {
-    welcomeToInOrdung: 'Willkommen in InOrdnung',
+    welcomeToInOrdnung: 'Willkommen in InOrdnung',
     createANewProject: 'Ein neues Projekt erstellen',
     openAProject: 'Ein Projekt öffnen',
   },

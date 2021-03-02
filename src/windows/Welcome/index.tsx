@@ -24,7 +24,7 @@ import styles from './Welcome.module.scss';
 const Welcome: React.FC = () => {
   const platform = useSelector((state: State) => state.app.platform);
   const [recentProjects, setRecentProjects] = useState<RecentProjectsLocalStorage[]>([]);
-  const welcomeToInOrdung = useTranslation('welcomeToInOrdung');
+  const welcomeToInOrdnung = useTranslation('welcomeToInOrdnung');
   const untitled = useTranslation('projectUntitled');
 
   useEffect(() => {
@@ -38,8 +38,8 @@ const Welcome: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    document.title = welcomeToInOrdung;
-  }, [welcomeToInOrdung]);
+    document.title = welcomeToInOrdnung;
+  }, [welcomeToInOrdnung]);
 
   const handleNewProjectClick = (): void => {
     window.api.send('createNewProject');
@@ -67,7 +67,7 @@ const Welcome: React.FC = () => {
             <img src={icon} alt='InOrdnung' className={styles.icon} />
 
             <div className={styles.welcome}>
-              <FormattedMessage id='welcomeToInOrdung' />
+              <FormattedMessage id='welcomeToInOrdnung' />
             </div>
           </div>
 
