@@ -13,8 +13,6 @@ import { stripHtml } from '../../../../../../lib/helper';
 
 import styles from './Task.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 interface Props {
   task: KanbanTask;
   columnId: string;
@@ -98,7 +96,7 @@ const Task: React.FC<Props> = ({ task, columnId }) => {
     >
       <Paper
         className={styles.task}
-        onContextMenu={() => ipcRenderer.send('showKanbanMenu', task)}
+        onContextMenu={() => window.api.send('showKanbanMenu', task)}
         onClick={handleOpenTask}
         draggable
         onDragStart={handleDragStart}

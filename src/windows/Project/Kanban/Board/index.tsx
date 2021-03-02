@@ -16,8 +16,6 @@ import Column from './Column';
 
 import styles from './Board.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 interface Props {
   board: KanbanBoard;
 }
@@ -27,7 +25,7 @@ const Board: React.FC<Props> = ({ board }) => {
   const context = useContext(Context);
 
   useEffect(() => {
-    ipcRenderer.on('editKanbanTask', (e: IpcRendererEvent, task: KanbanTask): void => {
+    window.api.on('editKanbanTask', (e: IpcRendererEvent, task: KanbanTask): void => {
       context.setIsNewTask(false);
       context.setEditColumnId(task.columnId || '');
       context.setEditingTask(task);
@@ -35,7 +33,7 @@ const Board: React.FC<Props> = ({ board }) => {
     });
 
     return () => {
-      ipcRenderer.removeAllListeners('editKanbanTask');
+      window.api.removeAllListeners('editKanbanTask');
     };
   }, []);
 

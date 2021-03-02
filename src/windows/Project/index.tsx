@@ -24,8 +24,6 @@ import Kanban from './Kanban';
 
 import styles from './Project.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 const Project: React.FC = () => {
   const { path } = useRouteMatch();
   const history = useHistory();
@@ -38,25 +36,25 @@ const Project: React.FC = () => {
   const untitled = useTranslation('projectUntitled');
 
   useEffect(() => {
-    ipcRenderer.on('newTask', (): void => {
+    window.api.on('newTask', (): void => {
       dispatch(uiSetOpenEditTaskDialog(true));
       history.push(`${path}/tasks`);
     });
 
-    ipcRenderer.on('newQuickNote', (): void => {
+    window.api.on('newQuickNote', (): void => {
       dispatch(uiSetOpenEditQuickNoteDialog(true));
       history.push(`${path}/quick-notes`);
     });
 
-    ipcRenderer.on('newBookmark', (): void => {
+    window.api.on('newBookmark', (): void => {
       dispatch(uiSetOpenEditBookmarkDialog(true));
       history.push(`${path}/bookmarks`);
     });
 
     return () => {
-      ipcRenderer.removeAllListeners('newTask');
-      ipcRenderer.removeAllListeners('newQuickNote');
-      ipcRenderer.removeAllListeners('newBookmark');
+      window.api.removeAllListeners('newTask');
+      window.api.removeAllListeners('newQuickNote');
+      window.api.removeAllListeners('newBookmark');
     };
   }, []);
 
@@ -69,7 +67,7 @@ const Project: React.FC = () => {
 
     if (file.fileLoaded) {
       if (!isEqual(project, projectInitialState)) {
-        ipcRenderer.send('projectIsEdited');
+        window.api.send('projectIsEdited');
       }
 
       if (autoSaveTimeout) {
@@ -77,7 +75,7 @@ const Project: React.FC = () => {
       }
 
       setAutoSaveTimeout(setTimeout(() => {
-        ipcRenderer.send('saveProject', { project, ui }, file);
+        window.api.send('saveProject', { project, ui }, file);
       }, 1000));
     }
   }, [project, ui]);

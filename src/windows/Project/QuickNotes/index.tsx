@@ -17,8 +17,6 @@ import NoteToolbar from './NoteToolbar';
 
 import styles from './QuickNotes.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 const QuickNotes: React.FC = () => {
   const dispatch = useDispatch();
   const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
@@ -36,12 +34,12 @@ const QuickNotes: React.FC = () => {
   };
 
   useEffect(() => {
-    ipcRenderer.on('editQuickNote', (e: IpcRendererEvent, quickNote: QuickNote): void => {
+    window.api.on('editQuickNote', (e: IpcRendererEvent, quickNote: QuickNote): void => {
       setEditingQuickNote(quickNote);
     });
 
     return () => {
-      ipcRenderer.removeAllListeners('editQuickNote');
+      window.api.removeAllListeners('editQuickNote');
     };
   }, []);
 
@@ -74,7 +72,7 @@ const QuickNotes: React.FC = () => {
               sm={6}
               md={4}
               lg={3}
-              onContextMenu={() => ipcRenderer.send('showQuickNoteMenu', quickNote)}
+              onContextMenu={() => window.api.send('showQuickNoteMenu', quickNote)}
             >
               <Paper className={styles.quickNote}>
                 <div onClick={() => handleOpenNote(quickNote)} className={styles.noteContents}>

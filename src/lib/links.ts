@@ -1,12 +1,10 @@
 import { MouseEvent } from 'react';
 
-const { shell } = window.require('electron');
-
 export const handleLinkClick = (e: MouseEvent<HTMLAnchorElement>, url: string): void => {
   e.preventDefault();
 
   if (url && isValidUrl(url)) {
-    shell.openExternal(url);
+    window.shell.openExternal(url);
   }
 };
 

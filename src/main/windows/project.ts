@@ -23,7 +23,8 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     height: defaultHeight, // preferences.windowHeight || defaultHeight,
     icon: path.join(__dirname, '../../assets/images/icon128.png'),
     webPreferences: {
-      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, '../preload.js'),
     },
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0',
   };

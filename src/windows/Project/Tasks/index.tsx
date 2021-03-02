@@ -38,8 +38,6 @@ import TaskDialog from './TaskDialog';
 
 import styles from './Tasks.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 const Tasks: React.FC = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state: State) => state.project?.tasks);
@@ -52,12 +50,12 @@ const Tasks: React.FC = () => {
   const [hoverTaskId, setHoverTaskId] = useState<string>('');
 
   useEffect(() => {
-    ipcRenderer.on('editTask', (e: IpcRendererEvent, task: Task): void => {
+    window.api.on('editTask', (e: IpcRendererEvent, task: Task): void => {
       setEditingTask(task);
     });
 
     return () => {
-      ipcRenderer.removeAllListeners('editTask');
+      window.api.removeAllListeners('editTask');
     };
   }, []);
 
@@ -194,7 +192,7 @@ const Tasks: React.FC = () => {
                   key={row.id}
                   onMouseEnter={() => setHoverTaskId(row.id)}
                   onMouseLeave={() => setHoverTaskId('')}
-                  onContextMenu={() => ipcRenderer.send('showTaskMenu', row)}
+                  onContextMenu={() => window.api.send('showTaskMenu', row)}
                   className={clsx({
                     [styles.completedTask]: row.completed,
                     [styles.hiddenTask]: !showCompletedTasks && row.completed,
@@ -227,7 +225,7 @@ const Tasks: React.FC = () => {
                   <TableCell align='right'>
                     <IconButton
                       size='small'
-                      onClick={() => ipcRenderer.send('showTaskMenu', row)}
+                      onClick={() => window.api.send('showTaskMenu', row)}
                       className={clsx({
                         [styles.invisible]: hoverTaskId !== row.id,
                       })}

@@ -31,8 +31,6 @@ import BookmarkDialog from './BookmarkDialog';
 
 import styles from './Bookmarks.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 const Bookmarks: React.FC = () => {
   const dispatch = useDispatch();
   const bookmarks = useSelector((state: State) => state.project?.bookmarks);
@@ -44,12 +42,12 @@ const Bookmarks: React.FC = () => {
   const [hoverBookmarkId, setHoverBookmarkId] = useState<string>('');
 
   useEffect(() => {
-    ipcRenderer.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
+    window.api.on('editBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
       setEditingBookmark(bookmark);
     });
 
     return () => {
-      ipcRenderer.removeAllListeners('editBookmark');
+      window.api.removeAllListeners('editBookmark');
     };
   }, []);
 
@@ -130,7 +128,7 @@ const Bookmarks: React.FC = () => {
                   key={row.id}
                   onMouseEnter={() => setHoverBookmarkId(row.id)}
                   onMouseLeave={() => setHoverBookmarkId('')}
-                  onContextMenu={() => ipcRenderer.send('showBookmarkMenu', row)}
+                  onContextMenu={() => window.api.send('showBookmarkMenu', row)}
                   onDoubleClick={() => handleDoubleClick(row)}
                 >
                   <TableCell component='th' scope='row'  className={styles.tableCell}>
@@ -144,7 +142,7 @@ const Bookmarks: React.FC = () => {
                   <TableCell align='right'>
                     <IconButton
                       size='small'
-                      onClick={() => ipcRenderer.send('showBookmarkMenu', row)}
+                      onClick={() => window.api.send('showBookmarkMenu', row)}
                       className={clsx({
                         [styles.invisible]: hoverBookmarkId !== row.id,
                       })}

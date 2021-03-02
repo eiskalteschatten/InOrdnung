@@ -14,8 +14,8 @@ export default async (): Promise<void> => {
       resizable: false,
       icon: path.join(__dirname, '../../assets/images/icon128.png'),
       webPreferences: {
-        nodeIntegration: true,
-        enableRemoteModule: true,
+        contextIsolation: true,
+        preload: path.join(__dirname, '../preload.js'),
       },
       backgroundColor: nativeTheme.shouldUseDarkColors ? '#222222' : '#f0f0f0',
     };

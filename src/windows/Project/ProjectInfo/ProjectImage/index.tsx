@@ -11,8 +11,6 @@ import { State } from '../../../../store';
 
 import styles from './ProjectImage.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 const ProjectImage: React.FC = () => {
   const projectImage = useSelector((state: State) => state.project.projectInfo.image);
   const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
@@ -30,15 +28,15 @@ const ProjectImage: React.FC = () => {
   const handleOnDrop = async (e: React.DragEvent<HTMLDivElement>): Promise<void> => {
     e.preventDefault();
     setIsDraggingOver(false);
-    ipcRenderer.send('handleProjectImageDrop', e.dataTransfer.files[0].path);
+    window.api.send('handleProjectImageDrop', e.dataTransfer.files[0].path);
   };
 
   const handleClick = (): void => {
-    ipcRenderer.send('selectProjectImage');
+    window.api.send('selectProjectImage');
   };
 
   const handleCm = (): void => {
-    ipcRenderer.send('showProjectImageContextMenu');
+    window.api.send('showProjectImageContextMenu');
   };
 
   return (

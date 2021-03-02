@@ -31,8 +31,6 @@ import { Context } from '../KanbanContextWrapper';
 
 import styles from './TaskDialog.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 interface Props {
   open: boolean;
   close: () => void;
@@ -200,7 +198,7 @@ const TaskDialog: React.FC<Props> = ({ open, close }) => {
         {!context.isNewTask && (
           <RoundedButton
             className={styles.deleteButton}
-            onClick={() => ipcRenderer.send('deleteKanbanTask', context.editingTask?.id)}
+            onClick={() => window.api.send('deleteKanbanTask', context.editingTask?.id)}
             size='small'
           >
             <DeleteIcon fontSize='small' />

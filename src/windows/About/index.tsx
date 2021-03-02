@@ -12,8 +12,6 @@ import { handleLinkClick } from '../../lib/links';
 import icon from '../../assets/images/icon.svg';
 import styles from './About.module.scss';
 
-const { remote, ipcRenderer } = window.require('electron');
-
 interface ProcessVersions {
   node: string;
   chrome: string;
@@ -27,10 +25,10 @@ const About: React.FC = () => {
 
   useEffect(() => {
     document.title = aboutInOrdnung;
-    ipcRenderer.on('processVersions', (event: IpcRendererEvent, versions: ProcessVersions): void => setProcessVersions(versions));
+    window.api.on('processVersions', (event: IpcRendererEvent, versions: ProcessVersions): void => setProcessVersions(versions));
 
     return () => {
-      ipcRenderer.removeAllListeners('processVersions');
+      window.api.removeAllListeners('processVersions');
     };
   }, [aboutInOrdnung]);
 
@@ -47,7 +45,7 @@ const About: React.FC = () => {
         </div>
 
         <div className={styles.version}>
-          {remote.app.getVersion()}
+          {window.app.getVersion()}
         </div>
 
         <div className={styles.electronVersions}>

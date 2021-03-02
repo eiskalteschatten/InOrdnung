@@ -21,8 +21,6 @@ import { RecentProjectsLocalStorage } from '../../interfaces/project';
 import icon from '../../assets/images/icon.svg';
 import styles from './Welcome.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 const Welcome: React.FC = () => {
   const platform = useSelector((state: State) => state.app.platform);
   const [recentProjects, setRecentProjects] = useState<RecentProjectsLocalStorage[]>([]);
@@ -30,12 +28,12 @@ const Welcome: React.FC = () => {
   const untitled = useTranslation('projectUntitled');
 
   useEffect(() => {
-    ipcRenderer.on('getRecentProjects', (e: IpcRendererEvent, _recentProjects: RecentProjectsLocalStorage[]): void => {
+    window.api.on('getRecentProjects', (e: IpcRendererEvent, _recentProjects: RecentProjectsLocalStorage[]): void => {
       setRecentProjects(_recentProjects);
     });
 
     return () => {
-      ipcRenderer.removeAllListeners('getRecentProjects');
+      window.api.removeAllListeners('getRecentProjects');
     };
   }, []);
 
@@ -44,16 +42,16 @@ const Welcome: React.FC = () => {
   }, [welcomeToInOrdung]);
 
   const handleNewProjectClick = (): void => {
-    ipcRenderer.send('createNewProject');
+    window.api.send('createNewProject');
     window.close();
   };
 
   const handleOpenRecentProject = (filePath: string): void => {
-    ipcRenderer.send('openFile', filePath);
+    window.api.send('openFile', filePath);
   };
 
   const handleOpenFileDialog = (): void => {
-    ipcRenderer.send('openFileDialog');
+    window.api.send('openFileDialog');
   };
 
   return (

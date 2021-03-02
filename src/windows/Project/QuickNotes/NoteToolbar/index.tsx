@@ -7,15 +7,13 @@ import RoundedButton from '../../../../components/RoundedButton';
 
 import styles from './NoteToolbar.module.scss';
 
-const { ipcRenderer } = window.require('electron');
-
 interface Props {
   quickNote?: QuickNote;
 }
 
 const NoteToolbar: React.FC<Props> = ({ quickNote }) => {
   const handleDeleteNote = (): void => {
-    ipcRenderer.send('deleteQuickNote', quickNote);
+    window.api.send('deleteQuickNote', quickNote);
   };
 
   return (
