@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline, createMuiTheme }  from '@material-ui/core';
@@ -57,13 +57,13 @@ const App: React.FC = () => {
       <IntlProviderWrapper injectedLocale={locale}>
         <ThemeProvider theme={muiTheme}>
           <CssBaseline />
-          <BrowserRouter>
+          <HashRouter>
             <Switch>
               <Route path='/' exact component={Welcome} />
               <Route path='/project' component={Project} />
               <Route path='/about' component={About} />
             </Switch>
-          </BrowserRouter>
+          </HashRouter>
         </ThemeProvider>
       </IntlProviderWrapper>
     </>
