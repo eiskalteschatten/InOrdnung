@@ -34,15 +34,6 @@
     "directories": {
       "buildResources": "build-resources"
     },
-    "fileAssociations": [
-      {
-        "ext": [
-          "inord"
-        ],
-        "name": "InOrdnung Project File",
-        "role": "Editor"
-      }
-    ],
     "mac": {
       "target": [
         "dmg"
@@ -50,21 +41,51 @@
       "category": "public.app-category.productivity",
       "entitlements": "build-resources/entitlements.mac.plist",
       "type": "development",
-      "darkModeSupport": true
+      "darkModeSupport": true,
+      "icon": "build-resources/icon.icns",
+      "fileAssociations": [
+        {
+          "ext": [
+            "inord"
+          ],
+          "name": "InOrdnung Project File",
+          "role": "Editor",
+          "icon": "build-resources/icon-doc.icns"
+        }
+      ]
     },
     "linux": {
       "target": [
         "deb",
         "tar.gz"
       ],
-      "category": "Office"
+      "category": "Office",
+      "fileAssociations": [
+        {
+          "ext": [
+            "inord"
+          ],
+          "name": "InOrdnung Project File",
+          "role": "Editor"
+        }
+      ]
     },
     "win": {
       "target": [
         "nsis",
         "portable"
       ],
-      "icon": "build-resources/icon.ico"
+      "icon": "build-resources/icon-doc.ico",
+      "fileAssociations": [
+        {
+          "ext": [
+            "inord"
+          ],
+          "name": "InOrdnung Project File",
+          "role": "Editor",
+          "icon": "build-resources/icon.icns"
+        }
+      ]
     }
   },
   "repository": "https://github.com/eiskalteschatten/electron-react-typescript.git",
