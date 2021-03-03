@@ -53,7 +53,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
 
     newWindow.loadURL(
       process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/project'
+        ? 'http://localhost:3000#project'
         : `file://${path.join(__dirname, '../../index.html#project')}`
     );
 
