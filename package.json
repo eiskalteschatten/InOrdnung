@@ -75,7 +75,7 @@
         "nsis",
         "portable"
       ],
-      "icon": "build-resources/icon-doc.ico",
+      "icon": "build-resources/icon.ico",
       "fileAssociations": [
         {
           "ext": [
@@ -83,7 +83,7 @@
           ],
           "name": "InOrdnung Project File",
           "role": "Editor",
-          "icon": "build-resources/icon.icns"
+          "icon": "build-resources/icon-doc.icns"
         }
       ]
     }
