@@ -65,8 +65,7 @@
           "ext": [
             "inord"
           ],
-          "name": "InOrdnung Project File",
-          "role": "Editor"
+          "name": "InOrdnung Project File"
         }
       ]
     },
@@ -82,7 +81,6 @@
             "inord"
           ],
           "name": "InOrdnung Project File",
-          "role": "Editor",
           "icon": "build-resources/icon-doc.ico"
         }
       ]
