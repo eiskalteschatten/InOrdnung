@@ -1,5 +1,6 @@
 import { BrowserWindow, BrowserWindowConstructorOptions, dialog, Menu, nativeTheme, screen } from 'electron';
 import path from 'path';
+import log from 'electron-log';
 
 import initializeRenderer from '../initializeRenderer';
 import appMenu from '../menus/appMenus/project';
@@ -115,7 +116,7 @@ const onClose = async (e: Event, window?: BrowserWindow): Promise<void> => {
     }
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
   }
 };
 

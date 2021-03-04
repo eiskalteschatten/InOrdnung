@@ -2,6 +2,7 @@ import { BrowserWindow, dialog, app } from 'electron';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
 import { Worker } from 'worker_threads';
+import log from 'electron-log';
 
 import config from '../../config';
 import { ProjectFile, ProjectFileMetaData, RecentProjectsLocalStorage } from '../../interfaces/project';
@@ -50,7 +51,7 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
     }
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
   }
 };
 
@@ -68,7 +69,7 @@ export const openFileDialog = async (): Promise<void> => {
     }
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
   }
 };
 
@@ -81,7 +82,7 @@ export const openFile = async (filePath: string): Promise<void> => {
     app.addRecentDocument(filePath);
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
   }
 };
 
@@ -93,13 +94,13 @@ export const addToRecentProjects = async (filePath: string, projectName?: string
       .on('online', (): void => {
         worker.postMessage({ projectName, filePath, image, mimeType });
       })
-      .on('error', console.error)
+      .on('error', log.error)
       .on('exit', (code: number): void => {
-        console.log(`Worker: addToRecentProjects exited with code ${code}`);
+        log.log(`Worker: addToRecentProjects exited with code ${code}`);
       });
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
   }
 };
 
@@ -122,7 +123,7 @@ export const getRecentProjects = async (): Promise<RecentProjectsLocalStorage[]>
     }
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
   }
 
   return recentProjects;

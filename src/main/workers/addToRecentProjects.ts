@@ -1,6 +1,7 @@
 import { parentPort } from 'worker_threads';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
+import log from 'electron-log';
 
 import { createThumbnail } from '../lib/images';
 import config from '../../config';
@@ -12,7 +13,7 @@ parentPort?.on('message', async ({ projectName, filePath, image, mimeType }): Pr
   const pathToLockFile = path.resolve(config.app.storagePath, 'recentProjects.lock');
 
   if (fs.existsSync(pathToLockFile)) {
-    console.log('Cannot update recent projects because the process is locked.');
+    log.log('Cannot update recent projects because the process is locked.');
     process.exit(0);
   }
 

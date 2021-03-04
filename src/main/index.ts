@@ -2,6 +2,7 @@ import path from 'path';
 import { Worker } from 'worker_threads';
 import { autoUpdater, dialog } from 'electron';
 import updateElectronApp from 'update-electron-app';
+import log from 'electron-log';
 
 import './eventsFromRenderer';
 
@@ -51,9 +52,9 @@ export default (_app: Electron.App): void => {
       .on('online', (): void => {
         worker.postMessage({});
       })
-      .on('error', console.error)
+      .on('error', log.error)
       .on('exit', (code: number): void => {
-        console.log(`Worker: initializeApp exited with code ${code}`);
+        log.log(`Worker: initializeApp exited with code ${code}`);
       });
 
     if (process.env.NODE_ENV === 'development') {
@@ -77,6 +78,6 @@ export default (_app: Electron.App): void => {
   });
 
   autoUpdater.on('error', (error: Error): void => {
-    console.error('There was a problem updating the application', error.message);
+    log.error('There was a problem updating the application', error.message);
   });
 };

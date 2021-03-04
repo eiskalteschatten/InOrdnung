@@ -3,6 +3,7 @@ import { promises as fsPromises } from 'fs';
 import path from 'path';
 import FileType from 'file-type';
 import sharp from 'sharp';
+import log from 'electron-log';
 
 import config from '../../config';
 import { getTranslation } from '../../lib/helper';
@@ -17,7 +18,7 @@ export const checkIfFileIsImage = (imagePath: string, promptUser = false): boole
         const extensionsString = config.extensions.images.join(', ');
         const errorDescription = `${translation.errorImageMustBeImageFileDesc} ${extensionsString}.`;
         dialog.showErrorBox(translation.errorImageMustBeImageFile, errorDescription);
-        console.error(translation.errorImageMustBeImageFile, errorDescription);
+        log.error(translation.errorImageMustBeImageFile, errorDescription);
       }
 
       return false;
@@ -26,7 +27,7 @@ export const checkIfFileIsImage = (imagePath: string, promptUser = false): boole
     return true;
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
     return false;
   }
 };
@@ -40,7 +41,7 @@ export const encodeImage = async (imagePath: string): Promise<string> => {
     return await fsPromises.readFile(imagePath, { encoding: 'base64' });
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
     return '';
   }
 };
@@ -66,7 +67,7 @@ export const createThumbnail = async (image: string): Promise<string> => {
     return thumbnailBuffer.toString('base64');
   }
   catch (error) {
-    console.error(error);
+    log.error(error);
     return '';
   }
 };
