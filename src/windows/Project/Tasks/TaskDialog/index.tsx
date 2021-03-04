@@ -32,25 +32,20 @@ import { getDateLocaleFormat } from '../../../../lib/dates';
 
 interface Props {
   open: boolean;
-  close: () => void;
+  handleClose: () => void;
   task?: Task;
 }
 
-const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
+const TaskDialog: React.FC<Props> = ({ open, handleClose, task }) => {
   const [editingTask, setEditingTask] = useState<Task | undefined>();
   const dispatch = useDispatch();
   const { locale, messages } = useContext(IntlContext);
 
   useEffect(() => {
-    setEditingTask(task ? task : {
-      id: uuidv4(),
-    });
+    if (task) {
+      setEditingTask(task);
+    }
   }, [task]);
-
-  const handleClose = (): void => {
-    setEditingTask(undefined);
-    close();
-  };
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEditingTask({
@@ -61,7 +56,10 @@ const TaskDialog: React.FC<Props> = ({ open, close, task }) => {
 
   const handleSave = (): void => {
     if (!task && editingTask) {
-      dispatch(projectAddTask(editingTask));
+      dispatch(projectAddTask({
+        id: uuidv4(),
+        ...editingTask,
+      }));
     }
     else if (editingTask) {
       dispatch(projectEditTask(editingTask));

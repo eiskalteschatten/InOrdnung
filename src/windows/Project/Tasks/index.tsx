@@ -115,6 +115,11 @@ const Tasks: React.FC = () => {
     setEditingTask(task);
   };
 
+  const handleCloseDialog = (): void => {
+    setEditingTask(undefined);
+    dispatch(uiSetOpenEditTaskDialog(false));
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
@@ -240,11 +245,13 @@ const Tasks: React.FC = () => {
         </TableContainer>
       </div>
 
-      <TaskDialog
-        open={openEditTaskDialog}
-        close={() => dispatch(uiSetOpenEditTaskDialog(false))}
-        task={editingTask}
-      />
+      {openEditTaskDialog && (
+        <TaskDialog
+          open={openEditTaskDialog}
+          handleClose={handleCloseDialog}
+          task={editingTask}
+        />
+      )}
     </div>
   );
 };

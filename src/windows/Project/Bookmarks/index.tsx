@@ -83,6 +83,11 @@ const Bookmarks: React.FC = () => {
     setEditingBookmark(bookmark);
   };
 
+  const handleCloseDialog = (): void => {
+    setEditingBookmark(undefined);
+    dispatch(uiSetOpenEditBookmarkDialog(false));
+  };
+
   return (
     <div>
       <div className={styles.toolbar}>
@@ -168,11 +173,13 @@ const Bookmarks: React.FC = () => {
         </TableContainer>
       </div>
 
-      <BookmarkDialog
-        open={openEditBookmarkDialog}
-        close={() => dispatch(uiSetOpenEditBookmarkDialog(false))}
-        bookmark={editingBookmark}
-      />
+      {openEditBookmarkDialog && (
+        <BookmarkDialog
+          open={openEditBookmarkDialog}
+          handleClose={handleCloseDialog}
+          bookmark={editingBookmark}
+        />
+      )}
     </div>
   );
 };

@@ -20,24 +20,19 @@ import { projectAddBookmark, projectEditBookmark } from '../../../../store/actio
 
 interface Props {
   open: boolean;
-  close: () => void;
+  handleClose: () => void;
   bookmark?: Bookmark;
 }
 
-const BookmarkDialog: React.FC<Props> = ({ open, close, bookmark }) => {
+const BookmarkDialog: React.FC<Props> = ({ open, handleClose, bookmark }) => {
   const [editingBookmark, setEditingBookmark] = useState<Bookmark | undefined>();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setEditingBookmark(bookmark ? bookmark : {
-      id: uuidv4(),
-    });
+    if (bookmark) {
+      setEditingBookmark(bookmark);
+    }
   }, [bookmark]);
-
-  const handleClose = (): void => {
-    setEditingBookmark(undefined);
-    close();
-  };
 
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setEditingBookmark({
@@ -48,7 +43,10 @@ const BookmarkDialog: React.FC<Props> = ({ open, close, bookmark }) => {
 
   const handleSave = (): void => {
     if (!bookmark && editingBookmark) {
-      dispatch(projectAddBookmark(editingBookmark));
+      dispatch(projectAddBookmark({
+        id: uuidv4(),
+        ...editingBookmark,
+      }));
     }
     else if (editingBookmark) {
       dispatch(projectEditBookmark(editingBookmark));
