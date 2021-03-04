@@ -1,7 +1,6 @@
 import { BrowserWindow, dialog, app } from 'electron';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
-import { Worker } from 'worker_threads';
 import log from 'electron-log';
 
 import config from '../../config';
@@ -88,16 +87,23 @@ export const openFile = async (filePath: string): Promise<void> => {
 
 export const addToRecentProjects = async (filePath: string, projectName?: string, image?: string, mimeType?: string): Promise<void> => {
   try {
-    const worker = new Worker(path.join(__dirname, '../workers/', 'addToRecentProjects.js'));
 
-    worker
-      .on('online', (): void => {
-        worker.postMessage({ projectName, filePath, image, mimeType });
-      })
-      .on('error', log.error)
-      .on('exit', (code: number): void => {
-        log.log(`Worker: addToRecentProjects exited with code ${code}`);
-      });
+    const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../workers/', 'addToRecentProjects.html');
+
+    const addToRecentProjectsWindow = new BrowserWindow({
+      width: 400,
+      height: 400,
+      show: false,
+      webPreferences: {
+        contextIsolation: true,
+        preload: path.join(__dirname, '../preload.js'),
+      },
+    });
+
+    addToRecentProjectsWindow.loadURL(addToRecentProjectsPath);
+    addToRecentProjectsWindow.webContents.on('did-finish-load', () => {
+      addToRecentProjectsWindow.webContents.send('startWorker', { projectName, filePath, image, mimeType });
+    });
   }
   catch (error) {
     log.error(error);

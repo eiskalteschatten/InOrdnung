@@ -1,4 +1,4 @@
-import { parentPort } from 'worker_threads';
+import { ipcMain, IpcMainEvent } from 'electron';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
 import log from 'electron-log';
@@ -8,8 +8,9 @@ import config from '../../config';
 import { RecentProjectsLocalStorage } from '../../interfaces/project';
 import { getRecentProjects } from '../lib/projectFile';
 
+ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath, image, mimeType }): Promise<void> => {
+  log.info('Adding project to recent projects list');
 
-parentPort?.on('message', async ({ projectName, filePath, image, mimeType }): Promise<void> => {
   const pathToLockFile = path.resolve(config.app.storagePath, 'recentProjects.lock');
 
   if (fs.existsSync(pathToLockFile)) {
@@ -39,5 +40,6 @@ parentPort?.on('message', async ({ projectName, filePath, image, mimeType }): Pr
   await fsPromises.writeFile(recentProjectsFilePath, JSON.stringify(recentProjects), 'utf8');
   await fsPromises.unlink(pathToLockFile);
 
-  process.exit(0);
+  log.info('Project added to recent projects list');
+  e.sender.send('addToRecentProjectsFinished');
 });

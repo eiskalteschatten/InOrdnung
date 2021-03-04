@@ -48,7 +48,7 @@ export default (_app: Electron.App): void => {
 
     const initializeAppPath = 'file://' + path.join(__dirname, '/workers/', 'initializeApp.html');
 
-    const initializeApp = new BrowserWindow({
+    const initializeAppWindow = new BrowserWindow({
       width: 400,
       height: 400,
       show: false,
@@ -58,9 +58,7 @@ export default (_app: Electron.App): void => {
       },
     });
 
-    initializeApp.loadURL(initializeAppPath);
-    initializeApp.webContents.on('did-finish-load', () => {
-    });
+    initializeAppWindow.loadURL(initializeAppPath);
 
     if (process.env.NODE_ENV === 'development') {
       const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
