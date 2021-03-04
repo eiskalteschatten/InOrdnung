@@ -13,8 +13,8 @@ parentPort?.on('message', async ({ projectName, filePath, image, mimeType }): Pr
   const pathToLockFile = path.resolve(config.app.storagePath, 'recentProjects.lock');
 
   if (fs.existsSync(pathToLockFile)) {
-    log.log('Cannot update recent projects because the process is locked.');
-    process.exit(0);
+    log.warn('Cannot update recent projects because the process is locked.');
+    process.exit(1);
   }
 
   await fsPromises.writeFile(pathToLockFile, '', 'utf8');
