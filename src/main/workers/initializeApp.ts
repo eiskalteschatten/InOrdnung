@@ -1,10 +1,13 @@
-import { parentPort } from 'worker_threads';
+import { ipcMain, IpcMainEvent } from 'electron';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
+import log from 'electron-log';
 
 import config from '../../config';
 
-parentPort?.on('message', async (): Promise<void> => {
+ipcMain.on('initializeApp', async (e: IpcMainEvent): Promise<void> => {
+  log.info('Initializing the app...');
+
   if (!fs.existsSync(config.app.storagePath)) {
     await fsPromises.mkdir(config.app.storagePath, { recursive: true });
   }
@@ -15,5 +18,6 @@ parentPort?.on('message', async (): Promise<void> => {
     await fsPromises.unlink(pathToLockFile);
   }
 
-  process.exit(0);
+  log.info('App initialized');
+  e.sender.send('initializeAppFinished');
 });

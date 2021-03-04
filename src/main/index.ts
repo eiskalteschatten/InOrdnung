@@ -1,10 +1,10 @@
 import path from 'path';
-import { Worker } from 'worker_threads';
-import { autoUpdater, dialog } from 'electron';
+import { autoUpdater, BrowserWindow, dialog } from 'electron';
 import updateElectronApp from 'update-electron-app';
 import log from 'electron-log';
 
 import './eventsFromRenderer';
+import './workers';
 
 import config from '../config';
 import openWelcomeWindow from './windows/welcome';
@@ -46,16 +46,21 @@ export default (_app: Electron.App): void => {
       openWelcomeWindow();
     }
 
-    const worker = new Worker(path.join(__dirname, '/workers/', 'initializeApp.js'));
+    const initializeAppPath = 'file://' + path.join(__dirname, '/workers/', 'initializeApp.html');
 
-    worker
-      .on('online', (): void => {
-        worker.postMessage({});
-      })
-      .on('error', log.error)
-      .on('exit', (code: number): void => {
-        log.log(`Worker: initializeApp exited with code ${code}`);
-      });
+    const initializeApp = new BrowserWindow({
+      width: 400,
+      height: 400,
+      show: false,
+      webPreferences: {
+        contextIsolation: true,
+        preload: path.join(__dirname, './preload.js'),
+      },
+    });
+
+    initializeApp.loadURL(initializeAppPath);
+    initializeApp.webContents.on('did-finish-load', () => {
+    });
 
     if (process.env.NODE_ENV === 'development') {
       const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');

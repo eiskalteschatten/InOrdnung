@@ -1,7 +1,6 @@
 const path = require('path');
 const copyfiles = require('copyfiles');
 
-
 // These are assets that are used by Electron's main process and are therefore not packed by WebPack.
 const assets = [
   ['src/assets/images/icon128.png', 'build/assets/images'],
@@ -19,3 +18,9 @@ for (const asset of assets) {
     console.log(`${src} was copied to ${dest}`);
   });
 }
+
+copyfiles(['./src/**/*.html', './build'], { up: 1 }, error => {
+  if (error) {
+    throw error;
+  }
+});
