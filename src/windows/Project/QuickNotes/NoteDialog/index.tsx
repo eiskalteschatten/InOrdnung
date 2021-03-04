@@ -22,19 +22,19 @@ import styles from './NoteDialog.module.scss';
 
 interface Props {
   open: boolean;
-  close: () => void;
+  handleClose: () => void;
   quickNote?: QuickNote;
 }
 
-const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
+const NoteDialog: React.FC<Props> = ({ open, handleClose, quickNote }) => {
   const quickNotes = useSelector((state: State) => state.project.quickNotes);
   const [editingQuickNote, setEditingQuickNote] = useState<QuickNote | undefined>();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setEditingQuickNote(quickNote ? quickNote : {
-      id: uuidv4(),
-    });
+    if (quickNote) {
+      setEditingQuickNote(quickNote);
+    }
   }, [quickNote]);
 
   const noteExists = useMemo(() => {
@@ -47,24 +47,25 @@ const NoteDialog: React.FC<Props> = ({ open, close, quickNote }) => {
     }
   }, [quickNotes, editingQuickNote]);
 
-  const handleClose = (): void => {
-    setEditingQuickNote(undefined);
-    close();
-  };
-
   const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const newNoteData = {
+    const noteData = {
       ...editingQuickNote,
       [e.target.id]: e.target.value,
     };
 
-    setEditingQuickNote(newNoteData);
+    setEditingQuickNote(noteData);
 
-    if (newNoteData && !noteExists) {
-      dispatch(projectAddQuickNote(newNoteData));
+    if (noteData && !noteExists) {
+      const newNote = {
+        id: uuidv4(),
+        ...noteData,
+      };
+
+      dispatch(projectAddQuickNote(newNote));
+      setEditingQuickNote(newNote);
     }
-    else if (newNoteData) {
-      dispatch(projectEditQuickNote(newNoteData));
+    else if (noteData) {
+      dispatch(projectEditQuickNote(noteData));
     }
   };
 

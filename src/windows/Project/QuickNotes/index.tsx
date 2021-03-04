@@ -33,6 +33,11 @@ const QuickNotes: React.FC = () => {
     setEditingQuickNote(quickNote);
   };
 
+  const handleCloseDialog = (): void => {
+    setEditingQuickNote(undefined);
+    dispatch(uiSetOpenEditQuickNoteDialog(false));
+  };
+
   useEffect(() => {
     window.api.on('editQuickNote', (e: IpcRendererEvent, quickNote: QuickNote): void => {
       setEditingQuickNote(quickNote);
@@ -89,11 +94,13 @@ const QuickNotes: React.FC = () => {
         </Grid>
       </div>
 
-      <NoteDialog
-        open={openEditQuickNoteDialog}
-        close={() => dispatch(uiSetOpenEditQuickNoteDialog(false))}
-        quickNote={editingQuickNote}
-      />
+      {openEditQuickNoteDialog && (
+        <NoteDialog
+          open={openEditQuickNoteDialog}
+          handleClose={handleCloseDialog}
+          quickNote={editingQuickNote}
+        />
+      )}
     </div>
   );
 };
