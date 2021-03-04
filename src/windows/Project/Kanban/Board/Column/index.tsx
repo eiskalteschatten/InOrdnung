@@ -59,7 +59,7 @@ const Column: React.FC<Props> = ({ column, handleOpenNewTask }) => {
       <div className={styles.top}>
         <div className={styles.title}>{column.name}</div>
         <div className={styles.count}>
-          {tasks?.length}&nbsp;
+          {tasks?.length ?? 0}&nbsp;
           {tasks?.length === 1 ? (
             <FormattedMessage id='kanbanTask' />
           ) : (
