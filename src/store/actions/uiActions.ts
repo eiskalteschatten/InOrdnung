@@ -1,6 +1,6 @@
 import { Action } from 'redux';
 
-import { SortingOptions, UiPreferences, PrimaryColor } from '../../interfaces/ui';
+import { SortingOptions, UiPreferences, ProjectColor } from '../../interfaces/ui';
 
 import {
   UI_SET_PREFERENCES,
@@ -33,7 +33,7 @@ export interface UiSetBookmarksSortingOptions extends Action<typeof UI_SET_BOOKM
 
 }
 export interface UiSetProjectColor extends Action<typeof UI_SET_PROJECT_COLOR> {
-  payload: PrimaryColor;
+  payload: ProjectColor;
 }
 
 export type UiActions =
@@ -49,4 +49,4 @@ export const uiSetSidebarWidth = (payload?: number): UiSetSidebarWidth => ({ typ
 export const uiSetTasksSortingOptions = (payload: SortingOptions): UiSetTasksSortingOptions => ({ type: UI_SET_TASKS_SORTING_OPTIONS, payload });
 export const uiSetShowCompletedTasks = (payload: boolean): UiSetShowCompletedTasks => ({ type: UI_SET_TASKS_SHOW_COMPLETED_TASKS, payload });
 export const uiSetBookmarksSortingOptions = (payload: SortingOptions): UiSetBookmarksSortingOptions => ({ type: UI_SET_BOOKMARKS_SORTING_OPTIONS, payload });
-export const uiSetProjectColor = (payload: PrimaryColor): UiSetProjectColor => ({ type: UI_SET_PROJECT_COLOR, payload });
+export const uiSetProjectColor = (payload: ProjectColor): UiSetProjectColor => ({ type: UI_SET_PROJECT_COLOR, payload });

@@ -18,7 +18,7 @@ export const initialState: UiState = {
   tasksSortingOptions: {},
   showCompletedTasks: false,
   bookmarksSortingOptions: {},
-  primaryColor: 'blue',
+  projectColor: 'blue',
 };
 
 const uiReducer: Reducer<UiState, UiActions> = (
@@ -54,7 +54,7 @@ const uiReducer: Reducer<UiState, UiActions> = (
     case UI_SET_PROJECT_COLOR:
       return {
         ...state,
-        primaryColor: action.payload,
+        projectColor: action.payload,
       };
     default:
       return state;
