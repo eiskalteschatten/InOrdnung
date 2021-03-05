@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline, createMuiTheme }  from '@material-ui/core';
 import { Localization, enUS, deDE } from '@material-ui/core/locale';
 
+import { State } from './store';
 import { IntlProviderWrapper } from './intl/IntlContext';
 import getThemeOptions from './theme';
 
@@ -16,8 +18,9 @@ const App: React.FC = () => {
   // TODO: allow the saved locale from the DB to override the system's settings
   const [locale] = useState<string>(navigator.language.split('-')[0] || 'en');
   const [theme, setTheme] = useState<string>('light');
+  const primaryColor = useSelector((state: State) => state.ui.primaryColor);
 
-  const themeOptions = getThemeOptions(theme);
+  const themeOptions = getThemeOptions(theme, primaryColor);
 
   const getMuiLocale = (): Localization => {
     switch (locale) {
