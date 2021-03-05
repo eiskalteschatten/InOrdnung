@@ -9,6 +9,7 @@ import {
   UI_SET_TASKS_SORTING_OPTIONS,
   UI_SET_TASKS_SHOW_COMPLETED_TASKS,
   UI_SET_BOOKMARKS_SORTING_OPTIONS,
+  UI_SET_PROJECT_COLOR,
 } from '../constants';
 
 export type UiState = UiPreferences;
@@ -17,6 +18,7 @@ export const initialState: UiState = {
   tasksSortingOptions: {},
   showCompletedTasks: false,
   bookmarksSortingOptions: {},
+  primaryColor: 'blue',
 };
 
 const uiReducer: Reducer<UiState, UiActions> = (
@@ -48,6 +50,11 @@ const uiReducer: Reducer<UiState, UiActions> = (
       return {
         ...state,
         bookmarksSortingOptions: action.payload,
+      };
+    case UI_SET_PROJECT_COLOR:
+      return {
+        ...state,
+        primaryColor: action.payload,
       };
     default:
       return state;
