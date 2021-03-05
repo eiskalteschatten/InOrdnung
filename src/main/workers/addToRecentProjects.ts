@@ -9,8 +9,6 @@ import { RecentProjectsLocalStorage } from '../../interfaces/project';
 import { getRecentProjects } from '../lib/projectFile';
 
 ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath, image, mimeType }): Promise<void> => {
-  log.info('Adding project to recent projects list');
-
   const pathToLockFile = path.resolve(config.app.storagePath, 'recentProjects.lock');
 
   if (fs.existsSync(pathToLockFile)) {

@@ -6,8 +6,6 @@ import log from 'electron-log';
 import config from '../../config';
 
 ipcMain.on('initializeApp', async (e: IpcMainEvent): Promise<void> => {
-  log.info('Initializing the app...');
-
   if (!fs.existsSync(config.app.storagePath)) {
     await fsPromises.mkdir(config.app.storagePath, { recursive: true });
   }
