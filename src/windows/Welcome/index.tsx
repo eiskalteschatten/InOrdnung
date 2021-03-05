@@ -86,24 +86,28 @@ const Welcome: React.FC = () => {
           'hasDarwinTitlebar': platform === 'darwin',
         })}>
           {recentProjects?.map((project: RecentProjectsLocalStorage, index: number) => (
-            <RoundedButton
-              key={index}
-              onClick={() => handleOpenRecentProject(project.path)}
-              className={styles.recentProject}
-            >
-              {project.thumbnail ? (
-                <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
-              ) : (
-                <div className={styles.defaultImage}>
-                  <InsertDriveFile />
-                </div>
-              )}
+            <>
+              {project && (
+                <RoundedButton
+                  key={index}
+                  onClick={() => handleOpenRecentProject(project.path)}
+                  className={styles.recentProject}
+                >
+                  {project.thumbnail ? (
+                    <img src={`data:${project.thumbnailMimeType};base64,${project.thumbnail}`} className={styles.projectImage} />
+                  ) : (
+                    <div className={styles.defaultImage}>
+                      <InsertDriveFile />
+                    </div>
+                  )}
 
-              <div className={styles.projectInfo}>
-                <div className={styles.projectName}>{project.name || untitled}</div>
-                <div className={styles.projectPath}>{project.path}</div>
-              </div>
-            </RoundedButton>
+                  <div className={styles.projectInfo}>
+                    <div className={styles.projectName}>{project.name || untitled}</div>
+                    <div className={styles.projectPath}>{project.path}</div>
+                  </div>
+                </RoundedButton>
+              )}
+            </>
           ))}
         </Grid>
       </Grid>
