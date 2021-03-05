@@ -1,0 +1,16 @@
+.label {
+  font-weight: bold;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.button {
+  margin: 0 2px;
+}
+
+.swatch {
+  $size: 20px;
+  height: $size;
+  width: $size;
+  border-radius: 5px;
+}

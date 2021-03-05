@@ -22,6 +22,7 @@ import { State } from '../../../store';
 import { projectSetProjectInfo } from '../../../store/actions/projectActions/projectInfoActions';
 import { getDateLocaleFormat } from '../../../lib/dates';
 import ProjectImage from './ProjectImage';
+import ProjectColors from './ProjectColors';
 
 import styles from './ProjectInfo.module.scss';
 
@@ -91,6 +92,10 @@ const ProjectInfo: React.FC = () => {
           </div>
         </Grid>
       </Grid>
+
+      <div className={styles.projectColors}>
+        <ProjectColors />
+      </div>
 
       <div className={styles.secondHalf}>
         <div
