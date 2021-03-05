@@ -18,6 +18,7 @@ export interface ProjectFileMetaData {
   path: string;
   saved?: boolean;
 }
+
 export interface ProjectFile {
   project: Project;
   ui: UiPreferences;
