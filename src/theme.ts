@@ -204,12 +204,12 @@ export const colors: Colors = {
   },
 };
 
-export default (type: string, primaryColor = 'blue'): any => ({
+export default (type: string, projectColor = 'blue'): any => ({
   palette: {
     type,
     primary: {
-      main: colors[primaryColor].main[type],
-      dark: colors[primaryColor].dark[type],
+      main: colors[projectColor].main[type],
+      dark: colors[projectColor].dark[type],
     },
     secondary: {
       main: blueGrey[100],

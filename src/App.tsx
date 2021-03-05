@@ -18,9 +18,9 @@ const App: React.FC = () => {
   // TODO: allow the saved locale from the DB to override the system's settings
   const [locale] = useState<string>(navigator.language.split('-')[0] || 'en');
   const [theme, setTheme] = useState<string>('light');
-  const primaryColor = useSelector((state: State) => state.ui.primaryColor);
+  const projectColor = useSelector((state: State) => state.ui.projectColor);
 
-  const themeOptions = getThemeOptions(theme, primaryColor);
+  const themeOptions = getThemeOptions(theme, projectColor);
 
   const getMuiLocale = (): Localization => {
     switch (locale) {
