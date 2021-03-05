@@ -63,12 +63,9 @@ const Project: React.FC = () => {
   }, [project, untitled]);
 
   useEffect(() => {
-    dispatch(fileSetSaved(false));
-
     if (file.fileLoaded) {
-      if (!isEqual(project, projectInitialState)) {
-        window.api.send('projectIsEdited');
-      }
+      dispatch(fileSetSaved(false));
+      window.api.send('projectIsEdited');
 
       if (autoSaveTimeout) {
         clearTimeout(autoSaveTimeout);
@@ -77,6 +74,10 @@ const Project: React.FC = () => {
       setAutoSaveTimeout(setTimeout(() => {
         window.api.send('saveProject', { project, ui }, file);
       }, 1000));
+    }
+    else if (!isEqual(project, projectInitialState)) {
+      dispatch(fileSetSaved(false));
+      window.api.send('projectIsEdited');
     }
   }, [project, ui]);
 

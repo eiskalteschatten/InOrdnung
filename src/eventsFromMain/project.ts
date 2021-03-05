@@ -27,4 +27,5 @@ window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, pat
     fileLoaded: true,
     saved: true,
   }));
+  window.api.send('projectIsEdited', false);
 });

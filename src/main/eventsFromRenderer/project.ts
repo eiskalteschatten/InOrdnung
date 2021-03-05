@@ -23,9 +23,9 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
   }
 });
 
-ipcMain.on('projectIsEdited', (e: IpcMainEvent): void => {
+ipcMain.on('projectIsEdited', (e: IpcMainEvent, isEdited = true): void => {
   const window = BrowserWindow.fromWebContents(e.sender);
-  window?.setDocumentEdited(true);
+  window?.setDocumentEdited(isEdited);
 });
 
 ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
