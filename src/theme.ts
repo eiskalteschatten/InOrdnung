@@ -28,8 +28,8 @@ export const colors: Colors = {
       light: red[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   yellow: {
@@ -38,8 +38,8 @@ export const colors: Colors = {
       light: yellow[500],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[400],
     },
   },
   green: {
@@ -48,8 +48,8 @@ export const colors: Colors = {
       light: green[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   pink: {
@@ -58,8 +58,8 @@ export const colors: Colors = {
       light: pink[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   purple: {
@@ -68,8 +68,8 @@ export const colors: Colors = {
       light: purple[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   deepPurple: {
@@ -78,8 +78,8 @@ export const colors: Colors = {
       light: deepPurple[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   indigo: {
@@ -88,8 +88,8 @@ export const colors: Colors = {
       light: indigo[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   lightBlue: {
@@ -98,8 +98,8 @@ export const colors: Colors = {
       light: lightBlue[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   cyan: {
@@ -108,8 +108,8 @@ export const colors: Colors = {
       light: cyan[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   teal: {
@@ -118,8 +118,8 @@ export const colors: Colors = {
       light: teal[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   lightGreen: {
@@ -128,8 +128,8 @@ export const colors: Colors = {
       light: lightGreen[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   lime: {
@@ -138,8 +138,8 @@ export const colors: Colors = {
       light: lime[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   amber: {
@@ -148,8 +148,8 @@ export const colors: Colors = {
       light: amber[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   orange: {
@@ -158,8 +158,8 @@ export const colors: Colors = {
       light: orange[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   deepOrange: {
@@ -168,8 +168,8 @@ export const colors: Colors = {
       light: deepOrange[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   brown: {
@@ -178,8 +178,8 @@ export const colors: Colors = {
       light: brown[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
   grey: {
@@ -198,8 +198,8 @@ export const colors: Colors = {
       light: blueGrey[800],
     },
     dark: {
-      dark: blueGrey[800],
-      light: blueGrey[100],
+      dark: grey[800],
+      light: grey[100],
     },
   },
 };
