@@ -35,7 +35,7 @@ export const colors: Colors = {
   yellow: {
     main: {
       dark: yellow[300],
-      light: yellow[800],
+      light: yellow[500],
     },
     dark: {
       dark: blueGrey[800],
