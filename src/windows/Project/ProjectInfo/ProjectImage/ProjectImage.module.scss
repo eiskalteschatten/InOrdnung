@@ -1,10 +1,10 @@
 @import "../../../../scss/variables";
 
-$imageWidth: 350px;
-$imageHeight: 300px;
+$imageWidth: 250px;
+$imageHeight: 200px;
 
 .projectImage {
-  margin: 0 50px 0 0 !important;
+  margin-bottom: 40px !important;
   font-size: .8em;
   padding: 10px;
   cursor: pointer;
@@ -45,4 +45,5 @@ $imageHeight: 300px;
   max-width: $imageWidth;
   max-height: $imageHeight;
   object-fit: cover;
+  border-radius: 5px;
 }
