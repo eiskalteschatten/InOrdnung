@@ -45,7 +45,7 @@ switch (process.platform) {
 const config: Config = {
   app: {
     name: 'InOrdnung',
-    version: '1.0.0-beta.1',
+    version: '1.0.0-beta.2',
     storagePath,
   },
   updates: {
