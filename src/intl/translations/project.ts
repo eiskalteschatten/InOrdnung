@@ -13,6 +13,8 @@ export default {
     projectUntitled: 'Untitled',
     projectClosedUnsavedProjectConfimration: 'Are you sure you want close this project without saving your changes?',
     projectClosedUnsavedProjectDetail: 'All of your unsaved changes will be permanently lost.',
+    projectProjectColor: 'Project Color',
+    projectProjectDates: 'Project Dates',
   },
   de: {
     projectInfo: 'Projektinfos',
@@ -28,5 +30,7 @@ export default {
     projectUntitled: 'Ohne Titel',
     projectClosedUnsavedProjectConfimration: 'Sind Sie sicher, dass Sie dieses Projekt mit ungespeicherten Änderungen schließen?',
     projectClosedUnsavedProjectDetail: 'Alle Ihrer ungespeicherten Änderugen werden unwiderruflich verloren.',
+    projectProjectColor: 'Projektfarbe',
+    projectProjectDates: 'Projektdaten',
   },
 };

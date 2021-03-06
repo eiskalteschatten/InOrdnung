@@ -4,22 +4,12 @@
   margin-top: 40px !important;
 }
 
-.projectColors {
-  margin-bottom: 40px;
+.card {
+  margin: 40px 0;
 }
 
-.secondHalf {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: calc(100% - 80px);
-  border-top: 1px solid $lightBorderColor;
-  padding-top: 40px;
-  margin-left: 40px;
-
-  @media (prefers-color-scheme: dark) {
-    border-top: 1px solid $darkBorderColor;
-  }
+.projectDatesTitle {
+  margin-bottom: 30px;
 }
 
 .formGroup {

@@ -24,30 +24,24 @@ const ProjectColors: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className={styles.label}>
-        Project Color:
-      </div>
-
-      <Grid container alignItems='center' justify='center'>
-        {Object.keys(colors).map((color, index) => (
-          <Grid item key={index}>
-            <RoundedButton
-              onClick={() => handleColorClicked(color as ProjectColor)}
-              className={styles.button}
-              selected={projectColor === color}
-            >
-              <div
-                style={{
-                  backgroundColor: colors[color].main[theme.palette.type],
-                }}
-                className={styles.swatch}
-              />
-            </RoundedButton>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+    <Grid container>
+      {Object.keys(colors).map((color, index) => (
+        <Grid item key={index}>
+          <RoundedButton
+            onClick={() => handleColorClicked(color as ProjectColor)}
+            className={styles.button}
+            selected={projectColor === color}
+          >
+            <div
+              style={{
+                backgroundColor: colors[color].main[theme.palette.type],
+              }}
+              className={styles.swatch}
+            />
+          </RoundedButton>
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 
