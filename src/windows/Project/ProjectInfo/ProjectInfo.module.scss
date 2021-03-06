@@ -1,11 +1,11 @@
 @import "../../../scss/variables";
 
 .projectInfo {
-  margin-top: 40px !important;
+  margin: 40px 0 !important;
 }
 
 .card {
-  margin: 40px 0;
+  margin-bottom: 40px;
 }
 
 .projectDatesTitle {
@@ -20,4 +20,8 @@
 
 .formControlWrapper {
   margin-bottom: 30px;
+}
+
+.dateSwitch {
+  float: right;
 }

@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import clsx from 'clsx';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import MomentUtils from '@date-io/moment';
@@ -11,7 +10,6 @@ import {
   Grid,
   Card,
   CardContent,
-  FormControlLabel,
   Switch,
   TextField,
 } from '@material-ui/core';
@@ -109,30 +107,22 @@ const ProjectInfo: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className={styles.card}>
-          <CardContent>
-            <CardTitle className={styles.projectDatesTitle}>
-              <FormattedMessage id='projectProjectDates' />
-            </CardTitle>
+        <Grid container spacing={4}>
+          <Grid item xs={6}>
+            <Card className={styles.card}>
+              <CardContent>
+                <CardTitle className={styles.projectDatesTitle}>
+                  <Switch
+                    checked={projectInfo?.hasStartDate ?? false}
+                    onChange={handleSwitchChange}
+                    id='hasStartDate'
+                    color='primary'
+                    className={styles.dateSwitch}
+                  />
 
-            <div
-              className={clsx(
-                'form-group',
-                styles.formGroup
-              )}
-            >
-              <div className={styles.formControlWrapper}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={projectInfo?.hasStartDate ?? false}
-                      onChange={handleSwitchChange}
-                      id='hasStartDate'
-                      color='primary'
-                    />
-                  }
-                  label={messages.projectHasStartDate}
-                />
+                  <FormattedMessage id='projectStartDate' />
+                </CardTitle>
+
 
                 {projectInfo?.hasStartDate && (
                   <KeyboardDatePicker
@@ -146,27 +136,23 @@ const ProjectInfo: React.FC = () => {
                     fullWidth
                   />
                 )}
-              </div>
-            </div>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={6}>
+            <Card className={styles.card}>
+              <CardContent>
+                <CardTitle className={styles.projectDatesTitle}>
+                  <Switch
+                    checked={projectInfo?.hasEndDate ?? false}
+                    onChange={handleSwitchChange}
+                    id='hasEndDate'
+                    color='primary'
+                    className={styles.dateSwitch}
+                  />
 
-            <div
-              className={clsx(
-                'form-group',
-                styles.formGroup
-              )}
-            >
-              <div className={styles.formControlWrapper}>
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={projectInfo?.hasEndDate ?? false}
-                      onChange={handleSwitchChange}
-                      id='hasEndDate'
-                      color='primary'
-                    />
-                  }
-                  label={messages.projectHasEndDate}
-                />
+                  <FormattedMessage id='projectEndDate' />
+                </CardTitle>
 
                 {projectInfo?.hasEndDate && (
                   <KeyboardDatePicker
@@ -180,10 +166,10 @@ const ProjectInfo: React.FC = () => {
                     fullWidth
                   />
                 )}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </Container>
     </MuiPickersUtilsProvider>
   );
