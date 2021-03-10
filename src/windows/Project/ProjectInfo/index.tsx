@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 
 import {
   Container,
-  Grid,
   Card,
   CardContent,
   TextField,
