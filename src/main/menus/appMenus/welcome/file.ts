@@ -41,11 +41,17 @@ export default (): MenuItem => {
     { item: { type: 'separator' } },
     {
       platforms: ['darwin'],
-      item: { role: 'close' },
+      item: {
+        label: translation.close,
+        role: 'close',
+      },
     },
     {
       platforms: nonMacPlatforms,
-      item: { role: 'quit' },
+      item: {
+        label: translation.menuQuitInOrdnung,
+        role: 'quit',
+      },
     },
   ];
 

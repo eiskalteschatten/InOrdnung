@@ -75,7 +75,10 @@ export default (): MenuItem => {
     { item: { type: 'separator' } },
     {
       platforms: ['darwin'],
-      item: { role: 'close' },
+      item: {
+        label: translation.close,
+        role: 'close',
+      },
     },
     {
       item:  {
@@ -103,7 +106,10 @@ export default (): MenuItem => {
     },
     {
       platforms: nonMacPlatforms,
-      item: { role: 'quit' },
+      item: {
+        label: translation.menuQuitInOrdnung,
+        role: 'quit',
+      },
     },
   ];
 
