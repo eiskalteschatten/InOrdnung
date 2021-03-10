@@ -7,16 +7,18 @@ import editMenuItems from './edit';
 import viewMenuItems from './view';
 import helpMenuItems from './help';
 
-const template: MenuItemConstructorOptions[] = [
-  menuBuilder(fileMenuItems),
-  menuBuilder(editMenuItems),
-  menuBuilder(viewMenuItems),
-  { role: 'windowMenu' },
-  menuBuilder(helpMenuItems),
-];
+export default (): MenuItemConstructorOptions[] => {
+  const template: MenuItemConstructorOptions[] = [
+    menuBuilder(fileMenuItems()),
+    menuBuilder(editMenuItems()),
+    menuBuilder(viewMenuItems()),
+    { role: 'windowMenu' },
+    menuBuilder(helpMenuItems()),
+  ];
 
-if (process.platform === 'darwin') {
-  template.unshift(menuBuilder(appMenuItems));
-}
+  if (process.platform === 'darwin') {
+    template.unshift(menuBuilder(appMenuItems()));
+  }
 
-export default (): MenuItemConstructorOptions[] => template;
+  return template;
+};

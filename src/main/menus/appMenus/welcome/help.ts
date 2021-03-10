@@ -5,58 +5,60 @@ import { getTranslation } from '../../../lib/helper';
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 import openAboutWindow from '../../../windows/about';
 
-const translation = getTranslation();
+export default (): MenuItem => {
+  const translation = getTranslation();
 
-const submenuItems: MenuItem[] = [
-  {
-    platforms: ['win32'],
-    item: {
-      label: translation.menuCheckForUpdates,
-      click: (): void => {
-        autoUpdater.checkForUpdates();
+  const submenuItems: MenuItem[] = [
+    {
+      platforms: ['win32'],
+      item: {
+        label: translation.menuCheckForUpdates,
+        click: (): void => {
+          autoUpdater.checkForUpdates();
+        },
       },
     },
-  },
-  {
-    platforms: nonMacPlatforms,
-    item: { type: 'separator' },
-  },
-  {
-    item: {
-      label: translation.menuSubmitFeedback,
-      click: (): void => {
-        shell.openExternal('https://www.alexseifert.com/contact');
+    {
+      platforms: nonMacPlatforms,
+      item: { type: 'separator' },
+    },
+    {
+      item: {
+        label: translation.menuSubmitFeedback,
+        click: (): void => {
+          shell.openExternal('https://www.alexseifert.com/contact');
+        },
       },
     },
-  },
-  {
-    item: {
-      label: translation.aboutAlexSeifert,
-      click: (): void => {
-        shell.openExternal('https://www.alexseifert.com');
+    {
+      item: {
+        label: translation.aboutAlexSeifert,
+        click: (): void => {
+          shell.openExternal('https://www.alexseifert.com');
+        },
       },
     },
-  },
-  {
-    platforms: nonMacPlatforms,
-    item: { type: 'separator' },
-  },
-  {
-    platforms: nonMacPlatforms,
-    item: {
-      label: `${translation.menuAbout} ${config.app.name}`,
-      click: (): void => {
-        openAboutWindow();
+    {
+      platforms: nonMacPlatforms,
+      item: { type: 'separator' },
+    },
+    {
+      platforms: nonMacPlatforms,
+      item: {
+        label: `${translation.menuAbout} ${config.app.name}`,
+        click: (): void => {
+          openAboutWindow();
+        },
       },
     },
-  },
-];
+  ];
 
-const menuItem: MenuItem = {
-  item: {
-    role: 'help',
-  },
-  submenu: submenuItems,
+  const menuItem: MenuItem = {
+    item: {
+      role: 'help',
+    },
+    submenu: submenuItems,
+  };
+
+  return menuItem;
 };
-
-export default menuItem;

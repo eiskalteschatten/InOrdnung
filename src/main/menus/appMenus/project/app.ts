@@ -5,41 +5,43 @@ import { getTranslation } from '../../../lib/helper';
 import { MenuItem } from '../../menuBuilder';
 import openAboutWindow from '../../../windows/about';
 
-const translation = getTranslation();
+export default (): MenuItem => {
+  const translation = getTranslation();
 
-const submenuItems: MenuItem[] = [
-  {
-    item: {
-      label: `${translation.menuAbout} ${config.app.name}`,
-      click: (): void => {
-        openAboutWindow();
+  const submenuItems: MenuItem[] = [
+    {
+      item: {
+        label: `${translation.menuAbout} ${config.app.name}`,
+        click: (): void => {
+          openAboutWindow();
+        },
       },
     },
-  },
-  {
-    item: {
-      label: translation.menuCheckForUpdates,
-      click: (): void => {
-        autoUpdater.checkForUpdates();
+    {
+      item: {
+        label: translation.menuCheckForUpdates,
+        click: (): void => {
+          autoUpdater.checkForUpdates();
+        },
       },
     },
-  },
-  { item: { type: 'separator' } },
-  { item: { role: 'services', submenu: [] } },
-  { item: { type: 'separator' } },
-  { item: { role: 'hide' } },
-  { item: { role: 'hideOthers' } },
-  { item: { role: 'unhide' } },
-  { item: { type: 'separator' } },
-  { item: { role: 'quit' } },
-];
+    { item: { type: 'separator' } },
+    { item: { role: 'services', submenu: [] } },
+    { item: { type: 'separator' } },
+    { item: { role: 'hide' } },
+    { item: { role: 'hideOthers' } },
+    { item: { role: 'unhide' } },
+    { item: { type: 'separator' } },
+    { item: { role: 'quit' } },
+  ];
 
-const menuItem: MenuItem = {
-  platforms: ['darwin'],
-  item: {
-    label: app?.getName(),
-  },
-  submenu: submenuItems,
+  const menuItem: MenuItem = {
+    platforms: ['darwin'],
+    item: {
+      label: app?.getName(),
+    },
+    submenu: submenuItems,
+  };
+
+  return menuItem;
 };
-
-export default menuItem;
