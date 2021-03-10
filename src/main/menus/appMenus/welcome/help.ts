@@ -56,6 +56,7 @@ export default (): MenuItem => {
   const menuItem: MenuItem = {
     item: {
       role: 'help',
+      label: translation.help,
     },
     submenu: submenuItems,
   };

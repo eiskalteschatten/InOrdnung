@@ -16,6 +16,8 @@ export default {
     menuAbout: 'About',
     menuCheckForUpdates: 'Check for Updates...',
     preferences: 'Preferences',
+    window: 'Window',
+    help: 'Help',
   },
   de: {
     file: 'Datei',
@@ -34,5 +36,7 @@ export default {
     menuAbout: 'Über',
     menuCheckForUpdates: 'Nach Aktualisierungen prüfen...',
     preferences: 'Einstellungen',
+    window: 'Fenster',
+    help: 'Hilfe',
   },
 };
