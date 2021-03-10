@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } fro
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../menus/appMenus/welcome';
+import getAppMenu from '../menus/appMenus/welcome';
 import { getRecentProjects } from '../lib/projectFile';
 
 let window: BrowserWindow | undefined;
@@ -48,7 +48,7 @@ export default async (): Promise<void> => {
       });
 
       window.on('focus', async (): Promise<void> => {
-        const menu = Menu.buildFromTemplate(appMenu);
+        const menu = Menu.buildFromTemplate(getAppMenu());
         Menu.setApplicationMenu(menu);
 
         const recentProjects = await getRecentProjects();

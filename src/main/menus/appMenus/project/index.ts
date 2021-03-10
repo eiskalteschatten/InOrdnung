@@ -1,5 +1,6 @@
 import { MenuItemConstructorOptions } from 'electron';
 
+import { getTranslation } from '../../../lib/helper';
 import menuBuilder from '../../menuBuilder';
 import appMenuItems from './app';
 import fileMenuItems from './file';
@@ -7,16 +8,23 @@ import editMenuItems from './edit';
 import viewMenuItems from './view';
 import helpMenuItems from './help';
 
-const template: MenuItemConstructorOptions[] = [
-  menuBuilder(fileMenuItems),
-  menuBuilder(editMenuItems),
-  menuBuilder(viewMenuItems),
-  { role: 'windowMenu' },
-  menuBuilder(helpMenuItems),
-];
+export default (): MenuItemConstructorOptions[] => {
+  const translation = getTranslation();
 
-if (process.platform === 'darwin') {
-  template.unshift(menuBuilder(appMenuItems));
-}
+  const template: MenuItemConstructorOptions[] = [
+    menuBuilder(fileMenuItems()),
+    menuBuilder(editMenuItems()),
+    menuBuilder(viewMenuItems()),
+    {
+      role: 'windowMenu',
+      label: translation.window,
+    },
+    menuBuilder(helpMenuItems()),
+  ];
 
-export default template;
+  if (process.platform === 'darwin') {
+    template.unshift(menuBuilder(appMenuItems()));
+  }
+
+  return template;
+};

@@ -1,6 +1,6 @@
 import { dialog, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
-import { getTranslation } from '../../../lib/helper';
+import { getTranslation } from '../../lib/helper';
 import { selectProjectImage } from '../../lib/project';
 
 const translation = getTranslation();

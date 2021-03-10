@@ -10,7 +10,7 @@ import config from '../config';
 import openWelcomeWindow from './windows/welcome';
 import { windows } from './windows/project';
 import { openFile } from './lib/projectFile';
-import { getTranslation } from '../lib/helper';
+import { getTranslation } from './lib/helper';
 
 
 updateElectronApp();

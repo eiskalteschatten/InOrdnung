@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import log from 'electron-log';
 
 import config from '../../config';
-import { getTranslation } from '../../lib/helper';
+import { getTranslation } from '../lib/helper';
 
 export const checkIfFileIsImage = (imagePath: string, promptUser = false): boolean => {
   try {

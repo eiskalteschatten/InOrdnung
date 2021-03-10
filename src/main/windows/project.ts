@@ -3,12 +3,10 @@ import path from 'path';
 import log from 'electron-log';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../menus/appMenus/project';
-import { getTranslation } from '../../lib/helper';
+import getAppMenu from '../menus/appMenus/project';
+import { getTranslation } from '../lib/helper';
 import { ProjectFile } from '../../interfaces/project';
 import { addToRecentProjects } from '../lib/projectFile';
-
-const translation = getTranslation();
 
 export const windows = new Set();
 
@@ -72,7 +70,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     });
 
     newWindow.on('focus', () => {
-      const menu = Menu.buildFromTemplate(appMenu);
+      const menu = Menu.buildFromTemplate(getAppMenu());
       Menu.setApplicationMenu(menu);
     });
 
@@ -86,6 +84,8 @@ const onClose = async (e: Event, window?: BrowserWindow): Promise<void> => {
   try {
     if (window) {
       if (window.isDocumentEdited()) {
+        const translation = getTranslation();
+
         const result = await dialog.showMessageBox({
           message: translation.projectClosedUnsavedProjectConfimration,
           detail: translation.projectClosedUnsavedProjectDetail,

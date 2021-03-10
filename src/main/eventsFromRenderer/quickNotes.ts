@@ -2,7 +2,7 @@ import { ipcMain, IpcMainEvent, BrowserWindow, Menu, dialog } from 'electron';
 
 import quickNoteMenuCm from '../menus/cmMenus/quickNoteMenu';
 import { QuickNote } from '../../interfaces/quickNotes';
-import { getTranslation } from '../../lib/helper';
+import { getTranslation } from '../lib/helper';
 
 ipcMain.on('showQuickNoteMenu', (e: IpcMainEvent, quickNote: QuickNote): void => {
   const window = BrowserWindow.fromWebContents(e.sender);

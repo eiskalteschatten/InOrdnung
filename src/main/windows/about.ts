@@ -2,7 +2,7 @@ import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme } fro
 import path from 'path';
 
 import initializeRenderer from '../initializeRenderer';
-import appMenu from '../menus/appMenus/welcome';
+import getAppMenu from '../menus/appMenus/welcome';
 
 let window: BrowserWindow | undefined;
 
@@ -42,7 +42,7 @@ export default async (): Promise<void> => {
 
       if (process.platform === 'darwin') {
         window.on('focus', () => {
-          const menu = Menu.buildFromTemplate(appMenu);
+          const menu = Menu.buildFromTemplate(getAppMenu());
           Menu.setApplicationMenu(menu);
         });
       }
