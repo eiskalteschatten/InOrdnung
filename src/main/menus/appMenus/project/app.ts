@@ -26,13 +26,39 @@ export default (): MenuItem => {
       },
     },
     { item: { type: 'separator' } },
-    { item: { role: 'services', submenu: [] } },
+    {
+      item: {
+        role: 'services',
+        submenu: [],
+        label: translation.menuServices,
+      } ,
+    },
     { item: { type: 'separator' } },
-    { item: { role: 'hide' } },
-    { item: { role: 'hideOthers' } },
-    { item: { role: 'unhide' } },
+    {
+      item: {
+        role: 'hide',
+        label: translation.menuHideInOrdnung,
+      },
+    },
+    {
+      item: {
+        role: 'hideOthers',
+        label: translation.menuHideOthers,
+      },
+    },
+    {
+      item: {
+        role: 'unhide',
+        label: translation.menuShowAll,
+      },
+    },
     { item: { type: 'separator' } },
-    { item: { role: 'quit' } },
+    {
+      item: {
+        role: 'quit',
+        label: translation.menuQuitInOrdnung,
+      },
+    },
   ];
 
   const menuItem: MenuItem = {
