@@ -18,8 +18,9 @@ export default async (showNoUpdatesDialog = false): Promise<void> => {
 
   if (response.status === 200) {
     const latestVersion = response.data[0];
+    const checkForPrelease = config.app.version.includes('beta');
 
-    if (latestVersion.tag_name !== config.app.version && !latestVersion.draft  && !latestVersion.prerelease) {
+    if (latestVersion.tag_name !== config.app.version && !latestVersion.draft && (!latestVersion.prerelease || checkForPrelease)) {
       const result = await dialog.showMessageBox({
         type: 'info',
         buttons: [translation.download, translation.later],
