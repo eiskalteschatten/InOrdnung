@@ -1,6 +1,6 @@
 import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
 
-import { getTranslation } from '../../../../lib/helper';
+import { getTranslation } from '../../../lib/helper';
 import createProjectWindow from '../../../windows/project';
 import { openFileDialog, saveFileAs } from '../../../lib/projectFile';
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';

@@ -5,7 +5,7 @@ import log from 'electron-log';
 
 import config from '../../config';
 import { ProjectFile, ProjectFileMetaData, RecentProjectsLocalStorage } from '../../interfaces/project';
-import { getTranslation } from '../../lib/helper';
+import { getTranslation } from '../lib/helper';
 import createProjectWindow from '../windows/project';
 
 const translation = getTranslation();

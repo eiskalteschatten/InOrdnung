@@ -2,7 +2,7 @@ import { ipcMain, IpcMainEvent, dialog, BrowserWindow, Menu } from 'electron';
 
 import kanbanTaskMenuCm from '../menus/cmMenus/kanbanTaskMenu';
 import { KanbanTask } from '../../interfaces/kanban';
-import { getTranslation } from '../../lib/helper';
+import { getTranslation } from '../lib/helper';
 
 const translation = getTranslation();
 

@@ -1,7 +1,7 @@
 import { dialog, MenuItemConstructorOptions, MenuItem, BrowserWindow } from 'electron';
 
 import { KanbanTask } from '../../../interfaces/kanban';
-import { getTranslation } from '../../../lib/helper';
+import { getTranslation } from '../../lib/helper';
 
 const translation = getTranslation();
 

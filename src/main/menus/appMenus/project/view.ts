@@ -1,4 +1,4 @@
-import { getTranslation } from '../../../../lib/helper';
+import { getTranslation } from '../../../lib/helper';
 import { MenuItem } from '../../menuBuilder';
 
 const translation = getTranslation();

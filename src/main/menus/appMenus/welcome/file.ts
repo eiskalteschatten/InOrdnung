@@ -1,4 +1,4 @@
-import { getTranslation } from '../../../../lib/helper';
+import { getTranslation } from '../../../lib/helper';
 import createProjectWindow from '../../../windows/project';
 import { openFileDialog } from '../../../lib/projectFile';
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';

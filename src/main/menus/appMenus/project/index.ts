@@ -19,4 +19,4 @@ if (process.platform === 'darwin') {
   template.unshift(menuBuilder(appMenuItems));
 }
 
-export default template;
+export default (): MenuItemConstructorOptions[] => template;
