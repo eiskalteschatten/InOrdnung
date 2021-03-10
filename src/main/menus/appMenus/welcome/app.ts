@@ -1,7 +1,8 @@
-import { app, autoUpdater } from 'electron';
+import { app } from 'electron';
 
 import config from '../../../../config';
 import { getTranslation } from '../../../lib/helper';
+import checkForUpdates from '../../../lib/checkForUpdates';
 import { MenuItem } from '../../menuBuilder';
 import openAboutWindow from '../../../windows/about';
 
@@ -21,7 +22,7 @@ export default (): MenuItem => {
       item: {
         label: translation.menuCheckForUpdates,
         click: (): void => {
-          autoUpdater.checkForUpdates();
+          checkForUpdates(true);
         },
       },
     },
