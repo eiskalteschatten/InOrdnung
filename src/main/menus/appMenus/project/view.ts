@@ -5,11 +5,37 @@ export default (): MenuItem => {
   const translation = getTranslation();
 
   const submenuItems: MenuItem[] = [
-    { item: { role: 'resetZoom' } },
-    { item: { role: 'zoomIn' } },
-    { item: { role: 'zoomOut' } },
-    { item: { type: 'separator' } },
-    { item: { role: 'togglefullscreen' } },
+    {
+      item: {
+        label: translation.menuResetZoom,
+        role: 'resetZoom',
+      },
+    },
+    {
+      item: {
+        label: translation.menuZoomIn,
+        role: 'zoomIn',
+      },
+    },
+    {
+      item: {
+        label: translation.menuZoomOut,
+        role: 'zoomOut',
+      },
+    },
+    {
+      platforms: ['darwin'],
+      item: {
+        type: 'separator',
+      },
+    },
+    {
+      platforms: ['darwin'],
+      item: {
+        label: translation.menuTogglefullscreen,
+        role: 'togglefullscreen',
+      },
+    },
     { item: { type: 'separator' } },
     {
       item: {
