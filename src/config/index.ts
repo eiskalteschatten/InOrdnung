@@ -49,7 +49,7 @@ const config: Config = {
     storagePath,
   },
   updates: {
-    url: 'update url',
+    url: 'https://api.github.com/repos/eiskalteschatten/InOrdnung/releases',
   },
   intl: {
     defaultLocale: process.env.REACT_APP_LOCALE || 'en',
