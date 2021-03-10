@@ -7,12 +7,43 @@ export default (): MenuItem => {
   const translation = getTranslation();
 
   const submenuItems: MenuItem[] = [
-    { item: { role: 'cut' } },
-    { item: { role: 'copy' } },
-    { item: { role: 'paste' } },
-    { item: { role: 'pasteAndMatchStyle' } },
-    { item: { role: 'delete' } },
-    { item: { role: 'selectAll' } },
+    {
+      item: {
+        label: translation.cut,
+        role: 'cut',
+      },
+    },
+    {
+      item: {
+        label: translation.copy,
+        role: 'copy',
+      },
+    },
+    {
+      item: {
+        label: translation.paste,
+        role: 'paste',
+      },
+    },
+    {
+      platforms: ['darwin'],
+      item: {
+        label: translation.pasteAndMatchStyle,
+        role: 'pasteAndMatchStyle',
+      },
+    },
+    {
+      item: {
+        label: translation.delete,
+        role: 'delete',
+      },
+    },
+    {
+      item: {
+        label: translation.selectAll,
+        role: 'selectAll',
+      },
+    },
     {
       platforms: ['darwin'],
       item: { type: 'separator' },
@@ -20,11 +51,21 @@ export default (): MenuItem => {
     {
       platforms: ['darwin'],
       item: {
-        label: 'Speech',
+        label: translation.speech,
       },
       submenu: [
-        { item: { role: 'startSpeaking' } },
-        { item: { role: 'stopSpeaking' } },
+        {
+          item: {
+            label: translation.startSpeaking,
+            role: 'startSpeaking',
+          },
+        },
+        {
+          item: {
+            label: translation.stopSpeaking,
+            role: 'stopSpeaking',
+          },
+        },
       ],
     },
     // {

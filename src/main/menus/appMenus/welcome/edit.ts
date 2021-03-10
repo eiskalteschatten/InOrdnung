@@ -7,9 +7,24 @@ export default (): MenuItem => {
   const translation = getTranslation();
 
   const submenuItems: MenuItem[] = [
-    { item: { role: 'cut' } },
-    { item: { role: 'copy' } },
-    { item: { role: 'paste' } },
+    {
+      item: {
+        label: translation.cut,
+        role: 'cut',
+      },
+    },
+    {
+      item: {
+        label: translation.copy,
+        role: 'copy',
+      },
+    },
+    {
+      item: {
+        label: translation.paste,
+        role: 'paste',
+      },
+    },
     {
       platforms: ['darwin'],
       item: { type: 'separator' },
@@ -17,11 +32,21 @@ export default (): MenuItem => {
     {
       platforms: ['darwin'],
       item: {
-        label: 'Speech',
+        label: translation.speech,
       },
       submenu: [
-        { item: { role: 'startSpeaking' } },
-        { item: { role: 'stopSpeaking' } },
+        {
+          item: {
+            label: translation.startSpeaking,
+            role: 'startSpeaking',
+          },
+        },
+        {
+          item: {
+            label: translation.stopSpeaking,
+            role: 'stopSpeaking',
+          },
+        },
       ],
     },
     // {
