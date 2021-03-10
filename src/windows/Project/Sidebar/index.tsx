@@ -63,7 +63,7 @@ const Sidebar: React.FC = () => {
         [styles.sidebar]: true,
         [styles.darwin]: platform === 'darwin',
       })}
-      style={{ width: sidebarWidth }}
+      style={{ flex: `0 0 ${sidebarWidth}px` }}
       ref={sidebarRef}
     >
       <div className={styles.projectInfo}>
