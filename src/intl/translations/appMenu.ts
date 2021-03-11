@@ -37,6 +37,7 @@ export default {
     preferences: 'Preferences',
     window: 'Window',
     help: 'Help',
+    inOrdnungOnGitHub: 'InOrdnung on GitHub',
   },
   de: {
     file: 'Datei',
@@ -76,5 +77,6 @@ export default {
     preferences: 'Einstellungen',
     window: 'Fenster',
     help: 'Hilfe',
+    inOrdnungOnGitHub: 'InOrdnung auf GitHub',
   },
 };
