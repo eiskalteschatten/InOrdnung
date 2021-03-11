@@ -35,6 +35,14 @@ export default (): MenuItem => {
     },
     {
       item: {
+        label: translation.inOrdnungOnGitHub,
+        click: (): void => {
+          shell.openExternal('https://github.com/eiskalteschatten/InOrdnung');
+        },
+      },
+    },
+    {
+      item: {
         label: translation.menuSubmitFeedback,
         click: (): void => {
           shell.openExternal('https://www.alexseifert.com/contact');
