@@ -23,9 +23,10 @@ interface Props {
   size?: 'small' | 'standard';
   selected?: boolean;
   dark?: boolean;
+  style?: React.CSSProperties;
 }
 
-const RoundedButton: React.FC<Props> = ({ onClick, children, className, variant, size, selected, dark }) => {
+const RoundedButton: React.FC<Props> = ({ onClick, children, className, variant, size, selected, dark, style }) => {
   const classes = useStyles();
 
   return (
@@ -40,6 +41,7 @@ const RoundedButton: React.FC<Props> = ({ onClick, children, className, variant,
         [styles.dark]: dark,
       })}
       onClick={onClick}
+      style={style}
     >
       <div className={styles.wrapper}>
         {children}
