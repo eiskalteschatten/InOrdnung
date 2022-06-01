@@ -126,7 +126,7 @@
     "react-scripts": "^4.0.3",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "sharp": "^0.27.2",
+    "sharp": "^0.30.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
