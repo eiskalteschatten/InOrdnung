@@ -1,5 +1,22 @@
 @import "../../../scss/variables";
 
-.isDarwin {
-  padding-top: $titlebarHeight;
+.mainLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &.customTitlebar {
+    padding-top: $titlebarHeight;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
+    min-height: 0;
+    flex-grow: 1;
+
+    .content {
+      flex-grow: 1;
+    }
+  }
 }
