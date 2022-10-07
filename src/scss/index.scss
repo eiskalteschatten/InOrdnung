@@ -1,16 +1,18 @@
+@import "./variables";
+
 html,
 body {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: #f0f0f0;
-  color: #000000;
+  background-color: $lightBg;
+  color: $lightColor;
   overflow: hidden;
 
   @media (prefers-color-scheme: dark) {
-    background-color: #222222 !important;
-    color: #f0f0f0 !important;
+    background-color: $darkBg !important;
+    color: $darkColor !important;
   }
 }
 
