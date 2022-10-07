@@ -38,7 +38,7 @@ export default (): MenuItem => {
       item: {
         label: t('appMenu:appOnGitHub', { appName: config.app.name }),
         click: (): void => {
-          shell.openExternal('https://github.com/eiskalteschatten/electron-react-typescript/');
+          shell.openExternal('https://github.com/eiskalteschatten/InOrdnung/');
         },
       },
     },
@@ -46,7 +46,7 @@ export default (): MenuItem => {
       item: {
         label: t('appMenu:submitFeedback'),
         click: (): void => {
-          shell.openExternal('https://www.alexseifert.com/contact');
+          shell.openExternal('https://github.com/eiskalteschatten/InOrdnung/discussions');
         },
       },
     },
