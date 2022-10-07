@@ -1,5 +1,7 @@
+@import "../../scss/variables";
+
 .titlebar {
-  height: 22px;
+  height: $titlebarHeight;
   width: 100%;
   left: 0;
   position: fixed;
@@ -7,4 +9,21 @@
   -webkit-app-region: drag;
   user-select: none;
   z-index: 1000;
+  background: #000000;
+  color: #ffffff;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .menu {
+    -webkit-app-region: no-drag;
+  }
+
+  .title {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+  }
 }

@@ -30,6 +30,7 @@ export default async (): Promise<BrowserWindow> => {
 
   if (process.platform === 'darwin') {
     browserWindowOptions.titleBarStyle = 'hidden';
+    browserWindowOptions.trafficLightPosition = { x: 10, y: 12 };
   }
 
   // if (preferences.windowX && preferences.windowY) {
