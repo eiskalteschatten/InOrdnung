@@ -28,7 +28,8 @@ export default (_app: Electron.App): void => {
     const initializeAppPath = 'file://' + path.join(__dirname, './workers/initializeApp/index.html');
     launchWorkerWindow(initializeAppPath);
 
-    if (process.env.NODE_ENV === 'development') {
+    // Only load the extension on macOS because it doesn't work on any other OS for some reason
+    if (process.env.NODE_ENV === 'development' && process.platform === 'darwin') {
       const { default: installExtension, REDUX_DEVTOOLS } = await import('electron-devtools-installer');
       await installExtension(REDUX_DEVTOOLS);
     }
