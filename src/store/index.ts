@@ -1,35 +1,28 @@
-import { AnyAction, applyMiddleware, combineReducers, compose, createStore } from 'redux';
-import thunk, { ThunkDispatch } from 'redux-thunk';
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 
-import app from './reducers/appReducer';
-import ui from './reducers/uiReducer';
-import uiTemp from './reducers/uiTempReducer';
-import project from './reducers/projectReducer';
-import file from './reducers/fileReducer';
-
-const devExtension = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
-
-const composeEnhancers = devExtension && process.env.NODE_ENV === 'development' ? devExtension : compose;
+import app from './slices/appSlice';
 
 const reducer = combineReducers({
   app,
-  ui,
-  uiTemp,
-  project,
-  file,
 });
 
-const store = createStore(
+export const store = configureStore({
   reducer,
-  composeEnhancers(
-    applyMiddleware(thunk)
-  )
-);
+});
 
 export type State = ReturnType<typeof reducer>;
 
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+ReturnType,
+RootState,
+unknown,
+Action<string>
+>;
+
 // Shortcuts
-export const dispatch: ThunkDispatch<any, any, AnyAction> = store.dispatch.bind(store);
+export const dispatch: AppDispatch = store.dispatch.bind(store);
 export const getState = store.getState.bind(store);
 
 export default store;

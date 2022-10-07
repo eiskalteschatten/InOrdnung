@@ -1,72 +1,10 @@
-import path from 'path';
-import os from 'os';
-
-export interface Config {
+export default {
   app: {
-    name: string;
-    version: string;
-    storagePath: string;
-  };
-  updates: {
-    url: string;
-  };
-  intl: {
-    defaultLocale: string;
-  };
-  extensions: {
-    default: string;
-    images: string[];
-  };
-  images: {
-    recentProjectThumbnail: {
-      width: number;
-      height: number;
-    };
-  };
-  welcomeWindow: {
-    recentProjectsLimit: number;
-  };
-}
-
-let storagePath = '';
-
-switch (process.platform) {
-  case 'darwin':
-    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'InOrdnung');
-    break;
-  case 'win32':
-    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'Alex Seifert', 'InOrdnung');
-    break;
-  default:
-    storagePath = path.join(os.homedir(), '.inordnung');
-    break;
-}
-
-const config: Config = {
-  app: {
-    name: 'InOrdnung',
-    version: '1.0.0-beta.6',
-    storagePath,
-  },
-  updates: {
-    url: 'https://api.github.com/repos/eiskalteschatten/InOrdnung/releases',
+    name: 'ElectronReactTypeScript',
+    version: '1.0.0',
   },
   intl: {
-    defaultLocale: process.env.REACT_APP_LOCALE || 'en',
-  },
-  extensions: {
-    default: 'inord',
-    images: ['jpg', 'jpeg', 'png', 'gif', 'svg'],
-  },
-  images: {
-    recentProjectThumbnail: {
-      width: 200,
-      height: 200,
-    },
-  },
-  welcomeWindow: {
-    recentProjectsLimit: 5,
+    defaultLocale: 'en',
+    languages: ['en'],
   },
 };
-
-export default config;

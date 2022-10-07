@@ -1,7 +1,8 @@
 import { IpcRendererEvent } from 'electron';
 
 import { dispatch } from '../store';
-import { appSetPlatform } from '../store/actions/appActions';
+import { setPlatform } from '../store/slices/appSlice';
 
-window.api.on('appSetPlatform', (e: IpcRendererEvent, platform: string): any =>
-  dispatch(appSetPlatform(platform)));
+window.api.on('setPlatform', (e: IpcRendererEvent, platform: string): any =>
+  dispatch(setPlatform(platform)));
+

@@ -1,2 +1,1 @@
 import './initializeApp';
-import './addToRecentProjects';

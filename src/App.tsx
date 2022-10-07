@@ -1,72 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
-import { ThemeProvider } from '@material-ui/styles';
-import { CssBaseline, createMuiTheme }  from '@material-ui/core';
-import { Localization, enUS, deDE } from '@material-ui/core/locale';
+import { useAppDispatch } from './store/hooks';
+import { setPrefersDarkMode } from './store/slices/appSlice';
 
-import { IntlProviderWrapper } from './intl/IntlContext';
-import getThemeOptions from './theme';
-
-import Welcome from './windows/Welcome';
-import Project from './windows/Project';
-import About from './windows/About';
+import MainLayout from './components/MainLayout';
 
 const App: React.FC = () => {
-  // TODO: allow the saved locale from the DB to override the system's settings
-  const [locale] = useState<string>(navigator.language.split('-')[0] || 'en');
-  const [theme, setTheme] = useState<string>('light');
-
-  const themeOptions = getThemeOptions(theme);
-
-  const getMuiLocale = (): Localization => {
-    switch (locale) {
-      case 'de':
-        return deDE;
-      case 'en':
-      default:
-        return enUS;
-    }
-  };
-
-  const muiTheme = createMuiTheme({
-    ...themeOptions,
-    palette: {
-      ...themeOptions.palette,
-      theme,
-    },
-  }, getMuiLocale());
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const themeChange = (e: any): void => {
-      setTheme(e.matches ? 'dark' : 'light');
-    };
+    dispatch(setPrefersDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches));
 
-    if (window.matchMedia) {
-      setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', themeChange);
-    }
-
-    return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', themeChange);
-    };
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      dispatch(setPrefersDarkMode(window.matchMedia('(prefers-color-scheme: dark)').matches));
+    });
   }, []);
 
   return (
-    <>
-      <IntlProviderWrapper injectedLocale={locale}>
-        <ThemeProvider theme={muiTheme}>
-          <CssBaseline />
-          <HashRouter>
-            <Switch>
-              <Route path='/' exact component={Welcome} />
-              <Route path='/project' component={Project} />
-              <Route path='/about' component={About} />
-            </Switch>
-          </HashRouter>
-        </ThemeProvider>
-      </IntlProviderWrapper>
-    </>
+    <HashRouter>
+      <Routes>
+        <Route path='*' element={<MainLayout />} />
+      </Routes>
+    </HashRouter>
   );
 };
 
