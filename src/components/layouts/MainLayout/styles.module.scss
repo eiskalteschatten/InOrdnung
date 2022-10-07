@@ -9,14 +9,10 @@
     padding-top: $titlebarHeight;
   }
 
-  .main {
+  .content {
     display: flex;
     flex-direction: row;
     min-height: 0;
     flex-grow: 1;
-
-    .content {
-      flex-grow: 1;
-    }
   }
 }
