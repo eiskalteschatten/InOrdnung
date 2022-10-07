@@ -1,6 +1,6 @@
 export default {
   app: {
-    name: 'ElectronReactTypeScript',
+    name: 'InOrdnung',
     version: '1.0.0',
   },
   intl: {
