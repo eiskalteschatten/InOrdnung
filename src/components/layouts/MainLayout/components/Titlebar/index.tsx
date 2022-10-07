@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IpcRendererEvent } from 'electron';
 
-import config from '../../config';
+import config from '../../../../../config';
 
 import styles from './styles.module.scss';
 
