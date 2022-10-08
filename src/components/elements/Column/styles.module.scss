@@ -1,0 +1,11 @@
+@import '../../../scss/variables';
+
+.column {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-color: #ffffff;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #000000;
+  }
+}
