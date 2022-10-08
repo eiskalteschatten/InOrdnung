@@ -1,0 +1,29 @@
+@import "../../../scss/variables";
+
+.link {
+  text-decoration: none;
+
+  .button {
+    color: var(--color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    margin-left: 5px;
+
+    &.active {
+      background-color: darken($lightBg, 6%);
+      color: var(--primary-color);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: darken($darkBg, 3%);
+      }
+    }
+
+    .contents {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+    }
+  }
+}
