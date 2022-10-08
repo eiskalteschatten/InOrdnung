@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 type Props = HtmlHTMLAttributes<HTMLOrSVGElement>;
 
-const Spinner: React.FC<Props> = ({className, ...leftoverProps}) => {
+const Spinner: React.FC<Props> = ({ className, ...leftoverProps }) => {
   return (
     <svg
       {...leftoverProps}
