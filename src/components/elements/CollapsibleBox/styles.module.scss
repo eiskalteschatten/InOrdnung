@@ -1,0 +1,32 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.collapsibleBox {
+  padding-bottom: 15px;
+  position: relative;
+
+  &.collapsed {
+    overflow: hidden;
+    height: 30px;
+
+    .title {
+      font-weight: bold;
+    }
+  }
+
+  .clickableArea {
+    display: flex;
+    align-items: center;
+    user-select: none;
+    border-radius: 5px;
+    margin: 0 0 2px 5px;
+    padding: 3px;
+
+    @include hoverActiveBackgrounds;
+
+    .title {
+      font-size: 14px;
+      margin-left: 2px;
+    }
+  }
+}

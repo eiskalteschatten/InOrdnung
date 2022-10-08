@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { State } from '../../../store';
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
+import Sidebar from './components/Sidebar';
 
 import styles from './styles.module.scss';
 
@@ -31,6 +32,8 @@ const MainLayout: React.FC<Props> = ({ toolbar, children }) => {
       )}
 
       <div className={styles.content}>
+        <Sidebar />
+
         {children}
       </div>
     </div>

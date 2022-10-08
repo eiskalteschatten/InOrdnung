@@ -1,14 +1,17 @@
 import React from 'react';
 
-import MainLayout from '../../components/layouts/MainLayout';
 import Toolbar from './components/Toolbar';
+import MainLayout from '../../components/layouts/MainLayout';
+import Column from '../../components/elements/Column';
 
 const ProjectInfo: React.FC = () => {
   return (
     <MainLayout
       toolbar={<Toolbar />}
     >
-      test
+      <Column>
+        test
+      </Column>
     </MainLayout>
   );
 };
