@@ -1,0 +1,9 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.buttonBase {
+  @include formBase;
+
+  padding: 3px 10px;
+  white-space: nowrap;
+}
