@@ -1,16 +1,12 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import MainLayout from '../components/layouts/MainLayout';
+import ProjectInfo from '../pages/ProjectInfo';
 
 const Router: React.FC = () => {
   return (
     <Routes>
-      <Route path='*' element={
-        <MainLayout>
-          <div>test</div>
-        </MainLayout>
-      } />
+      <Route path='*' element={<ProjectInfo />} />
     </Routes>
   );
 };
