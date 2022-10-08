@@ -1,19 +1,33 @@
 @import "./variables";
 
-html,
-body {
+:root {
+  --background-color: #{$lightBg};
+  --opposite-background-color: #{$darkBg};
+  --color: #{$lightColor};
+  --opposite-color: #{$darkColor};
+  --primary-color: #{$primaryColor};
+  --border-color: #{$lightBorderColor};
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #{$darkBg};
+    --opposite-background-color: #{$lightBg};
+    --color: #{$darkColor};
+    --opposite-color: #{$lightColor};
+    --primary-color: #{$primaryColor};
+    --border-color: #{$darkBorderColor};
+  }
+}
+
+html, body {
   padding: 0;
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: $lightBg;
-  color: $lightColor;
+  background-color: var(--background-color);
+  color: var(--color);
   overflow: hidden;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $darkBg !important;
-    color: $darkColor !important;
-  }
 }
 
 #root {
