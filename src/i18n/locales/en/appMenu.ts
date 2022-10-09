@@ -19,7 +19,6 @@ export default {
   preferences: 'Preferences',
   file: 'File',
   new: 'New',
-  newEmail: 'New Email',
   close: 'Close',
   quit: 'Quit',
   help: 'Help',

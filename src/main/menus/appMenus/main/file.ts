@@ -12,10 +12,9 @@ export default (): MenuItem => {
       submenu: [
         {
           item: {
-            label: t('appMenu:newEmail'),
-            accelerator: 'CmdOrCtrl+N',
+            label: t('bookmarks:newBookmark'),
             click: async (): Promise<void> => {
-              console.log('New Email');
+              console.log('New Bookmark');
             },
           },
         },
