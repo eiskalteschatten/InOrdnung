@@ -9,7 +9,7 @@ const ProjectInfo: React.FC = () => {
     <MainLayout
       toolbar={<Toolbar />}
     >
-      <Column flexGrow>
+      <Column flexGrow centered>
         Project Info
       </Column>
     </MainLayout>
