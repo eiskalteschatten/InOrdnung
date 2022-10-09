@@ -42,6 +42,7 @@ const Sidebar: React.FC = () => {
         <SidebarButton
           to='/'
           icon={<span className='material-icons'>info</span>}
+          end
         >
           {t('projectInfo:projectInfo')}
         </SidebarButton>
