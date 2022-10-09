@@ -5,6 +5,10 @@
   border-top-right-radius: 5px;
   background-color: #ffffff;
 
+  &.flexGrow {
+    flex-grow: 1;
+  }
+
   @media (prefers-color-scheme: dark) {
     background-color: #000000;
   }

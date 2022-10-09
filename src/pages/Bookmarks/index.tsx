@@ -9,7 +9,7 @@ const Bookmarks: React.FC = () => {
     <MainLayout
       toolbar={<Toolbar />}
     >
-      <Column>
+      <Column flexGrow>
         bookmarks
       </Column>
     </MainLayout>
