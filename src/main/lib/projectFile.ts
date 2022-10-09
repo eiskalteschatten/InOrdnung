@@ -85,7 +85,7 @@ export const openFile = async (filePath: string): Promise<void> => {
 
 export const addToRecentProjects = async (filePath: string, projectName?: string): Promise<void> => {
   try {
-    const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../workers/', 'addToRecentProjects.html');
+    const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../workers/addToRecentProjects', 'index.html');
 
     const addToRecentProjectsWindow = new BrowserWindow({
       width: 400,
