@@ -32,4 +32,8 @@ export default {
   zoomOut: 'Zoom Out',
   togglefullscreen: 'Toggle Full Screen',
   development: 'Development',
+  open: 'Open...',
+  openRecent: 'Open Recent',
+  clearMenu: 'Clear Menu',
+  saveAs: 'Save As...',
 };

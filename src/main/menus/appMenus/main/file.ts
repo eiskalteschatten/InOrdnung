@@ -1,5 +1,8 @@
+import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
+
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 import i18n from '../../../../i18n/main';
+import { openFileDialog, saveFileAs } from '../../../lib/projectFile';
 
 const { t } = i18n;
 
@@ -30,6 +33,28 @@ export default (): MenuItem => {
         },
       ],
     },
+    {
+      item: {
+        label: t('appMenu:open'),
+        accelerator: 'CmdOrCtrl+O',
+        click: async (): Promise<void> => {
+          await openFileDialog();
+        },
+      },
+    },
+    {
+      platforms: ['darwin'],
+      item: {
+        label: t('appMenu:openRecent'),
+        role: 'recentDocuments',
+        submenu:[
+          {
+            label: t('appMenu:clearMenu'),
+            role: 'clearRecentDocuments',
+          },
+        ],
+      },
+    },
     { item: { type: 'separator' } },
     {
       platforms: ['darwin'],
@@ -37,6 +62,30 @@ export default (): MenuItem => {
         label: t('appMenu:close'),
         role: 'close',
       },
+    },
+    {
+      item:  {
+        label: t('common:save'),
+        accelerator: 'CmdOrCtrl+S',
+        click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+          focusedWindow?.webContents.send('saveProject');
+        },
+      },
+    },
+    {
+      item: {
+        label: t('appMenu:saveAs'),
+        accelerator: 'CmdOrCtrl+Shift+S',
+        click: async (item: ElectronMenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
+          if (focusedWindow) {
+            await saveFileAs(focusedWindow);
+          }
+        },
+      },
+    },
+    {
+      platforms: nonMacPlatforms,
+      item: { type: 'separator' },
     },
     {
       platforms: nonMacPlatforms,
