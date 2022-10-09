@@ -15,7 +15,7 @@ const Sidebar: React.FC = () => {
   // const collapsedIds = useAppSelector(state => state.ui.collapsedAccountIds);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
-  const { t } = useTranslation(['projectInfo']);
+  const { t } = useTranslation(['projectInfo', 'bookmarks']);
   // const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -44,6 +44,13 @@ const Sidebar: React.FC = () => {
           icon={<span className='material-icons'>info</span>}
         >
           {t('projectInfo:projectInfo')}
+        </SidebarButton>
+
+        <SidebarButton
+          to='/bookmarks'
+          icon={<span className='material-icons'>bookmark</span>}
+        >
+          {t('bookmarks:bookmarks')}
         </SidebarButton>
 
         {/* {Array.isArray(accounts) && accounts.length > 0 ? accounts.map(account => (

@@ -4,16 +4,16 @@ import Toolbar from './components/Toolbar';
 import MainLayout from '../../components/layouts/MainLayout';
 import Column from '../../components/elements/Column';
 
-const ProjectInfo: React.FC = () => {
+const Bookmarks: React.FC = () => {
   return (
     <MainLayout
       toolbar={<Toolbar />}
     >
       <Column>
-        Project Info
+        bookmarks
       </Column>
     </MainLayout>
   );
 };
 
-export default ProjectInfo;
+export default Bookmarks;
