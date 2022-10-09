@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '../../../../../store/hooks';
-import { setSidebarWidth } from '../../../../../store/slices/uiSlice';
+import { setSidebarWidth } from '../../../../../store/entities/ui';
 
 // import CollapsibleBox from '../../../../elements/CollapsibleBox';
 import ColumnDragger from '../../../../elements/ColumnDragger';

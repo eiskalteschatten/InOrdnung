@@ -1,18 +1,17 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { dispatch, RootState } from '..';
-import { Project, ProjectInfo } from '../../shared/interfaces/Project';
-import { setIsLoading } from './uiSlice';
+import { dispatch, RootState } from '../..';
+import { Project } from '../../../shared/interfaces/Project';
+import { setIsLoading } from '../ui';
 
-export type State = ProjectInfo;
+export type State = object;
 
 const initialState: State = {
-  name: '',
-  description: '',
+
 };
 
 const serializeProject = (state: RootState): Project => ({
-  ...state.project,
+  ...state.project.info,
 });
 
 export const saveProject = createAsyncThunk(
@@ -28,15 +27,6 @@ export const slice = createSlice({
   name: 'project',
   initialState,
   reducers: {
-    setProjectInfo: (state, action: PayloadAction<State>) => {
-      state = action.payload;
-    },
-    setName: (state, action: PayloadAction<string>) => {
-      state.name = action.payload;
-    },
-    setDescription: (state, action: PayloadAction<string>) => {
-      state.description = action.payload;
-    },
   },
   extraReducers(builder) {
     // Save Project
@@ -59,10 +49,4 @@ export const slice = createSlice({
   },
 });
 
-export const {
-  setProjectInfo,
-  setName,
-  setDescription,
-} = slice.actions;
-
-export default slice.reducer;
+export const { reducer } = slice;

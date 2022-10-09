@@ -72,4 +72,4 @@ export const {
   setIsLoading,
 } = slice.actions;
 
-export default slice.reducer;
+export const { reducer } = slice;
