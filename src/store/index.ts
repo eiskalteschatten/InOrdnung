@@ -2,10 +2,12 @@ import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/t
 
 import app from './slices/appSlice';
 import ui from './slices/uiSlice';
+import project from './slices/projectSlice';
 
 const reducer = combineReducers({
   app,
   ui,
+  project,
 });
 
 export const store = configureStore({
