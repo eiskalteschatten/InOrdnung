@@ -28,6 +28,9 @@ export const slice = createSlice({
   name: 'project',
   initialState,
   reducers: {
+    setProjectInfo: (state, action: PayloadAction<State>) => {
+      state = action.payload;
+    },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
@@ -57,6 +60,7 @@ export const slice = createSlice({
 });
 
 export const {
+  setProjectInfo,
   setName,
   setDescription,
 } = slice.actions;
