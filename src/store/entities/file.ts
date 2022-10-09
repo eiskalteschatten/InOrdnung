@@ -20,6 +20,14 @@ export const saveProject = createAsyncThunk(
   }
 );
 
+export const saveProjectAs = createAsyncThunk(
+  'file/saveProjectAs',
+  async (_, thunkAPI) => {
+    const { project, ui, file } = thunkAPI.getState() as RootState;
+    window.api.sendSync('saveProjectAs', { project, ui }, file);
+  }
+);
+
 export const slice = createSlice({
   name: 'file',
   initialState,

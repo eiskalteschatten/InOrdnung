@@ -8,7 +8,7 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
 
   if (window) {
     if (!fileMetaData.path) {
-      await saveFileAs(window);
+      await saveFileAs(projectFile, fileMetaData, window);
     }
     else {
       await writeFile(projectFile, fileMetaData, window);
@@ -17,5 +17,13 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
         window.close();
       }
     }
+  }
+});
+
+ipcMain.on('saveProjectAs', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData) => {
+  const window = BrowserWindow.fromWebContents(e.sender);
+
+  if (window) {
+    await saveFileAs(projectFile, fileMetaData, window);
   }
 });

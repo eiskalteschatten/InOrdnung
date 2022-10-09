@@ -10,7 +10,7 @@ import createProjectWindow from '../windows/main';
 
 const { t } = i18n;
 
-export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
+export const saveFileAs = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
       { name: t('files:inOrdnungProjectFile'), extensions: [config.extensions.default] },
@@ -20,14 +20,20 @@ export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   if (!canceled) {
     window.setRepresentedFilename(filePath || '');
     window.webContents.send('setProjectFileMetaData', { path: filePath });
-    window.webContents.send('saveProject');
+
+    const writeFileMetaData = {
+      ...fileMetaData,
+      path: filePath || '',
+    };
+
+    await writeFile(projectFile, writeFileMetaData, window);
   }
 };
 
 export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
   try {
     if (!fileMetaData.path) {
-      await saveFileAs(window);
+      throw new Error('No file path can be found for writing!');
     }
     else {
       await fsPromises.writeFile(fileMetaData.path, JSON.stringify(projectFile), 'utf8');

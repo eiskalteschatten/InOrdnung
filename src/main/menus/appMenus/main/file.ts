@@ -76,9 +76,9 @@ export default (): MenuItem => {
       item: {
         label: t('appMenu:saveAs'),
         accelerator: 'CmdOrCtrl+Shift+S',
-        click: async (item: ElectronMenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
+        click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
           if (focusedWindow) {
-            await saveFileAs(focusedWindow);
+            focusedWindow?.webContents.send('saveProjectAs');
           }
         },
       },
