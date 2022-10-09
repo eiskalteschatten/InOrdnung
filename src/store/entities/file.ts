@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '..';
 import { ProjectFileMetaData } from '../../shared/interfaces/File';
 
 export type State = ProjectFileMetaData;
