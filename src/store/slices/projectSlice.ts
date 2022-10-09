@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from '..';
+import { dispatch, RootState } from '..';
 import { Project, ProjectInfo } from '../../shared/interfaces/Project';
+import { setIsLoading } from './uiSlice';
 
 export type State = ProjectInfo;
 
@@ -36,20 +37,19 @@ export const slice = createSlice({
   },
   extraReducers(builder) {
     // Save Project
-    builder.addCase(saveProject.pending, (state, action) => {
-      // TODO:
-      // 1. Start loader
+    builder.addCase(saveProject.pending, () => {
+      dispatch(setIsLoading(true));
     });
 
     builder.addCase(saveProject.fulfilled, (state, action) => {
+      dispatch(setIsLoading(false));
       // TODO:
-      // 1. Stop loader
       // 2. Clear global error message
     });
 
     builder.addCase(saveProject.rejected, (state, action) => {
+      dispatch(setIsLoading(false));
       // TODO:
-      // 1. Stop loader
       // 2. Set global error message
       console.error(action.error);
     });

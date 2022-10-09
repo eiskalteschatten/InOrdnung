@@ -6,12 +6,14 @@ export interface State {
   sidebarWidth: number;
   middleColumnWidth: number;
   collapsedAccountIds: number[];
+  isLoading: boolean;
 }
 
 const initialState: State = {
   sidebarWidth: Number(localStorage.getItem('sidebarWidth')) || 260,
   middleColumnWidth: Number(localStorage.getItem('middleColumnWidth')) || 350,
   collapsedAccountIds: JSON.parse(localStorage.getItem('collapsedAccountIds') || '[]'),
+  isLoading: false,
 };
 
 export const addCollapsedAccountId = createAsyncThunk(
@@ -57,6 +59,9 @@ export const slice = createSlice({
       state.collapsedAccountIds = action.payload;
       localStorage.setItem('collapsedAccountIds', JSON.stringify(action.payload));
     },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
@@ -64,6 +69,7 @@ export const {
   setSidebarWidth,
   setMiddleColumnWidth,
   setCollapsedAccountIds,
+  setIsLoading,
 } = slice.actions;
 
 export default slice.reducer;
