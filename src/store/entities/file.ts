@@ -13,7 +13,7 @@ const initialState: State = {
 };
 
 export const saveProject = createAsyncThunk(
-  'project/saveProject',
+  'file/saveProject',
   async (closeWindow: boolean, thunkAPI) => {
     const { project, ui, file } = thunkAPI.getState() as RootState;
     window.api.sendSync('saveProject', { project, ui }, file, closeWindow);
