@@ -8,10 +8,11 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   ref?: React.ForwardedRef<HTMLDivElement>;
   flexGrow?: boolean;
   centered?: boolean;
+  padding?: boolean;
 }
 
 const Column: React.FC<Props> = forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { children, className, flexGrow, centered, ...leftoverProps } = props;
+  const { children, className, flexGrow, centered, padding, ...leftoverProps } = props;
 
   return (
     <div
@@ -19,6 +20,7 @@ const Column: React.FC<Props> = forwardRef<HTMLDivElement, Props>((props, ref) =
       className={clsx(styles.column, className, {
         [styles.flexGrow]: flexGrow,
         [styles.centered]: centered,
+        [styles.padding]: padding,
       })}
       {...leftoverProps}
     >
