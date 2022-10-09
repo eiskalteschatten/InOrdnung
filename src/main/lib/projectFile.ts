@@ -56,6 +56,9 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
   catch (error) {
     log.error(error);
   }
+  finally {
+    window.webContents.send('setIsLoading', false);
+  }
 };
 
 export const openFileDialog = async (): Promise<void> => {

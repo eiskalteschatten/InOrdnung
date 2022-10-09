@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { dispatch, RootState } from '..';
+import { RootState } from '..';
 import { ProjectFileMetaData } from '../../shared/interfaces/File';
-import { setIsLoading } from './ui';
 
 export type State = ProjectFileMetaData;
 
@@ -11,22 +10,6 @@ const initialState: State = {
   fileLoaded: false,
   path: '',
 };
-
-export const saveProject = createAsyncThunk(
-  'file/saveProject',
-  async (closeWindow: boolean, thunkAPI) => {
-    const { project, ui, file } = thunkAPI.getState() as RootState;
-    window.api.sendSync('saveProject', { project, ui }, file, closeWindow);
-  }
-);
-
-export const saveProjectAs = createAsyncThunk(
-  'file/saveProjectAs',
-  async (_, thunkAPI) => {
-    const { project, ui, file } = thunkAPI.getState() as RootState;
-    window.api.sendSync('saveProjectAs', { project, ui }, file);
-  }
-);
 
 export const slice = createSlice({
   name: 'file',
@@ -50,45 +33,6 @@ export const slice = createSlice({
     setPath: (state, action: PayloadAction<string>) => {
       state.path = action.payload;
     },
-  },
-  extraReducers(builder) {
-    // Save Project
-    builder
-      .addCase(saveProject.pending, () => {
-        // dispatch(setIsLoading(true));
-      })
-      .addCase(saveProject.fulfilled, state => {
-        // dispatch(setIsLoading(false));
-        state.saved = true;
-        // TODO:
-        // 2. Clear global error message
-      })
-      .addCase(saveProject.rejected, (state, action) => {
-        // dispatch(setIsLoading(false));
-        state.saved = false;
-        // TODO:
-        // 2. Set global error message
-        console.error(action.error);
-      });
-
-    // Save Project As
-    builder
-      .addCase(saveProjectAs.pending, () => {
-        // dispatch(setIsLoading(true));
-      })
-      .addCase(saveProjectAs.fulfilled, state => {
-        // dispatch(setIsLoading(false));
-        state.saved = true;
-        // TODO:
-        // 2. Clear global error message
-      })
-      .addCase(saveProjectAs.rejected, (state, action) => {
-        // dispatch(setIsLoading(false));
-        state.saved = false;
-        // TODO:
-        // 2. Set global error message
-        console.error(action.error);
-      });
   },
 });
 
