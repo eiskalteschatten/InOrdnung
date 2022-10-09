@@ -7,10 +7,14 @@ import Column from '../../components/elements/Column';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
 
+import { useAppDispatch } from '../../store/hooks';
+import { setDescription, setName } from '../../store/entities/project/info';
+
 import styles from './styles.module.scss';
 
 const ProjectInfo: React.FC = () => {
   const { t } = useTranslation(['projectInfo']);
+  const dispatch = useAppDispatch();
 
   return (
     <MainLayout
@@ -21,11 +25,13 @@ const ProjectInfo: React.FC = () => {
           <Input
             label={t('projectInfo:projectName')}
             fullWidth
+            onChange={e => dispatch(setName(e.target.value))}
           />
 
           <TextArea
             label={t('projectInfo:description')}
             fullWidth
+            onChange={e => dispatch(setDescription(e.target.value))}
           />
         </div>
       </Column>
