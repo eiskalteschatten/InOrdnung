@@ -6,7 +6,7 @@ import { setIsLoading } from '../ui';
 
 export interface State {
   isSaved: boolean;
-};
+}
 
 const initialState: State = {
   isSaved: false,
