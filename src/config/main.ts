@@ -28,5 +28,9 @@ export default {
   updates: {
     url: 'https://api.github.com/repos/eiskalteschatten/InOrdnung/releases',
   },
+  extensions: {
+    default: 'inord',
+    images: ['jpg', 'jpeg', 'png', 'gif', 'svg'],
+  },
   ...globalConfig,
 };

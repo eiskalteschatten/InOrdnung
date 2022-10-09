@@ -5,6 +5,7 @@ export interface ProjectInfo {
   description?: string;
 }
 
-export interface Project extends ProjectInfo {
+export interface Project {
+  info: ProjectInfo;
   bookmarks?: Bookmark[];
 }

@@ -13,7 +13,7 @@ const initialState: State = {
 };
 
 const serializeProject = (state: RootState): Project => ({
-  ...state.project.info,
+  info: state.project.info,
 });
 
 export const saveProject = createAsyncThunk(

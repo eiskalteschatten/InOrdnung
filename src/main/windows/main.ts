@@ -5,10 +5,12 @@ import log from 'electron-log';
 import config from '../../config/main';
 import initializeRenderer from '../initializeRenderer';
 import getAppMenu from '../menus/appMenus/main';
+import { ProjectFile } from '../../shared/interfaces/File';
+import { addToRecentProjects } from '../lib/projectFile';
 
 export const windows = new Set();
 
-export default async (): Promise<BrowserWindow> => {
+export default async (projectFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
   // const preferences = load window preferences here;
 
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
@@ -78,6 +80,12 @@ export default async (): Promise<BrowserWindow> => {
 
     newWindow.webContents.on('did-finish-load', async (): Promise<void> => {
       initializeRenderer(newWindow);
+
+      if (projectFile && filePath) {
+        newWindow.webContents.send('openProject', projectFile, filePath);
+        const { name } = projectFile.project.info;
+        await addToRecentProjects(filePath, name);
+      }
     });
 
     newWindow.on('focus', () => {
