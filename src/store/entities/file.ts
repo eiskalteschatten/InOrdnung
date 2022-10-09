@@ -27,6 +27,12 @@ export const slice = createSlice({
     setFileMetaData: (state, action: PayloadAction<State>) => {
       state = action.payload;
     },
+    updateFileMetaData: (state, action: PayloadAction<State>) => {
+      state = {
+        ...state,
+        ...action.payload,
+      };
+    },
     setSaved: (state, action: PayloadAction<boolean>) => {
       state.saved = action.payload;
     },
@@ -41,16 +47,16 @@ export const slice = createSlice({
     // Save Project
     builder
       .addCase(saveProject.pending, () => {
-        dispatch(setIsLoading(true));
+        // dispatch(setIsLoading(true));
       })
       .addCase(saveProject.fulfilled, state => {
-        dispatch(setIsLoading(false));
+        // dispatch(setIsLoading(false));
         state.saved = true;
         // TODO:
         // 2. Clear global error message
       })
       .addCase(saveProject.rejected, (state, action) => {
-        dispatch(setIsLoading(false));
+        // dispatch(setIsLoading(false));
         state.saved = false;
         // TODO:
         // 2. Set global error message
@@ -61,6 +67,7 @@ export const slice = createSlice({
 
 export const {
   setFileMetaData,
+  updateFileMetaData,
   setSaved,
   setFileLoaded,
   setPath,

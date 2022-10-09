@@ -9,7 +9,7 @@ import TextArea from '../../components/elements/TextArea';
 
 import { useAppDispatch } from '../../store/hooks';
 import { setDescription, setName } from '../../store/entities/project/info';
-import { setSaved } from '../../store/entities/file';
+// import { setSaved } from '../../store/entities/file';
 
 import styles from './styles.module.scss';
 
@@ -17,7 +17,7 @@ const ProjectInfo: React.FC = () => {
   const { t } = useTranslation(['projectInfo']);
   const dispatch = useAppDispatch();
 
-  const markProjectAsNotSaved = () => dispatch(setSaved(false));
+  // const markProjectAsNotSaved = () => dispatch(setSaved(false));
 
   return (
     <MainLayout
@@ -30,7 +30,7 @@ const ProjectInfo: React.FC = () => {
             fullWidth
             onChange={e => {
               dispatch(setName(e.target.value));
-              markProjectAsNotSaved();
+              // markProjectAsNotSaved();
             }}
           />
 
@@ -39,7 +39,7 @@ const ProjectInfo: React.FC = () => {
             fullWidth
             onChange={e => {
               dispatch(setDescription(e.target.value));
-              markProjectAsNotSaved();
+              // markProjectAsNotSaved();
             }}
           />
         </div>
