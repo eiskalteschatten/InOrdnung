@@ -1,4 +1,4 @@
-import { BrowserWindow, BrowserWindowConstructorOptions, Menu, nativeTheme, screen } from 'electron';
+import { BrowserWindow, BrowserWindowConstructorOptions, dialog, Menu, nativeTheme, screen } from 'electron';
 import path from 'path';
 import log from 'electron-log';
 
@@ -7,6 +7,9 @@ import initializeRenderer from '../initializeRenderer';
 import getAppMenu from '../menus/appMenus/main';
 import { ProjectFile } from '../../shared/interfaces/File';
 import { addToRecentProjects } from '../lib/projectFile';
+import i18n from '../../i18n/main';
+
+const { t } = i18n;
 
 export const windows = new Set();
 
@@ -76,6 +79,8 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     newWindow.on('leave-full-screen', (e: Event) => onWindowChanged(e, {
       windowIsFullScreen: newWindow.isFullScreen(),
     }));
+
+    newWindow.on('close', (e: Event) => onClose(e, newWindow));
     newWindow.on('closed', () => closed(newWindow));
 
     newWindow.webContents.on('did-finish-load', async (): Promise<void> => {
@@ -132,6 +137,44 @@ const onWindowChanged = async (e: Event, changedPreferences: OnWindowChangedOpti
     //     ...changedPreferences,
     //   });
     // }
+  }
+  catch (error) {
+    log.error(error);
+  }
+};
+
+const onClose = async (e: Event, window?: BrowserWindow): Promise<void> => {
+  try {
+    if (window) {
+      if (window.isDocumentEdited()) {
+        const result = await dialog.showMessageBox({
+          message: t('files:closedUnsavedProjectConfimration'),
+          detail: t('files:closedUnsavedProjectDetail'),
+          buttons: [t('common:save'), t('common:dontSave'), t('common:cancel')],
+          type: 'warning',
+          defaultId: 0,
+        });
+
+        if (result.response === 2) {
+          e.preventDefault();
+        }
+        else if (result.response === 0) {
+          e.preventDefault();
+          window?.webContents.send('saveProject', true);
+        }
+      }
+
+      // const windowBounds = window.getBounds();
+
+      // const windowPreferences = {
+      //   windowWidth: windowBounds.width,
+      //   windowHeight: windowBounds.height,
+      //   windowX: windowBounds.x,
+      //   windowY: windowBounds.y,
+      //   windowIsFullScreen: window.isFullScreen(),
+      //   windowIsMaximized: window.isMaximized(),
+      // };
+    }
   }
   catch (error) {
     log.error(error);
