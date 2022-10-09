@@ -35,22 +35,21 @@ export const slice = createSlice({
   },
   extraReducers(builder) {
     // Save Project
-    builder.addCase(saveProject.pending, () => {
-      dispatch(setIsLoading(true));
-    });
-
-    builder.addCase(saveProject.fulfilled, () => {
-      dispatch(setIsLoading(false));
-      // TODO:
-      // 2. Clear global error message
-    });
-
-    builder.addCase(saveProject.rejected, (state, action) => {
-      dispatch(setIsLoading(false));
-      // TODO:
-      // 2. Set global error message
-      console.error(action.error);
-    });
+    builder
+      .addCase(saveProject.pending, () => {
+        dispatch(setIsLoading(true));
+      })
+      .addCase(saveProject.fulfilled, () => {
+        dispatch(setIsLoading(false));
+        // TODO:
+        // 2. Clear global error message
+      })
+      .addCase(saveProject.rejected, (state, action) => {
+        dispatch(setIsLoading(false));
+        // TODO:
+        // 2. Set global error message
+        console.error(action.error);
+      });
   },
 });
 
