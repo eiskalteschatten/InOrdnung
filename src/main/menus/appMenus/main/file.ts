@@ -12,6 +12,16 @@ export default (): MenuItem => {
       submenu: [
         {
           item: {
+            label: t('projects:newProject'),
+            accelerator: 'CmdOrCtrl+N',
+            click: async (): Promise<void> => {
+              console.log('New Project');
+            },
+          },
+        },
+        { item: { type: 'separator' } },
+        {
+          item: {
             label: t('bookmarks:newBookmark'),
             click: async (): Promise<void> => {
               console.log('New Bookmark');
