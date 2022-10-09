@@ -41,7 +41,7 @@ export const slice = createSlice({
       dispatch(setIsLoading(true));
     });
 
-    builder.addCase(saveProject.fulfilled, (state, action) => {
+    builder.addCase(saveProject.fulfilled, () => {
       dispatch(setIsLoading(false));
       // TODO:
       // 2. Clear global error message
