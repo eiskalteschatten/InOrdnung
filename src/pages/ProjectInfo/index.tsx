@@ -9,12 +9,15 @@ import TextArea from '../../components/elements/TextArea';
 
 import { useAppDispatch } from '../../store/hooks';
 import { setDescription, setName } from '../../store/entities/project/info';
+import { setSaved } from '../../store/entities/file';
 
 import styles from './styles.module.scss';
 
 const ProjectInfo: React.FC = () => {
   const { t } = useTranslation(['projectInfo']);
   const dispatch = useAppDispatch();
+
+  const markProjectAsNotSaved = () => dispatch(setSaved(false));
 
   return (
     <MainLayout
@@ -25,13 +28,19 @@ const ProjectInfo: React.FC = () => {
           <Input
             label={t('projectInfo:projectName')}
             fullWidth
-            onChange={e => dispatch(setName(e.target.value))}
+            onChange={e => {
+              dispatch(setName(e.target.value));
+              markProjectAsNotSaved();
+            }}
           />
 
           <TextArea
             label={t('projectInfo:description')}
             fullWidth
-            onChange={e => dispatch(setDescription(e.target.value))}
+            onChange={e => {
+              dispatch(setDescription(e.target.value));
+              markProjectAsNotSaved();
+            }}
           />
         </div>
       </Column>
