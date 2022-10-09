@@ -1,69 +1,64 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
+import { Project, ProjectInfo } from '../../shared/interfaces/Project';
 
-export interface State {
-  sidebarWidth: number;
-  middleColumnWidth: number;
-  collapsedAccountIds: number[];
-}
+export type State = ProjectInfo;
 
 const initialState: State = {
-  sidebarWidth: Number(localStorage.getItem('sidebarWidth')) || 260,
-  middleColumnWidth: Number(localStorage.getItem('middleColumnWidth')) || 350,
-  collapsedAccountIds: JSON.parse(localStorage.getItem('collapsedAccountIds') || '[]'),
+  name: '',
+  description: '',
 };
 
-export const addCollapsedAccountId = createAsyncThunk(
-  'ui/addCollapsedAccountId',
-  async (id: number, thunkAPI) => {
+const serializeProject = (state: RootState): Project => ({
+  ...state.project,
+});
+
+export const saveProject = createAsyncThunk(
+  'project/saveProject',
+  async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedAccountIds } = state.ui;
-
-    if (!collapsedAccountIds.includes(id)) {
-      collapsedAccountIds.push(id);
-      thunkAPI.dispatch(setCollapsedAccountIds(collapsedAccountIds));
-    }
-  }
-);
-
-export const removeCollapsedAccountId = createAsyncThunk(
-  'ui/addCollapsedAccountId',
-  async (id: number, thunkAPI) => {
-    const state = thunkAPI.getState() as RootState;
-    const { collapsedAccountIds } = state.ui;
-    const index = collapsedAccountIds.indexOf(id);
-
-    if (index > -1) {
-      collapsedAccountIds.splice(index, 1);
-      thunkAPI.dispatch(setCollapsedAccountIds(collapsedAccountIds));
-    }
+    const project = serializeProject(state);
+    window.api.sendSync('saveProject', project);
   }
 );
 
 export const slice = createSlice({
-  name: 'ui',
+  name: 'project',
   initialState,
   reducers: {
-    setSidebarWidth: (state, action: PayloadAction<number>) => {
-      state.sidebarWidth = action.payload;
-      localStorage.setItem('sidebarWidth', action.payload.toString());
+    setName: (state, action: PayloadAction<string>) => {
+      state.name = action.payload;
     },
-    setMiddleColumnWidth: (state, action: PayloadAction<number>) => {
-      state.middleColumnWidth = action.payload;
-      localStorage.setItem('middleColumnWidth', action.payload.toString());
+    setDescription: (state, action: PayloadAction<string>) => {
+      state.description = action.payload;
     },
-    setCollapsedAccountIds: (state, action: PayloadAction<number[]>) => {
-      state.collapsedAccountIds = action.payload;
-      localStorage.setItem('collapsedAccountIds', JSON.stringify(action.payload));
-    },
+  },
+  extraReducers(builder) {
+    // Save Project
+    builder.addCase(saveProject.pending, (state, action) => {
+      // TODO:
+      // 1. Start loader
+    });
+
+    builder.addCase(saveProject.fulfilled, (state, action) => {
+      // TODO:
+      // 1. Stop loader
+      // 2. Clear global error message
+    });
+
+    builder.addCase(saveProject.rejected, (state, action) => {
+      // TODO:
+      // 1. Stop loader
+      // 2. Set global error message
+      console.error(action.error);
+    });
   },
 });
 
 export const {
-  setSidebarWidth,
-  setMiddleColumnWidth,
-  setCollapsedAccountIds,
+  setName,
+  setDescription,
 } = slice.actions;
 
 export default slice.reducer;
