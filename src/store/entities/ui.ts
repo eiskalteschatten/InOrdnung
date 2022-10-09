@@ -30,7 +30,7 @@ export const addCollapsedAccountId = createAsyncThunk(
 );
 
 export const removeCollapsedAccountId = createAsyncThunk(
-  'ui/addCollapsedAccountId',
+  'ui/removeCollapsedAccountId',
   async (id: number, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const { collapsedAccountIds } = state.ui;
