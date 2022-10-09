@@ -13,7 +13,7 @@ const { t } = i18n;
 export const saveFileAs = async (window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
-      { name: t('files:projectInOrdnungProjectFile'), extensions: [config.extensions.default] },
+      { name: t('files:inOrdnungProjectFile'), extensions: [config.extensions.default] },
     ],
   });
 
@@ -56,7 +56,7 @@ export const openFileDialog = async (): Promise<void> => {
   try {
     const { filePaths, canceled } = await dialog.showOpenDialog({
       filters: [
-        { name: t('files:projectInOrdnungProjectFile'), extensions: [config.extensions.default] },
+        { name: t('files:inOrdnungProjectFile'), extensions: [config.extensions.default] },
       ],
       properties: ['openFile'],
     });
