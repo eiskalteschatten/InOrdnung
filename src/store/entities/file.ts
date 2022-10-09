@@ -17,12 +17,7 @@ export const slice = createSlice({
   reducers: {
     setFileMetaData: (state, action: PayloadAction<State>) => {
       state = action.payload;
-    },
-    updateFileMetaData: (state, action: PayloadAction<State>) => {
-      state = {
-        ...state,
-        ...action.payload,
-      };
+      return state;
     },
     setSaved: (state, action: PayloadAction<boolean>) => {
       state.saved = action.payload;
@@ -38,7 +33,6 @@ export const slice = createSlice({
 
 export const {
   setFileMetaData,
-  updateFileMetaData,
   setSaved,
   setFileLoaded,
   setPath,

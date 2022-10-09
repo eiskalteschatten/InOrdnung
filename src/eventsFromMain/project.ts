@@ -2,13 +2,17 @@ import { IpcRendererEvent } from 'electron';
 
 import { ProjectFileMetaData, ProjectFile } from '../shared/interfaces/File';
 import { dispatch, getState } from '../store';
-import { setFileMetaData, updateFileMetaData } from '../store/entities/file';
+import { setFileMetaData } from '../store/entities/file';
 import { setIsLoading } from '../store/entities/ui';
 // import { projectSetProject } from '../store/actions/projectActions';
 // import { uiSetPreferences } from '../store/actions/uiActions';
 
 window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: ProjectFileMetaData): void => {
-  dispatch(updateFileMetaData(fileMetaData));
+  const { file } = getState();
+  dispatch(setFileMetaData({
+    ...file,
+    ...fileMetaData,
+  }));
 });
 
 window.api.on('saveProject', (e: IpcRendererEvent, closeWindow = false): void => {
