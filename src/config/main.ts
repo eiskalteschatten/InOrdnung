@@ -7,13 +7,13 @@ let storagePath = '';
 
 switch (process.platform) {
   case 'darwin':
-    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'electron-react-typescript');
+    storagePath = path.join(os.homedir(), 'Library', 'Application Support', 'InOrdnung');
     break;
   case 'win32':
-    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'electron-react-typescript');
+    storagePath = path.join(os.homedir(), 'AppData', 'Roaming', 'InOrdnung');
     break;
   default:
-    storagePath = path.join(os.homedir(), '.electron-react-typescript');
+    storagePath = path.join(os.homedir(), '.inordnung');
     break;
 }
 
