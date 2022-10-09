@@ -7,7 +7,7 @@ import { setIsLoading } from '../store/entities/ui';
 // import { projectSetProject } from '../store/actions/projectActions';
 // import { uiSetPreferences } from '../store/actions/uiActions';
 
-window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: ProjectFileMetaData): void => {
+window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: ProjectFileMetaData) => {
   const { file } = getState();
   dispatch(setFileMetaData({
     ...file,
@@ -15,19 +15,19 @@ window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: Proj
   }));
 });
 
-window.api.on('saveProject', (e: IpcRendererEvent, closeWindow = false): void => {
+window.api.on('saveProject', (e: IpcRendererEvent, closeWindow = false) => {
   dispatch(setIsLoading(true));
   const { project, ui, file } = getState();
   window.api.send('saveProject', { project, ui }, file, closeWindow);
 });
 
-window.api.on('saveProjectAs', (): void => {
+window.api.on('saveProjectAs', () => {
   dispatch(setIsLoading(true));
   const { project, ui, file } = getState();
   window.api.send('saveProjectAs', { project, ui }, file);
 });
 
-// window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string): void => {
+// window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string) => {
 //   dispatch(projectSetProject(projectFile.project));
 //   dispatch(uiSetPreferences(projectFile.ui));
 //   dispatch(setFileMetaData({
