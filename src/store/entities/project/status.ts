@@ -39,13 +39,15 @@ export const slice = createSlice({
       .addCase(saveProject.pending, () => {
         dispatch(setIsLoading(true));
       })
-      .addCase(saveProject.fulfilled, () => {
+      .addCase(saveProject.fulfilled, state => {
         dispatch(setIsLoading(false));
+        state.isSaved = true;
         // TODO:
         // 2. Clear global error message
       })
       .addCase(saveProject.rejected, (state, action) => {
         dispatch(setIsLoading(false));
+        state.isSaved = false;
         // TODO:
         // 2. Set global error message
         console.error(action.error);
