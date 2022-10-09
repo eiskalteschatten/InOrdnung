@@ -70,6 +70,25 @@ export const slice = createSlice({
         // 2. Set global error message
         console.error(action.error);
       });
+
+    // Save Project As
+    builder
+      .addCase(saveProjectAs.pending, () => {
+        // dispatch(setIsLoading(true));
+      })
+      .addCase(saveProjectAs.fulfilled, state => {
+        // dispatch(setIsLoading(false));
+        state.saved = true;
+        // TODO:
+        // 2. Clear global error message
+      })
+      .addCase(saveProjectAs.rejected, (state, action) => {
+        // dispatch(setIsLoading(false));
+        state.saved = false;
+        // TODO:
+        // 2. Set global error message
+        console.error(action.error);
+      });
   },
 });
 
