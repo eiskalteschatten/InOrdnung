@@ -1,13 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { dispatch, RootState } from '../..';
 import { Project } from '../../../shared/interfaces/Project';
 import { setIsLoading } from '../ui';
 
-export type State = object;
+export interface State {
+  isSaved: boolean;
+};
 
 const initialState: State = {
-
+  isSaved: false,
 };
 
 const serializeProject = (state: RootState): Project => ({
@@ -27,6 +29,9 @@ export const slice = createSlice({
   name: 'project',
   initialState,
   reducers: {
+    setIsSaved: (state, action: PayloadAction<boolean>) => {
+      state.isSaved = action.payload;
+    },
   },
   extraReducers(builder) {
     // Save Project
@@ -48,5 +53,9 @@ export const slice = createSlice({
     });
   },
 });
+
+export const {
+  setIsSaved,
+} = slice.actions;
 
 export const { reducer } = slice;
