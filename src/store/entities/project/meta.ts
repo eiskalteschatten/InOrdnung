@@ -26,7 +26,7 @@ export const saveProject = createAsyncThunk(
 );
 
 export const slice = createSlice({
-  name: 'project',
+  name: 'meta',
   initialState,
   reducers: {
     setIsSaved: (state, action: PayloadAction<boolean>) => {
