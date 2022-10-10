@@ -8,6 +8,8 @@ import { setSaved } from '../../../store/entities/file';
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
+import GlobalInfo from '../../elements/GlobalInfo';
+import GlobalError from '../../elements/GlobalError';
 
 import styles from './styles.module.scss';
 
@@ -76,6 +78,9 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
 
         {children}
       </div>
+
+      <GlobalInfo />
+      <GlobalError />
     </div>
   );
 };

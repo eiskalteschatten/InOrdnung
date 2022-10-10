@@ -6,6 +6,8 @@ import { UiPreferences } from '../../shared/interfaces/ui';
 export interface State {
   preferences: UiPreferences;
   isLoading?: boolean;
+  globalInfo?: string;
+  globalError?: string;
 }
 
 const initialState: State = {
@@ -61,11 +63,17 @@ export const slice = createSlice({
     setCollapsedAccountIds: (state, action: PayloadAction<number[]>) => {
       state.preferences.collapsedAccountIds = action.payload;
     },
+    setPreferences: (state, action: PayloadAction<UiPreferences>) => {
+      state.preferences = action.payload;
+    },
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
-    setPreferences: (state, action: PayloadAction<UiPreferences>) => {
-      state.preferences = action.payload;
+    setGlobalInfo: (state, action: PayloadAction<string>) => {
+      state.globalInfo = action.payload;
+    },
+    setGlobalError: (state, action: PayloadAction<string>) => {
+      state.globalError = action.payload;
     },
   },
 });
@@ -74,8 +82,10 @@ export const {
   setSidebarWidth,
   setMiddleColumnWidth,
   setCollapsedAccountIds,
-  setIsLoading,
   setPreferences,
+  setIsLoading,
+  setGlobalInfo,
+  setGlobalError,
 } = slice.actions;
 
 export const { reducer } = slice;
