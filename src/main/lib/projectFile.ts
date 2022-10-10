@@ -5,7 +5,7 @@ import log from 'electron-log';
 
 import i18n from '../../i18n/main';
 import config from '../../config/main';
-import { ProjectFile, ProjectFileMetaData, RecentProjectsLocalStorage } from '../../shared/interfaces/File';
+import { ProjectFile, ProjectFileMetaData, RecentProjectsLocalStorage } from '../../shared/interfaces/file';
 import createProjectWindow from '../windows/main';
 
 const { t } = i18n;

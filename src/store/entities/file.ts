@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ProjectFileMetaData } from '../../shared/interfaces/File';
+import { ProjectFileMetaData } from '../../shared/interfaces/file';
 
 export type State = ProjectFileMetaData;
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 
-import { ToolbarConfig } from '../../../shared/interfaces/Toolbars';
+import { ToolbarConfig } from '../../../shared/interfaces/toolbars';
 import Button from '../Button';
 import ToolbarDropdown from '../ToolbarDropdown';
 

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
-import { UiPreferences } from '../../shared/interfaces/UI';
+import { UiPreferences } from '../../shared/interfaces/ui';
 
 export interface State {
   preferences: UiPreferences;

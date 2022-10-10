@@ -1,6 +1,6 @@
 import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 
-import { ProjectFile, ProjectFileMetaData } from '../../shared/interfaces/File';
+import { ProjectFile, ProjectFileMetaData } from '../../shared/interfaces/file';
 import { openFile, openFileDialog, saveFileAs, writeFile } from '../lib/projectFile';
 
 ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, closeWindow = false) => {

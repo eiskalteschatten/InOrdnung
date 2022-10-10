@@ -1,6 +1,6 @@
 import { IpcRendererEvent } from 'electron';
 
-import { ProjectFileMetaData, ProjectFile } from '../shared/interfaces/File';
+import { ProjectFileMetaData, ProjectFile } from '../shared/interfaces/file';
 import { dispatch, getState } from '../store';
 import { setFileMetaData } from '../store/entities/file';
 import { setProjectInfo } from '../store/entities/project/info';

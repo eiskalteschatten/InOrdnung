@@ -5,7 +5,7 @@ import log from 'electron-log';
 import config from '../../config/main';
 import initializeRenderer from '../initializeRenderer';
 import getAppMenu from '../menus/appMenus/main';
-import { ProjectFile } from '../../shared/interfaces/File';
+import { ProjectFile } from '../../shared/interfaces/file';
 import { addToRecentProjects } from '../lib/projectFile';
 import i18n from '../../i18n/main';
 

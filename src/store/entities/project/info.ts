@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ProjectInfo } from '../../../shared/interfaces/Project';
+import { ProjectInfo } from '../../../shared/interfaces/project';
 
 export type State = ProjectInfo;
 
