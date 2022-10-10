@@ -11,8 +11,8 @@ import SidebarButton from '../../../../elements/SidebarButton';
 import styles from './styles.module.scss';
 
 const Sidebar: React.FC = () => {
-  const savedWidth = useAppSelector(state => state.ui.sidebarWidth);
-  // const collapsedIds = useAppSelector(state => state.ui.collapsedAccountIds);
+  const savedWidth = useAppSelector(state => state.ui.preferences.sidebarWidth);
+  // const collapsedIds = useAppSelector(state => state.ui.preferences.collapsedAccountIds);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation(['projectInfo', 'bookmarks']);

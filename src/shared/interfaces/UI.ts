@@ -4,8 +4,10 @@ export interface SortingOptions {
 }
 
 export interface UiPreferences {
-  sidebarWidth?: number;
-  tasksSortingOptions: SortingOptions;
-  showCompletedTasks: boolean;
+  sidebarWidth: number;
+  middleColumnWidth: number;
+  tasksSortingOptions?: SortingOptions;
+  showCompletedTasks?: boolean;
   bookmarksSortingOptions: SortingOptions;
+  collapsedAccountIds: number[];
 }

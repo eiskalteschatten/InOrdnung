@@ -1,18 +1,23 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '..';
+import { UiPreferences } from '../../shared/interfaces/UI';
 
 export interface State {
-  sidebarWidth: number;
-  middleColumnWidth: number;
-  collapsedAccountIds: number[];
-  isLoading: boolean;
+  preferences: UiPreferences;
+  isLoading?: boolean;
 }
 
 const initialState: State = {
-  sidebarWidth: Number(localStorage.getItem('sidebarWidth')) || 260,
-  middleColumnWidth: Number(localStorage.getItem('middleColumnWidth')) || 350,
-  collapsedAccountIds: JSON.parse(localStorage.getItem('collapsedAccountIds') || '[]'),
+  preferences: {
+    sidebarWidth: 260,
+    middleColumnWidth: 350,
+    collapsedAccountIds: [],
+    bookmarksSortingOptions: {
+      sortBy: '',
+      sortDirection: 'desc',
+    },
+  },
   isLoading: false,
 };
 
@@ -20,7 +25,7 @@ export const addCollapsedAccountId = createAsyncThunk(
   'ui/addCollapsedAccountId',
   async (id: number, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedAccountIds } = state.ui;
+    const { collapsedAccountIds } = state.ui.preferences;
 
     if (!collapsedAccountIds.includes(id)) {
       collapsedAccountIds.push(id);
@@ -33,7 +38,7 @@ export const removeCollapsedAccountId = createAsyncThunk(
   'ui/removeCollapsedAccountId',
   async (id: number, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedAccountIds } = state.ui;
+    const { collapsedAccountIds } = state.ui.preferences;
     const index = collapsedAccountIds.indexOf(id);
 
     if (index > -1) {
@@ -48,19 +53,19 @@ export const slice = createSlice({
   initialState,
   reducers: {
     setSidebarWidth: (state, action: PayloadAction<number>) => {
-      state.sidebarWidth = action.payload;
-      localStorage.setItem('sidebarWidth', action.payload.toString());
+      state.preferences.sidebarWidth = action.payload;
     },
     setMiddleColumnWidth: (state, action: PayloadAction<number>) => {
-      state.middleColumnWidth = action.payload;
-      localStorage.setItem('middleColumnWidth', action.payload.toString());
+      state.preferences.middleColumnWidth = action.payload;
     },
     setCollapsedAccountIds: (state, action: PayloadAction<number[]>) => {
-      state.collapsedAccountIds = action.payload;
-      localStorage.setItem('collapsedAccountIds', JSON.stringify(action.payload));
+      state.preferences.collapsedAccountIds = action.payload;
     },
     setIsLoading: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
+    },
+    setPreferences: (state, action: PayloadAction<UiPreferences>) => {
+      state.preferences = action.payload;
     },
   },
 });
@@ -70,6 +75,7 @@ export const {
   setMiddleColumnWidth,
   setCollapsedAccountIds,
   setIsLoading,
+  setPreferences,
 } = slice.actions;
 
 export const { reducer } = slice;

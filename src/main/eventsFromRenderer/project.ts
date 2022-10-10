@@ -1,7 +1,7 @@
 import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 
 import { ProjectFile, ProjectFileMetaData } from '../../shared/interfaces/File';
-import { saveFileAs, writeFile } from '../lib/projectFile';
+import { openFile, openFileDialog, saveFileAs, writeFile } from '../lib/projectFile';
 
 ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, closeWindow = false) => {
   const window = BrowserWindow.fromWebContents(e.sender);
@@ -26,4 +26,17 @@ ipcMain.on('saveProjectAs', async (e: IpcMainEvent, projectFile: ProjectFile, fi
   if (window) {
     await saveFileAs(projectFile, fileMetaData, window);
   }
+});
+
+ipcMain.on('projectIsEdited', (e: IpcMainEvent, isEdited = true): void => {
+  const window = BrowserWindow.fromWebContents(e.sender);
+  window?.setDocumentEdited(isEdited);
+});
+
+ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
+  await openFile(filePath);
+});
+
+ipcMain.on('openFileDialog', async (): Promise<void> => {
+  await openFileDialog();
 });
