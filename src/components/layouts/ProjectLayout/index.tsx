@@ -16,7 +16,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const MainLayout: React.FC<Props> = ({ toolbar, children }) => {
+const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   const dispatch = useAppDispatch();
   const platform = useAppSelector(state => state.app.platform);
   const { project, ui: { preferences: ui }, file } = useAppSelector(state => state);
@@ -48,7 +48,7 @@ const MainLayout: React.FC<Props> = ({ toolbar, children }) => {
 
   return (
     <div
-      className={clsx(styles.mainLayout, {
+      className={clsx(styles.projectLayout, {
         [styles.customTitlebar]: platform === 'darwin',
       })}
     >
@@ -69,4 +69,4 @@ const MainLayout: React.FC<Props> = ({ toolbar, children }) => {
   );
 };
 
-export default MainLayout;
+export default ProjectLayout;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Toolbar from './components/Toolbar';
-import MainLayout from '../../components/layouts/MainLayout';
+import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
@@ -18,7 +18,7 @@ const ProjectInfo: React.FC = () => {
   const { name, description } = useAppSelector(state => state.project.info);
 
   return (
-    <MainLayout
+    <ProjectLayout
       toolbar={<Toolbar />}
     >
       <Column flexGrow centered padding>
@@ -38,7 +38,7 @@ const ProjectInfo: React.FC = () => {
           />
         </div>
       </Column>
-    </MainLayout>
+    </ProjectLayout>
   );
 };
 
