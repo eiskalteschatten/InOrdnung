@@ -9,14 +9,13 @@ import getAppMenu from '../menus/appMenus/main';
 import { ProjectFile } from '../../shared/interfaces/file';
 import { addToRecentProjects } from '../lib/projectFile';
 import i18n from '../../i18n/main';
-import { WindowPreferences } from '../../interfaces/windows';
+import { WindowPreferences } from '../interfaces/windows';
 
 const { t } = i18n;
+export const windows = new Set();
 
 const WINDOW_PREFERENCES_FILE = 'projectWindow.json';
 const WINDOW_PREFERENCES_FILE_PATH = path.resolve(config.storagePath, WINDOW_PREFERENCES_FILE);
-
-export const windows = new Set();
 
 const getWindowPreferences = async (): Promise<WindowPreferences> => {
   try {
