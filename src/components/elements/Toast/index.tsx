@@ -9,9 +9,10 @@ import { setGlobalError, setGlobalInfo } from '../../../store/entities/ui';
 interface Props extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   type?: 'info' | 'error';
+  hideCloseButton?: boolean;
 }
 
-const Toast: React.FC<Props> = ({ children, type = 'info' }) => {
+const Toast: React.FC<Props> = ({ children, type = 'info', hideCloseButton }) => {
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
@@ -27,9 +28,11 @@ const Toast: React.FC<Props> = ({ children, type = 'info' }) => {
         {children}
       </div>
 
-      <div className={styles.closeButton} onClick={handleClose}>
-        <span className='material-icons'>close</span>
-      </div>
+      {!hideCloseButton && (
+        <div className={styles.closeButton} onClick={handleClose}>
+          <span className='material-icons'>close</span>
+        </div>
+      )}
     </div>
   );
 };
