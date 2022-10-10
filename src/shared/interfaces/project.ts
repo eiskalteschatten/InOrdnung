@@ -1,4 +1,4 @@
-import { Bookmark } from './Bookmark';
+import { Bookmark } from './bookmarks';
 
 export interface ProjectInfo {
   name: string;

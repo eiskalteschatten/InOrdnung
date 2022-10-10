@@ -1,5 +1,5 @@
-import { Project } from './Project';
-import { UiPreferences } from './UI';
+import { Project } from './project';
+import { UiPreferences } from './ui';
 
 export interface ProjectFileMetaData {
   fileLoaded?: boolean;
