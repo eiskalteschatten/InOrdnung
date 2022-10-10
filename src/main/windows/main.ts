@@ -19,11 +19,17 @@ const WINDOW_PREFERENCES_FILE_PATH = path.resolve(config.storagePath, WINDOW_PRE
 export const windows = new Set();
 
 const getWindowPreferences = async (): Promise<WindowPreferences> => {
-  const preferencesString = fs.existsSync(WINDOW_PREFERENCES_FILE_PATH)
-    ? await fsPromises.readFile(WINDOW_PREFERENCES_FILE_PATH, 'utf8')
-    : '';
+  try {
+    const preferencesString = fs.existsSync(WINDOW_PREFERENCES_FILE_PATH)
+      ? await fsPromises.readFile(WINDOW_PREFERENCES_FILE_PATH, 'utf8')
+      : '';
 
-  return preferencesString ? JSON.parse(preferencesString) : {};
+    return preferencesString ? JSON.parse(preferencesString) : {};
+  }
+  catch (error) {
+    log.error(error);
+    return {};
+  }
 };
 
 export default async (projectFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
@@ -70,26 +76,26 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
         : `file://${path.join(__dirname, '../../index.html')}`
     );
 
-    newWindow.on('resized', (e: Event) => onWindowChanged(e, {
+    newWindow.on('resized', () => onWindowChanged({
       width: newWindow.getBounds().width,
       height: newWindow.getBounds().height,
       isMaximized: false,
     }));
-    newWindow.on('moved', (e: Event) => onWindowChanged(e, {
+    newWindow.on('moved', () => onWindowChanged({
       x: newWindow.getBounds().x,
       y: newWindow.getBounds().y,
       isMaximized: false,
     }));
-    newWindow.on('maximize', (e: Event) => onWindowChanged(e, {
+    newWindow.on('maximize', () => onWindowChanged({
       isMaximized: newWindow.isMaximized(),
     }));
-    newWindow.on('unmaximize', (e: Event) => onWindowChanged(e, {
+    newWindow.on('unmaximize', () => onWindowChanged({
       isMaximized: newWindow.isMaximized(),
     }));
-    newWindow.on('enter-full-screen', (e: Event) => onWindowChanged(e, {
+    newWindow.on('enter-full-screen', () => onWindowChanged({
       isFullScreen: newWindow.isFullScreen(),
     }));
-    newWindow.on('leave-full-screen', (e: Event) => onWindowChanged(e, {
+    newWindow.on('leave-full-screen', () => onWindowChanged({
       isFullScreen: newWindow.isFullScreen(),
     }));
 
@@ -117,7 +123,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
   return newWindow;
 };
 
-const onWindowChanged = async (e: Event, changedPreferences: WindowPreferences): Promise<void> => {
+const onWindowChanged = async (changedPreferences: WindowPreferences): Promise<void> => {
   try {
     const preferences = await getWindowPreferences();
 
