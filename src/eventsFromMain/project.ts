@@ -3,6 +3,7 @@ import { IpcRendererEvent } from 'electron';
 import { ProjectFileMetaData, ProjectFile } from '../shared/interfaces/file';
 import { dispatch, getState } from '../store';
 import { setFileMetaData } from '../store/entities/file';
+import { setAllBookmarks } from '../store/entities/project/bookmarks';
 import { setProjectInfo } from '../store/entities/project/info';
 import { setIsLoading, setPreferences } from '../store/entities/ui';
 
@@ -28,6 +29,7 @@ window.api.on('saveProjectAs', () => {
 
 window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string) => {
   dispatch(setProjectInfo(projectFile.project.info));
+  dispatch(setAllBookmarks(projectFile.project.bookmarks));
 
   dispatch(setPreferences(projectFile.ui));
 
