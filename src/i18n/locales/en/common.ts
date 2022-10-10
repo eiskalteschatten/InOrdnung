@@ -4,4 +4,5 @@ export default {
   save: 'Save',
   dontSave: 'Don\'t Save',
   cancel: 'Cancel',
+  untitled: 'Untitled',
 };

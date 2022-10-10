@@ -1,8 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 
-import { State } from '../../../store';
+import { useAppSelector } from '../../../store/hooks';
+
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
@@ -15,7 +16,13 @@ interface Props {
 }
 
 const MainLayout: React.FC<Props> = ({ toolbar, children }) => {
-  const platform = useSelector((state: State) => state.app.platform);
+  const platform = useAppSelector(state => state.app.platform);
+  const projectName = useAppSelector(state => state.project.info.name);
+  const { t } = useTranslation(['common']);
+
+  useEffect(() => {
+    document.title = projectName || t('common:untitled');
+  }, [projectName]);
 
   return (
     <div

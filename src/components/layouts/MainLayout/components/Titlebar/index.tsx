@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { IpcRendererEvent } from 'electron';
+import React from 'react';
 
 import config from '../../../../../config';
+import { useAppSelector } from '../../../../../store/hooks';
 
 import styles from './styles.module.scss';
 
 const Titlebar: React.FC = () => {
-  const [title, setTitle] = useState<string>(config.app.name);
+  const projectName = useAppSelector(state => state.project.info.name);
 
   const handleDoubleClick = () => {
     window.api.send('maximizeOrUnmaximizeWindow');
   };
-
-  useEffect(() => {
-    window.api.on('setTitlebarTitle', (e: IpcRendererEvent, _title: string) => setTitle(_title));
-  }, []);
 
   return (
     <div
@@ -22,7 +18,7 @@ const Titlebar: React.FC = () => {
       onDoubleClick={handleDoubleClick}
     >
       <div className={styles.title}>
-        {title}
+        {projectName || config.app.name}
       </div>
     </div>
   );
