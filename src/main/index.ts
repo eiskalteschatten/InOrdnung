@@ -9,6 +9,7 @@ import config from '../config';
 import openMainWindow from './windows/main';
 import checkForUpdates from './lib/checkForUpdates';
 import { launchWorkerWindow } from './lib/workerHelpers';
+import { openFile } from './lib/projectFile';
 
 let app: Electron.App;
 
@@ -20,6 +21,10 @@ export default (_app: Electron.App): void => {
     if (process.platform !== 'darwin') {
       app.quit();
     }
+  });
+
+  app.on('open-file', async (e: Event, path: string): Promise<void> => {
+    await openFile(path);
   });
 
   app.whenReady().then(async (): Promise<void> => {
