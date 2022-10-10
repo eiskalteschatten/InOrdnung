@@ -2,7 +2,7 @@ import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
 
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 import i18n from '../../../../i18n/main';
-import { openFileDialog, saveFileAs } from '../../../lib/projectFile';
+import { openFileDialog } from '../../../lib/projectFile';
 import createProjectWindow from '../../../windows/main';
 
 const { t } = i18n;
