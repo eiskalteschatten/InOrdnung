@@ -19,7 +19,7 @@ interface Props {
 const MainLayout: React.FC<Props> = ({ toolbar, children }) => {
   const dispatch = useAppDispatch();
   const platform = useAppSelector(state => state.app.platform);
-  const { project, ui, file } = useAppSelector(state => state);
+  const { project, ui: { preferences: ui }, file } = useAppSelector(state => state);
   const { t } = useTranslation(['common']);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
 
