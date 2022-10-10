@@ -22,13 +22,15 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   const { project, ui: { preferences: ui }, file } = useAppSelector(state => state);
   const { t } = useTranslation(['common']);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
+  const [justOpenedTimeout, setJustOpenedTimeout] = useState<NodeJS.Timeout>();
+  const [justOpened, setJustOpened] = useState<boolean>(true);
 
   useEffect(() => {
     document.title = project.info.name || t('common:untitled');
   }, [project]);
 
   useEffect(() => {
-    if (file.fileLoaded) {
+    if (file.fileLoaded && !justOpened) {
       dispatch(setSaved(false));
       window.api.send('projectIsEdited');
 
@@ -40,9 +42,18 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
         window.api.send('saveProject', { project, ui }, file);
       }, 1000));
     }
-    else {
+    else if (!justOpened) {
       dispatch(setSaved(false));
       window.api.send('projectIsEdited');
+    }
+    else {
+      if (justOpenedTimeout) {
+        clearTimeout(justOpenedTimeout);
+      }
+
+      setJustOpenedTimeout(setTimeout(() => {
+        setJustOpened(false);
+      }, 1000));
     }
   }, [project, ui]);
 
