@@ -2,12 +2,12 @@
   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
   <style>
     circle, line {
-      stroke: #000;
+      stroke: #fff;
     }
 
     @media (prefers-color-scheme: dark) {
       circle, line {
-        stroke: #fff;
+        stroke: #000;
       }
     }
   </style>

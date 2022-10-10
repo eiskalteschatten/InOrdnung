@@ -10,9 +10,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   type?: 'info' | 'error';
   hideCloseButton?: boolean;
+  wrapperClassName?: string;
 }
 
-const Toast: React.FC<Props> = ({ children, type = 'info', hideCloseButton }) => {
+const Toast: React.FC<Props> = ({ children, type = 'info', hideCloseButton, wrapperClassName, className, ...leftoverProps }) => {
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
@@ -21,10 +22,13 @@ const Toast: React.FC<Props> = ({ children, type = 'info', hideCloseButton }) =>
   };
 
   return (
-    <div className={clsx(styles.toast, {
-      [styles.error]: type === 'error',
-    })}>
-      <div className={styles.message}>
+    <div
+      className={clsx(styles.toast, wrapperClassName, {
+        [styles.error]: type === 'error',
+      })}
+      {...leftoverProps}
+    >
+      <div className={clsx(styles.message, className)}>
         {children}
       </div>
 
