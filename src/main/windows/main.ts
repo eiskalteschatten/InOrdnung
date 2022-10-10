@@ -126,7 +126,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
 const onWindowChanged = async (changedPreferences: WindowPreferences): Promise<void> => {
   try {
     const preferences = await getWindowPreferences();
-
+    await fsPromises.unlink(WINDOW_PREFERENCES_FILE_PATH);
     await fsPromises.writeFile(WINDOW_PREFERENCES_FILE_PATH, JSON.stringify({
       ...preferences,
       ...changedPreferences,

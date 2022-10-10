@@ -27,6 +27,7 @@ ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePat
     path: filePath,
   });
 
+  await fsPromises.unlink(recentProjectsFilePath);
   await fsPromises.writeFile(recentProjectsFilePath, JSON.stringify(recentProjects), 'utf8');
   await fsPromises.unlink(pathToLockFile);
 
