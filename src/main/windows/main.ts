@@ -78,6 +78,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     newWindow.on('moved', (e: Event) => onWindowChanged(e, {
       x: newWindow.getBounds().x,
       y: newWindow.getBounds().y,
+      isMaximized: false,
     }));
     newWindow.on('maximize', (e: Event) => onWindowChanged(e, {
       isMaximized: newWindow.isMaximized(),
