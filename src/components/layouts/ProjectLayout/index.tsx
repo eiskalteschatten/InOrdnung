@@ -21,7 +21,7 @@ interface Props {
 const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   const dispatch = useAppDispatch();
   const platform = useAppSelector(state => state.app.platform);
-  const { project, ui: { preferences: ui }, file } = useAppSelector(state => state);
+  const { project, ui, file } = useAppSelector(state => state);
   const { t } = useTranslation(['common']);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
   const [justOpenedTimeout, setJustOpenedTimeout] = useState<NodeJS.Timeout>();
@@ -41,7 +41,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
       }
 
       setAutoSaveTimeout(setTimeout(() => {
-        window.api.send('saveProject', { project, ui }, file);
+        window.api.send('saveProject', { project, ui: ui.preferences }, file);
       }, 1000));
     }
     else if (!justOpened) {

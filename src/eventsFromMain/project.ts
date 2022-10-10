@@ -16,14 +16,14 @@ window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: Proj
 
 window.api.on('saveProject', (e: IpcRendererEvent, closeWindow = false) => {
   dispatch(setIsLoading(true));
-  const { project, ui: { preferences: ui }, file } = getState();
-  window.api.send('saveProject', { project, ui }, file, closeWindow);
+  const { project, ui, file } = getState();
+  window.api.send('saveProject', { project, ui: ui.preferences }, file, closeWindow);
 });
 
 window.api.on('saveProjectAs', () => {
   dispatch(setIsLoading(true));
-  const { project, ui: { preferences: ui }, file } = getState();
-  window.api.send('saveProjectAs', { project, ui }, file);
+  const { project, ui, file } = getState();
+  window.api.send('saveProjectAs', { project, ui: ui.preferences }, file);
 });
 
 window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string) => {
