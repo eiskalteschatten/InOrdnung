@@ -6,7 +6,7 @@ import './workers';
 
 import { setupi18n } from '../i18n/main';
 import config from '../config';
-import openMainWindow from './windows/main';
+import createProjectWindow from './windows/project';
 import checkForUpdates from './lib/checkForUpdates';
 import { launchWorkerWindow } from './lib/workerHelpers';
 import { openFile } from './lib/projectFile';
@@ -39,7 +39,7 @@ export default (_app: Electron.App): void => {
       await installExtension(REDUX_DEVTOOLS);
     }
 
-    openMainWindow();
+    createProjectWindow();
 
     setTimeout(() => checkForUpdates(false), 3000);
   }).catch(log.error);
