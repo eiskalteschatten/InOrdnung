@@ -3,6 +3,7 @@ import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 import i18n from '../../../../i18n/main';
 import { openFileDialog, saveFileAs } from '../../../lib/projectFile';
+import createProjectWindow from '../../../windows/main';
 
 const { t } = i18n;
 
@@ -17,8 +18,8 @@ export default (): MenuItem => {
           item: {
             label: t('projects:newProject'),
             accelerator: 'CmdOrCtrl+N',
-            click: async (): Promise<void> => {
-              console.log('New Project');
+            click: (): void => {
+              createProjectWindow();
             },
           },
         },
