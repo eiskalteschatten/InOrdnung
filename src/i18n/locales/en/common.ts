@@ -5,4 +5,5 @@ export default {
   dontSave: 'Don\'t Save',
   cancel: 'Cancel',
   untitled: 'Untitled',
+  loading: 'Loading...',
 };

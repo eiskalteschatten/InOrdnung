@@ -10,6 +10,7 @@ import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
 import GlobalInfo from '../../elements/GlobalInfo';
 import GlobalError from '../../elements/GlobalError';
+import GlobalLoader from '../../elements/GlobalLoader';
 
 import styles from './styles.module.scss';
 
@@ -81,6 +82,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
 
       <GlobalInfo />
       <GlobalError />
+      <GlobalLoader />
     </div>
   );
 };
