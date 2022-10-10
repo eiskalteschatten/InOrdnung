@@ -15,6 +15,7 @@ export const slice = createSlice({
   reducers: {
     setProjectInfo: (state, action: PayloadAction<State>) => {
       state = action.payload;
+      return state;
     },
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
