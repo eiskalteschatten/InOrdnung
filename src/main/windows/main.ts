@@ -14,7 +14,7 @@ import { WindowPreferences } from '../interfaces/windows';
 const { t } = i18n;
 export const windows = new Set();
 
-const WINDOW_PREFERENCES_FILE = 'projectWindow.json';
+const WINDOW_PREFERENCES_FILE = 'projectWindowPreferences.json';
 const WINDOW_PREFERENCES_FILE_PATH = path.resolve(config.storagePath, WINDOW_PREFERENCES_FILE);
 
 const getWindowPreferences = async (): Promise<WindowPreferences> => {
@@ -125,7 +125,11 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
 const onWindowChanged = async (changedPreferences: WindowPreferences): Promise<void> => {
   try {
     const preferences = await getWindowPreferences();
-    await fsPromises.unlink(WINDOW_PREFERENCES_FILE_PATH);
+
+    if (fs.existsSync(WINDOW_PREFERENCES_FILE_PATH)) {
+      await fsPromises.unlink(WINDOW_PREFERENCES_FILE_PATH);
+    }
+
     await fsPromises.writeFile(WINDOW_PREFERENCES_FILE_PATH, JSON.stringify({
       ...preferences,
       ...changedPreferences,
