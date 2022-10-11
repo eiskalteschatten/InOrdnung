@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
+import { IpcRendererEvent } from 'electron';
+import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { setSaved } from '../../../store/entities/file';
@@ -28,6 +30,13 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
   const [justOpenedTimeout, setJustOpenedTimeout] = useState<NodeJS.Timeout>();
   const [justOpened, setJustOpened] = useState<boolean>(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.api.on('navigateTo', (e: IpcRendererEvent, url: string) => {
+      navigate(url);
+    });
+  }, []);
 
   useEffect(() => {
     document.title = project.info.name || t('common:untitled');

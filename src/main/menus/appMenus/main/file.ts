@@ -28,6 +28,7 @@ export default (): MenuItem => {
           item: {
             label: t('bookmarks:newBookmark'),
             click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+              focusedWindow?.webContents.send('navigateTo', '/bookmarks');
               focusedWindow?.webContents.send('createNewBookmark');
             },
           },
