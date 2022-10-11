@@ -18,9 +18,7 @@ const ProjectInfo: React.FC = () => {
   const { name, description } = useAppSelector(state => state.project.info);
 
   return (
-    <ProjectLayout
-      toolbar={<Toolbar />}
-    >
+    <ProjectLayout toolbar={<Toolbar />}>
       <Column flexGrow centered padding>
         <div className={styles.projectInfo}>
           <Input

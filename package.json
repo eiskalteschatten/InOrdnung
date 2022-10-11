@@ -139,6 +139,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
+    "@tanstack/react-table": "^8.5.15",
     "axios": "^1.1.0",
     "clsx": "^1.1.1",
     "electron-log": "^4.4.4",
