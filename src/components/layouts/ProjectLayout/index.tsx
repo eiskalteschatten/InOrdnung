@@ -44,8 +44,10 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
 
   useEffect(() => {
     if (file.fileLoaded && !justOpened) {
-      dispatch(setSaved(false));
-      window.api.send('projectIsEdited');
+      if (file.saved) {
+        dispatch(setSaved(false));
+        window.api.send('projectIsEdited');
+      }
 
       if (autoSaveTimeout) {
         clearTimeout(autoSaveTimeout);
@@ -55,7 +57,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
         window.api.send('saveProject', getProjectForSaving(), file);
       }, 1000));
     }
-    else if (!justOpened) {
+    else if (!justOpened && file.saved) {
       dispatch(setSaved(false));
       window.api.send('projectIsEdited');
     }
