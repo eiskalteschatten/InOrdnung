@@ -4,6 +4,7 @@ import { Bookmark } from '../../../shared/interfaces/bookmarks';
 
 export interface State {
   data?: Bookmark[];
+  editing?: Bookmark;
 }
 
 const initialState: State = {
@@ -17,11 +18,15 @@ export const slice = createSlice({
     setBookmarks: (state, action: PayloadAction<Bookmark[] | undefined>) => {
       state.data = action.payload;
     },
+    setEditingBookmark: (state, action: PayloadAction<Bookmark | undefined>) => {
+      state.editing = action.payload;
+    },
   },
 });
 
 export const {
   setBookmarks,
+  setEditingBookmark,
 } = slice.actions;
 
 export const { reducer } = slice;
