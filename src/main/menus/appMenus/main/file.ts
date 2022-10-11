@@ -27,8 +27,8 @@ export default (): MenuItem => {
         {
           item: {
             label: t('bookmarks:newBookmark'),
-            click: async (): Promise<void> => {
-              console.log('New Bookmark');
+            click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+              focusedWindow?.webContents.send('createNewBookmark');
             },
           },
         },
