@@ -13,6 +13,8 @@ import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setBookmarksSortingState } from '../../../../store/entities/ui';
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 
+import styles from './styles.module.scss';
+
 const columnHelper = createColumnHelper<Bookmark>();
 
 const BookmarksTable: React.FC = () => {
@@ -56,8 +58,8 @@ const BookmarksTable: React.FC = () => {
   });
 
   return (
-    <table>
-      <thead>
+    <table className={styles.table}>
+      <thead className={styles.head}>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map(header => (
@@ -66,8 +68,8 @@ const BookmarksTable: React.FC = () => {
                   <div
                     {...{
                       className: header.column.getCanSort()
-                        ? 'cursor-pointer select-none'
-                        : '',
+                        ? styles.canSort
+                        : styles.cannotSort,
                       onClick: header.column.getToggleSortingHandler(),
                     }}
                   >
@@ -76,8 +78,8 @@ const BookmarksTable: React.FC = () => {
                       header.getContext()
                     )}
                     {{
-                      asc: ' 🔼',
-                      desc: ' 🔽',
+                      asc: <span className='material-icons'>expand_less</span>,
+                      desc: <span className='material-icons'>expand_more</span>,
                     }[header.column.getIsSorted() as string] ?? null}
                   </div>
                 )}
