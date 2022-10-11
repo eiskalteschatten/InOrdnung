@@ -23,7 +23,7 @@ const EditBookmark: React.FC = () => {
         url,
       }));
     }
-  }, [editing, name, url]);
+  }, [name, url]);
 
   return (
     <div className={styles.editBookmark}>
