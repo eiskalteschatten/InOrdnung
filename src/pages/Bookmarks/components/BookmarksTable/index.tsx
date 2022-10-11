@@ -22,14 +22,18 @@ const BookmarksTable: React.FC = () => {
       id: 'name',
       header: () => <span>{t(('bookmarks:name'))}</span>,
       cell: info => info.getValue(),
-      footer: info => info.column.id,
     }),
     columnHelper.accessor('url', {
       id: 'url',
       header: () => <span>{t(('bookmarks:url'))}</span>,
       cell: info => info.getValue(),
-      footer: info => info.column.id,
     }),
+    // TODO: edit and delete controls
+    // columnHelper.accessor('url', {
+    //   id: 'controls',
+    //   header: () => <span>{t(('bookmarks:url'))}</span>,
+    //   cell: info => info.getValue(),
+    // }),
   ]), [bookmarks]);
 
   const table = useReactTable({
@@ -39,7 +43,36 @@ const BookmarksTable: React.FC = () => {
   });
 
   return (
-    <>table</>
+    <table>
+      <thead>
+        {table.getHeaderGroups().map(headerGroup => (
+          <tr key={headerGroup.id}>
+            {headerGroup.headers.map(header => (
+              <th key={header.id}>
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                    header.column.columnDef.header,
+                    header.getContext()
+                  )}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody>
+        {/* TODO: context menu */}
+        {table.getRowModel().rows.map(row => (
+          <tr key={row.id}>
+            {row.getVisibleCells().map(cell => (
+              <td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
