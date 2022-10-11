@@ -4,7 +4,7 @@ export interface UiPreferences {
   sidebarWidth: number;
   middleColumnWidth: number;
   showCompletedTasks?: boolean;
-  collapsedAccountIds: number[];
+  collapsedSidebarIds: number[];
   bookmarks: {
     sortingState: SortingState;
   };

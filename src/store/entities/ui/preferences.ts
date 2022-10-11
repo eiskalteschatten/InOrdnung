@@ -9,7 +9,7 @@ export type State = UiPreferences;
 const initialState: State = {
   sidebarWidth: 260,
   middleColumnWidth: 350,
-  collapsedAccountIds: [],
+  collapsedSidebarIds: [],
   bookmarks: {
     sortingState: [],
   },
@@ -19,11 +19,11 @@ export const addCollapsedAccountId = createAsyncThunk(
   'ui/addCollapsedAccountId',
   async (id: number, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedAccountIds } = state.ui.preferences;
+    const { collapsedSidebarIds } = state.ui.preferences;
 
-    if (!collapsedAccountIds.includes(id)) {
-      collapsedAccountIds.push(id);
-      thunkAPI.dispatch(setCollapsedAccountIds(collapsedAccountIds));
+    if (!collapsedSidebarIds.includes(id)) {
+      collapsedSidebarIds.push(id);
+      thunkAPI.dispatch(setCollapsedSidebarIds(collapsedSidebarIds));
     }
   }
 );
@@ -32,12 +32,12 @@ export const removeCollapsedAccountId = createAsyncThunk(
   'ui/removeCollapsedAccountId',
   async (id: number, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedAccountIds } = state.ui.preferences;
-    const index = collapsedAccountIds.indexOf(id);
+    const { collapsedSidebarIds } = state.ui.preferences;
+    const index = collapsedSidebarIds.indexOf(id);
 
     if (index > -1) {
-      collapsedAccountIds.splice(index, 1);
-      thunkAPI.dispatch(setCollapsedAccountIds(collapsedAccountIds));
+      collapsedSidebarIds.splice(index, 1);
+      thunkAPI.dispatch(setCollapsedSidebarIds(collapsedSidebarIds));
     }
   }
 );
@@ -56,8 +56,8 @@ export const slice = createSlice({
     setMiddleColumnWidth: (state, action: PayloadAction<number>) => {
       state.middleColumnWidth = action.payload;
     },
-    setCollapsedAccountIds: (state, action: PayloadAction<number[]>) => {
-      state.collapsedAccountIds = action.payload;
+    setCollapsedSidebarIds: (state, action: PayloadAction<number[]>) => {
+      state.collapsedSidebarIds = action.payload;
     },
     setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
       state.bookmarks.sortingState = action.payload;
@@ -68,7 +68,7 @@ export const slice = createSlice({
 export const {
   setSidebarWidth,
   setMiddleColumnWidth,
-  setCollapsedAccountIds,
+  setCollapsedSidebarIds,
   setBookmarksSortingState,
   setPreferences,
 } = slice.actions;
