@@ -10,8 +10,6 @@ import createProjectWindow from '../windows/project';
 
 const { t } = i18n;
 
-const PROJECT_FILE_VERSION = 1;
-
 export const saveFileAs = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
@@ -39,7 +37,7 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
     }
     else {
       const dataToSave = {
-        fileVersion: PROJECT_FILE_VERSION,
+        fileVersion: config.projectFileVersion,
         ...projectFile,
       };
 
