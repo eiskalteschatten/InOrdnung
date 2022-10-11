@@ -94,7 +94,7 @@ const BookmarksTable: React.FC = () => {
                     {{
                       asc: <span className='material-icons'>expand_less</span>,
                       desc: <span className='material-icons'>expand_more</span>,
-                    }[header.column.getIsSorted() as string] ?? null}
+                    }[header.column.getIsSorted() as string] ?? <span className='material-icons'>unfold_more</span>}
                   </div>
                 )}
               </th>

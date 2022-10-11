@@ -6,13 +6,11 @@
   .head {
     user-select: none;
 
-    .canSort {
+    .canSort, .cannotSort {
       display: flex;
       align-items: center;
-    }
-
-    .canSort, .cannotSort {
       height: 30px;
+      gap: 2px;
     }
   }
 
