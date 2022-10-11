@@ -9,9 +9,11 @@ import styles from './styles.module.scss';
 
 interface Props {
   children: React.ReactNode;
+  title?: string;
+  hideCloseButton?: boolean;
 }
 
-const RightSidebar: React.FC<Props> = ({ children }) => {
+const RightSidebar: React.FC<Props> = ({ children, title, hideCloseButton }) => {
   const savedWidth = useAppSelector(state => state.ui.preferences.rightSidebarWidth);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
@@ -33,7 +35,15 @@ const RightSidebar: React.FC<Props> = ({ children }) => {
         draggerOnLeft
       />
 
-      {children}
+      <div className={styles.content}>
+        <div className={styles.toolbar}>
+          <div className={styles.title}>
+            {title}
+          </div>
+        </div>
+
+        {children}
+      </div>
     </div>
   );
 };
