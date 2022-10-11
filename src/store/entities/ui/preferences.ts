@@ -9,6 +9,7 @@ export type State = UiPreferences;
 const initialState: State = {
   sidebarWidth: 260,
   middleColumnWidth: 350,
+  rightSidebarWidth: 260,
   collapsedSidebarIds: [],
   bookmarks: {
     sortingState: [],
@@ -56,6 +57,9 @@ export const slice = createSlice({
     setMiddleColumnWidth: (state, action: PayloadAction<number>) => {
       state.middleColumnWidth = action.payload;
     },
+    setRightSidebarWidth: (state, action: PayloadAction<number>) => {
+      state.rightSidebarWidth = action.payload;
+    },
     setCollapsedSidebarIds: (state, action: PayloadAction<number[]>) => {
       state.collapsedSidebarIds = action.payload;
     },
@@ -68,6 +72,7 @@ export const slice = createSlice({
 export const {
   setSidebarWidth,
   setMiddleColumnWidth,
+  setRightSidebarWidth,
   setCollapsedSidebarIds,
   setBookmarksSortingState,
   setPreferences,

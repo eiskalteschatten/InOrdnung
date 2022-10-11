@@ -9,9 +9,10 @@ interface Props {
   columnRef: MutableRefObject<HTMLDivElement | null>;
   setWidth: (width: number) => void;
   setStoreWidth: (width: number) => any;
+  draggerOnLeft?: boolean;
 }
 
-const ColumnDragger: React.FC<Props> = ({ columnRef, setWidth, setStoreWidth }) => {
+const ColumnDragger: React.FC<Props> = ({ columnRef, setWidth, setStoreWidth, draggerOnLeft }) => {
   const dispatch = useAppDispatch();
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -21,7 +22,10 @@ const ColumnDragger: React.FC<Props> = ({ columnRef, setWidth, setStoreWidth }) 
 
     const handleMouseMove = debounce((e: any): void => {
       if (rect) {
-        const newWidth = Math.max(rect.width + (e.pageX - startCursorX), minWidth);
+        const newWidth = draggerOnLeft
+          ? Math.max(rect.width - (e.pageX - startCursorX), minWidth)
+          : Math.max(rect.width + (e.pageX - startCursorX), minWidth);
+
         setWidth(newWidth);
       }
     }, 1);
