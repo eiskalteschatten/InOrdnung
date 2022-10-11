@@ -61,7 +61,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
       dispatch(setSaved(false));
       window.api.send('projectIsEdited');
     }
-    else {
+    else if (justOpened) {
       if (justOpenedTimeout) {
         clearTimeout(justOpenedTimeout);
       }
