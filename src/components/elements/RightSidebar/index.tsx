@@ -4,16 +4,17 @@ import { useAppSelector } from '../../../store/hooks';
 import { setRightSidebarWidth } from '../../../store/entities/ui/preferences';
 
 import ColumnDragger from '../ColumnDragger';
+import Button from '../Button';
 
 import styles from './styles.module.scss';
 
 interface Props {
   children: React.ReactNode;
   title?: string;
-  hideCloseButton?: boolean;
+  handleClose?: () => void;
 }
 
-const RightSidebar: React.FC<Props> = ({ children, title, hideCloseButton }) => {
+const RightSidebar: React.FC<Props> = ({ children, title, handleClose }) => {
   const savedWidth = useAppSelector(state => state.ui.preferences.rightSidebarWidth);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
@@ -40,6 +41,12 @@ const RightSidebar: React.FC<Props> = ({ children, title, hideCloseButton }) => 
           <div className={styles.title}>
             {title}
           </div>
+
+          {handleClose && (
+            <Button className={styles.closeButton} onClick={handleClose}>
+              <span className='material-icons'>close</span>
+            </Button>
+          )}
         </div>
 
         <div className={styles.content}>
