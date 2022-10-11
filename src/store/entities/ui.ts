@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { SortingState } from '@tanstack/react-table';
 
 import { RootState } from '..';
 import { UiPreferences } from '../../shared/interfaces/ui';
@@ -15,10 +16,7 @@ const initialState: State = {
     sidebarWidth: 260,
     middleColumnWidth: 350,
     collapsedAccountIds: [],
-    bookmarksSortingOptions: {
-      sortBy: '',
-      sortDirection: 'desc',
-    },
+    bookmarksSortingState: [],
   },
   isLoading: false,
 };
@@ -63,6 +61,9 @@ export const slice = createSlice({
     setCollapsedAccountIds: (state, action: PayloadAction<number[]>) => {
       state.preferences.collapsedAccountIds = action.payload;
     },
+    setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
+      state.preferences.bookmarksSortingState = action.payload;
+    },
     setPreferences: (state, action: PayloadAction<UiPreferences>) => {
       state.preferences = action.payload;
     },
@@ -82,6 +83,7 @@ export const {
   setSidebarWidth,
   setMiddleColumnWidth,
   setCollapsedAccountIds,
+  setBookmarksSortingState,
   setPreferences,
   setIsLoading,
   setGlobalInfo,

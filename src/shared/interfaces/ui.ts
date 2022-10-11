@@ -1,13 +1,9 @@
-export interface SortingOptions {
-  sortBy?: string;
-  sortDirection?: 'asc' | 'desc';
-}
+import { SortingState } from '@tanstack/react-table';
 
 export interface UiPreferences {
   sidebarWidth: number;
   middleColumnWidth: number;
-  tasksSortingOptions?: SortingOptions;
   showCompletedTasks?: boolean;
-  bookmarksSortingOptions: SortingOptions;
+  bookmarksSortingState: SortingState;
   collapsedAccountIds: number[];
 }

@@ -1,21 +1,30 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 
-import { useAppSelector } from '../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
+import { setBookmarksSortingState } from '../../../../store/entities/ui';
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 
 const columnHelper = createColumnHelper<Bookmark>();
 
 const BookmarksTable: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { all: bookmarks } = useAppSelector(state => state.project.bookmarks);
+  const { bookmarksSortingState } = useAppSelector(state => state.ui.preferences);
   const { t } = useTranslation(['bookmarks']);
+  const [sorting, setSorting] = useState<SortingState>(bookmarksSortingState);
+
+  useEffect(() => {
+    dispatch(setBookmarksSortingState(sorting));
+  }, [sorting]);
 
   const columns = useMemo(() => ([
     columnHelper.accessor('name', {
@@ -39,6 +48,10 @@ const BookmarksTable: React.FC = () => {
   const table = useReactTable({
     data: bookmarks || [],
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
   });
 
