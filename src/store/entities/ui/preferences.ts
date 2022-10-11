@@ -1,24 +1,16 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SortingState } from '@tanstack/react-table';
 
-import { RootState } from '..';
-import { UiPreferences } from '../../shared/interfaces/ui';
+import { RootState } from '../..';
+import { UiPreferences } from '../../../shared/interfaces/ui';
 
-export interface State {
-  preferences: UiPreferences;
-  isLoading?: boolean;
-  globalInfo?: string;
-  globalError?: string;
-}
+export type State = UiPreferences;
 
 const initialState: State = {
-  preferences: {
-    sidebarWidth: 260,
-    middleColumnWidth: 350,
-    collapsedAccountIds: [],
-    bookmarksSortingState: [],
-  },
-  isLoading: false,
+  sidebarWidth: 260,
+  middleColumnWidth: 350,
+  collapsedAccountIds: [],
+  bookmarksSortingState: [],
 };
 
 export const addCollapsedAccountId = createAsyncThunk(
@@ -49,32 +41,24 @@ export const removeCollapsedAccountId = createAsyncThunk(
 );
 
 export const slice = createSlice({
-  name: 'ui',
+  name: 'preferences',
   initialState,
   reducers: {
     setSidebarWidth: (state, action: PayloadAction<number>) => {
-      state.preferences.sidebarWidth = action.payload;
+      state.sidebarWidth = action.payload;
     },
     setMiddleColumnWidth: (state, action: PayloadAction<number>) => {
-      state.preferences.middleColumnWidth = action.payload;
+      state.middleColumnWidth = action.payload;
     },
     setCollapsedAccountIds: (state, action: PayloadAction<number[]>) => {
-      state.preferences.collapsedAccountIds = action.payload;
+      state.collapsedAccountIds = action.payload;
     },
     setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
-      state.preferences.bookmarksSortingState = action.payload;
+      state.bookmarksSortingState = action.payload;
     },
-    setPreferences: (state, action: PayloadAction<UiPreferences>) => {
-      state.preferences = action.payload;
-    },
-    setIsLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
-    },
-    setGlobalInfo: (state, action: PayloadAction<string>) => {
-      state.globalInfo = action.payload;
-    },
-    setGlobalError: (state, action: PayloadAction<string>) => {
-      state.globalError = action.payload;
+    setPreferences: (state, action: PayloadAction<State>) => {
+      state = action.payload;
+      return state;
     },
   },
 });
@@ -85,9 +69,6 @@ export const {
   setCollapsedAccountIds,
   setBookmarksSortingState,
   setPreferences,
-  setIsLoading,
-  setGlobalInfo,
-  setGlobalError,
 } = slice.actions;
 
 export const { reducer } = slice;

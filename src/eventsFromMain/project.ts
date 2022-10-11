@@ -5,7 +5,8 @@ import { dispatch, getState } from '../store';
 import { setFileMetaData } from '../store/entities/file';
 import { setAllBookmarks } from '../store/entities/project/bookmarks';
 import { setProjectInfo } from '../store/entities/project/info';
-import { setIsLoading, setPreferences } from '../store/entities/ui';
+import { setPreferences } from '../store/entities/ui/preferences';
+import { setIsLoading } from '../store/entities/ui/session';
 
 window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: ProjectFileMetaData) => {
   const { file } = getState();

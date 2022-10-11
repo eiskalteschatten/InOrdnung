@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { setBookmarksSortingState } from '../../../../store/entities/ui';
+import { setBookmarksSortingState } from '../../../../store/entities/ui/preferences';
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 import Button from '../../../../components/elements/Button';
 

@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 const GlobalLoader: React.FC = () => {
   const { t } = useTranslation(['common']);
-  const { isLoading } = useAppSelector(state => state.ui);
+  const { isLoading } = useAppSelector(state => state.ui.session);
 
   if (!isLoading) {
     return null;
