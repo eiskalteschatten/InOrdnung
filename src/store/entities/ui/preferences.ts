@@ -10,7 +10,9 @@ const initialState: State = {
   sidebarWidth: 260,
   middleColumnWidth: 350,
   collapsedAccountIds: [],
-  bookmarksSortingState: [],
+  bookmarks: {
+    sortingState: [],
+  },
 };
 
 export const addCollapsedAccountId = createAsyncThunk(
@@ -44,6 +46,10 @@ export const slice = createSlice({
   name: 'preferences',
   initialState,
   reducers: {
+    setPreferences: (state, action: PayloadAction<State>) => {
+      state = action.payload;
+      return state;
+    },
     setSidebarWidth: (state, action: PayloadAction<number>) => {
       state.sidebarWidth = action.payload;
     },
@@ -54,11 +60,7 @@ export const slice = createSlice({
       state.collapsedAccountIds = action.payload;
     },
     setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
-      state.bookmarksSortingState = action.payload;
-    },
-    setPreferences: (state, action: PayloadAction<State>) => {
-      state = action.payload;
-      return state;
+      state.bookmarks.sortingState = action.payload;
     },
   },
 });

@@ -21,9 +21,9 @@ const columnHelper = createColumnHelper<Bookmark>();
 const BookmarksTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const { all: bookmarks } = useAppSelector(state => state.project.bookmarks);
-  const { bookmarksSortingState } = useAppSelector(state => state.ui.preferences);
+  const { sortingState } = useAppSelector(state => state.ui.preferences.bookmarks);
   const { t } = useTranslation(['bookmarks']);
-  const [sorting, setSorting] = useState<SortingState>(bookmarksSortingState);
+  const [sorting, setSorting] = useState<SortingState>(sortingState);
 
   useEffect(() => {
     dispatch(setBookmarksSortingState(sorting));
