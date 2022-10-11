@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { setEditingBookmark } from '../../../../store/entities/project/bookmarks';
+import { bookmarksAdapter, setEditingBookmark } from '../../../../store/entities/project/bookmarks';
 
 import Input from '../../../../components/elements/Input';
 
@@ -10,8 +10,9 @@ import styles from './styles.module.scss';
 
 const EditBookmark: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
-  const { editing } = useAppSelector(state => state.project.bookmarks);
   const dispatch = useAppDispatch();
+  const { bookmarks } = useAppSelector(state => state.project);
+  const { editing } = bookmarks;
   const [name, setName] = useState<string>(editing?.name || '');
   const [url, setUrl] = useState<string>(editing?.url || '');
 
@@ -22,6 +23,11 @@ const EditBookmark: React.FC = () => {
         name,
         url,
       }));
+
+      bookmarksAdapter.updateOne(bookmarks.data, {
+        id: editing.id,
+        changes: { name, url },
+      });
     }
   }, [name, url]);
 
