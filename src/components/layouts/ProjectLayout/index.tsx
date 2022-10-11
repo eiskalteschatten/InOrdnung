@@ -57,11 +57,11 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
         window.api.send('saveProject', getProjectForSaving(), file);
       }, 1000));
     }
-    else if (!justOpened && file.saved) {
+    else if (!justOpened && (!file.fileLoaded || file.saved)) {
       dispatch(setSaved(false));
       window.api.send('projectIsEdited');
     }
-    else {
+    else if (justOpened) {
       if (justOpenedTimeout) {
         clearTimeout(justOpenedTimeout);
       }
