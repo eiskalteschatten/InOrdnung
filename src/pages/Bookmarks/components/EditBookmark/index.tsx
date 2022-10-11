@@ -8,10 +8,6 @@ import styles from './styles.module.scss';
 const EditBookmark: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
 
-  // if (!editing) {
-  //   return null;
-  // }
-
   return (
     <div className={styles.editBookmark}>
       <Input
