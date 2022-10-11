@@ -35,14 +35,16 @@ const RightSidebar: React.FC<Props> = ({ children, title, hideCloseButton }) => 
         draggerOnLeft
       />
 
-      <div className={styles.content}>
+      <div className={styles.contentWrapper}>
         <div className={styles.toolbar}>
           <div className={styles.title}>
             {title}
           </div>
         </div>
 
-        {children}
+        <div className={styles.content}>
+          {children}
+        </div>
       </div>
     </div>
   );

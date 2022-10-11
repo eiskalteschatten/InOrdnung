@@ -2,10 +2,11 @@
   display: flex;
   font-size: .9em;
 
-  .content {
+  .contentWrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex-grow: 1;
 
     .toolbar {
       display: flex;
@@ -15,6 +16,10 @@
         font-size: 1.3em;
         font-weight: bold;
       }
+    }
+
+    .content {
+      flex-grow: 1;
     }
   }
 }
