@@ -12,6 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setBookmarksSortingState } from '../../../../store/entities/ui';
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
+import Button from '../../../../components/elements/Button';
 
 import styles from './styles.module.scss';
 
@@ -28,6 +29,12 @@ const BookmarksTable: React.FC = () => {
     dispatch(setBookmarksSortingState(sorting));
   }, [sorting]);
 
+  const openInBrowser = (url: string) => {
+    if (url) {
+      window.api.send('openLink', url);
+    }
+  };
+
   const columns = useMemo(() => ([
     columnHelper.accessor('name', {
       id: 'name',
@@ -37,7 +44,14 @@ const BookmarksTable: React.FC = () => {
     columnHelper.accessor('url', {
       id: 'url',
       header: () => <span>{t(('bookmarks:url'))}</span>,
-      cell: info => info.getValue(),
+      cell: info => (
+        <div className={styles.linkCell}>
+          <div>{info.getValue()}</div>
+          <Button onClick={() => openInBrowser(info.getValue())}>
+            <span className='material-icons'>open_in_browser</span>
+          </Button>
+        </div>
+      ),
     }),
     // TODO: edit and delete controls
     // columnHelper.accessor('url', {
