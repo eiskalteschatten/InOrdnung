@@ -10,6 +10,8 @@ import createProjectWindow from '../windows/project';
 
 const { t } = i18n;
 
+const PROJECT_FILE_VERSION = 1;
+
 export const saveFileAs = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
@@ -36,7 +38,12 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectF
       throw new Error('No file path can be found for writing!');
     }
     else {
-      await fsPromises.writeFile(fileMetaData.path, JSON.stringify(projectFile), 'utf8');
+      const dataToSave = {
+        fileVersion: PROJECT_FILE_VERSION,
+        ...projectFile,
+      };
+
+      await fsPromises.writeFile(fileMetaData.path, JSON.stringify(dataToSave), 'utf8');
 
       window.webContents.send('setProjectFileMetaData', {
         ...fileMetaData,
