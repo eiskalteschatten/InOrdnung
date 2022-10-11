@@ -31,7 +31,7 @@ window.api.on('saveProjectAs', () => {
 
 window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string) => {
   dispatch(setProjectInfo(projectFile.project.info));
-  dispatch(setBookmarks(projectFile.project.bookmarks));
+  dispatch(setBookmarks(projectFile.project.bookmarks || []));
 
   dispatch(setPreferences(projectFile.ui));
 

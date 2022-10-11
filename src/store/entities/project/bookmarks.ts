@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice, EntityState, PayloadAction, Update } from '@reduxjs/toolkit';
 
 import { RootState } from '../..';
 import { Bookmark } from '../../../shared/interfaces/bookmarks';
@@ -22,18 +22,26 @@ export const slice = createSlice({
   name: 'bookmarks',
   initialState,
   reducers: {
-    setBookmarks: (state, action) => {
-      bookmarksAdapter.setAll(state.data, action.payload);
-    },
     setEditingBookmark: (state, action: PayloadAction<Bookmark | undefined>) => {
       state.editing = action.payload;
+    },
+    setBookmarks: (state, action: PayloadAction<Bookmark[]>) => {
+      bookmarksAdapter.setAll(state.data, action.payload);
+    },
+    addBookmark: (state, action: PayloadAction<Bookmark>) => {
+      bookmarksAdapter.addOne(state.data, action.payload);
+    },
+    updateBookmark: (state, action: PayloadAction<Update<Bookmark>>) => {
+      bookmarksAdapter.updateOne(state.data, action.payload);
     },
   },
 });
 
 export const {
-  setBookmarks,
   setEditingBookmark,
+  setBookmarks,
+  addBookmark,
+  updateBookmark,
 } = slice.actions;
 
 export const { reducer } = slice;
