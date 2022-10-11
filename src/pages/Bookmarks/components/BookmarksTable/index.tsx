@@ -11,6 +11,8 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setBookmarksSortingState } from '../../../../store/entities/ui/preferences';
+import { bookmarkSelectors } from '../../../../store/entities/project/bookmarks';
+
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 import Button from '../../../../components/elements/Button';
 
@@ -20,7 +22,7 @@ const columnHelper = createColumnHelper<Bookmark>();
 
 const BookmarksTable: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { data: bookmarks } = useAppSelector(state => state.project.bookmarks);
+  const bookmarks = useAppSelector(bookmarkSelectors.selectAll);
   const { sortingState } = useAppSelector(state => state.ui.preferences.bookmarks);
   const { t } = useTranslation(['bookmarks']);
   const [sorting, setSorting] = useState<SortingState>(sortingState);
@@ -62,7 +64,7 @@ const BookmarksTable: React.FC = () => {
   ]), [bookmarks]);
 
   const table = useReactTable({
-    data: bookmarks || [],
+    data: bookmarks,
     columns,
     state: {
       sorting,

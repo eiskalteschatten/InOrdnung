@@ -1,22 +1,29 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createEntityAdapter, createSlice, EntityState, PayloadAction } from '@reduxjs/toolkit';
 
+import { RootState } from '../..';
 import { Bookmark } from '../../../shared/interfaces/bookmarks';
 
+export const bookmarksAdapter = createEntityAdapter<Bookmark>({
+  sortComparer: (a, b) => a.name.localeCompare(b.name),
+});
+
+export const bookmarkSelectors = bookmarksAdapter.getSelectors<RootState>(state => state.project.bookmarks.data);
+
 export interface State {
-  data?: Bookmark[];
+  data: EntityState<Bookmark>;
   editing?: Bookmark;
 }
 
 const initialState: State = {
-  data: [],
+  data: bookmarksAdapter.getInitialState(),
 };
 
 export const slice = createSlice({
   name: 'bookmarks',
   initialState,
   reducers: {
-    setBookmarks: (state, action: PayloadAction<Bookmark[] | undefined>) => {
-      state.data = action.payload;
+    setBookmarks: (state, action) => {
+      bookmarksAdapter.setAll(state.data, action.payload);
     },
     setEditingBookmark: (state, action: PayloadAction<Bookmark | undefined>) => {
       state.editing = action.payload;

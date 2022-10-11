@@ -1,14 +1,16 @@
 import { getState } from '../../store';
+import { bookmarkSelectors } from '../../store/entities/project/bookmarks';
+
 import { ProjectFile } from '../interfaces/file';
 
 export const getProjectForSaving = (): ProjectFile => {
-  const { project, ui } = getState();
+  const state = getState();
 
   return {
-    ui: ui.preferences,
+    ui: state.ui.preferences,
     project: {
-      info: project.info,
-      bookmarks: project.bookmarks.data,
+      info: state.project.info,
+      bookmarks: bookmarkSelectors.selectAll(state),
     },
   };
 };
