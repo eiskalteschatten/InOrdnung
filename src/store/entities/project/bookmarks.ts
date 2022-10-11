@@ -3,25 +3,25 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Bookmark } from '../../../shared/interfaces/bookmarks';
 
 export interface State {
-  all?: Bookmark[];
+  data?: Bookmark[];
 }
 
 const initialState: State = {
-  all: [],
+  data: [],
 };
 
 export const slice = createSlice({
   name: 'bookmarks',
   initialState,
   reducers: {
-    setAllBookmarks: (state, action: PayloadAction<Bookmark[] | undefined>) => {
-      state.all = action.payload;
+    setBookmarks: (state, action: PayloadAction<Bookmark[] | undefined>) => {
+      state.data = action.payload;
     },
   },
 });
 
 export const {
-  setAllBookmarks,
+  setBookmarks,
 } = slice.actions;
 
 export const { reducer } = slice;
