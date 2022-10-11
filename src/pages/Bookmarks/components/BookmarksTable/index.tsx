@@ -20,13 +20,13 @@ const BookmarksTable: React.FC = () => {
   const columns = useMemo(() => ([
     columnHelper.accessor('name', {
       id: 'name',
-      header: () => <span>{t(('bookmarks:name')}</span>,
+      header: () => <span>{t(('bookmarks:name'))}</span>,
       cell: info => info.getValue(),
       footer: info => info.column.id,
     }),
     columnHelper.accessor('url', {
       id: 'url',
-      header: () => <span>{t(('bookmarks:url')}</span>,
+      header: () => <span>{t(('bookmarks:url'))}</span>,
       cell: info => info.getValue(),
       footer: info => info.column.id,
     }),
@@ -36,7 +36,7 @@ const BookmarksTable: React.FC = () => {
     data: bookmarks || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
     <>table</>
