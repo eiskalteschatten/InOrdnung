@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { dispatch } from '../../store';
-import { addBookmark, setEditingBookmark } from '../../store/entities/project/bookmarks';
+import { addBookmark, setEditingId } from '../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../shared/interfaces/bookmarks';
 
@@ -13,5 +13,5 @@ export const createNewBookmark = () => {
   };
 
   dispatch(addBookmark(newBookmark));
-  dispatch(setEditingBookmark(newBookmark));
+  dispatch(setEditingId(newBookmark.id));
 };

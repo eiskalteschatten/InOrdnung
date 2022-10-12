@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { setEditingBookmark, updateBookmark } from '../../../../store/entities/project/bookmarks';
+import { bookmarkSelectors, updateBookmark } from '../../../../store/entities/project/bookmarks';
 
 import Input from '../../../../components/elements/Input';
 
@@ -11,20 +11,23 @@ import styles from './styles.module.scss';
 const EditBookmark: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
   const dispatch = useAppDispatch();
-  const { editing } = useAppSelector(state => state.project.bookmarks);
-  const [name, setName] = useState<string>(editing?.name || '');
-  const [url, setUrl] = useState<string>(editing?.url || '');
+  const { editingId }  = useAppSelector(state => state.project.bookmarks);
+  const state  = useAppSelector(state => state);
+  const [name, setName] = useState<string>('');
+  const [url, setUrl] = useState<string>('');
 
   useEffect(() => {
-    if (editing) {
-      dispatch(setEditingBookmark({
-        ...editing,
-        name,
-        url,
-      }));
+    if (editingId) {
+      const bookmarkToEdit = bookmarkSelectors.selectById(state, editingId);
+      setName(bookmarkToEdit?.name || '');
+      setUrl(bookmarkToEdit?.url || '');
+    }
+  }, [editingId]);
 
+  useEffect(() => {
+    if (editingId) {
       dispatch(updateBookmark({
-        id: editing.id,
+        id: editingId,
         changes: { name, url },
       }));
     }
