@@ -64,7 +64,7 @@ const BookmarksTable: React.FC = () => {
 
   // TODO: context menus
   return (
-    <ReactTable
+    <ReactTable<Bookmark>
       tableData={{
         data: bookmarks,
         columns,
