@@ -1,22 +1,5 @@
-.table {
-  width: 100%;
-  height: 100%;
-  margin: 5px 10px;
-
-  .head {
-    user-select: none;
-
-    .canSort, .cannotSort {
-      display: flex;
-      align-items: center;
-      height: 30px;
-      gap: 2px;
-    }
-  }
-
-  .linkCell {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+.linkCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

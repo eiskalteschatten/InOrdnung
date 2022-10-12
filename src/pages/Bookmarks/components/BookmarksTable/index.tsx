@@ -3,10 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import {
   createColumnHelper,
-  flexRender,
   getCoreRowModel,
   SortingState,
-  useReactTable,
 } from '@tanstack/react-table';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
@@ -17,6 +15,7 @@ import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 import Button from '../../../../components/elements/Button';
 
 import styles from './styles.module.scss';
+import ReactTable from '../../../../components/elements/ReactTable';
 
 const columnHelper = createColumnHelper<Bookmark>();
 
@@ -63,60 +62,19 @@ const BookmarksTable: React.FC = () => {
     // }),
   ]), [bookmarks]);
 
-  const table = useReactTable({
-    data: bookmarks,
-    columns,
-    state: {
-      sorting,
-    },
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
+  // TODO: context menus
   return (
-    <table className={styles.table}>
-      <thead className={styles.head}>
-        {table.getHeaderGroups().map(headerGroup => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map(header => (
-              <th key={header.id}>
-                {header.isPlaceholder ? null : (
-                  <div
-                    {...{
-                      className: header.column.getCanSort()
-                        ? styles.canSort
-                        : styles.cannotSort,
-                      onClick: header.column.getToggleSortingHandler(),
-                    }}
-                  >
-                    {flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
-                    {{
-                      asc: <span className='material-icons'>expand_less</span>,
-                      desc: <span className='material-icons'>expand_more</span>,
-                    }[header.column.getIsSorted() as string] ?? <span className='material-icons'>unfold_more</span>}
-                  </div>
-                )}
-              </th>
-            ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody>
-        {/* TODO: context menu */}
-        {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map(cell => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <ReactTable
+      tableData={{
+        data: bookmarks,
+        columns,
+        state: {
+          sorting,
+        },
+        onSortingChange: setSorting,
+        getCoreRowModel: getCoreRowModel(),
+      }}
+    />
   );
 };
 
