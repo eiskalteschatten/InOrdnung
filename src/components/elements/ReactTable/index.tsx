@@ -35,10 +35,15 @@ function ReactTable<T>({ tableData }: Props<T>): React.ReactElement {
                       header.column.columnDef.header,
                       header.getContext()
                     )}
-                    {{
-                      asc: <span className='material-icons'>expand_less</span>,
-                      desc: <span className='material-icons'>expand_more</span>,
-                    }[header.column.getIsSorted() as string] ?? <span className='material-icons'>unfold_more</span>}
+
+                    {header.column.getCanSort() && (
+                      <>
+                        {{
+                          asc: <span className='material-icons'>expand_less</span>,
+                          desc: <span className='material-icons'>expand_more</span>,
+                        }[header.column.getIsSorted() as string] ?? <span className='material-icons'>unfold_more</span>}
+                      </>
+                    )}
                   </div>
                 )}
               </th>

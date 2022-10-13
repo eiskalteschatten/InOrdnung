@@ -9,7 +9,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setBookmarksSortingState } from '../../../../store/entities/ui/preferences';
-import { bookmarkSelectors } from '../../../../store/entities/project/bookmarks';
+import { bookmarkSelectors, setEditingId, deleteBookmark } from '../../../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 import Button from '../../../../components/elements/Button';
@@ -36,6 +36,15 @@ const BookmarksTable: React.FC = () => {
     }
   };
 
+  const editBookmark = (id: string) => {
+    dispatch(setEditingId(id));
+  };
+
+  const _deleteBookmark = (id: string) => {
+    // TODO: prompt user to confirm deletion
+    dispatch(deleteBookmark(id));
+  };
+
   const columns = useMemo(() => ([
     columnHelper.accessor('name', {
       id: 'name',
@@ -54,12 +63,23 @@ const BookmarksTable: React.FC = () => {
         </div>
       ),
     }),
-    // TODO: edit and delete controls
-    // columnHelper.accessor('url', {
-    //   id: 'controls',
-    //   header: () => <span>{t(('bookmarks:url'))}</span>,
-    //   cell: info => info.getValue(),
-    // }),
+    {
+      id: 'buttons',
+      cell: (info: any) => (
+        <>
+          <Button onClick={() => editBookmark(info.row.original.id)}>
+            <span className='material-icons'>edit</span>
+          </Button>
+          <Button onClick={() => _deleteBookmark(info.row.original.id)}>
+            <span className='material-icons'>delete</span>
+          </Button>
+        </>
+      ),
+      enableSorting: false,
+      width: 80,
+      minWidth: 80,
+      maxWidth: 80,
+    },
   ]), [bookmarks]);
 
   // TODO: context menus

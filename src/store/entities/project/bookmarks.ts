@@ -34,6 +34,9 @@ export const slice = createSlice({
     updateBookmark: (state, action: PayloadAction<Update<Bookmark>>) => {
       bookmarksAdapter.updateOne(state.data, action.payload);
     },
+    deleteBookmark: (state, action: PayloadAction<string>) => {
+      bookmarksAdapter.removeOne(state.data, action.payload);
+    },
   },
 });
 
@@ -42,6 +45,7 @@ export const {
   setBookmarks,
   addBookmark,
   updateBookmark,
+  deleteBookmark,
 } = slice.actions;
 
 export const { reducer } = slice;
