@@ -12,4 +12,12 @@
       gap: 2px;
     }
   }
+
+  .row {
+    border-radius: 5px;
+
+    &:hover {
+      background-color: rgba(125, 125, 125, 0.15);
+    }
+  }
 }

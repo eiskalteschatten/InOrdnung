@@ -1,9 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 import {
   createColumnHelper,
   getCoreRowModel,
+  Row,
   SortingState,
 } from '@tanstack/react-table';
 
@@ -25,6 +27,7 @@ const BookmarksTable: React.FC = () => {
   const { sortingState } = useAppSelector(state => state.ui.preferences.bookmarks);
   const { t } = useTranslation(['bookmarks']);
   const [sorting, setSorting] = useState<SortingState>(sortingState);
+  const [hoverRowId, setHoverRowId] = useState<string | undefined>();
 
   useEffect(() => {
     dispatch(setBookmarksSortingState(sorting));
@@ -44,6 +47,14 @@ const BookmarksTable: React.FC = () => {
     // TODO: prompt user to confirm deletion
     dispatch(deleteBookmark(id));
     dispatch(setEditingId());
+  };
+
+  const handleRowHover = (row: Row<Bookmark>) => {
+    setHoverRowId(row.id);
+  };
+
+  const handleRowOut = () => {
+    setHoverRowId(undefined);
   };
 
   const columns = useMemo(() => ([
@@ -69,7 +80,9 @@ const BookmarksTable: React.FC = () => {
     {
       id: 'buttons',
       cell: (info: any) => (
-        <div className={styles.buttonCell}>
+        <div className={clsx(styles.buttonCell, {
+          [styles.visible]: hoverRowId === info.row.id,
+        })}>
           <Button onClick={() => editBookmark(info.row.original.id)}>
             <span className='material-icons'>edit</span>
           </Button>
@@ -81,11 +94,13 @@ const BookmarksTable: React.FC = () => {
       enableSorting: false,
       size: 80,
     },
-  ]), [bookmarks]);
+  ]), [bookmarks, hoverRowId]);
 
   // TODO: context menus
   return (
     <ReactTable<Bookmark>
+      onRowHover={handleRowHover}
+      onRowOut={handleRowOut}
       tableData={{
         data: bookmarks,
         columns,

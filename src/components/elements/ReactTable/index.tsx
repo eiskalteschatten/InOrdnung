@@ -3,6 +3,7 @@ import clsx from 'clsx';
 
 import {
   flexRender,
+  Row,
   TableOptions,
   useReactTable,
 } from '@tanstack/react-table';
@@ -12,9 +13,11 @@ import styles from './styles.module.scss';
 interface Props<T> {
   tableData: TableOptions<T>;
   className?: string;
+  onRowHover?: (row: Row<T>) => void;
+  onRowOut?: (row: Row<T>) => void;
 }
 
-function ReactTable<T>({ tableData, className }: Props<T>): React.ReactElement {
+function ReactTable<T>({ tableData, className, onRowHover, onRowOut }: Props<T>): React.ReactElement {
   const table = useReactTable(tableData);
 
   return (
@@ -56,7 +59,12 @@ function ReactTable<T>({ tableData, className }: Props<T>): React.ReactElement {
       <tbody>
         {/* TODO: context menus */}
         {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
+          <tr
+            key={row.id}
+            className={styles.row}
+            onMouseOver={() => onRowHover && onRowHover(row)}
+            onMouseOut={() => onRowOut && onRowOut(row)}
+          >
             {row.getVisibleCells().map(cell => (
               <td key={cell.id} style={{ width: cell.column.getSize() }}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
