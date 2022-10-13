@@ -58,9 +58,11 @@ const BookmarksTable: React.FC = () => {
       cell: info => (
         <div className={styles.linkCell}>
           <div>{info.getValue()}</div>
-          <Button onClick={() => openInBrowser(info.getValue())}>
-            <span className='material-icons'>open_in_browser</span>
-          </Button>
+          {info.getValue() && (
+            <Button onClick={() => openInBrowser(info.getValue())}>
+              <span className='material-icons'>open_in_browser</span>
+            </Button>
+          )}
         </div>
       ),
     }),
