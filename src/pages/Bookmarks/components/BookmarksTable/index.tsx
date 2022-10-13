@@ -43,6 +43,7 @@ const BookmarksTable: React.FC = () => {
   const _deleteBookmark = (id: string) => {
     // TODO: prompt user to confirm deletion
     dispatch(deleteBookmark(id));
+    dispatch(setEditingId());
   };
 
   const columns = useMemo(() => ([
