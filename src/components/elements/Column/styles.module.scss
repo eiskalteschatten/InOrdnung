@@ -4,6 +4,9 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   background-color: #ffffff;
+  height: 100%;
+  overflow: auto;
+  position: relative;
 
   &.flexGrow {
     flex-grow: 1;
