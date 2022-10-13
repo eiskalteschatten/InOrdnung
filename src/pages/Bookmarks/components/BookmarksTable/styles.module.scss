@@ -3,3 +3,10 @@
   align-items: center;
   gap: 10px;
 }
+
+.buttonCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+}

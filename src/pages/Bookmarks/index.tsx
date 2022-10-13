@@ -20,7 +20,7 @@ const Bookmarks: React.FC = () => {
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
-      <Column flexGrow>
+      <Column flexGrow padding>
         <BookmarksTable />
       </Column>
 

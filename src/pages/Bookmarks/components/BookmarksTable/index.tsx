@@ -66,19 +66,17 @@ const BookmarksTable: React.FC = () => {
     {
       id: 'buttons',
       cell: (info: any) => (
-        <>
+        <div className={styles.buttonCell}>
           <Button onClick={() => editBookmark(info.row.original.id)}>
             <span className='material-icons'>edit</span>
           </Button>
           <Button onClick={() => _deleteBookmark(info.row.original.id)}>
             <span className='material-icons'>delete</span>
           </Button>
-        </>
+        </div>
       ),
       enableSorting: false,
-      width: 80,
-      minWidth: 80,
-      maxWidth: 80,
+      size: 80,
     },
   ]), [bookmarks]);
 

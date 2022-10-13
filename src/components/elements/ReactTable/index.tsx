@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import {
   flexRender,
@@ -10,13 +11,14 @@ import styles from './styles.module.scss';
 
 interface Props<T> {
   tableData: TableOptions<T>;
+  className?: string;
 }
 
-function ReactTable<T>({ tableData }: Props<T>): React.ReactElement {
+function ReactTable<T>({ tableData, className }: Props<T>): React.ReactElement {
   const table = useReactTable(tableData);
 
   return (
-    <table className={styles.table}>
+    <table className={clsx(styles.table, className)}>
       <thead className={styles.head}>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
@@ -56,7 +58,7 @@ function ReactTable<T>({ tableData }: Props<T>): React.ReactElement {
         {table.getRowModel().rows.map(row => (
           <tr key={row.id}>
             {row.getVisibleCells().map(cell => (
-              <td key={cell.id}>
+              <td key={cell.id} style={{ width: cell.column.getSize() }}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
