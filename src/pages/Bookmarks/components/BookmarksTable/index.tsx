@@ -14,10 +14,11 @@ import { setBookmarksSortingState } from '../../../../store/entities/ui/preferen
 import { bookmarkSelectors, setEditingId, deleteBookmark } from '../../../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
+import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
+import { isValidUrl } from '../../../../shared/lib/helpers/url';
 
 import styles from './styles.module.scss';
-import ReactTable from '../../../../components/elements/ReactTable';
 
 const columnHelper = createColumnHelper<Bookmark>();
 
@@ -69,7 +70,7 @@ const BookmarksTable: React.FC = () => {
       cell: info => (
         <div className={styles.linkCell}>
           <div>{info.getValue()}</div>
-          {info.getValue() && (
+          {isValidUrl(info.getValue()) && (
             <Button onClick={() => openInBrowser(info.getValue())}>
               <span className='material-icons'>open_in_browser</span>
             </Button>
