@@ -33,9 +33,16 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.api.on('navigateTo', (e: IpcRendererEvent, url: string) => {
-      navigate(url);
-    });
+    const navigateToEventHandlerElectron = (e: IpcRendererEvent, url: string) => navigate(url);
+    const navigateToEventHandler = (e: CustomEvent) => navigate(e.detail);
+
+    window.api.on('navigateTo', navigateToEventHandlerElectron);
+    window.addEventListener('navigateTo', navigateToEventHandler as EventListener);
+
+    return () => {
+      window.api.removeListener('navigateTo', navigateToEventHandlerElectron);
+      window.removeEventListener('navigateTo', navigateToEventHandler as EventListener);
+    };
   }, []);
 
   useEffect(() => {

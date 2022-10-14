@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { bookmarkSelectors, deleteBookmark, setEditingId } from '../../store/entities/project/bookmarks';
+import { bookmarkSelectors, deleteBookmark } from '../../store/entities/project/bookmarks';
 
 import Toolbar from './components/Toolbar';
 import ProjectLayout from '../../components/layouts/ProjectLayout';
@@ -15,7 +16,8 @@ const Bookmarks: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
   const dispatch = useAppDispatch();
   const state  = useAppSelector(state => state);
-  const { editingId } = useAppSelector(state => state.project.bookmarks);
+  const { editingId } = useParams();
+  const navigate = useNavigate();
 
   const handleSidebarClose = () => {
     if (editingId) {
@@ -26,7 +28,7 @@ const Bookmarks: React.FC = () => {
       }
     }
 
-    dispatch(setEditingId());
+    navigate('/bookmarks');
   };
 
   return (
@@ -40,7 +42,7 @@ const Bookmarks: React.FC = () => {
           title={t('bookmarks:editBookmark')}
           handleClose={handleSidebarClose}
         >
-          <EditBookmark />
+          <EditBookmark editingId={editingId} />
         </RightSidebar>
       )}
     </ProjectLayout>

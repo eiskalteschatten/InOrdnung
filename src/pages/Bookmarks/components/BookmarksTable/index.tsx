@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
 
 import {
   createColumnHelper,
@@ -11,7 +12,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setBookmarksSortingState } from '../../../../store/entities/ui/preferences';
-import { bookmarkSelectors, setEditingId, deleteBookmark } from '../../../../store/entities/project/bookmarks';
+import { bookmarkSelectors, deleteBookmark } from '../../../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 import ReactTable from '../../../../components/elements/ReactTable';
@@ -29,6 +30,7 @@ const BookmarksTable: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
   const [sorting, setSorting] = useState<SortingState>(sortingState);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setBookmarksSortingState(sorting));
@@ -41,13 +43,13 @@ const BookmarksTable: React.FC = () => {
   };
 
   const editBookmark = (id: string) => {
-    dispatch(setEditingId(id));
+    navigate(`/bookmarks/edit/${id}`);
   };
 
   const _deleteBookmark = (id: string) => {
     // TODO: prompt user to confirm deletion
     dispatch(deleteBookmark(id));
-    dispatch(setEditingId());
+    navigate('/bookmarks');
   };
 
   const handleRowHover = (row: Row<Bookmark>) => {

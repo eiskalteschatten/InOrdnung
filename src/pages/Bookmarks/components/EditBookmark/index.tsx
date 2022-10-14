@@ -8,10 +8,13 @@ import Input from '../../../../components/elements/Input';
 
 import styles from './styles.module.scss';
 
-const EditBookmark: React.FC = () => {
+interface Props {
+  editingId: string;
+}
+
+const EditBookmark: React.FC<Props> = ({ editingId }) => {
   const { t } = useTranslation(['bookmarks']);
   const dispatch = useAppDispatch();
-  const { editingId }  = useAppSelector(state => state.project.bookmarks);
   const state  = useAppSelector(state => state);
   const [name, setName] = useState<string>('');
   const [url, setUrl] = useState<string>('');
