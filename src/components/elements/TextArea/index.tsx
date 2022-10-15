@@ -13,7 +13,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 const TextArea: React.FC<Props> = props => {
-  const { className, inputClassName, label, large, fullWidth, error, icon, onFocus, onBlur, ...leftoverProps } = props;
+  const { className, inputClassName, label, large, fullWidth, error, icon, onFocus, onBlur, onContextMenu, ...leftoverProps } = props;
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleOnFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -29,6 +29,14 @@ const TextArea: React.FC<Props> = props => {
 
     if (onBlur) {
       onBlur(e);
+    }
+  };
+
+  const handleOnContextMenu = (e: React.MouseEvent<HTMLTextAreaElement>) => {
+    window.api.send('openTextFieldContextMenu');
+
+    if (onContextMenu) {
+      onContextMenu(e);
     }
   };
 
@@ -55,6 +63,7 @@ const TextArea: React.FC<Props> = props => {
           })}
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
+          onContextMenu={handleOnContextMenu}
           {...leftoverProps as TextareaHTMLAttributes<HTMLTextAreaElement>}
         />
       </div>
