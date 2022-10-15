@@ -47,9 +47,17 @@ const BookmarksTable: React.FC = () => {
   };
 
   const _deleteBookmark = (id: string) => {
-    // TODO: prompt user to confirm deletion
-    dispatch(deleteBookmark(id));
-    navigate('/bookmarks');
+    const result = window.api.sendSync('openAlert', {
+      message: t('bookmarks:confirmDeleteBookmark'),
+      detail: t('common:areYouSureYouWantToContinue'),
+      types: 'warning',
+      buttons: [t('common:no'), t('common:yes')],
+    });
+
+    if (result === 1) {
+      dispatch(deleteBookmark(id));
+      navigate('/bookmarks');
+    }
   };
 
   const handleRowHover = (row: Row<Bookmark>) => {
@@ -100,6 +108,7 @@ const BookmarksTable: React.FC = () => {
   ]), [bookmarks, hoverRowId]);
 
   // TODO: context menus
+  // TODO: fix sorting
   return (
     <ReactTable<Bookmark>
       onRowHover={handleRowHover}
