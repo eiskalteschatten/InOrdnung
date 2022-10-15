@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   createColumnHelper,
   getCoreRowModel,
+  getSortedRowModel,
   Row,
   SortingState,
 } from '@tanstack/react-table';
@@ -108,7 +109,6 @@ const BookmarksTable: React.FC = () => {
   ]), [bookmarks, hoverRowId]);
 
   // TODO: context menus
-  // TODO: fix sorting
   return (
     <ReactTable<Bookmark>
       onRowHover={handleRowHover}
@@ -121,6 +121,7 @@ const BookmarksTable: React.FC = () => {
         },
         onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
       }}
     />
   );
