@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import { useNavigate } from 'react-router-dom';
 
 import {
   createColumnHelper,
@@ -32,7 +31,6 @@ const BookmarksTable: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
   const [sorting, setSorting] = useState<SortingState>(sortingState);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setBookmarksSortingState(sorting));
@@ -50,6 +48,10 @@ const BookmarksTable: React.FC = () => {
 
   const handleRowOut = () => {
     setHoverRowId(undefined);
+  };
+
+  const handleRowContextMenu = (row: Row<Bookmark>) => {
+    window.api.send('openBookmarkContextMenu', row.original.id);
   };
 
   const columns = useMemo(() => ([
@@ -91,11 +93,11 @@ const BookmarksTable: React.FC = () => {
     },
   ]), [bookmarks, hoverRowId]);
 
-  // TODO: context menus
   return (
     <ReactTable<Bookmark>
       onRowHover={handleRowHover}
       onRowOut={handleRowOut}
+      onRowContextMenu={handleRowContextMenu}
       tableData={{
         data: bookmarks,
         columns,
