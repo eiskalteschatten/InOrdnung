@@ -18,7 +18,7 @@ export const createNewBookmark = () => {
 };
 
 export const editBookmark = (id: string) => {
-  const navigateEvent = new CustomEvent('navigateTo',{ detail: `/bookmarks/edit/${id}` });
+  const navigateEvent = new CustomEvent('navigateTo', { detail: `/bookmarks/edit/${id}` });
   window.dispatchEvent(navigateEvent);
 };
 
@@ -32,7 +32,7 @@ export const deleteBookmark = (id: string) => {
 
   if (result === 1) {
     dispatch(deleteBookmarkFromStore(id));
-    const navigateEvent = new CustomEvent('navigateTo',{ detail: '/bookmarks' });
+    const navigateEvent = new CustomEvent('navigateTo', { detail: '/bookmarks' });
     window.dispatchEvent(navigateEvent);
   }
 };
