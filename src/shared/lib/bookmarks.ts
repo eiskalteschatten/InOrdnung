@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { t } from 'i18next';
 
 import { dispatch } from '../../store';
-import { addBookmark, deleteBookmark as deleteBookmarkFromStore } from '../../store/entities/project/bookmarks';
+import { addBookmark, deleteBookmark as deleteBookmarkFromStore, setEditingId } from '../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../shared/interfaces/bookmarks';
 
@@ -18,7 +18,8 @@ export const createNewBookmark = () => {
 };
 
 export const editBookmark = (id: string) => {
-  const navigateEvent = new CustomEvent('navigateTo', { detail: `/bookmarks/edit/${id}` });
+  dispatch(setEditingId(id));
+  const navigateEvent = new CustomEvent('navigateTo', { detail: '/bookmarks' });
   window.dispatchEvent(navigateEvent);
 };
 
@@ -32,7 +33,6 @@ export const deleteBookmark = (id: string) => {
 
   if (result === 1) {
     dispatch(deleteBookmarkFromStore(id));
-    const navigateEvent = new CustomEvent('navigateTo', { detail: '/bookmarks' });
-    window.dispatchEvent(navigateEvent);
+    dispatch(setEditingId());
   }
 };

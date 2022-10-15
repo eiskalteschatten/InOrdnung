@@ -11,6 +11,7 @@ export const bookmarkSelectors = bookmarksAdapter.getSelectors<RootState>(state 
 
 export interface State {
   data: EntityState<Bookmark>;
+  editingId?: string;
 }
 
 const initialState: State = {
@@ -33,6 +34,9 @@ export const slice = createSlice({
     deleteBookmark: (state, action: PayloadAction<string>) => {
       bookmarksAdapter.removeOne(state.data, action.payload);
     },
+    setEditingId: (state, action: PayloadAction<string | undefined>) => {
+      state.editingId = action.payload;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   addBookmark,
   updateBookmark,
   deleteBookmark,
+  setEditingId,
 } = slice.actions;
 
 export const { reducer } = slice;
