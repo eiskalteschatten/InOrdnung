@@ -13,12 +13,13 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setBookmarksSortingState } from '../../../../store/entities/ui/preferences';
-import { bookmarkSelectors, deleteBookmark } from '../../../../store/entities/project/bookmarks';
+import { bookmarkSelectors } from '../../../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
 import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
 import { isValidUrl } from '../../../../shared/lib/helpers/url';
+import { deleteBookmark, editBookmark } from '../../../../shared/lib/bookmarks';
 
 import styles from './styles.module.scss';
 
@@ -40,24 +41,6 @@ const BookmarksTable: React.FC = () => {
   const openInBrowser = (url: string) => {
     if (url) {
       window.api.send('openLink', url);
-    }
-  };
-
-  const editBookmark = (id: string) => {
-    navigate(`/bookmarks/edit/${id}`);
-  };
-
-  const _deleteBookmark = (id: string) => {
-    const result = window.api.sendSync('openAlert', {
-      message: t('bookmarks:confirmDeleteBookmark'),
-      detail: t('common:areYouSureYouWantToContinue'),
-      types: 'warning',
-      buttons: [t('common:no'), t('common:yes')],
-    });
-
-    if (result === 1) {
-      dispatch(deleteBookmark(id));
-      navigate('/bookmarks');
     }
   };
 
@@ -98,7 +81,7 @@ const BookmarksTable: React.FC = () => {
           <Button onClick={() => editBookmark(info.row.original.id)}>
             <span className='material-icons'>edit</span>
           </Button>
-          <Button onClick={() => _deleteBookmark(info.row.original.id)}>
+          <Button onClick={() => deleteBookmark(info.row.original.id)}>
             <span className='material-icons'>delete</span>
           </Button>
         </div>
