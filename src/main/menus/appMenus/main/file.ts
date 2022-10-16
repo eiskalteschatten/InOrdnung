@@ -32,6 +32,15 @@ export default (): MenuItem => {
             },
           },
         },
+        {
+          item: {
+            label: t('tasks:newTasks'),
+            click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+              console.log('add task');
+              // focusedWindow?.webContents.send('createNewBookmark');
+            },
+          },
+        },
       ],
     },
     {

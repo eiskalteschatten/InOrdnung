@@ -6,7 +6,7 @@ import ToolbarButtons from '../../../components/elements/ToolbarButtons';
 import { createNewBookmark } from '../../../shared/lib/bookmarks';
 
 const Toolbar: React.FC = () => {
-  const { t } = useTranslation(['bookmarks']);
+  const { t } = useTranslation(['bookmarks', 'tasks']);
   const navigate = useNavigate();
 
   const toolbar = [
@@ -16,6 +16,14 @@ const Toolbar: React.FC = () => {
       onClick: () => {
         navigate('/bookmarks');
         createNewBookmark();
+      },
+    },
+    {
+      label: t('tasks:newTask'),
+      icon: 'add_task',
+      onClick: () => {
+        // navigate('/tasks');
+        // createNewBookmark();
       },
     },
   ];
