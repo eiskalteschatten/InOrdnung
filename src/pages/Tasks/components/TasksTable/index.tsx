@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 
 import {
   createColumnHelper,
@@ -13,6 +14,7 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setTasksSortingState } from '../../../../store/entities/ui/preferences';
+import { taskListSelectors } from '../../../../store/entities/project/tasks';
 
 import { Task } from '../../../../shared/interfaces/tasks';
 import ReactTable from '../../../../components/elements/ReactTable';
@@ -29,6 +31,7 @@ interface Props {
 
 const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   const dispatch = useAppDispatch();
+  const state = useAppSelector(state => state);
   const { tasks: tasksUi } = useAppSelector(state => state.ui.preferences);
   const { t } = useTranslation(['common']);
   const [sorting, setSorting] = useState<SortingState>(tasksUi?.sortingState ?? []);
@@ -74,7 +77,15 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
     columnHelper.accessor('taskListId', {
       id: 'taskListId',
       header: () => <span>{t(('tasks:taskList'))}</span>,
-      cell: info => info.getValue(),
+      cell: info => {
+        const taskList = info.getValue() ? taskListSelectors.selectById(state, info.getValue()!) : undefined;
+
+        return (
+          <Link to={`/tasks/list/${info.getValue()}`}>
+            {taskList?.name ? taskList.name : t('common:untitled')}
+          </Link>
+        );
+      },
     }),
     {
       id: 'buttons',
