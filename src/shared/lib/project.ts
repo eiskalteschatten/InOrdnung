@@ -24,7 +24,9 @@ export const serializeProjectForSaving = (): ProjectFile => {
 
 export const setProjectFromFile = (projectFile: ProjectFile, path: string) => {
   dispatch(setProjectInfo(projectFile.project.info));
+
   dispatch(setBookmarks(projectFile.project.bookmarks || []));
+
   dispatch(setTasks(projectFile.project.tasks || []));
   dispatch(setTaskLists(projectFile.project.taskLists || []));
 
