@@ -8,6 +8,7 @@ import {
   getSortedRowModel,
   Row,
   SortingState,
+  VisibilityState,
 } from '@tanstack/react-table';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
@@ -23,10 +24,10 @@ const columnHelper = createColumnHelper<Task>();
 
 interface Props {
   tasks: Task[];
-  isAllTasks?: boolean;
+  showTaskListColumn?: boolean;
 }
 
-const TasksTable: React.FC<Props> = ({ tasks, isAllTasks }) => {
+const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   const dispatch = useAppDispatch();
   const { tasks: tasksUi } = useAppSelector(state => state.ui.preferences);
   const { t } = useTranslation(['common']);
@@ -37,9 +38,9 @@ const TasksTable: React.FC<Props> = ({ tasks, isAllTasks }) => {
     dispatch(setTasksSortingState(sorting));
   }, [sorting]);
 
-  const columnVisibility = useMemo(() => ({
-
-  }), [isAllTasks]);
+  const columnVisibility = useMemo<VisibilityState>(() => ({
+    taskListId: showTaskListColumn || false,
+  }), [showTaskListColumn]);
 
   const handleRowHover = (row: Row<Task>) => {
     setHoverRowId(row.id);

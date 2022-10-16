@@ -16,7 +16,7 @@ const TasksPage: React.FC = () => {
   return (
     <ProjectLayout toolbar={<Toolbar />}>
       <Column flexGrow padding fullWidth={!editingId}>
-        <TasksTable tasks={tasks} isAllTasks />
+        <TasksTable tasks={tasks} showTaskListColumn />
       </Column>
     </ProjectLayout>
   );
