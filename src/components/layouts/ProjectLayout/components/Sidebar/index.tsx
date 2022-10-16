@@ -8,11 +8,12 @@ import { taskListSelectors } from '../../../../../store/entities/project/tasks';
 import { TaskViewType } from '../../../../../shared/interfaces/tasks';
 import { addTaskList } from '../../../../../shared/lib/tasks';
 
-import CollapsibleBox from '../../../../elements/CollapsibleBox';
+import CollapsibleBox from './components/CollapsibleBox';
+import SidebarButton from './components/SidebarButton';
+import SidebarSpacer from './components/SidebarSpacer';
+import CollapsibleBoxAddButton from './components/CollapsibleBoxAddButton';
+
 import ColumnDragger from '../../../../elements/ColumnDragger';
-import SidebarButton from '../../../../elements/SidebarButton';
-import SidebarSpacer from '../../../../elements/SidebarSpacer';
-import CollapsibleBoxAddButton from '../../../../elements/CollapsibleBoxAddButton';
 
 import styles from './styles.module.scss';
 

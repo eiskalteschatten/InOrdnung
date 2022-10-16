@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 
-import ButtonBase from '../ButtonBase';
+import ButtonBase from '../../../../../../elements/ButtonBase';
 
 import styles from './styles.module.scss';
 

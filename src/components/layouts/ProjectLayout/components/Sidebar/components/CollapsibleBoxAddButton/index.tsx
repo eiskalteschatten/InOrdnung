@@ -1,7 +1,7 @@
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 
-import Button from '../Button';
+import Button from '../../../../../../elements/Button';
 
 import styles from './styles.module.scss';
 
