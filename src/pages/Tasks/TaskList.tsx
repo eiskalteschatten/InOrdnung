@@ -14,12 +14,13 @@ import TasksTable from './components/TasksTable';
 const TaskListPage: React.FC = () => {
   const { editingId } = useAppSelector(state => state.project.tasks);
   const tasks = useAppSelector(taskSelectors.selectAll);
+  const allTaskLists = useAppSelector(taskListSelectors.selectAll);
   const { taskListId } = useParams();
   const state = useAppSelector(state => state);
 
   const taskList = useMemo<TaskList | undefined>(() => {
     return taskListId ? taskListSelectors.selectById(state, taskListId) : undefined;
-  }, [taskListId]);
+  }, [taskListId, allTaskLists]);
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
