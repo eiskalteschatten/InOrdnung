@@ -71,6 +71,13 @@ const Sidebar: React.FC = () => {
           onCollapseChange={(collapsed?: boolean) => handleCollapseChange(CollapsibleBoxIds.TASKS, collapsed)}
           isCollapsed={collapsedIds.includes(CollapsibleBoxIds.TASKS)}
         >
+          <SidebarButton
+            to='/tasks/all'
+            icon={<span className='material-icons'>task_alt</span>}
+          >
+            {t('tasks:allTasks')}
+          </SidebarButton>
+
           {taskLists?.map(list => (
             <SidebarButton
               to={`/tasks/list/${list.id}`}
