@@ -9,7 +9,7 @@ export type State = UiPreferences;
 const initialState: State = {
   sidebarWidth: 260,
   middleColumnWidth: 350,
-  rightSidebarWidth: 300,
+  rightSidebarWidth: 310,
   collapsedSidebarIds: [],
   bookmarks: {
     sortingState: [],
