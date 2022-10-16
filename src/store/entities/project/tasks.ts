@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, EntityState, PayloadAction, Update } from '@reduxjs/toolkit';
 
 import { RootState } from '../..';
-import { Task } from '../../../shared/interfaces/tasks';
+import { Task, TaskList } from '../../../shared/interfaces/tasks';
 
 export const tasksAdapter = createEntityAdapter<Task>({
   sortComparer: (a, b) => a.name.localeCompare(b.name),
@@ -9,13 +9,21 @@ export const tasksAdapter = createEntityAdapter<Task>({
 
 export const taskSelectors = tasksAdapter.getSelectors<RootState>(state => state.project.tasks.data);
 
+export const taskListsAdapter = createEntityAdapter<TaskList>({
+  sortComparer: (a, b) => a.name.localeCompare(b.name),
+});
+
+export const taskListSelectors = taskListsAdapter.getSelectors<RootState>(state => state.project.tasks.lists);
+
 export interface State {
   data: EntityState<Task>;
+  lists: EntityState<TaskList>;
   editingId?: string;
 }
 
 const initialState: State = {
   data: tasksAdapter.getInitialState(),
+  lists: taskListsAdapter.getInitialState(),
 };
 
 export const slice = createSlice({
@@ -37,6 +45,18 @@ export const slice = createSlice({
     setEditingId: (state, action: PayloadAction<string | undefined>) => {
       state.editingId = action.payload;
     },
+    setTaskLists: (state, action: PayloadAction<TaskList[]>) => {
+      taskListsAdapter.setAll(state.lists, action.payload);
+    },
+    addTaskList: (state, action: PayloadAction<TaskList>) => {
+      taskListsAdapter.addOne(state.lists, action.payload);
+    },
+    updateTaskList: (state, action: PayloadAction<Update<TaskList>>) => {
+      taskListsAdapter.updateOne(state.lists, action.payload);
+    },
+    deleteTaskList: (state, action: PayloadAction<string>) => {
+      taskListsAdapter.removeOne(state.lists, action.payload);
+    },
   },
 });
 
@@ -46,6 +66,10 @@ export const {
   updateTask,
   deleteTask,
   setEditingId,
+  setTaskLists,
+  addTaskList,
+  updateTaskList,
+  deleteTaskList,
 } = slice.actions;
 
 export const { reducer } = slice;
