@@ -13,12 +13,5 @@
     height: 100%;
     max-width: calc(100% - #{$columnDraggerWidth});
     flex-grow: 1;
-
-    .addAccountButton {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
   }
 }

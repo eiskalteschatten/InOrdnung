@@ -1,12 +1,13 @@
 @import '../../../scss/variables';
 
 .column {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: #ffffff;
+  border-top-left-radius: $borderRadius;
+  border-top-right-radius: $borderRadius;
+  background-color: var(--secondary-background-color);
   height: 100%;
   overflow: auto;
   position: relative;
+  margin-right: 5px;
 
   &.flexGrow {
     flex-grow: 1;
@@ -25,7 +26,7 @@
     padding: 5px 10px;
   }
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #000000;
+  &.fullWidth {
+    margin-right: 15px;
   }
 }

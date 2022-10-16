@@ -12,20 +12,20 @@
   }
 
   &:hover:not(:disabled) {
-    background-color: darken($lightBg, 6%);
+    background-color: darken($lightSecondaryBg, 10%);
     color: $lightColor;
 
     @media (prefers-color-scheme: dark) {
-      background-color: darken($darkBg, 5%);
+      background-color: darken($darkSecondaryBg, 4%);
       color: $darkColor;
     }
   }
 
   &:active:not(:disabled), &:not(button):focus {
-    background-color: darken($lightBg, 10%);
+    background-color: darken($lightSecondaryBg, 15%);
 
     @media (prefers-color-scheme: dark) {
-      background-color: darken($darkBg, 8%);
+      background-color: darken($darkSecondaryBg, 10%);
     }
   }
 

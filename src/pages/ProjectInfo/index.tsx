@@ -19,7 +19,7 @@ const ProjectInfo: React.FC = () => {
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
-      <Column flexGrow centered padding>
+      <Column flexGrow centered padding fullWidth>
         <div className={styles.projectInfo}>
           <Input
             label={t('projectInfo:projectName')}

@@ -2,6 +2,7 @@
 
 :root {
   --background-color: #{$lightBg};
+  --secondary-background-color: #{$lightSecondaryBg};
   --opposite-background-color: #{$darkBg};
   --color: #{$lightColor};
   --opposite-color: #{$darkColor};
@@ -12,6 +13,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background-color: #{$darkBg};
+    --secondary-background-color: #{$darkSecondaryBg};
     --opposite-background-color: #{$lightBg};
     --color: #{$darkColor};
     --opposite-color: #{$lightColor};
