@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { setSaved } from '../../../store/entities/file';
 
-import { getProjectForSaving } from '../../../shared/lib/project';
+import { serializeProjectForSaving } from '../../../shared/lib/project';
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
@@ -61,7 +61,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
       }
 
       setAutoSaveTimeout(setTimeout(() => {
-        window.api.send('saveProject', getProjectForSaving(), file);
+        window.api.send('saveProject', serializeProjectForSaving(), file);
       }, 1000));
     }
     else if (!justOpened && (!file.fileLoaded || file.saved)) {
