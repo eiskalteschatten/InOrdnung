@@ -16,9 +16,9 @@ const initialState: State = {
   },
 };
 
-export const addCollapsedAccountId = createAsyncThunk(
-  'ui/addCollapsedAccountId',
-  async (id: number, thunkAPI) => {
+export const addCollapsedSidebarId = createAsyncThunk(
+  'ui/addCollapsedSidebarId',
+  async (id: string, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const { collapsedSidebarIds } = state.ui.preferences;
 
@@ -29,9 +29,9 @@ export const addCollapsedAccountId = createAsyncThunk(
   }
 );
 
-export const removeCollapsedAccountId = createAsyncThunk(
-  'ui/removeCollapsedAccountId',
-  async (id: number, thunkAPI) => {
+export const removeCollapsedSidebarId = createAsyncThunk(
+  'ui/removeCollapsedSidebarId',
+  async (id: string, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const { collapsedSidebarIds } = state.ui.preferences;
     const index = collapsedSidebarIds.indexOf(id);
@@ -60,7 +60,7 @@ export const slice = createSlice({
     setRightSidebarWidth: (state, action: PayloadAction<number>) => {
       state.rightSidebarWidth = action.payload;
     },
-    setCollapsedSidebarIds: (state, action: PayloadAction<number[]>) => {
+    setCollapsedSidebarIds: (state, action: PayloadAction<string[]>) => {
       state.collapsedSidebarIds = action.payload;
     },
     setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
