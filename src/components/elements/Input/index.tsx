@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useState } from 'react';
+import React, { forwardRef, InputHTMLAttributes, useState } from 'react';
 import clsx from 'clsx';
 
 import styles from './styles.module.scss';
@@ -9,9 +9,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   fullWidth?: boolean;
   error?: string;
   icon?: React.ReactNode;
+  ref?: React.ForwardedRef<HTMLInputElement>;
 }
 
-const Input: React.FC<Props> = props => {
+const Input: React.FC<Props> = forwardRef<HTMLInputElement, Props>((props, ref) => {
   const { className, label, large, fullWidth, error, icon, type, onFocus, onBlur, onContextMenu, ...leftoverProps } = props;
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -64,6 +65,7 @@ const Input: React.FC<Props> = props => {
           onFocus={handleOnFocus}
           onBlur={handleOnBlur}
           onContextMenu={handleContextMenu}
+          ref={ref}
           {...leftoverProps as InputHTMLAttributes<HTMLInputElement>}
         />
       </div>
@@ -73,6 +75,6 @@ const Input: React.FC<Props> = props => {
       )}
     </div>
   );
-};
+});
 
 export default Input;

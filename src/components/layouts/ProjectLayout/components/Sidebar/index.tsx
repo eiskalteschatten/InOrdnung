@@ -31,10 +31,17 @@ const Sidebar: React.FC = () => {
   const columnRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation(['projectInfo', 'bookmarks', 'tasks']);
   const dispatch = useAppDispatch();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setWidth(savedWidth);
   }, [savedWidth]);
+
+  useEffect(() => {
+    if (listEditingId && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [listEditingId]);
 
   const handleCollapseChange = (id: string, collapsed?: boolean) => {
     collapsed
@@ -103,6 +110,7 @@ const Sidebar: React.FC = () => {
                   }))}
                   onBlur={() => dispatch(setListEditingId())}
                   onKeyDown={e => e.key === 'Enter' && dispatch(setListEditingId())}
+                  ref={inputRef}
                 />
               ) : (
                 <>{list.name}</>
