@@ -43,7 +43,7 @@ const RightSidebar: React.FC<Props> = ({ children, title, handleClose }) => {
           </div>
 
           {handleClose && (
-            <Button className={styles.closeButton} onClick={handleClose}>
+            <Button onClick={handleClose}>
               <span className='material-icons'>close</span>
             </Button>
           )}
