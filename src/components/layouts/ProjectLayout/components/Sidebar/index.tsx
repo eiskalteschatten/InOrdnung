@@ -72,19 +72,17 @@ const Sidebar: React.FC = () => {
           {/* TODO: context menus */}
           {taskLists?.map(list => (
             <SidebarButton
-              to='/'
+              to={`/tasks/list/${list.id}`}
               icon={
                 list.view === TaskViewType.LIST
                   ? <span className='material-icons'>checklist</span>
                   : <span className='material-icons'>view_column</span>
               }
-              end
               key={list.id}
             >
               {list.name}
             </SidebarButton>
           ))}
-
 
           <CollapsibleBoxAddButton onClick={() => createTaskList()}>
             <span className='material-icons'>add</span>{t('tasks:newTaskList')}
