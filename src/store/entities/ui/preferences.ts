@@ -69,18 +69,20 @@ export const slice = createSlice({
       state.collapsedSidebarIds = action.payload;
     },
     setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
-      if (!state.bookmarks) {
-        state.bookmarks = initialState.bookmarks;
-      }
+      const bookmarks = state.bookmarks || initialState.bookmarks;
 
-      state.bookmarks!.sortingState = action.payload;
+      state.bookmarks = {
+        ...bookmarks,
+        sortingState: action.payload,
+      };
     },
     setTasksSortingState: (state, action: PayloadAction<SortingState>) => {
-      if (!state.tasks) {
-        state.tasks = initialState.tasks;
-      }
+      const tasks = state.tasks || initialState.tasks;
 
-      state.tasks!.sortingState = action.payload;
+      state.tasks = {
+        ...tasks,
+        sortingState: action.payload,
+      };
     },
   },
 });
