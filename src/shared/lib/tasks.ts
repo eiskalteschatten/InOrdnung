@@ -2,9 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { t } from 'i18next';
 
 import { dispatch } from '../../store';
-import { addTaskList, deleteTaskList as deleteTaskListFromStore, setListEditingId } from '../../store/entities/project/tasks';
+import { addTask, addTaskList, deleteTaskList as deleteTaskListFromStore, setListEditingId } from '../../store/entities/project/tasks';
 
-import { TaskList, TaskViewType } from '../interfaces/tasks';
+import { Task, TaskList, TaskStatus, TaskViewType } from '../interfaces/tasks';
 
 export const createTaskList = () => {
   const newTaskList: TaskList = {
@@ -32,3 +32,13 @@ export const deleteTaskList = (id: string) => {
   }
 };
 
+export const createTask = (taskListId?: string) => {
+  const newTask: Task = {
+    id: uuidv4(),
+    name: '',
+    status: TaskStatus.TODO,
+    taskListId,
+  };
+
+  dispatch(addTask(newTask));
+};
