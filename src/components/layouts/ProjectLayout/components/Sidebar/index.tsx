@@ -11,6 +11,7 @@ import CollapsibleBox from '../../../../elements/CollapsibleBox';
 import ColumnDragger from '../../../../elements/ColumnDragger';
 import SidebarButton from '../../../../elements/SidebarButton';
 import SidebarSpacer from '../../../../elements/SidebarSpacer';
+import CollapsibleBoxAddButton from '../../../../elements/CollapsibleBoxAddButton';
 
 import styles from './styles.module.scss';
 
@@ -41,6 +42,10 @@ const Sidebar: React.FC = () => {
   // const handleAccountContextMenu = (account: Account) => {
   //   window.api.send('openEmailSidebarAccountContextMenu', account);
   // };
+
+  const addTaskList = () => {
+    console.log('add task list');
+  };
 
   return (
     <div
@@ -87,6 +92,11 @@ const Sidebar: React.FC = () => {
               {list.name}
             </SidebarButton>
           ))}
+
+
+          <CollapsibleBoxAddButton onClick={addTaskList}>
+            <span className='material-icons'>add</span>{t('tasks:newTaskList')}
+          </CollapsibleBoxAddButton>
         </CollapsibleBox>
       </div>
 
