@@ -6,7 +6,7 @@ import { addCollapsedSidebarId, removeCollapsedSidebarId, setSidebarWidth } from
 import { taskListSelectors } from '../../../../../store/entities/project/tasks';
 
 import { TaskViewType } from '../../../../../shared/interfaces/tasks';
-import { addTaskList } from '../../../../../shared/lib/tasks';
+import { createTaskList } from '../../../../../shared/lib/tasks';
 
 import CollapsibleBox from './components/CollapsibleBox';
 import SidebarButton from './components/SidebarButton';
@@ -40,11 +40,6 @@ const Sidebar: React.FC = () => {
       : dispatch(removeCollapsedSidebarId(id));
   };
 
-  // TODO
-  // const handleAccountContextMenu = (account: Account) => {
-  //   window.api.send('openEmailSidebarAccountContextMenu', account);
-  // };
-
   return (
     <div
       className={styles.sidebar}
@@ -73,7 +68,6 @@ const Sidebar: React.FC = () => {
           title={t('tasks:tasks')}
           onCollapseChange={(collapsed?: boolean) => handleCollapseChange(CollapsibleBoxIds.TASKS, collapsed)}
           isCollapsed={collapsedIds.includes(CollapsibleBoxIds.TASKS)}
-          // onLabelContextMenu={() => handleAccountContextMenu(account)}
         >
           {/* TODO: context menus */}
           {taskLists?.map(list => (
@@ -92,7 +86,7 @@ const Sidebar: React.FC = () => {
           ))}
 
 
-          <CollapsibleBoxAddButton onClick={() => addTaskList()}>
+          <CollapsibleBoxAddButton onClick={() => createTaskList()}>
             <span className='material-icons'>add</span>{t('tasks:newTaskList')}
           </CollapsibleBoxAddButton>
         </CollapsibleBox>

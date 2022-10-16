@@ -32,11 +32,20 @@ export default (): MenuItem => {
             },
           },
         },
+        { item: { type: 'separator' } },
         {
           item: {
             label: t('tasks:newTask'),
             click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
               focusedWindow?.webContents.send('createTask');
+            },
+          },
+        },
+        {
+          item: {
+            label: t('tasks:newTaskList'),
+            click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+              focusedWindow?.webContents.send('createTaskList');
             },
           },
         },
