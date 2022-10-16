@@ -12,4 +12,8 @@ export default {
   thisCannotBeUndone: 'This cannot be undone.',
   rename: 'Rename',
   delete: 'Delete',
+  name: 'Name',
+  description: 'Description',
+  url: 'URL',
+  status: 'Status',
 };

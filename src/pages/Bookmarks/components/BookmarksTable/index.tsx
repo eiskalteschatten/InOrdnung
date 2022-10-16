@@ -28,7 +28,7 @@ const BookmarksTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const bookmarks = useAppSelector(bookmarkSelectors.selectAll);
   const { bookmarks: bookmarksUi } = useAppSelector(state => state.ui.preferences);
-  const { t } = useTranslation(['bookmarks']);
+  const { t } = useTranslation(['common']);
   const [sorting, setSorting] = useState<SortingState>(bookmarksUi?.sortingState ?? []);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
 
@@ -57,12 +57,12 @@ const BookmarksTable: React.FC = () => {
   const columns = useMemo(() => ([
     columnHelper.accessor('name', {
       id: 'name',
-      header: () => <span>{t(('bookmarks:name'))}</span>,
+      header: () => <span>{t(('common:name'))}</span>,
       cell: info => info.getValue(),
     }),
     columnHelper.accessor('url', {
       id: 'url',
-      header: () => <span>{t(('bookmarks:url'))}</span>,
+      header: () => <span>{t(('common:url'))}</span>,
       cell: info => (
         <div className={styles.linkCell}>
           <div>{info.getValue()}</div>
