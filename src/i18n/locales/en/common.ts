@@ -10,4 +10,6 @@ export default {
   no: 'No',
   areYouSureYouWantToContinue: 'Are you sure you want to continue?',
   thisCannotBeUndone: 'This cannot be undone.',
+  rename: 'Rename',
+  delete: 'Delete',
 };

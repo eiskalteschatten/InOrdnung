@@ -1,4 +1,5 @@
 import { IpcRendererEvent } from 'electron';
+
 import { createBookmark, deleteBookmark, editBookmark } from '../shared/lib/bookmarks';
 
 window.api.on('createBookmark', () => createBookmark());

@@ -40,6 +40,8 @@ const Sidebar: React.FC = () => {
       : dispatch(removeCollapsedSidebarId(id));
   };
 
+  const handleTaskListContextMenu = (id: string) => window.api.send('openTaskListContextMenu', id);
+
   return (
     <div
       className={styles.sidebar}
@@ -69,7 +71,6 @@ const Sidebar: React.FC = () => {
           onCollapseChange={(collapsed?: boolean) => handleCollapseChange(CollapsibleBoxIds.TASKS, collapsed)}
           isCollapsed={collapsedIds.includes(CollapsibleBoxIds.TASKS)}
         >
-          {/* TODO: context menus */}
           {taskLists?.map(list => (
             <SidebarButton
               to={`/tasks/list/${list.id}`}
@@ -79,6 +80,7 @@ const Sidebar: React.FC = () => {
                   : <span className='material-icons'>view_column</span>
               }
               key={list.id}
+              onContextMenu={() => handleTaskListContextMenu(list.id)}
             >
               {list.name}
             </SidebarButton>

@@ -5,22 +5,22 @@ import i18n from '../../../i18n/main';
 
 const { t } = i18n;
 
-export default (bookmarkId: string): MenuItemConstructorOptions[] => {
+export default (taskListId: string): MenuItemConstructorOptions[] => {
   const menuItems: MenuItem[] = [
     {
       item: {
-        label: t('bookmarks:newBookmark'),
+        label: t('tasks:newTaskList'),
         click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-          focusedWindow?.webContents.send('createBookmark');
+          focusedWindow?.webContents.send('createTaskList');
         },
       },
     },
     { item: { type: 'separator' } },
     {
       item: {
-        label: t('bookmarks:editBookmark'),
+        label: t('common:rename'),
         click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-          focusedWindow?.webContents.send('editBookmark', bookmarkId);
+          focusedWindow?.webContents.send('renameTaskList', taskListId);
         },
       },
     },
@@ -28,7 +28,7 @@ export default (bookmarkId: string): MenuItemConstructorOptions[] => {
       item: {
         label: t('common:delete'),
         click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-          focusedWindow?.webContents.send('deleteBookmark', bookmarkId);
+          focusedWindow?.webContents.send('deleteTaskList', taskListId);
         },
       },
     },
