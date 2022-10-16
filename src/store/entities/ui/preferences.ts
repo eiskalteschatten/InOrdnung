@@ -23,8 +23,9 @@ export const addCollapsedSidebarId = createAsyncThunk(
     const { collapsedSidebarIds } = state.ui.preferences;
 
     if (!collapsedSidebarIds.includes(id)) {
-      collapsedSidebarIds.push(id);
-      thunkAPI.dispatch(setCollapsedSidebarIds(collapsedSidebarIds));
+      const _collapsedSidebarIds = [...collapsedSidebarIds];
+      _collapsedSidebarIds.push(id);
+      thunkAPI.dispatch(setCollapsedSidebarIds(_collapsedSidebarIds));
     }
   }
 );
@@ -37,8 +38,9 @@ export const removeCollapsedSidebarId = createAsyncThunk(
     const index = collapsedSidebarIds.indexOf(id);
 
     if (index > -1) {
-      collapsedSidebarIds.splice(index, 1);
-      thunkAPI.dispatch(setCollapsedSidebarIds(collapsedSidebarIds));
+      const _collapsedSidebarIds = [...collapsedSidebarIds];
+      _collapsedSidebarIds.splice(index, 1);
+      thunkAPI.dispatch(setCollapsedSidebarIds(_collapsedSidebarIds));
     }
   }
 );
