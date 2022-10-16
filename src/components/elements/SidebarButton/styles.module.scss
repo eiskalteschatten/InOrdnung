@@ -11,13 +11,16 @@
     gap: 10px;
     user-select: none;
     margin-left: 5px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
 
     &.active {
-      background-color: darken($lightBg, 6%);
+      background-color: $primaryColorLighter;
       color: var(--primary-color);
 
       @media (prefers-color-scheme: dark) {
-        background-color: darken($darkBg, 3%);
+        background-color: $primaryColor;
+        color: $darkColor;
       }
     }
 

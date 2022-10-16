@@ -4,7 +4,7 @@
   position: absolute;
   background-color: #ffffff;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: $borderRadius;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   z-index: 10000;
 

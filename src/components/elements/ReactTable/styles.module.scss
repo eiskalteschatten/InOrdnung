@@ -16,7 +16,7 @@
   }
 
   .row {
-    border-radius: 5px;
+    border-radius: $borderRadius;
 
     &:hover {
       background-color: darken($lightSecondaryBg, 3%);

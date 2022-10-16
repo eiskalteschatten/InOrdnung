@@ -11,7 +11,7 @@
   max-width: 750px;
   width: 100%;
   padding: 8px 20px;
-  border-radius: 5px;
+  border-radius: $borderRadius;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   font-weight: 500;
   display: flex;
@@ -32,7 +32,7 @@
     transition: background-color 150ms;
     user-select: none;
     padding: 0 6px;
-    border-radius: 5px;
+    border-radius: $borderRadius;
 
     &:hover:not(:disabled) {
       background-color: rgba(100, 100, 100, 0.3);
