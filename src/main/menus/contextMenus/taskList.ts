@@ -9,6 +9,15 @@ export default (taskListId: string): MenuItemConstructorOptions[] => {
   const menuItems: MenuItem[] = [
     {
       item: {
+        label: t('tasks:newTask'),
+        click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+          focusedWindow?.webContents.send('createTask', taskListId);
+        },
+      },
+    },
+    { item: { type: 'separator' } },
+    {
+      item: {
         label: t('tasks:newTaskList'),
         click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
           focusedWindow?.webContents.send('createTaskList');
