@@ -72,7 +72,7 @@ const Sidebar: React.FC = () => {
           isCollapsed={collapsedIds.includes(CollapsibleBoxIds.TASKS)}
         >
           <SidebarButton
-            to='/tasks/all'
+            to='/tasks'
             icon={<span className='material-icons'>task_alt</span>}
           >
             {t('tasks:allTasks')}
