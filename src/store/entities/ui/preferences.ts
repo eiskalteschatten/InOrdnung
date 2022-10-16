@@ -14,6 +14,9 @@ const initialState: State = {
   bookmarks: {
     sortingState: [],
   },
+  tasks: {
+    sortingState: [],
+  },
 };
 
 export const addCollapsedSidebarId = createAsyncThunk(
@@ -66,18 +69,30 @@ export const slice = createSlice({
       state.collapsedSidebarIds = action.payload;
     },
     setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
-      state.bookmarks.sortingState = action.payload;
+      if (!state.bookmarks) {
+        state.bookmarks = initialState.bookmarks;
+      }
+
+      state.bookmarks!.sortingState = action.payload;
+    },
+    setTasksSortingState: (state, action: PayloadAction<SortingState>) => {
+      if (!state.tasks) {
+        state.tasks = initialState.tasks;
+      }
+
+      state.tasks!.sortingState = action.payload;
     },
   },
 });
 
 export const {
+  setPreferences,
   setSidebarWidth,
   setMiddleColumnWidth,
   setRightSidebarWidth,
   setCollapsedSidebarIds,
   setBookmarksSortingState,
-  setPreferences,
+  setTasksSortingState,
 } = slice.actions;
 
 export const { reducer } = slice;

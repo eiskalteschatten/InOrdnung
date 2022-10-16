@@ -27,9 +27,9 @@ const columnHelper = createColumnHelper<Bookmark>();
 const BookmarksTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const bookmarks = useAppSelector(bookmarkSelectors.selectAll);
-  const { sortingState } = useAppSelector(state => state.ui.preferences.bookmarks);
+  const { bookmarks: bookmarksUi } = useAppSelector(state => state.ui.preferences);
   const { t } = useTranslation(['bookmarks']);
-  const [sorting, setSorting] = useState<SortingState>(sortingState);
+  const [sorting, setSorting] = useState<SortingState>(bookmarksUi?.sortingState ?? []);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
 
   useEffect(() => {

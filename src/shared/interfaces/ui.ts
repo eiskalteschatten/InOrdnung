@@ -6,7 +6,10 @@ export interface UiPreferences {
   rightSidebarWidth: number;
   showCompletedTasks?: boolean;
   collapsedSidebarIds: string[];
-  bookmarks: {
+  bookmarks?: {
+    sortingState: SortingState;
+  };
+  tasks?: {
     sortingState: SortingState;
   };
 }
