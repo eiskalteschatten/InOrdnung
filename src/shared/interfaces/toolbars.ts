@@ -5,4 +5,5 @@ export interface ToolbarConfig extends ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   primary?: boolean;
   dropdown?: React.ReactNode;
+  hide?: boolean;
 }

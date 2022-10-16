@@ -50,7 +50,11 @@ const ToolbarButtons: React.FC<Props> = ({ toolbar }) => {
   return (
     <>
       {toolbar.map((button: ToolbarConfig, index: number) => (
-        <ToolbarButton button={button} key={index} />
+        <React.Fragment key={index}>
+          {!button.hide && (
+            <ToolbarButton button={button} key={index} />
+          )}
+        </React.Fragment>
       ))}
     </>
   );
