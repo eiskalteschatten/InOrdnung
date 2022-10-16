@@ -11,7 +11,6 @@ import {
 } from '@tanstack/react-table';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { taskSelectors } from '../../../../store/entities/project/tasks';
 import { setTasksSortingState } from '../../../../store/entities/ui/preferences';
 
 import { Task } from '../../../../shared/interfaces/tasks';
@@ -22,9 +21,13 @@ import styles from './styles.module.scss';
 
 const columnHelper = createColumnHelper<Task>();
 
-const TasksTable: React.FC = () => {
+interface Props {
+  tasks: Task[];
+  isAllTasks?: boolean;
+}
+
+const TasksTable: React.FC<Props> = ({ tasks, isAllTasks }) => {
   const dispatch = useAppDispatch();
-  const tasks = useAppSelector(taskSelectors.selectAll);
   const { tasks: tasksUi } = useAppSelector(state => state.ui.preferences);
   const { t } = useTranslation(['common']);
   const [sorting, setSorting] = useState<SortingState>(tasksUi?.sortingState ?? []);
@@ -33,6 +36,10 @@ const TasksTable: React.FC = () => {
   useEffect(() => {
     dispatch(setTasksSortingState(sorting));
   }, [sorting]);
+
+  const columnVisibility = useMemo(() => ({
+
+  }), [isAllTasks]);
 
   const handleRowHover = (row: Row<Task>) => {
     setHoverRowId(row.id);
@@ -61,6 +68,11 @@ const TasksTable: React.FC = () => {
     columnHelper.accessor('status', {
       id: 'status',
       header: () => <span>{t(('common:status'))}</span>,
+      cell: info => info.getValue(),
+    }),
+    columnHelper.accessor('taskListId', {
+      id: 'taskListId',
+      header: () => <span>{t(('tasks:taskList'))}</span>,
       cell: info => info.getValue(),
     }),
     {
@@ -93,6 +105,7 @@ const TasksTable: React.FC = () => {
         columns,
         state: {
           sorting,
+          columnVisibility,
         },
         onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),

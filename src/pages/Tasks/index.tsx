@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useAppSelector } from '../../store/hooks';
+import { taskSelectors } from '../../store/entities/project/tasks';
 
 import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
@@ -10,11 +11,12 @@ import TasksTable from './components/TasksTable';
 
 const TasksPage: React.FC = () => {
   const { editingId } = useAppSelector(state => state.project.tasks);
+  const tasks = useAppSelector(taskSelectors.selectAll);
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
       <Column flexGrow padding fullWidth={!editingId}>
-        <TasksTable />
+        <TasksTable tasks={tasks} isAllTasks />
       </Column>
     </ProjectLayout>
   );
