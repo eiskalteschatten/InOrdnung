@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import ToolbarButtons from '../../../components/elements/ToolbarButtons';
-import { createNewBookmark } from '../../../shared/lib/bookmarks';
+import { createBookmark } from '../../../shared/lib/bookmarks';
 
 const Toolbar: React.FC = () => {
   const { t } = useTranslation(['bookmarks', 'tasks']);
@@ -15,7 +15,7 @@ const Toolbar: React.FC = () => {
       icon: 'bookmark',
       onClick: () => {
         navigate('/bookmarks');
-        createNewBookmark();
+        createBookmark();
       },
     },
     {

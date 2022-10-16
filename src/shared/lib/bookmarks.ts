@@ -6,7 +6,7 @@ import { addBookmark, deleteBookmark as deleteBookmarkFromStore, setEditingId } 
 
 import { Bookmark } from '../../shared/interfaces/bookmarks';
 
-export const createNewBookmark = () => {
+export const createBookmark = () => {
   const newBookmark: Bookmark = {
     id: uuidv4(),
     name: '',

@@ -28,7 +28,7 @@ export default (): MenuItem => {
           item: {
             label: t('bookmarks:newBookmark'),
             click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-              focusedWindow?.webContents.send('createNewBookmark');
+              focusedWindow?.webContents.send('createBookmark');
             },
           },
         },
@@ -36,8 +36,7 @@ export default (): MenuItem => {
           item: {
             label: t('tasks:newTask'),
             click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-              console.log('add task');
-              // focusedWindow?.webContents.send('createNewBookmark');
+              focusedWindow?.webContents.send('createTask');
             },
           },
         },
