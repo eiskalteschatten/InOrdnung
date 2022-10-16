@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
 import { addCollapsedSidebarId, removeCollapsedSidebarId, setSidebarWidth } from '../../../../../store/entities/ui/preferences';
-import { taskListSelectors } from '../../../../../store/entities/project/tasks';
+import { setListEditingId, taskListSelectors, updateTaskList } from '../../../../../store/entities/project/tasks';
 
 import { TaskViewType } from '../../../../../shared/interfaces/tasks';
 import { createTaskList } from '../../../../../shared/lib/tasks';
@@ -14,6 +14,7 @@ import SidebarSpacer from './components/SidebarSpacer';
 import CollapsibleBoxAddButton from './components/CollapsibleBoxAddButton';
 
 import ColumnDragger from '../../../../elements/ColumnDragger';
+import Input from '../../../../elements/Input';
 
 import styles from './styles.module.scss';
 
@@ -25,6 +26,7 @@ const Sidebar: React.FC = () => {
   const savedWidth = useAppSelector(state => state.ui.preferences.sidebarWidth);
   const collapsedIds = useAppSelector(state => state.ui.preferences.collapsedSidebarIds);
   const taskLists = useAppSelector(taskListSelectors.selectAll);
+  const { listEditingId } = useAppSelector(state => state.project.tasks);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation(['projectInfo', 'bookmarks', 'tasks']);
@@ -74,6 +76,7 @@ const Sidebar: React.FC = () => {
           <SidebarButton
             to='/tasks'
             icon={<span className='material-icons'>task_alt</span>}
+            end
           >
             {t('tasks:allTasks')}
           </SidebarButton>
@@ -89,7 +92,21 @@ const Sidebar: React.FC = () => {
               key={list.id}
               onContextMenu={() => handleTaskListContextMenu(list.id)}
             >
-              {list.name}
+              {listEditingId === list.id ? (
+                <Input
+                  value={list.name}
+                  onChange={e => dispatch(updateTaskList({
+                    id: list.id,
+                    changes: {
+                      name: e.target.value,
+                    },
+                  }))}
+                  onBlur={() => dispatch(setListEditingId())}
+                  onKeyDown={e => e.key === 'Enter' && dispatch(setListEditingId())}
+                />
+              ) : (
+                <>{list.name}</>
+              )}
             </SidebarButton>
           ))}
 
