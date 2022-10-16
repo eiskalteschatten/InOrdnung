@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../../../../../../store/hooks';
-import { addCollapsedSidebarId, removeCollapsedSidebarId } from '../../../../../../../store/entities/ui/preferences';
 import { setListEditingId, taskListSelectors, updateTaskList } from '../../../../../../../store/entities/project/tasks';
 
 import { TaskViewType } from '../../../../../../../shared/interfaces/tasks';
@@ -15,6 +14,7 @@ import CollapsibleBoxAddButton from '../CollapsibleBoxAddButton';
 import SidebarButton from '../SidebarButton';
 
 import { CollapsibleBoxIds } from '../../config';
+import { useCollapsibleBoxHelper } from '../../hooks';
 
 const Tasks: React.FC = () => {
   const { t } = useTranslation(['tasks']);
@@ -23,18 +23,13 @@ const Tasks: React.FC = () => {
   const { listEditingId } = useAppSelector(state => state.project.tasks);
   const taskLists = useAppSelector(taskListSelectors.selectAll);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { handleCollapseChange } = useCollapsibleBoxHelper();
 
   useEffect(() => {
     if (listEditingId && inputRef.current) {
       inputRef.current.focus();
     }
   }, [listEditingId]);
-
-  const handleCollapseChange = (id: string, collapsed?: boolean) => {
-    collapsed
-      ? dispatch(addCollapsedSidebarId(id))
-      : dispatch(removeCollapsedSidebarId(id));
-  };
 
   const handleTaskListContextMenu = (id: string) => window.api.send('openTaskListContextMenu', id);
 
