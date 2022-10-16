@@ -33,6 +33,15 @@ const Tasks: React.FC = () => {
 
   const handleTaskListContextMenu = (id: string) => window.api.send('openTaskListContextMenu', id);
 
+  const handleRenameTaskListChange = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+    dispatch(updateTaskList({
+      id,
+      changes: {
+        name: e.target.value,
+      },
+    }));
+  };
+
   return (
     <CollapsibleBox
       title={t('tasks:tasks')}
@@ -61,12 +70,7 @@ const Tasks: React.FC = () => {
           {listEditingId === list.id ? (
             <Input
               value={list.name}
-              onChange={e => dispatch(updateTaskList({
-                id: list.id,
-                changes: {
-                  name: e.target.value,
-                },
-              }))}
+              onChange={e => handleRenameTaskListChange(e, list.id)}
               onBlur={() => dispatch(setListEditingId())}
               onKeyDown={e => e.key === 'Enter' && dispatch(setListEditingId())}
               ref={inputRef}
