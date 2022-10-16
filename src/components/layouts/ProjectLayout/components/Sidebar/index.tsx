@@ -7,6 +7,7 @@ import { addCollapsedSidebarId, removeCollapsedSidebarId, setSidebarWidth } from
 import CollapsibleBox from '../../../../elements/CollapsibleBox';
 import ColumnDragger from '../../../../elements/ColumnDragger';
 import SidebarButton from '../../../../elements/SidebarButton';
+import SidebarSpacer from '../../../../elements/SidebarSpacer';
 
 import styles from './styles.module.scss';
 
@@ -57,6 +58,8 @@ const Sidebar: React.FC = () => {
         >
           {t('bookmarks:bookmarks')}
         </SidebarButton>
+
+        <SidebarSpacer />
 
         <CollapsibleBox
           title={t('tasks:tasks')}
