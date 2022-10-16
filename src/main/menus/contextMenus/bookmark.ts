@@ -11,7 +11,7 @@ export default (bookmarkId: string): MenuItemConstructorOptions[] => {
       item: {
         label: t('bookmarks:newBookmark'),
         click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
-          focusedWindow?.webContents.send('createNewBookmark');
+          focusedWindow?.webContents.send('createBookmark');
         },
       },
     },
