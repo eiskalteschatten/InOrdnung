@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../../../../../../store/hooks';
 import { setListEditingId, taskListSelectors, updateTaskList } from '../../../../../../../store/entities/project/tasks';
 
-import { TaskViewType } from '../../../../../../../shared/interfaces/tasks';
+import { TaskListViewType } from '../../../../../../../shared/interfaces/tasks';
 import { createTaskList } from '../../../../../../../shared/lib/tasks';
 
 import Input from '../../../../../../elements/Input';
@@ -60,7 +60,7 @@ const Tasks: React.FC = () => {
         <SidebarButton
           to={`/tasks/list/${list.id}`}
           icon={
-            list.view === TaskViewType.LIST
+            list.view === TaskListViewType.LIST
               ? <span className='material-icons'>checklist</span>
               : <span className='material-icons'>view_column</span>
           }

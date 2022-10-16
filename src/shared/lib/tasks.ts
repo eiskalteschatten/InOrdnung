@@ -4,13 +4,13 @@ import { t } from 'i18next';
 import { dispatch } from '../../store';
 import { addTask, addTaskList, deleteTaskList as deleteTaskListFromStore, setListEditingId } from '../../store/entities/project/tasks';
 
-import { Task, TaskList, TaskStatus, TaskViewType } from '../interfaces/tasks';
+import { Task, TaskList, TaskStatus, TaskListViewType } from '../interfaces/tasks';
 
 export const createTaskList = () => {
   const newTaskList: TaskList = {
     id: uuidv4(),
     name: '',
-    view: TaskViewType.LIST,
+    view: TaskListViewType.LIST,
   };
 
   dispatch(addTaskList(newTaskList));

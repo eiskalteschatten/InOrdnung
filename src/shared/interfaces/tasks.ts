@@ -1,7 +1,7 @@
 export interface TaskList {
   id: string;
   name: string;
-  view: TaskViewType;
+  view: TaskListViewType;
 }
 
 export interface Task {
@@ -12,7 +12,7 @@ export interface Task {
   description?: string;
 }
 
-export enum TaskViewType {
+export enum TaskListViewType {
   LIST = 'list',
   KANBAN_BOARD = 'kanbanBoard',
 }
