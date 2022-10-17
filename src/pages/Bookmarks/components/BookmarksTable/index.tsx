@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { setBookmarksSortingState } from '../../../../store/entities/ui/preferences';
+import { setSortingState } from '../../../../store/entities/ui/preferences/bookmarks';
 import { bookmarkSelectors } from '../../../../store/entities/project/bookmarks';
 
 import { Bookmark } from '../../../../shared/interfaces/bookmarks';
@@ -33,7 +33,7 @@ const BookmarksTable: React.FC = () => {
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
 
   useEffect(() => {
-    dispatch(setBookmarksSortingState(sorting));
+    dispatch(setSortingState(sorting));
   }, [sorting]);
 
   const openInBrowser = (url: string) => {

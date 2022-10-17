@@ -13,7 +13,7 @@ import {
 } from '@tanstack/react-table';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
-import { setTasksSortingState } from '../../../../store/entities/ui/preferences';
+import { setSortingState } from '../../../../store/entities/ui/preferences/tasks';
 import { taskListSelectors, updateTask } from '../../../../store/entities/project/tasks';
 
 import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
@@ -39,7 +39,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
 
   useEffect(() => {
-    dispatch(setTasksSortingState(sorting));
+    dispatch(setSortingState(sorting));
   }, [sorting]);
 
   const columnVisibility = useMemo<VisibilityState>(() => ({

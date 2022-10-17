@@ -3,7 +3,9 @@ import { bookmarkSelectors } from '../../store/entities/project/bookmarks';
 import { setTaskLists, setTasks, taskListSelectors, taskSelectors } from '../../store/entities/project/tasks';
 import { setBookmarks } from '../../store/entities/project/bookmarks';
 import { setProjectInfo } from '../../store/entities/project/info';
-import { setPreferences } from '../../store/entities/ui/preferences';
+import { setGeneralUiPreferences } from '../../store/entities/ui/preferences/general';
+import { setBookmarkUiPreferences } from '../../store/entities/ui/preferences/bookmarks';
+import { setTaskUiPreferences } from '../../store/entities/ui/preferences/tasks';
 import { setFileMetaData } from '../../store/entities/file';
 
 import { ProjectFile } from '../interfaces/file';
@@ -30,7 +32,9 @@ export const setProjectFromFile = (projectFile: ProjectFile, path: string) => {
   dispatch(setTasks(projectFile.project.tasks || []));
   dispatch(setTaskLists(projectFile.project.taskLists || []));
 
-  dispatch(setPreferences(projectFile.ui));
+  dispatch(setGeneralUiPreferences(projectFile.ui.general));
+  dispatch(setBookmarkUiPreferences(projectFile.ui.bookmarks || {}));
+  dispatch(setTaskUiPreferences(projectFile.ui.tasks || {}));
 
   dispatch(setFileMetaData({
     path,

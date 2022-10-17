@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { useAppSelector } from '../../../store/hooks';
-import { setRightSidebarWidth } from '../../../store/entities/ui/preferences';
+import { setRightSidebarWidth } from '../../../store/entities/ui/preferences/general';
 
 import ColumnDragger from '../ColumnDragger';
 import Button from '../Button';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const RightSidebar: React.FC<Props> = ({ children, title, handleClose }) => {
-  const savedWidth = useAppSelector(state => state.ui.preferences.rightSidebarWidth);
+  const savedWidth = useAppSelector(state => state.ui.preferences.general.rightSidebarWidth);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
 

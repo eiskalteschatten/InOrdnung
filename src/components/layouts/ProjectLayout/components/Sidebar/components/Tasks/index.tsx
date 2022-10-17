@@ -19,7 +19,7 @@ import { useCollapsibleBoxHelper } from '../../hooks';
 const Tasks: React.FC = () => {
   const { t } = useTranslation(['tasks']);
   const dispatch = useAppDispatch();
-  const collapsedIds = useAppSelector(state => state.ui.preferences.collapsedSidebarIds);
+  const collapsedIds = useAppSelector(state => state.ui.preferences.general.collapsedSidebarIds);
   const { listEditingId } = useAppSelector(state => state.project.tasks);
   const taskLists = useAppSelector(taskListSelectors.selectAll);
   const inputRef = useRef<HTMLInputElement>(null);

@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../../../store/hooks';
-import { addCollapsedSidebarId, removeCollapsedSidebarId } from '../../../../../store/entities/ui/preferences';
+import { addCollapsedSidebarId, removeCollapsedSidebarId } from '../../../../../store/entities/ui/preferences/general';
 
 export const useCollapsibleBoxHelper = () => {
   const dispatch = useAppDispatch();

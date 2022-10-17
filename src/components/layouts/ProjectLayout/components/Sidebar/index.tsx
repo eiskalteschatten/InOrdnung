@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppSelector } from '../../../../../store/hooks';
-import { setSidebarWidth } from '../../../../../store/entities/ui/preferences';
+import { setSidebarWidth } from '../../../../../store/entities/ui/preferences/general';
 
 import ColumnDragger from '../../../../elements/ColumnDragger';
 
@@ -13,7 +13,7 @@ import Tasks from './components/Tasks';
 import styles from './styles.module.scss';
 
 const Sidebar: React.FC = () => {
-  const savedWidth = useAppSelector(state => state.ui.preferences.sidebarWidth);
+  const savedWidth = useAppSelector(state => state.ui.preferences.general.sidebarWidth);
   const [width, setWidth] = useState<number>(savedWidth);
   const columnRef = useRef<HTMLDivElement | null>(null);
   const { t } = useTranslation(['projectInfo', 'bookmarks']);

@@ -1,30 +1,22 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SortingState } from '@tanstack/react-table';
 
-import { RootState } from '../..';
-import { UiPreferences } from '../../../shared/interfaces/ui';
+import { RootState } from '../../..';
+import { GeneralUiPreferences } from '../../../../shared/interfaces/ui';
 
-export type State = UiPreferences;
+export type State = GeneralUiPreferences;
 
 const initialState: State = {
   sidebarWidth: 260,
   middleColumnWidth: 350,
   rightSidebarWidth: 310,
   collapsedSidebarIds: [],
-  bookmarks: {
-    sortingState: [],
-  },
-  tasks: {
-    sortingState: [],
-    showCompletedTasks: false,
-  },
 };
 
 export const addCollapsedSidebarId = createAsyncThunk(
   'ui/addCollapsedSidebarId',
   async (id: string, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedSidebarIds } = state.ui.preferences;
+    const { collapsedSidebarIds } = state.ui.preferences.general;
 
     if (!collapsedSidebarIds.includes(id)) {
       const _collapsedSidebarIds = [...collapsedSidebarIds];
@@ -38,7 +30,7 @@ export const removeCollapsedSidebarId = createAsyncThunk(
   'ui/removeCollapsedSidebarId',
   async (id: string, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    const { collapsedSidebarIds } = state.ui.preferences;
+    const { collapsedSidebarIds } = state.ui.preferences.general;
     const index = collapsedSidebarIds.indexOf(id);
 
     if (index > -1) {
@@ -53,7 +45,7 @@ export const slice = createSlice({
   name: 'preferences',
   initialState,
   reducers: {
-    setPreferences: (state, action: PayloadAction<State>) => {
+    setGeneralUiPreferences: (state, action: PayloadAction<State>) => {
       state = action.payload;
       return state;
     },
@@ -69,42 +61,15 @@ export const slice = createSlice({
     setCollapsedSidebarIds: (state, action: PayloadAction<string[]>) => {
       state.collapsedSidebarIds = action.payload;
     },
-    setBookmarksSortingState: (state, action: PayloadAction<SortingState>) => {
-      const bookmarks = state.bookmarks || initialState.bookmarks;
-
-      state.bookmarks = {
-        ...bookmarks,
-        sortingState: action.payload,
-      };
-    },
-    setTasksSortingState: (state, action: PayloadAction<SortingState>) => {
-      const tasks = state.tasks || initialState.tasks;
-
-      state.tasks = {
-        ...tasks,
-        sortingState: action.payload,
-      };
-    },
-    setTasksShowCompletedTasks: (state, action: PayloadAction<boolean>) => {
-      const tasks = state.tasks || initialState.tasks;
-
-      state.tasks = {
-        ...tasks,
-        showCompletedTasks: action.payload,
-      };
-    },
   },
 });
 
 export const {
-  setPreferences,
+  setGeneralUiPreferences,
   setSidebarWidth,
   setMiddleColumnWidth,
   setRightSidebarWidth,
   setCollapsedSidebarIds,
-  setBookmarksSortingState,
-  setTasksSortingState,
-  setTasksShowCompletedTasks,
 } = slice.actions;
 
 export const { reducer } = slice;
