@@ -16,6 +16,7 @@ const initialState: State = {
   },
   tasks: {
     sortingState: [],
+    showCompletedTasks: false,
   },
 };
 
@@ -84,6 +85,14 @@ export const slice = createSlice({
         sortingState: action.payload,
       };
     },
+    setTasksShowCompletedTasks: (state, action: PayloadAction<boolean>) => {
+      const tasks = state.tasks || initialState.tasks;
+
+      state.tasks = {
+        ...tasks,
+        showCompletedTasks: action.payload,
+      };
+    },
   },
 });
 
@@ -95,6 +104,7 @@ export const {
   setCollapsedSidebarIds,
   setBookmarksSortingState,
   setTasksSortingState,
+  setTasksShowCompletedTasks,
 } = slice.actions;
 
 export const { reducer } = slice;

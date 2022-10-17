@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { taskListSelectors, updateTaskList } from '../../../store/entities/project/tasks';
+import { setTasksShowCompletedTasks } from '../../../store/entities/ui/preferences';
 
 import ToolbarButtons from '../../../components/elements/ToolbarButtons';
 import { createTask } from '../../../shared/lib/tasks';
@@ -53,14 +54,14 @@ const Toolbar: React.FC = () => {
     {
       label: t('tasks:showCompletedTasks'),
       icon: 'visibility',
-      onClick: () => createTask(),
-      hide: taskList?.view === TaskListViewType.KANBAN_BOARD,
+      onClick: () => dispatch(setTasksShowCompletedTasks(true)),
+      hide: taskList?.view === TaskListViewType.KANBAN_BOARD || state.ui.preferences.tasks?.showCompletedTasks,
     },
     {
       label: t('tasks:hideCompletedTasks'),
       icon: 'visibility_off',
-      onClick: () => createTask(),
-      hide: taskList?.view === TaskListViewType.KANBAN_BOARD,
+      onClick: () => dispatch(setTasksShowCompletedTasks(false)),
+      hide: taskList?.view === TaskListViewType.KANBAN_BOARD || !state.ui.preferences.tasks?.showCompletedTasks,
     },
   ];
 

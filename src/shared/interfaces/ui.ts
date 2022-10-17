@@ -11,5 +11,6 @@ export interface UiPreferences {
   };
   tasks?: {
     sortingState: SortingState;
+    showCompletedTasks?: boolean;
   };
 }
