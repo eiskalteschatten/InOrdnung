@@ -38,6 +38,18 @@ const Toolbar: React.FC = () => {
       onClick: () => createTask(),
     },
     {
+      label: t('tasks:showCompletedTasks'),
+      icon: 'visibility',
+      onClick: () => dispatch(setShowCompletedTasks(true)),
+      hide: taskList?.view === TaskListViewType.KANBAN_BOARD || state.ui.preferences.tasks?.showCompletedTasks,
+    },
+    {
+      label: t('tasks:hideCompletedTasks'),
+      icon: 'visibility_off',
+      onClick: () => dispatch(setShowCompletedTasks(false)),
+      hide: taskList?.view === TaskListViewType.KANBAN_BOARD || !state.ui.preferences.tasks?.showCompletedTasks,
+    },
+    {
       label: t('tasks:useListView'),
       icon: 'checklist',
       onClick: () => updateTaskListView(TaskListViewType.LIST),
@@ -50,18 +62,6 @@ const Toolbar: React.FC = () => {
       onClick: () => updateTaskListView(TaskListViewType.KANBAN_BOARD),
       disabled: !taskListId,
       hide: !taskListId || taskList?.view === TaskListViewType.KANBAN_BOARD,
-    },
-    {
-      label: t('tasks:showCompletedTasks'),
-      icon: 'visibility',
-      onClick: () => dispatch(setShowCompletedTasks(true)),
-      hide: taskList?.view === TaskListViewType.KANBAN_BOARD || state.ui.preferences.tasks?.showCompletedTasks,
-    },
-    {
-      label: t('tasks:hideCompletedTasks'),
-      icon: 'visibility_off',
-      onClick: () => dispatch(setShowCompletedTasks(false)),
-      hide: taskList?.view === TaskListViewType.KANBAN_BOARD || !state.ui.preferences.tasks?.showCompletedTasks,
     },
   ];
 
