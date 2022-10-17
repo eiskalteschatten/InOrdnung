@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { setTasksSortingState } from '../../../../store/entities/ui/preferences';
 import { taskListSelectors } from '../../../../store/entities/project/tasks';
 
-import { Task } from '../../../../shared/interfaces/tasks';
+import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
 import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
 
@@ -58,7 +58,27 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   //   window.api.send('openTaskContextMenu', row.original.id);
   // };
 
+  const handleMarkTaskAsDone = () => {
+    // TODO
+  };
+
   const columns = useMemo(() => ([
+    {
+      id: 'checkbox',
+      cell: (info: any) => (
+        <div className={styles.checkbox} onClick={handleMarkTaskAsDone}>
+          <span className='material-icons'>
+            {info.row.original.status === TaskStatus.DONE ? (
+              <>check_circle</>
+            ) : (
+              <>circle</>
+            )}
+          </span>
+        </div>
+      ),
+      enableSorting: false,
+      size: 20,
+    },
     columnHelper.accessor('name', {
       id: 'name',
       header: () => <span>{t(('common:name'))}</span>,
