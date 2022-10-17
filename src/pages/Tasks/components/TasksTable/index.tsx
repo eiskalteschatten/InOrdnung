@@ -90,17 +90,29 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
     columnHelper.accessor('name', {
       id: 'name',
       header: () => <span>{t(('common:name'))}</span>,
-      cell: info => info.getValue(),
+      cell: info => (
+        <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
+          {info.getValue()}
+        </div>
+      ),
     }),
     columnHelper.accessor('description', {
       id: 'description',
       header: () => <span>{t(('common:description'))}</span>,
-      cell: info => info.getValue(),
+      cell: info => (
+        <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
+          {info.getValue()}
+        </div>
+      ),
     }),
     columnHelper.accessor('status', {
       id: 'status',
       header: () => <span>{t(('common:status'))}</span>,
-      cell: info => info.getValue(),
+      cell: info => (
+        <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
+          {info.getValue()}
+        </div>
+      ),
     }),
     columnHelper.accessor('taskListId', {
       id: 'taskListId',
