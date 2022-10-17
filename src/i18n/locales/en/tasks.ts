@@ -7,4 +7,6 @@ export default {
   allTasks: 'All Tasks',
   useListView: 'Use List View',
   useKanbanBoard: 'Use Kanban Board',
+  showCompletedTasks: 'Show Completed Tasks',
+  hideCompletedTasks: 'Hide Completed Tasks',
 };

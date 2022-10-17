@@ -50,6 +50,18 @@ const Toolbar: React.FC = () => {
       disabled: !taskListId,
       hide: !taskListId || taskList?.view === TaskListViewType.KANBAN_BOARD,
     },
+    {
+      label: t('tasks:showCompletedTasks'),
+      icon: 'visibility',
+      onClick: () => createTask(),
+      hide: taskList?.view === TaskListViewType.KANBAN_BOARD,
+    },
+    {
+      label: t('tasks:hideCompletedTasks'),
+      icon: 'visibility_off',
+      onClick: () => createTask(),
+      hide: taskList?.view === TaskListViewType.KANBAN_BOARD,
+    },
   ];
 
   return (
