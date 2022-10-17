@@ -42,17 +42,16 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
     dispatch(setSortingState(sorting));
   }, [sorting]);
 
+  const filteredTasks = useMemo<Task[]>(() => {
+    return tasks.filter(({ status }) => tasksUi.showCompletedTasks ? true : status !== TaskStatus.DONE);
+  }, [tasks, tasksUi.showCompletedTasks]);
+
   const columnVisibility = useMemo<VisibilityState>(() => ({
     taskListId: showTaskListColumn || false,
   }), [showTaskListColumn]);
 
-  const handleRowHover = (row: Row<Task>) => {
-    setHoverRowId(row.id);
-  };
-
-  const handleRowOut = () => {
-    setHoverRowId(undefined);
-  };
+  const handleRowHover = (row: Row<Task>) => setHoverRowId(row.id);
+  const handleRowOut = () => setHoverRowId(undefined);
 
   // TODO
   // const handleRowContextMenu = (row: Row<Task>) => {
@@ -154,7 +153,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       // TODO
       // onRowContextMenu={handleRowContextMenu}
       tableData={{
-        data: tasks,
+        data: filteredTasks,
         columns,
         state: {
           sorting,

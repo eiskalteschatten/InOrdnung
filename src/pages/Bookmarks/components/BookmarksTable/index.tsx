@@ -42,13 +42,8 @@ const BookmarksTable: React.FC = () => {
     }
   };
 
-  const handleRowHover = (row: Row<Bookmark>) => {
-    setHoverRowId(row.id);
-  };
-
-  const handleRowOut = () => {
-    setHoverRowId(undefined);
-  };
+  const handleRowHover = (row: Row<Bookmark>) => setHoverRowId(row.id);
+  const handleRowOut = () => setHoverRowId(undefined);
 
   const handleRowContextMenu = (row: Row<Bookmark>) => {
     window.api.send('openBookmarkContextMenu', row.original.id);
