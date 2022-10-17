@@ -19,6 +19,7 @@ import { taskListSelectors, updateTask } from '../../../../store/entities/projec
 import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
 import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
+import TaskStatusMarker from '../../../../components/elements/TaskStatusMarker';
 
 import styles from './styles.module.scss';
 
@@ -110,7 +111,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       header: () => <span>{t(('common:status'))}</span>,
       cell: info => (
         <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
-          {info.getValue()}
+          <TaskStatusMarker status={info.getValue()} />
         </div>
       ),
     }),
@@ -133,10 +134,10 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
         <div className={clsx(styles.buttonCell, {
           [styles.visible]: hoverRowId === info.row.id,
         })}>
-          <Button /*onClick={() => editBookmark(info.row.original.id)}*/>
+          <Button /*TODO: onClick={() => editBookmark(info.row.original.id)}*/>
             <span className='material-icons'>edit</span>
           </Button>
-          <Button /*onClick={() => deleteBookmark(info.row.original.id)}*/>
+          <Button /*TODO: onClick={() => deleteBookmark(info.row.original.id)}*/>
             <span className='material-icons'>delete</span>
           </Button>
         </div>
