@@ -14,4 +14,5 @@ export default {
   [TaskStatus.TODO]: 'To Do',
   [TaskStatus.DOING]: 'Doing',
   [TaskStatus.DONE]: 'Done',
+  dueDate: 'Due Date',
 };

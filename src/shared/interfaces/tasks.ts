@@ -10,6 +10,7 @@ export interface Task {
   status: TaskStatus;
   name: string;
   description?: string;
+  dueDate?: Date;
 }
 
 export enum TaskListViewType {

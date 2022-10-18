@@ -114,6 +114,19 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
         </div>
       ),
     }),
+    columnHelper.accessor('dueDate', {
+      id: 'dueDate',
+      header: () => <span>{t(('tasks:dueDate'))}</span>,
+      cell: info => {
+        const date = info.getValue();
+        return date
+          ? (
+            <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
+              {new Date(date).toLocaleDateString()}
+            </div>
+          ) : (<></>);
+      },
+    }),
     columnHelper.accessor('taskListId', {
       id: 'taskListId',
       header: () => <span>{t(('tasks:taskList'))}</span>,
