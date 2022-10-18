@@ -1,3 +1,23 @@
-.statusMarker {
+@import "../../../scss/variables";
 
+.statusMarker {
+  font-size: .7em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: $borderRadius;
+  text-align: center;
+  max-width: 90px;
+
+  &.todo {
+    background-color: $paletteBlue;
+  }
+
+  &.doing {
+    background-color: $paletteYellow;
+    color: #000000;
+  }
+
+  &.done {
+    background-color: $paletteGreen;
+  }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 import { TaskStatus } from '../../../shared/interfaces/tasks';
 
@@ -13,7 +14,11 @@ const TaskStatusMarker: React.FC<Props> = ({ status }) => {
   const { t } = useTranslation(['tasks']);
 
   return (
-    <div className={styles.statusMarker}>
+    <div className={clsx(styles.statusMarker, {
+      [styles.todo]: status === TaskStatus.TODO,
+      [styles.doing]: status === TaskStatus.DOING,
+      [styles.done]: status === TaskStatus.DONE,
+    })}>
       {t(`tasks:${status}`)}
     </div>
   );
