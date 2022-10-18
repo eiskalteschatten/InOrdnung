@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TaskStatus } from '../../../shared/interfaces/tasks';
 
@@ -9,9 +10,11 @@ interface Props {
 }
 
 const TaskStatusMarker: React.FC<Props> = ({ status }) => {
+  const { t } = useTranslation(['tasks']);
+
   return (
     <div className={styles.statusMarker}>
-      {status}
+      {t(`tasks:${status}`)}
     </div>
   );
 };

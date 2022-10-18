@@ -1,3 +1,5 @@
+import { TaskStatus } from '../../../shared/interfaces/tasks';
+
 export default {
   tasks: 'Tasks',
   newTask: 'New Task',
@@ -9,4 +11,7 @@ export default {
   useKanbanBoard: 'Use Kanban Board',
   showCompletedTasks: 'Show Completed Tasks',
   hideCompletedTasks: 'Hide Completed Tasks',
+  [TaskStatus.TODO]: 'To Do',
+  [TaskStatus.DOING]: 'Doing',
+  [TaskStatus.DONE]: 'Done',
 };
