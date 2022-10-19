@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import {
   createColumnHelper,
@@ -38,6 +38,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   const { t } = useTranslation(['common']);
   const [sorting, setSorting] = useState<SortingState>(tasksUi?.sortingState ?? []);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
+  const { taskListId } = useParams();
 
   useEffect(() => {
     dispatch(setSortingState(sorting));
@@ -54,10 +55,9 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   const handleRowHover = (row: Row<Task>) => setHoverRowId(row.id);
   const handleRowOut = () => setHoverRowId(undefined);
 
-  // TODO
-  // const handleRowContextMenu = (row: Row<Task>) => {
-  //   window.api.send('openTaskContextMenu', row.original.id);
-  // };
+  const handleRowContextMenu = (row: Row<Task>) => {
+    window.api.send('openTaskContextMenu', row.original.id, taskListId);
+  };
 
   const handleMarkTaskAsDone = (id: string, status: TaskStatus) => {
     dispatch(updateTask({
@@ -168,8 +168,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
     <ReactTable<Task>
       onRowHover={handleRowHover}
       onRowOut={handleRowOut}
-      // TODO
-      // onRowContextMenu={handleRowContextMenu}
+      onRowContextMenu={handleRowContextMenu}
       tableData={{
         data: filteredTasks,
         columns,
