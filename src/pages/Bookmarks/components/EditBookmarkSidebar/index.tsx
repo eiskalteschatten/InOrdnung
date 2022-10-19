@@ -13,7 +13,7 @@ interface Props {
 }
 
 const EditBookmarkSidebar: React.FC<Props> = ({ editingId }) => {
-  const { t } = useTranslation(['bookmarks']);
+  const { t } = useTranslation(['common']);
   const dispatch = useAppDispatch();
   const state  = useAppSelector(state => state);
   const [name, setName] = useState<string>('');
@@ -39,7 +39,7 @@ const EditBookmarkSidebar: React.FC<Props> = ({ editingId }) => {
   return (
     <div className={styles.editBookmark}>
       <Input
-        label={t('bookmarks:name')}
+        label={t('common:name')}
         fullWidth
         name='name'
         onChange={e => setName(e.target.value)}
@@ -47,7 +47,7 @@ const EditBookmarkSidebar: React.FC<Props> = ({ editingId }) => {
       />
 
       <Input
-        label={t('bookmarks:url')}
+        label={t('common:url')}
         fullWidth
         placeholder='https://...'
         name='url'
