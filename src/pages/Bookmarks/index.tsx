@@ -19,9 +19,9 @@ const Bookmarks: React.FC = () => {
 
   const handleSidebarClose = () => {
     if (editingId) {
-      const bookmarkToEdit = bookmarkSelectors.selectById(state, editingId);
+      const toEdit = bookmarkSelectors.selectById(state, editingId);
 
-      if (bookmarkToEdit && !bookmarkToEdit.name && !bookmarkToEdit.url) {
+      if (toEdit && !toEdit.name && !toEdit.url) {
         dispatch(deleteBookmark(editingId));
       }
     }

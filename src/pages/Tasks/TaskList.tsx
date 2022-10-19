@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import { useAppSelector } from '../../store/hooks';
-import { taskListSelectors, taskSelectors } from '../../store/entities/project/tasks';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setEditingId, taskListSelectors, taskSelectors } from '../../store/entities/project/tasks';
 
 import { TaskList, TaskListViewType } from '../../shared/interfaces/tasks';
 import ProjectLayout from '../../components/layouts/ProjectLayout';
@@ -10,17 +11,25 @@ import Column from '../../components/elements/Column';
 
 import Toolbar from './components/Toolbar';
 import TasksTable from './components/TasksTable';
+import RightSidebar from '../../components/elements/RightSidebar';
+import EditTask from './components/EditTask';
 
 const TaskListPage: React.FC = () => {
+  const { t } = useTranslation(['tasks']);
   const { editingId } = useAppSelector(state => state.project.tasks);
   const tasks = useAppSelector(taskSelectors.selectAll);
   const allTaskLists = useAppSelector(taskListSelectors.selectAll);
   const { taskListId } = useParams();
   const state = useAppSelector(state => state);
+  const dispatch = useAppDispatch();
 
   const taskList = useMemo<TaskList | undefined>(() => {
     return taskListId ? taskListSelectors.selectById(state, taskListId) : undefined;
   }, [taskListId, allTaskLists]);
+
+  const handleSidebarClose = () => {
+    dispatch(setEditingId());
+  };
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
@@ -31,6 +40,15 @@ const TaskListPage: React.FC = () => {
           <TasksTable tasks={tasks} />
         )}
       </Column>
+
+      {editingId && (
+        <RightSidebar
+          title={t('tasks:editTask')}
+          handleClose={handleSidebarClose}
+        >
+          <EditTask editingId={editingId} />
+        </RightSidebar>
+      )}
     </ProjectLayout>
   );
 };
