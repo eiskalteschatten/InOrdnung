@@ -20,7 +20,7 @@ import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
 import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
 import TaskStatusMarker from '../../../../components/elements/TaskStatusMarker';
-import { editTask } from '../../../../shared/lib/tasks';
+import { deleteTask, editTask } from '../../../../shared/lib/tasks';
 
 import styles from './styles.module.scss';
 
@@ -154,7 +154,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
           <Button onClick={() => editTask(info.row.original.id)}>
             <span className='material-icons'>edit</span>
           </Button>
-          <Button /*TODO: onClick={() => deleteBookmark(info.row.original.id)}*/>
+          <Button onClick={() => deleteTask(info.row.original.id)}>
             <span className='material-icons'>delete</span>
           </Button>
         </div>

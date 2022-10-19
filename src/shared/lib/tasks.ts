@@ -2,7 +2,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { t } from 'i18next';
 
 import { dispatch } from '../../store';
-import { addTask, addTaskList, deleteTaskList as deleteTaskListFromStore, setEditingId, setListEditingId } from '../../store/entities/project/tasks';
+
+import {
+  addTask,
+  addTaskList,
+  deleteTaskList as deleteTaskListFromStore,
+  setEditingId,
+  setListEditingId,
+  deleteTask as deleteTaskFromStore,
+} from '../../store/entities/project/tasks';
 
 import { Task, TaskList, TaskStatus, TaskListViewType } from '../interfaces/tasks';
 
@@ -47,4 +55,18 @@ export const createTask = (taskListId?: string) => {
 
 export const editTask = (id: string) => {
   dispatch(setEditingId(id));
+};
+
+export const deleteTask = (id: string) => {
+  const result = window.api.sendSync('openAlert', {
+    message: t('tasks:confirmDeleteTask'),
+    detail: t('common:areYouSureYouWantToContinue'),
+    types: 'warning',
+    buttons: [t('common:no'), t('common:yes')],
+  });
+
+  if (result === 1) {
+    dispatch(deleteTaskFromStore(id));
+    dispatch(setEditingId());
+  }
 };
