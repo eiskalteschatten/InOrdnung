@@ -6,9 +6,10 @@ import { taskListSelectors, taskSelectors, updateTask } from '../../../../store/
 
 import Input from '../../../../components/elements/Input';
 import TextArea from '../../../../components/elements/TextArea';
+import Select from '../../../../components/elements/Select';
+import { TaskStatus } from '../../../../shared/interfaces/tasks';
 
 import styles from './styles.module.scss';
-import Select from '../../../../components/elements/Select';
 
 interface Props {
   editingId: string;
@@ -33,6 +34,18 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
 
   return (
     <div className={styles.editTask}>
+      <Select
+        label={t('common:status')}
+        fullWidth
+        name='status'
+        onChange={handleChange}
+        value={toEdit?.status}
+      >
+        {Object.values(TaskStatus).map(status => (
+          <option key={status} value={status}>{t(`tasks:${status}`)}</option>
+        ))}
+      </Select>
+
       <Input
         label={t('common:name')}
         fullWidth
