@@ -10,6 +10,7 @@ import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
 
 import Toolbar from './components/Toolbar';
+import TasksKanbanBoard from './components/TasksKanbanBoard';
 import TasksTable from './components/TasksTable';
 import RightSidebar from '../../components/elements/RightSidebar';
 import EditTask from './components/EditTask';
@@ -37,7 +38,7 @@ const TaskListPage: React.FC = () => {
     <ProjectLayout toolbar={<Toolbar />}>
       <Column flexGrow padding fullWidth={!editingId}>
         {taskList?.view === TaskListViewType.KANBAN_BOARD ? (
-          <div>KANBAN_BOARD</div>
+          <TasksKanbanBoard tasks={filteredTasks} />
         ) : (
           <TasksTable tasks={filteredTasks} />
         )}
