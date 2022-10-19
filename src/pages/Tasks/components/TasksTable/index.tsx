@@ -103,7 +103,9 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       id: 'description',
       header: () => <span>{t(('common:description'))}</span>,
       cell: info => (
-        <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
+        <div className={clsx(styles.description, {
+          [styles.done]: info.row.original.status === TaskStatus.DONE,
+        })}>
           {info.getValue()}
         </div>
       ),
@@ -136,11 +138,11 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       cell: info => {
         const taskList = info.getValue() ? taskListSelectors.selectById(state, info.getValue()!) : undefined;
 
-        return (
+        return taskList ? (
           <Link to={`/tasks/list/${info.getValue()}`}>
             {taskList?.name ? taskList.name : t('common:untitled')}
           </Link>
-        );
+        ) : '';
       },
     }),
     {

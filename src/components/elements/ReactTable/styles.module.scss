@@ -26,5 +26,9 @@
         background-color: darken($darkSecondaryBg, 2%);
       }
     }
+
+    .column {
+      padding: 3px 5px;
+    }
   }
 }

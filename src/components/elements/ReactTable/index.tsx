@@ -67,7 +67,7 @@ function ReactTable<T>({ tableData, className, onRowHover, onRowOut, onRowContex
             onContextMenu={() => onRowContextMenu && onRowContextMenu(row)}
           >
             {row.getVisibleCells().map(cell => (
-              <td key={cell.id} style={{ width: cell.column.getSize() }}>
+              <td key={cell.id} className={styles.column} style={{ width: cell.column.getSize() }}>
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}
