@@ -72,7 +72,9 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       id: 'checkbox',
       cell: (info: any) => (
         <div
-          className={styles.checkbox}
+          className={clsx(styles.checkbox, {
+            [styles.done]: info.row.original.status === TaskStatus.DONE,
+          })}
           onClick={() => handleMarkTaskAsDone(info.row.original.id, info.row.original.status)}
         >
           <span className='material-icons'>
