@@ -73,6 +73,15 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
           <option key={taskList.id} value={taskList.id}>{taskList.name}</option>
         ))}
       </Select>
+
+      <Input
+        label={t('tasks:dueDate')}
+        fullWidth
+        name='dueDate'
+        onChange={handleChange}
+        value={toEdit?.dueDate ?? ''}
+        type='date'
+      />
     </div>
   );
 };
