@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Task } from '../../../../shared/interfaces/tasks';
+import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
+import KanbanBoardColumn from './components/KanbanBoardColumn';
 
 import styles from './styles.module.scss';
 
@@ -11,7 +12,13 @@ interface Props {
 const TasksKanbanBoard: React.FC<Props> = ({ tasks }) => {
   return (
     <div className={styles.kanbanBoard}>
-      this is the kanban board view
+      {Object.values(TaskStatus).map(status => (
+        <KanbanBoardColumn
+          key={status}
+          status={status}
+          tasks={tasks.filter(task => task.status === status)}
+        />
+      ))}
     </div>
   );
 };
