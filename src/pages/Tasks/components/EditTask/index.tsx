@@ -10,6 +10,8 @@ import { generateNewTask } from '../../../../shared/lib/tasks';
 import Input from '../../../../components/elements/Input';
 import TextArea from '../../../../components/elements/TextArea';
 
+import styles from './styles.module.scss';
+
 type FormState = Task;
 
 interface FormAction {
@@ -51,7 +53,7 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
   }, [editingId]);
 
   return (
-    <div>
+    <div className={styles.editTask}>
       <Input
         label={t('common:name')}
         fullWidth
