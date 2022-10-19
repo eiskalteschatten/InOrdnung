@@ -27,7 +27,7 @@ const TaskListPage: React.FC = () => {
     return taskListId ? taskListSelectors.selectById(state, taskListId) : undefined;
   }, [taskListId, allTaskLists]);
 
-  const filteredTasks = useMemo<Task[]>(() => tasks.filter(task => task.taskListId === taskListId), [taskListId]);
+  const filteredTasks = useMemo<Task[]>(() => tasks.filter(task => task.taskListId === taskListId), [taskListId, tasks]);
 
   const handleSidebarClose = () => {
     dispatch(setEditingId());
