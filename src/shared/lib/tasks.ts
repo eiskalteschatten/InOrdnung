@@ -32,13 +32,14 @@ export const deleteTaskList = (id: string) => {
   }
 };
 
-export const createTask = (taskListId?: string) => {
-  const newTask: Task = {
-    id: uuidv4(),
-    name: '',
-    status: TaskStatus.TODO,
-    taskListId,
-  };
+export const generateNewTask = (taskListId?: string): Task => ({
+  id: uuidv4(),
+  name: '',
+  status: TaskStatus.TODO,
+  taskListId,
+});
 
+export const createTask = (taskListId?: string) => {
+  const newTask = generateNewTask(taskListId);
   dispatch(addTask(newTask));
 };

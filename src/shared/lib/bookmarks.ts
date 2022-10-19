@@ -6,13 +6,14 @@ import { addBookmark, deleteBookmark as deleteBookmarkFromStore, setEditingId } 
 
 import { Bookmark } from '../../shared/interfaces/bookmarks';
 
-export const createBookmark = () => {
-  const newBookmark: Bookmark = {
-    id: uuidv4(),
-    name: '',
-    url: '',
-  };
+export const generateNewBookmark = (): Bookmark => ({
+  id: uuidv4(),
+  name: '',
+  url: '',
+});
 
+export const createBookmark = () => {
+  const newBookmark = generateNewBookmark();
   dispatch(addBookmark(newBookmark));
   editBookmark(newBookmark.id);
 };
