@@ -16,4 +16,5 @@ export default {
   description: 'Description',
   url: 'URL',
   status: 'Status',
+  none: 'None',
 };

@@ -69,6 +69,8 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
         onChange={handleChange}
         value={toEdit?.taskListId}
       >
+        <option value='' selected={!toEdit?.taskListId}>{t('common:none')}</option>
+
         {taskLists?.map(taskList => (
           <option key={taskList.id} value={taskList.id}>{taskList.name}</option>
         ))}
