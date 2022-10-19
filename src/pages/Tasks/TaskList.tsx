@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setEditingId, taskListSelectors, taskSelectors } from '../../store/entities/project/tasks';
 
-import { TaskList, TaskListViewType } from '../../shared/interfaces/tasks';
+import { Task, TaskList, TaskListViewType } from '../../shared/interfaces/tasks';
 import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
 
@@ -27,6 +27,8 @@ const TaskListPage: React.FC = () => {
     return taskListId ? taskListSelectors.selectById(state, taskListId) : undefined;
   }, [taskListId, allTaskLists]);
 
+  const filteredTasks = useMemo<Task[]>(() => tasks.filter(task => task.taskListId === taskListId), [taskListId]);
+
   const handleSidebarClose = () => {
     dispatch(setEditingId());
   };
@@ -37,7 +39,7 @@ const TaskListPage: React.FC = () => {
         {taskList?.view === TaskListViewType.KANBAN_BOARD ? (
           <div>KANBAN_BOARD</div>
         ) : (
-          <TasksTable tasks={tasks} />
+          <TasksTable tasks={filteredTasks} />
         )}
       </Column>
 
