@@ -12,7 +12,7 @@ interface Props {
   editingId: string;
 }
 
-const EditBookmark: React.FC<Props> = ({ editingId }) => {
+const EditBookmarkSidebar: React.FC<Props> = ({ editingId }) => {
   const { t } = useTranslation(['bookmarks']);
   const dispatch = useAppDispatch();
   const state  = useAppSelector(state => state);
@@ -21,9 +21,9 @@ const EditBookmark: React.FC<Props> = ({ editingId }) => {
 
   useEffect(() => {
     if (editingId) {
-      const bookmarkToEdit = bookmarkSelectors.selectById(state, editingId);
-      setName(bookmarkToEdit?.name || '');
-      setUrl(bookmarkToEdit?.url || '');
+      const toEdit = bookmarkSelectors.selectById(state, editingId);
+      setName(toEdit?.name || '');
+      setUrl(toEdit?.url || '');
     }
   }, [editingId]);
 
@@ -58,4 +58,4 @@ const EditBookmark: React.FC<Props> = ({ editingId }) => {
   );
 };
 
-export default EditBookmark;
+export default EditBookmarkSidebar;

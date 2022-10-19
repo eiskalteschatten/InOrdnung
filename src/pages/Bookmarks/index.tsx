@@ -9,7 +9,7 @@ import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
 import BookmarksTable from './components/BookmarksTable';
 import RightSidebar from '../../components/elements/RightSidebar';
-import EditBookmark from './components/EditBookmark';
+import EditBookmarkSidebar from './components/EditBookmarkSidebar';
 
 const Bookmarks: React.FC = () => {
   const { t } = useTranslation(['bookmarks']);
@@ -40,7 +40,7 @@ const Bookmarks: React.FC = () => {
           title={t('bookmarks:editBookmark')}
           handleClose={handleSidebarClose}
         >
-          <EditBookmark editingId={editingId} />
+          <EditBookmarkSidebar editingId={editingId} />
         </RightSidebar>
       )}
     </ProjectLayout>
