@@ -1,13 +1,11 @@
 import React, { PropsWithChildren } from 'react';
+import clsx from 'clsx';
 
-import config from '../../../../../config';
-import { useAppSelector } from '../../../../../store/hooks';
+import Button from '../../../../elements/Button';
 
 import styles from './styles.module.scss';
 
 const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
-  const projectName = useAppSelector(state => state.project.info.name);
-
   const handleDoubleClick = () => {
     window.api.send('maximizeOrUnmaximizeWindow');
   };
@@ -17,8 +15,14 @@ const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
       className={styles.titlebar}
       onDoubleClick={handleDoubleClick}
     >
-      <div className={styles.title}>
-        {projectName || config.app.name}
+      <div className={clsx(styles.navButtons, styles.noDrag)}>
+        <Button>
+          <span className='material-icons'>arrow_back_ios</span>
+        </Button>
+
+        <Button>
+          <span className='material-icons'>arrow_forward_ios</span>
+        </Button>
       </div>
 
       <div>
