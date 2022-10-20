@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import config from '../../../../../config';
 import { useAppSelector } from '../../../../../store/hooks';
 
 import styles from './styles.module.scss';
 
-const Titlebar: React.FC = () => {
+const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
   const projectName = useAppSelector(state => state.project.info.name);
 
   const handleDoubleClick = () => {
@@ -19,6 +19,10 @@ const Titlebar: React.FC = () => {
     >
       <div className={styles.title}>
         {projectName || config.app.name}
+      </div>
+
+      <div>
+        {children}
       </div>
     </div>
   );

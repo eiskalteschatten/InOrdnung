@@ -52,7 +52,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
 
   if (process.platform === 'darwin') {
     browserWindowOptions.titleBarStyle = 'hidden';
-    browserWindowOptions.trafficLightPosition = { x: 10, y: 12 };
+    browserWindowOptions.trafficLightPosition = { x: 10, y: 19 };
   }
 
   if (preferences.x && preferences.y) {

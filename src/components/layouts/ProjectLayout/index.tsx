@@ -85,13 +85,13 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
         [styles.customTitlebar]: platform === 'darwin',
       })}
     >
-      {platform === 'darwin' && (<Titlebar />)}
-
-      {toolbar && (
-        <Toolbar>
-          {toolbar}
-        </Toolbar>
-      )}
+      <Titlebar>
+        {toolbar && (
+          <Toolbar>
+            {toolbar}
+          </Toolbar>
+        )}
+      </Titlebar>
 
       <div className={styles.content}>
         <Sidebar />
