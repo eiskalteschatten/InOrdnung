@@ -9,11 +9,15 @@
   -webkit-app-region: drag;
   user-select: none;
   z-index: 1000;
-  padding: 5px 5px 5px 80px;
+  padding: 5px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 20px;
+
+  &.darwin {
+    padding: 5px 5px 5px 80px;
+  }
 
   .noDrag {
     -webkit-app-region: no-drag;

@@ -82,7 +82,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   return (
     <div
       className={clsx(styles.projectLayout, {
-        [styles.customTitlebar]: platform === 'darwin',
+        [styles.customTitlebar]: platform === 'darwin' || platform === 'win32',
       })}
     >
       <Titlebar>
