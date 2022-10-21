@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
@@ -19,6 +19,17 @@ interface Props {
 const KanbanBoardColumn: React.FC<Props> = ({ tasks, status }) => {
   const { t } = useTranslation(['tasks']);
   const dispatch = useAppDispatch();
+  const [draggedOver, setDraggedOver] = useState<boolean>(false);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDraggedOver(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setDraggedOver(false);
+  };
 
   const handleDrop = (e: React.DragEvent) => {
     const taskId = e.dataTransfer.getData('drag-task');
@@ -26,12 +37,16 @@ const KanbanBoardColumn: React.FC<Props> = ({ tasks, status }) => {
       id: taskId,
       changes: { status },
     }));
+    setDraggedOver(false);
   };
 
   return (
     <div
-      className={styles.kanbanBoardColumn}
-      onDragOver={e => e.preventDefault()}
+      className={clsx(styles.kanbanBoardColumn, {
+        [styles.draggedOver]: draggedOver,
+      })}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
       <div className={styles.title}>
