@@ -33,6 +33,7 @@ const ProjectInfo: React.FC = () => {
             defaultLanguage='markdown'
             value={description}
             onChange={value => dispatch(setDescription(value || ''))}
+            minimap={false}
           />
         </div>
       </Column>
