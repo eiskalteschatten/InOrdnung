@@ -21,6 +21,7 @@ import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
 import TaskStatusMarker from '../../../../components/elements/TaskStatusMarker';
 import { deleteTask, editTask } from '../../../../shared/lib/tasks';
+import DueDate from '../DueDate';
 
 import styles from './styles.module.scss';
 
@@ -123,7 +124,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
         return date
           ? (
             <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
-              {new Date(date).toLocaleDateString()}
+              <DueDate dueDate={date} />
             </div>
           ) : (<></>);
       },

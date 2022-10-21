@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Task } from '../../../../../../shared/interfaces/tasks';
 import Button from '../../../../../../components/elements/Button';
 import { deleteTask, editTask } from '../../../../../../shared/lib/tasks';
+import DueDate from '../../../DueDate';
 
 import styles from './styles.module.scss';
 
@@ -34,7 +35,7 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
       <div className={styles.footer}>
         {task.dueDate ? (
           <div className={styles.dueDate}>
-            {new Date(task.dueDate).toLocaleDateString()}
+            <DueDate dueDate={task.dueDate} />
           </div>
         ) : (
           <div />
