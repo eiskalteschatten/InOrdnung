@@ -113,11 +113,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
     columnHelper.accessor('status', {
       id: 'status',
       header: () => <span>{t(('common:status'))}</span>,
-      cell: info => (
-        <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
-          <TaskStatusMarker status={info.getValue()} />
-        </div>
-      ),
+      cell: info => <TaskStatusMarker status={info.getValue()} />,
     }),
     columnHelper.accessor('dueDate', {
       id: 'dueDate',
