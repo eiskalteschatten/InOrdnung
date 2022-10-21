@@ -151,7 +151,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
           <Button onClick={() => editTask(info.row.original.id)}>
             <span className='material-icons'>edit</span>
           </Button>
-          <Button onClick={() => deleteTask(info.row.original.id)}>
+          <Button onClick={() => deleteTask(info.row.original.id)} deleteButton>
             <span className='material-icons'>delete</span>
           </Button>
         </div>

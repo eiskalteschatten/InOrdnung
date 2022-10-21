@@ -78,7 +78,7 @@ const BookmarksTable: React.FC = () => {
           <Button onClick={() => editBookmark(info.row.original.id)}>
             <span className='material-icons'>edit</span>
           </Button>
-          <Button onClick={() => deleteBookmark(info.row.original.id)}>
+          <Button onClick={() => deleteBookmark(info.row.original.id)} deleteButton>
             <span className='material-icons'>delete</span>
           </Button>
         </div>

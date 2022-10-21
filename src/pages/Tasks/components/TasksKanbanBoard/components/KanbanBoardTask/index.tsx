@@ -51,6 +51,7 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
 
           <Button
             iconButton
+            deleteButton
             onClick={() => deleteTask(task.id)}
           >
             <span className='material-icons'>delete</span>
