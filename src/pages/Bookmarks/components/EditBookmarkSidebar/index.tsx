@@ -5,8 +5,11 @@ import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { bookmarkSelectors, updateBookmark } from '../../../../store/entities/project/bookmarks';
 
 import Input from '../../../../components/elements/Input';
+import RightSidebarCenterButton from '../../../../components/elements/RightSidebarCenterButton';
+import Button from '../../../../components/elements/Button';
 
 import styles from './styles.module.scss';
+import { deleteBookmark } from '../../../../shared/lib/bookmarks';
 
 interface Props {
   editingId: string;
@@ -46,6 +49,17 @@ const EditBookmarkSidebar: React.FC<Props> = ({ editingId }) => {
         onChange={handleChange}
         value={toEdit?.url ?? ''}
       />
+
+      <RightSidebarCenterButton>
+        <Button
+          className={styles.deleteButton}
+          onClick={() => deleteBookmark(editingId)}
+          icon={<span className='material-icons'>delete</span>}
+          deleteButton
+        >
+          {t('bookmarks:deleteBookmark')}
+        </Button>
+      </RightSidebarCenterButton>
     </div>
   );
 };
