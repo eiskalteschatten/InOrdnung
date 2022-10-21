@@ -35,7 +35,7 @@ const Toolbar: React.FC = () => {
       label: t('tasks:newTask'),
       icon: 'add_task',
       primary: true,
-      onClick: () => createTask(),
+      onClick: () => createTask(taskListId),
     },
     {
       label: t('tasks:useListView'),
