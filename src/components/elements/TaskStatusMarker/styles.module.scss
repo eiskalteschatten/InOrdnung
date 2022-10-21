@@ -9,15 +9,15 @@
   max-width: 90px;
 
   &.todo {
-    background-color: $paletteBlue;
+    background-color: $todoColor;
   }
 
   &.doing {
-    background-color: $paletteYellow;
+    background-color: $doingColor;
     color: #000000;
   }
 
   &.done {
-    background-color: $paletteGreen;
+    background-color: $doneColor;
   }
 }

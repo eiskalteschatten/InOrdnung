@@ -12,6 +12,28 @@
 
   .title {
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .marker {
+      $size: 15px;
+      height: $size;
+      width: $size;
+      border-radius: 50%;
+
+      &.todo {
+        background-color: $todoColor;
+      }
+
+      &.doing {
+        background-color: $doingColor;
+      }
+
+      &.done {
+        background-color: $doneColor;
+      }
+    }
   }
 
   .tasks {
