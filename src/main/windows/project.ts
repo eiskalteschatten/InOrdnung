@@ -37,6 +37,14 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
   const defaultWidth = Math.floor(screenWidth * 0.6);
   const defaultHeight = Math.floor(screenHeight * 0.75);
 
+  const backgroundColor = nativeTheme.shouldUseDarkColors
+    ? config.windows.defaultBackgroundColors.dark
+    : config.windows.defaultBackgroundColors.light;
+
+  const foregroundColor = nativeTheme.shouldUseDarkColors
+    ? config.windows.defaultForegroundColors.dark
+    : config.windows.defaultForegroundColors.light;
+
   const browserWindowOptions: BrowserWindowConstructorOptions = {
     width: preferences.width || defaultWidth,
     height: preferences.height || defaultHeight,
@@ -45,14 +53,19 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
       contextIsolation: true,
       preload: path.join(__dirname, '../preload.js'),
     },
-    backgroundColor: nativeTheme.shouldUseDarkColors
-      ? config.windows.defaultBackgroundColors.dark
-      : config.windows.defaultBackgroundColors.light,
+    backgroundColor,
   };
 
   if (process.platform === 'darwin') {
     browserWindowOptions.titleBarStyle = 'hidden';
     browserWindowOptions.trafficLightPosition = { x: 10, y: 19 };
+  }
+  else if (process.platform === 'win32') {
+    browserWindowOptions.titleBarStyle = 'hidden';
+    browserWindowOptions.titleBarOverlay = {
+      color: backgroundColor,
+      symbolColor: foregroundColor,
+    };
   }
 
   if (preferences.x && preferences.y) {

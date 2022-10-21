@@ -9,18 +9,23 @@ import styles from './styles.module.scss';
 const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
   const { platform } = useAppSelector(state => state.app);
 
-  const handleDoubleClick = () => {
-    window.api.send('maximizeOrUnmaximizeWindow');
-  };
-
   return (
     <div
       className={clsx(styles.titlebar, {
         [styles.darwin]: platform === 'darwin',
       })}
-      onDoubleClick={handleDoubleClick}
+      onDoubleClick={() => window.api.send('maximizeOrUnmaximizeWindow')}
     >
       <div className={clsx(styles.navButtons, styles.noDrag)}>
+        {platform === 'win32' && (
+          <Button
+            onClick={() => window.api.send('openAppMenu')}
+            className={styles.appMenu}
+          >
+            <span className='material-icons'>menu</span>
+          </Button>
+        )}
+
         <Button>
           <span className='material-icons'>arrow_back_ios</span>
         </Button>

@@ -23,6 +23,10 @@ export default {
       dark: '#222222',
       light: '#f0f0f0',
     },
+    defaultForegroundColors: {
+      dark: '#f0f0f0',
+      light: '#222222',
+    },
   },
   projectFileVersion: 1,
   storagePath,
