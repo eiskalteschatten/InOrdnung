@@ -15,7 +15,7 @@ const KanbanBoardColumn: React.FC<Props> = ({ tasks, status }) => {
 
   return (
     <div className={styles.kanbanBoardColumn}>
-      <div>{t(`tasks:${status}`)}</div>
+      <div className={styles.title}>{t(`tasks:${status}`)}</div>
 
       <div>
         {tasks.map(task => task.name)}

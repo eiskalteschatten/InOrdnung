@@ -1,6 +1,16 @@
+@import "../../../../../../scss/variables";
+
 .kanbanBoardColumn {
   display: flex;
   gap: 10px;
   flex-direction: column;
   width: 33%;
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: var(--background-color);
+  border-radius: $borderRadius;
+
+  .title {
+    font-weight: bold;
+  }
 }
