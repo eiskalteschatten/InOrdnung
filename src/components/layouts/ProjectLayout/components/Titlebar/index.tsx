@@ -7,7 +7,7 @@ import Button from '../../../../elements/Button';
 import styles from './styles.module.scss';
 
 const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
-  const { platform } = useAppSelector(state => state.app);
+  const { platform, canGoBack, canGoForward } = useAppSelector(state => state.app);
 
   return (
     <div
@@ -26,11 +26,17 @@ const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
           </Button>
         )}
 
-        <Button disabled>
+        <Button
+          onClick={() => window.api.send('navigateBack')}
+          disabled={!canGoBack}
+        >
           <span className='material-icons'>arrow_back_ios</span>
         </Button>
 
-        <Button disabled>
+        <Button
+          onClick={() => window.api.send('navigateForward')}
+          disabled={!canGoForward}
+        >
           <span className='material-icons'>arrow_forward_ios</span>
         </Button>
       </div>
