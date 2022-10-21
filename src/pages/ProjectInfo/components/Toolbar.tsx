@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import ToolbarButtons from '../../../components/elements/ToolbarButtons';
 import { createBookmark } from '../../../shared/lib/bookmarks';
+import { createTask } from '../../../shared/lib/tasks';
 
 const Toolbar: React.FC = () => {
   const { t } = useTranslation(['bookmarks', 'tasks']);
@@ -22,8 +23,8 @@ const Toolbar: React.FC = () => {
       label: t('tasks:newTask'),
       icon: 'add_task',
       onClick: () => {
-        // navigate('/tasks');
-        // createNewBookmark();
+        navigate('/tasks');
+        createTask();
       },
     },
   ];
