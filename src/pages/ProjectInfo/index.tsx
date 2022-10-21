@@ -5,7 +5,6 @@ import Toolbar from './components/Toolbar';
 import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
 import Input from '../../components/elements/Input';
-import TextArea from '../../components/elements/TextArea';
 import MonacoEditor from '../../components/elements/MonacoEditor';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
