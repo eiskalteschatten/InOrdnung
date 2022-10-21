@@ -17,7 +17,6 @@ const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
     <div
       className={clsx(styles.titlebar, {
         [styles.darwin]: platform === 'darwin',
-        [styles.windows]: platform === 'win32',
       })}
       onDoubleClick={handleDoubleClick}
     >
