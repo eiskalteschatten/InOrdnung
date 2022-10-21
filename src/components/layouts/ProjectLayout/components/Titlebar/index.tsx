@@ -26,11 +26,11 @@ const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
           </Button>
         )}
 
-        <Button>
+        <Button disabled>
           <span className='material-icons'>arrow_back_ios</span>
         </Button>
 
-        <Button>
+        <Button disabled>
           <span className='material-icons'>arrow_forward_ios</span>
         </Button>
       </div>
