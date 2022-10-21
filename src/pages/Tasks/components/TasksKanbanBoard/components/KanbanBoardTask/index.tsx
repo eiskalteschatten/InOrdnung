@@ -18,6 +18,8 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
     <div
       className={styles.task}
       onContextMenu={() => window.api.send('openTaskContextMenu', task.id, taskListId)}
+      draggable
+      onDragStart={e => e.dataTransfer.setData('drag-task', task.id)}
     >
       <div className={styles.name}>
         {task.name}
@@ -28,7 +30,6 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
           {task.description}
         </div>
       )}
-
 
       <div className={styles.footer}>
         {task.dueDate ? (
