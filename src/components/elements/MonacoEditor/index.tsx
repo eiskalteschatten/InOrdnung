@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import Editor, { EditorProps, useMonaco } from '@monaco-editor/react';
+import Editor, { EditorProps } from '@monaco-editor/react';
 import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
 import Spinner from '../Spinner';
