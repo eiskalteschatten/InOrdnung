@@ -139,6 +139,7 @@
     "wait-on": "^6.0.0"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.4.6",
     "@reduxjs/toolkit": "^1.8.1",
     "@tanstack/react-table": "^8.5.15",
     "axios": "^1.1.0",
@@ -146,6 +147,7 @@
     "electron-log": "^4.4.4",
     "i18next": "^21.6.6",
     "lodash": "^4.17.21",
+    "monaco-editor": "^0.34.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-i18next": "^11.15.3",

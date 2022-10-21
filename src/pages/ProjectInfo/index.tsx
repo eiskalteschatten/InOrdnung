@@ -6,6 +6,7 @@ import ProjectLayout from '../../components/layouts/ProjectLayout';
 import Column from '../../components/elements/Column';
 import Input from '../../components/elements/Input';
 import TextArea from '../../components/elements/TextArea';
+import MonacoEditor from '../../components/elements/MonacoEditor';
 
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { setDescription, setName } from '../../store/entities/project/info';
@@ -19,7 +20,7 @@ const ProjectInfo: React.FC = () => {
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
-      <Column flexGrow centered padding fullWidth>
+      <Column flexGrow padding centered>
         <div className={styles.projectInfo}>
           <Input
             label={t('projectInfo:projectName')}
@@ -28,11 +29,11 @@ const ProjectInfo: React.FC = () => {
             onChange={e => dispatch(setName(e.target.value))}
           />
 
-          <TextArea
-            label={t('projectInfo:description')}
-            fullWidth
+          <MonacoEditor
+            height='200px'
+            defaultLanguage='markdown'
             value={description}
-            onChange={e => dispatch(setDescription(e.target.value))}
+            onChange={value => dispatch(setDescription(value || ''))}
           />
         </div>
       </Column>
