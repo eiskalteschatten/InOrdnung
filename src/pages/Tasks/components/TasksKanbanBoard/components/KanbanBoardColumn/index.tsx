@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import { Task, TaskStatus } from '../../../../../../shared/interfaces/tasks';
 
+import KanbanBoardTask from '../KanbanBoardTask';
+
 import styles from './styles.module.scss';
 
 interface Props {
@@ -18,7 +20,7 @@ const KanbanBoardColumn: React.FC<Props> = ({ tasks, status }) => {
       <div className={styles.title}>{t(`tasks:${status}`)}</div>
 
       <div>
-        {tasks.map(task => task.name)}
+        {tasks.map(task => <KanbanBoardTask task={task} />)}
       </div>
     </div>
   );

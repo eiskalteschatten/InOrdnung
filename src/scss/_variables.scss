@@ -1,24 +1,6 @@
 $primaryColor: #0d589b;
 $primaryColorLighter: #d1e3f9;
 
-$lightBg: #fafafa;
-$lightSecondaryBg: #ffffff;
-$lightColor: #000000;
-$darkBg: #212121;
-$darkColor: #f0f0f0;
-$darkSecondaryBg: #333333;
-$lightBorderColor: #cfcfcf;
-$darkBorderColor: #333333;
-
-$successColor: green;
-$errorColor: red;
-
-$borderRadius: 3px;
-$dialogPadding: 10px;
-
-$titlebarHeight: 55px;
-$columnDraggerWidth: 5px;
-
 $paletteBlue: #4285f4;
 $paletteDarkBlue: #01579b;
 $paletteYellow: #fbbc05;
@@ -27,3 +9,23 @@ $paletteGreen: #24a853;
 $paletteOrange: #ff8f00;
 $paletteDarkGray: #2F3436;
 $paletteLightGray: #D3D3D3;
+
+$lightBg: #fafafa;
+$lightSecondaryBg: #ffffff;
+$lightColor: #000000;
+$lightShadowColor: $paletteLightGray;
+$darkBg: #212121;
+$darkColor: #f0f0f0;
+$darkSecondaryBg: #333333;
+$lightBorderColor: #cfcfcf;
+$darkBorderColor: #333333;
+$darkShadowColor: #111111;
+
+$borderRadius: 3px;
+$dialogPadding: 10px;
+
+$titlebarHeight: 55px;
+$columnDraggerWidth: 5px;
+
+$successColor: $paletteGreen;
+$errorColor: $paletteRed;

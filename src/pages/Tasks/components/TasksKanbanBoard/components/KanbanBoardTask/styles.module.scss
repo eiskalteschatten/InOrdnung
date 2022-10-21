@@ -1,0 +1,17 @@
+@import "../../../../../../scss/variables";
+
+.task {
+  padding: 5px 10px;
+  border-radius: $borderRadius;
+  background-color: var(--secondary-background-color);
+  box-shadow: 0 0 3px var(--shadow-color);
+  user-select: none;
+
+  &:hover {
+    background-color: darken($lightSecondaryBg, 3%);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: darken($darkSecondaryBg, 2%);
+    }
+  }
+}

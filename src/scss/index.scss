@@ -8,6 +8,7 @@
   --opposite-color: #{$darkColor};
   --primary-color: #{$primaryColor};
   --border-color: #{$lightBorderColor};
+  --shadow-color: #{$lightShadowColor};
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,6 +20,7 @@
     --opposite-color: #{$lightColor};
     --primary-color: #{$primaryColor};
     --border-color: #{$darkBorderColor};
+    --shadow-color: #{$darkShadowColor};
   }
 }
 
