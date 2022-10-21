@@ -14,7 +14,6 @@ const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
       className={clsx(styles.titlebar, {
         [styles.darwin]: platform === 'darwin',
       })}
-      onDoubleClick={() => window.api.send('maximizeOrUnmaximizeWindow')}
     >
       <div className={clsx(styles.navButtons, styles.noDrag)}>
         {platform === 'win32' && (
@@ -41,7 +40,7 @@ const Titlebar: React.FC<PropsWithChildren> = ({ children }) => {
         </Button>
       </div>
 
-      <div>
+      <div onDoubleClick={() => window.api.send('maximizeOrUnmaximizeWindow')}>
         {children}
       </div>
     </div>
