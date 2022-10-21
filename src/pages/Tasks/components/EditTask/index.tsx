@@ -8,6 +8,9 @@ import Input from '../../../../components/elements/Input';
 import TextArea from '../../../../components/elements/TextArea';
 import Select from '../../../../components/elements/Select';
 import { TaskStatus } from '../../../../shared/interfaces/tasks';
+import Button from '../../../../components/elements/Button';
+import RightSidebarCenterButton from '../../../../components/elements/RightSidebarCenterButton';
+import { deleteTask } from '../../../../shared/lib/tasks';
 
 import styles from './styles.module.scss';
 
@@ -85,6 +88,17 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
         value={toEdit?.dueDate ?? ''}
         type='date'
       />
+
+      <RightSidebarCenterButton>
+        <Button
+          className={styles.deleteButton}
+          onClick={() => deleteTask(editingId)}
+          icon={<span className='material-icons'>delete</span>}
+          deleteButton
+        >
+          {t('tasks:deleteTask')}
+        </Button>
+      </RightSidebarCenterButton>
     </div>
   );
 };

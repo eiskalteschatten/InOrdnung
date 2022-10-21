@@ -16,6 +16,14 @@
     padding: 0 6px;
   }
 
+  &.deleteButton {
+    color: $paletteRed;
+
+    &:hover {
+      color: $paletteRed;
+    }
+  }
+
   &.large {
     font-size: 1em;
     padding: 4px 12px;

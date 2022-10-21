@@ -8,6 +8,7 @@ import styles from './styles.module.scss';
 
 interface InitialProps {
   iconButton?: boolean;
+  deleteButton?: boolean;
   large?: boolean;
   primary?: boolean;
   icon?: React.ReactNode;
@@ -27,10 +28,11 @@ interface ButtonProps extends InitialProps, ButtonHTMLAttributes<HTMLButtonEleme
 type Props = LinkProps | ButtonProps;
 
 const Button: React.FC<Props> = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>((props, ref) => {
-  const { children, to, iconButton, large, primary, icon, iconRight, showLoader, ...leftoverProps } = props;
+  const { children, to, iconButton, deleteButton, large, primary, icon, iconRight, showLoader, ...leftoverProps } = props;
 
   const classes = clsx(styles.button, props.className, {
     [styles.iconButton]: iconButton,
+    [styles.deleteButton]: deleteButton,
     [styles.large]: large,
     [styles.primary]: primary,
   });

@@ -18,4 +18,5 @@ export default {
   [TaskStatus.DONE]: 'Done',
   dueDate: 'Due Date',
   editTask: 'Edit Task',
+  deleteTask: 'Delete Task',
 };
