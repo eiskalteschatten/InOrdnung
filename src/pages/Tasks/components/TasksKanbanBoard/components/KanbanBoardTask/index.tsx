@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Task } from '../../../../../../shared/interfaces/tasks';
+import Button from '../../../../../../components/elements/Button';
+import { deleteTask, editTask } from '../../../../../../shared/lib/tasks';
 
 import styles from './styles.module.scss';
 
@@ -17,7 +19,9 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
       className={styles.task}
       onContextMenu={() => window.api.send('openTaskContextMenu', task.id, taskListId)}
     >
-      {task.name}
+      <div className={styles.name}>
+        {task.name}
+      </div>
 
       {task.description && (
         <div className={styles.description}>
@@ -25,11 +29,32 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
         </div>
       )}
 
-      {task.dueDate && (
-        <div className={styles.dueDate}>
-          {new Date(task.dueDate).toLocaleDateString()}
+
+      <div className={styles.footer}>
+        {task.dueDate ? (
+          <div className={styles.dueDate}>
+            {new Date(task.dueDate).toLocaleDateString()}
+          </div>
+        ) : (
+          <div />
+        )}
+
+        <div className={styles.toolbar}>
+          <Button
+            iconButton
+            onClick={() => editTask(task.id)}
+          >
+            <span className='material-icons'>edit</span>
+          </Button>
+
+          <Button
+            iconButton
+            onClick={() => deleteTask(task.id)}
+          >
+            <span className='material-icons'>delete</span>
+          </Button>
         </div>
-      )}
+      </div>
     </div>
   );
 };
