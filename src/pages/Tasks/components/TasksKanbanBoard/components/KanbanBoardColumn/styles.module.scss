@@ -13,4 +13,10 @@
   .title {
     font-weight: bold;
   }
+
+  .tasks {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
 }

@@ -1,11 +1,15 @@
 @import "../../../../../../scss/variables";
 
 .task {
-  padding: 5px 10px;
+  padding: 10px;
   border-radius: $borderRadius;
   background-color: var(--secondary-background-color);
   box-shadow: 0 0 3px var(--shadow-color);
   user-select: none;
+  font-size: .9em;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 
   &:hover {
     background-color: darken($lightSecondaryBg, 3%);
@@ -13,5 +17,20 @@
     @media (prefers-color-scheme: dark) {
       background-color: darken($darkSecondaryBg, 2%);
     }
+  }
+
+  .description {
+    opacity: .5;
+    font-size: .8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  .dueDate {
+    font-size: .8em;
+    text-align: right;
+    opacity: .9;
   }
 }
