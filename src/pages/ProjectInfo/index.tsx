@@ -34,6 +34,7 @@ const ProjectInfo: React.FC = () => {
             value={description}
             onChange={value => dispatch(setDescription(value || ''))}
             minimap={false}
+            label={`${t('common:description')}`}
           />
         </div>
       </Column>

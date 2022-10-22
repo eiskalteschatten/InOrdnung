@@ -14,6 +14,7 @@ interface Props extends EditorProps {
   minimap?: boolean;
   readOnly?: boolean;
   lineNumbers?: editorApi.LineNumbersType;
+  label?: string;
 }
 
 const MonacoEditor: React.FC<Props> = props => {
@@ -23,6 +24,7 @@ const MonacoEditor: React.FC<Props> = props => {
     minimap = true,
     readOnly,
     lineNumbers = 'off',
+    label,
     ...leftoverProps
   } = props;
 
@@ -59,13 +61,19 @@ const MonacoEditor: React.FC<Props> = props => {
   }, [theme, prefersDarkMode]);
 
   return (
-    <Editor
-      theme={_theme}
-      defaultLanguage={defaultLanguage}
-      loading={<Spinner className={styles.loader} />}
-      onMount={handleEditorDidMount}
-      {...leftoverProps}
-    />
+    <div>
+      {label && (
+        <div className={styles.label}>{label}:</div>
+      )}
+
+      <Editor
+        theme={_theme}
+        defaultLanguage={defaultLanguage}
+        loading={<Spinner className={styles.loader} />}
+        onMount={handleEditorDidMount}
+        {...leftoverProps}
+      />
+    </div>
   );
 };
 
