@@ -4,11 +4,11 @@ import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
 import Spinner from '../Spinner';
 import { useAppSelector } from '../../../store/hooks';
-import GitHubTheme from '../../../shared/monacoThemes/GitHub.json';
+import LightTheme from '../../../shared/monacoThemes/SlushAndPoppies.json';
 
 import styles from './styles.module.scss';
 
-const lightThemName = 'GitHub';
+const lightThemeName = 'SlushAndPoppies';
 
 interface Props extends EditorProps {
   minimap?: boolean;
@@ -38,9 +38,11 @@ const MonacoEditor: React.FC<Props> = props => {
       lineNumbers,
     });
 
-    if (!prefersDarkMode) {
-      monaco.editor.defineTheme(lightThemName, GitHubTheme as any);
-      monaco.editor.setTheme(lightThemName);
+    monaco.editor.defineTheme(lightThemeName, LightTheme as any);
+
+    // Don't use prefersDarkMode here because this code is run before the store is set
+    if (window.matchMedia && !window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      monaco.editor.setTheme(lightThemeName);
     }
   };
 
@@ -50,10 +52,10 @@ const MonacoEditor: React.FC<Props> = props => {
     }
 
     if (!prefersDarkMode) {
-      return lightThemName;
+      return lightThemeName;
     }
 
-    return prefersDarkMode ? 'vs-dark' : lightThemName;
+    return prefersDarkMode ? 'vs-dark' : lightThemeName;
   }, [theme, prefersDarkMode]);
 
   return (
