@@ -60,7 +60,7 @@ const KanbanBoardColumn: React.FC<Props> = ({ tasks, status }) => {
       </div>
 
       <div className={styles.tasks}>
-        {tasks.map(task => <KanbanBoardTask task={task} />)}
+        {tasks.map(task => <KanbanBoardTask key={task.id} task={task} />)}
       </div>
     </div>
   );
