@@ -12,6 +12,10 @@
     border-top-left-radius: $borderRadius;
     background-color: var(--secondary-background-color);
     padding: 15px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
 
     .toolbar {
       display: flex;
