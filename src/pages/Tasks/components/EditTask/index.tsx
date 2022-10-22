@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { taskListSelectors, taskSelectors, updateTask } from '../../../../store/entities/project/tasks';
 
 import Input from '../../../../components/elements/Input';
-import TextArea from '../../../../components/elements/TextArea';
+import MonacoEditor from '../../../../components/elements/MonacoEditor';
 import Select from '../../../../components/elements/Select';
 import { TaskStatus } from '../../../../shared/interfaces/tasks';
 import Button from '../../../../components/elements/Button';
@@ -35,6 +35,17 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
     }
   };
 
+  const handleDescriptionChange = (value: string | undefined) => {
+    if (editingId) {
+      dispatch(updateTask({
+        id: editingId,
+        changes: {
+          description: value,
+        },
+      }));
+    }
+  };
+
   return (
     <div className={styles.editTask}>
       <Select
@@ -57,12 +68,11 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
         value={toEdit?.name ?? ''}
       />
 
-      <TextArea
-        label={`${t('common:description')} TODO: markdown`}
-        fullWidth
-        name='description'
-        onChange={handleChange}
+      <MonacoEditor
+        label={`${t('common:description')}`}
+        onChange={handleDescriptionChange}
         value={toEdit?.description ?? ''}
+        height='250px'
       />
 
       <Select
