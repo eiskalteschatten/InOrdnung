@@ -155,6 +155,7 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.0",
+    "remark": "^14.0.2",
     "remark-gfm": "^3.0.1",
     "strip-markdown": "^5.0.0",
     "uuid": "^9.0.0"

@@ -20,6 +20,7 @@ import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
 import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
 import TaskStatusMarker from '../../../../components/elements/TaskStatusMarker';
+import RenderMarkdown from '../../../../components/elements/RenderMarkdown';
 import { deleteTask, editTask } from '../../../../shared/lib/tasks';
 import DueDate from '../DueDate';
 
@@ -80,11 +81,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
           onClick={() => handleMarkTaskAsDone(info.row.original.id, info.row.original.status)}
         >
           <span className='material-icons'>
-            {info.row.original.status === TaskStatus.DONE ? (
-              <>check_circle</>
-            ) : (
-              <>circle</>
-            )}
+            {info.row.original.status === TaskStatus.DONE ? 'check_circle' : 'circle'}
           </span>
         </div>
       ),
@@ -107,7 +104,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
         <div className={clsx(styles.description, {
           [styles.done]: info.row.original.status === TaskStatus.DONE,
         })}>
-          {info.getValue()}
+          <RenderMarkdown markdownString={info.getValue()} stripMarkdown />
         </div>
       ),
     }),
