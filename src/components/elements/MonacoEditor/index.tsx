@@ -4,11 +4,11 @@ import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
 import Spinner from '../Spinner';
 import { useAppSelector } from '../../../store/hooks';
-import LightTheme from '../../../shared/monacoThemes/SlushAndPoppies.json';
+import LightTheme from '../../../shared/monacoThemes/InOrdnungLight.json';
 
 import styles from './styles.module.scss';
 
-const lightThemeName = 'SlushAndPoppies';
+const lightThemeName = 'InOrdnungLight';
 
 interface Props extends EditorProps {
   minimap?: boolean;
