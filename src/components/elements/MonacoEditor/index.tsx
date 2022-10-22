@@ -1,11 +1,14 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import Editor, { EditorProps } from '@monaco-editor/react';
 import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
 import Spinner from '../Spinner';
 import { useAppSelector } from '../../../store/hooks';
+import GitHubTheme from '../../../shared/monacoThemes/GitHub.json';
 
 import styles from './styles.module.scss';
+
+const lightThemName = 'GitHub';
 
 interface Props extends EditorProps {
   minimap?: boolean;
@@ -26,8 +29,19 @@ const MonacoEditor: React.FC<Props> = props => {
   const { prefersDarkMode } = useAppSelector(state => state.app);
   const editorRef = useRef<editorApi.IStandaloneCodeEditor | null>(null);
 
-  const handleEditorDidMount = (editor: editorApi.IStandaloneCodeEditor) => {
+  const handleEditorDidMount = (editor: editorApi.IStandaloneCodeEditor, monaco: any) => {
     editorRef.current = editor;
+
+    editor.updateOptions({
+      minimap: { enabled: minimap },
+      readOnly,
+      lineNumbers,
+    });
+
+    if (!prefersDarkMode) {
+      monaco.editor.defineTheme(lightThemName, GitHubTheme as any);
+      monaco.editor.setTheme(lightThemName);
+    }
   };
 
   const _theme = useMemo(() => {
@@ -35,24 +49,12 @@ const MonacoEditor: React.FC<Props> = props => {
       return theme;
     }
 
-    return prefersDarkMode ? 'vs-dark' : 'light';
+    if (!prefersDarkMode) {
+      return lightThemName;
+    }
+
+    return prefersDarkMode ? 'vs-dark' : lightThemName;
   }, [theme, prefersDarkMode]);
-
-  useEffect(() => {
-    if (editorRef.current) {
-      editorRef.current.updateOptions({ theme: prefersDarkMode ? 'vs-dark' : 'light' });
-    }
-  }, [prefersDarkMode]);
-
-  useEffect(() => {
-    if (editorRef.current) {
-      editorRef.current.updateOptions({
-        minimap: { enabled: minimap },
-        readOnly,
-        lineNumbers,
-      });
-    }
-  }, [minimap, readOnly, lineNumbers]);
 
   return (
     <Editor
