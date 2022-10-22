@@ -23,10 +23,15 @@ const RightSidebar: React.FC<Props> = ({ children, title, handleClose }) => {
     setWidth(savedWidth);
   }, [savedWidth]);
 
+  const sendColumnResizeEvent = () => {
+    const resizeEvent = new CustomEvent('resizeRightSidebar', { detail: width });
+    window.dispatchEvent(resizeEvent);
+  };
+
   return (
     <div
       className={styles.rightSidebar}
-      style={{ flex: `0 0 ${width}px` }}
+      style={{ flex: `0 0 ${width}px`, width }}
       ref={columnRef}
     >
       <ColumnDragger
@@ -34,6 +39,7 @@ const RightSidebar: React.FC<Props> = ({ children, title, handleClose }) => {
         setWidth={setWidth}
         setStoreWidth={setRightSidebarWidth}
         draggerOnLeft
+        onColumnResize={sendColumnResizeEvent}
       />
 
       <div className={styles.contentWrapper}>

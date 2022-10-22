@@ -30,7 +30,6 @@ const ProjectInfo: React.FC = () => {
 
           <MonacoEditor
             height='200px'
-            defaultLanguage='markdown'
             value={description}
             onChange={value => dispatch(setDescription(value || ''))}
             minimap={false}

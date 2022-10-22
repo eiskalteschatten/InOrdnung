@@ -73,6 +73,7 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
         onChange={handleDescriptionChange}
         value={toEdit?.description ?? ''}
         height='250px'
+        minimap={false}
       />
 
       <Select

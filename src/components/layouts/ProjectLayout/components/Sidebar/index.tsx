@@ -24,6 +24,11 @@ const Sidebar: React.FC = () => {
     setWidth(savedWidth);
   }, [savedWidth]);
 
+  const sendColumnResizeEvent = () => {
+    const resizeEvent = new CustomEvent('resizeLeftSidebar', { detail: width });
+    window.dispatchEvent(resizeEvent);
+  };
+
   return (
     <div
       className={styles.sidebar}
@@ -58,6 +63,7 @@ const Sidebar: React.FC = () => {
         columnRef={columnRef}
         setWidth={setWidth}
         setStoreWidth={setSidebarWidth}
+        onColumnResize={sendColumnResizeEvent}
       />
     </div>
   );

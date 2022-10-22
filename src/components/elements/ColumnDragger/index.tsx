@@ -10,9 +10,10 @@ interface Props {
   setWidth: (width: number) => void;
   setStoreWidth: (width: number) => any;
   draggerOnLeft?: boolean;
+  onColumnResize?: () => void;
 }
 
-const ColumnDragger: React.FC<Props> = ({ columnRef, setWidth, setStoreWidth, draggerOnLeft }) => {
+const ColumnDragger: React.FC<Props> = ({ columnRef, setWidth, setStoreWidth, draggerOnLeft, onColumnResize }) => {
   const dispatch = useAppDispatch();
 
   const handleMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -35,6 +36,10 @@ const ColumnDragger: React.FC<Props> = ({ columnRef, setWidth, setStoreWidth, dr
       document.removeEventListener('mouseup', handleMouseUp);
       const rect = columnRef.current?.getBoundingClientRect();
       dispatch(setStoreWidth(rect?.width ?? minWidth));
+
+      if (onColumnResize) {
+        onColumnResize();
+      }
     };
 
     e.preventDefault();

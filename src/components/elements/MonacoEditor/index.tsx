@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import Editor, { EditorProps } from '@monaco-editor/react';
 import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
@@ -15,6 +15,7 @@ interface Props extends EditorProps {
   readOnly?: boolean;
   lineNumbers?: editorApi.LineNumbersType;
   label?: string;
+  resizeEventName?: string;
 }
 
 const MonacoEditor: React.FC<Props> = props => {
@@ -25,6 +26,7 @@ const MonacoEditor: React.FC<Props> = props => {
     readOnly,
     lineNumbers = 'off',
     label,
+    resizeEventName,
     ...leftoverProps
   } = props;
 
@@ -59,6 +61,17 @@ const MonacoEditor: React.FC<Props> = props => {
 
     return prefersDarkMode ? 'vs-dark' : lightThemeName;
   }, [theme, prefersDarkMode]);
+
+  useEffect(() => {
+    if (resizeEventName) {
+      const resizeEventHandler = () => editorRef.current?.layout();
+      window.addEventListener(resizeEventName, resizeEventHandler as EventListener);
+
+      return () => {
+        window.removeEventListener(resizeEventName, resizeEventHandler as EventListener);
+      };
+    }
+  }, [resizeEventName]);
 
   return (
     <div>
