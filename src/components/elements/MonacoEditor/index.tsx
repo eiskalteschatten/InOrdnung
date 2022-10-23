@@ -16,6 +16,7 @@ interface Props extends EditorProps {
   lineNumbers?: editorApi.LineNumbersType;
   label?: string;
   resizeEventName?: string;
+  hideCurrentLanguage?: boolean;
 }
 
 const MonacoEditor: React.FC<Props> = props => {
@@ -27,6 +28,7 @@ const MonacoEditor: React.FC<Props> = props => {
     lineNumbers = 'off',
     label,
     resizeEventName,
+    hideCurrentLanguage,
     ...leftoverProps
   } = props;
 
@@ -86,6 +88,12 @@ const MonacoEditor: React.FC<Props> = props => {
         onMount={handleEditorDidMount}
         {...leftoverProps}
       />
+
+      {!hideCurrentLanguage && (
+        <div className={styles.currentLanguage}>
+          {editorRef.current?.getModel()?.getLanguageId()}
+        </div>
+      )}
     </div>
   );
 };
