@@ -41,22 +41,24 @@ export const deleteTaskList = (id: string) => {
   }
 };
 
-export const generateNewTask = (taskListId?: string): Task => ({
-  id: uuidv4(),
-  number: 1,
-  name: '',
-  status: TaskStatus.TODO,
-  taskListId,
-});
+export const generateNewTask = (taskListId?: string): Task => {
+  const state = getState();
+  const newTaskNumber = state.project.tasks.currentTaskNumber + 1;
+  dispatch(setCurrentTaskNumber(newTaskNumber));
+
+  return {
+    id: uuidv4(),
+    number: newTaskNumber,
+    name: '',
+    status: TaskStatus.TODO,
+    taskListId,
+  };
+};
 
 export const createTask = (taskListId?: string) => {
   const newTask = generateNewTask(taskListId);
   dispatch(addTask(newTask));
   dispatch(setEditingId(newTask.id));
-
-  const state = getState();
-  const newTaskNumber = state.project.tasks.currentTaskNumber + 1;
-  dispatch(setCurrentTaskNumber(newTaskNumber));
 };
 
 export const editTask = (id: string) => {

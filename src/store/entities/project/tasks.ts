@@ -26,7 +26,9 @@ export interface State {
 const initialState: State = {
   data: tasksAdapter.getInitialState(),
   lists: taskListsAdapter.getInitialState(),
-  currentTaskNumber: 1,
+  // Set this to 0 by default because the first task should be #1
+  // and the task number is always incremented before creating a new task
+  currentTaskNumber: 0,
 };
 
 export const slice = createSlice({
