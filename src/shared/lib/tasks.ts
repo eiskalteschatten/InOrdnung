@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import { t } from 'i18next';
 
-import { dispatch } from '../../store';
+import { dispatch, getState } from '../../store';
 
 import {
   addTask,
@@ -10,6 +10,7 @@ import {
   setEditingId,
   setListEditingId,
   deleteTask as deleteTaskFromStore,
+  setCurrentTaskNumber,
 } from '../../store/entities/project/tasks';
 
 import { Task, TaskList, TaskStatus, TaskListViewType } from '../interfaces/tasks';
@@ -42,6 +43,7 @@ export const deleteTaskList = (id: string) => {
 
 export const generateNewTask = (taskListId?: string): Task => ({
   id: uuidv4(),
+  number: 1,
   name: '',
   status: TaskStatus.TODO,
   taskListId,
@@ -51,6 +53,10 @@ export const createTask = (taskListId?: string) => {
   const newTask = generateNewTask(taskListId);
   dispatch(addTask(newTask));
   dispatch(setEditingId(newTask.id));
+
+  const state = getState();
+  const newTaskNumber = state.project.tasks.currentTaskNumber + 1;
+  dispatch(setCurrentTaskNumber(newTaskNumber));
 };
 
 export const editTask = (id: string) => {

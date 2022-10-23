@@ -20,11 +20,13 @@ export interface State {
   lists: EntityState<TaskList>;
   editingId?: string;
   listEditingId?: string;
+  currentTaskNumber: number;
 }
 
 const initialState: State = {
   data: tasksAdapter.getInitialState(),
   lists: taskListsAdapter.getInitialState(),
+  currentTaskNumber: 1,
 };
 
 export const slice = createSlice({
@@ -61,6 +63,9 @@ export const slice = createSlice({
     setListEditingId: (state, action: PayloadAction<string | undefined>) => {
       state.listEditingId = action.payload;
     },
+    setCurrentTaskNumber: (state, action: PayloadAction<number>) => {
+      state.currentTaskNumber = action.payload;
+    },
   },
 });
 
@@ -75,6 +80,7 @@ export const {
   updateTaskList,
   deleteTaskList,
   setListEditingId,
+  setCurrentTaskNumber,
 } = slice.actions;
 
 export const { reducer } = slice;

@@ -18,6 +18,7 @@ export const serializeProjectForSaving = (): ProjectFile => {
     project: {
       info: state.project.info,
       bookmarks: bookmarkSelectors.selectAll(state),
+      currentTaskNumber: state.project.tasks.currentTaskNumber,
       tasks: taskSelectors.selectAll(state),
       taskLists: taskListSelectors.selectAll(state),
     },

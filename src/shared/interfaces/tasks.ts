@@ -6,6 +6,7 @@ export interface TaskList {
 
 export interface Task {
   id: string;
+  number: number;
   taskListId?: string;
   status: TaskStatus;
   name: string;

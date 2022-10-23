@@ -9,6 +9,7 @@ export interface ProjectInfo {
 export interface Project {
   info: ProjectInfo;
   bookmarks?: Bookmark[];
+  currentTaskNumber: number;
   tasks?: Task[];
   taskLists?: TaskList[];
 }
