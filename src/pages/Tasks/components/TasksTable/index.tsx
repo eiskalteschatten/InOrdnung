@@ -20,7 +20,6 @@ import { Task, TaskStatus } from '../../../../shared/interfaces/tasks';
 import ReactTable from '../../../../components/elements/ReactTable';
 import Button from '../../../../components/elements/Button';
 import TaskStatusMarker from '../../../../components/elements/TaskStatusMarker';
-import RenderMarkdown from '../../../../components/elements/RenderMarkdown';
 import { deleteTask, editTask } from '../../../../shared/lib/tasks';
 import DueDate from '../DueDate';
 
@@ -94,17 +93,6 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       cell: info => (
         <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
           {info.getValue()}
-        </div>
-      ),
-    }),
-    columnHelper.accessor('description', {
-      id: 'description',
-      header: () => <span>{t(('common:description'))}</span>,
-      cell: info => (
-        <div className={clsx(styles.description, {
-          [styles.done]: info.row.original.status === TaskStatus.DONE,
-        })}>
-          <RenderMarkdown markdownString={info.getValue()} stripMarkdown />
         </div>
       ),
     }),

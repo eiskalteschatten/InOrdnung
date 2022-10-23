@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { Task } from '../../../../../../shared/interfaces/tasks';
 import Button from '../../../../../../components/elements/Button';
-import RenderMarkdown from '../../../../../../components/elements/RenderMarkdown';
 import { deleteTask, editTask } from '../../../../../../shared/lib/tasks';
 import DueDate from '../../../DueDate';
 
@@ -26,12 +25,6 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
       <div className={styles.name}>
         {task.name}
       </div>
-
-      {task.description && (
-        <div className={styles.description}>
-          <RenderMarkdown markdownString={task.description} stripMarkdown />
-        </div>
-      )}
 
       <div className={styles.footer}>
         {task.dueDate ? (
