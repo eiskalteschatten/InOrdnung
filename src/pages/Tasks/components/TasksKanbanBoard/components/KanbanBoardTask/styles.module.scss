@@ -32,20 +32,25 @@
     width: 100%;
   }
 
-  .dueDate {
-    font-size: .8em;
-    text-align: right;
-    opacity: .9;
-  }
-
   .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
+
+    .taskNumber {
+      flex-shrink: 1;
+      margin-right: 25px;
+    }
+
+    .dueDate {
+      font-size: .8em;
+      opacity: .9;
+      flex-grow: 1;
+    }
 
     .toolbar {
       visibility: hidden;
     }
   }
-
 }

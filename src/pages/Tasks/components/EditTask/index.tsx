@@ -48,6 +48,10 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
 
   return (
     <div className={styles.editTask}>
+      <div className={styles.taskNumber}>
+        #{toEdit?.number}
+      </div>
+
       <Select
         label={t('common:status')}
         fullWidth

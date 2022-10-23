@@ -2,6 +2,7 @@ import { TaskStatus } from '../../../shared/interfaces/tasks';
 
 export default {
   tasks: 'Tasks',
+  task: 'Task',
   newTask: 'New Task',
   newTaskList: 'New Task List',
   taskList: 'Task List',

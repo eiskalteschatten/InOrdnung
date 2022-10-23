@@ -27,6 +27,10 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
       </div>
 
       <div className={styles.footer}>
+        <div className={styles.taskNumber}>
+          #{task.number}
+        </div>
+
         {task.dueDate ? (
           <div className={styles.dueDate}>
             <DueDate dueDate={task.dueDate} />
