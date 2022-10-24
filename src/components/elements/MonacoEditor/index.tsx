@@ -91,7 +91,7 @@ const MonacoEditor: React.FC<Props> = props => {
 
       {!hideCurrentLanguage && (
         <div className={styles.currentLanguage}>
-          {editorRef.current?.getModel()?.getLanguageId()}
+          {editorRef.current?.getModel()?.getLanguageId() ?? defaultLanguage}
         </div>
       )}
     </div>
