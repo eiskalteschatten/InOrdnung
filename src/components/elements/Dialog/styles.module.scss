@@ -1,0 +1,35 @@
+@import "../../scss/variables";
+
+.dialog {
+  $marginEdgeOfScreen: 15px;
+
+  z-index: $dialogZIndex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 200px;
+  min-height: 200px;
+  max-width: calc(100% - #{$marginEdgeOfScreen});
+  max-height: calc(100% - #{$marginEdgeOfScreen});
+  overflow: hidden;
+  background-color: var(--background-color);
+  border-radius: 5px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, .3);
+  border: 1px solid var(--border-color);
+
+  &.fullScreen {
+    width: calc(100% - #{$marginEdgeOfScreen});
+    height: calc(100% - #{$marginEdgeOfScreen});
+  }
+
+  .titleBar {
+    padding: $dialogPadding $dialogPadding 0 $dialogPadding;
+    display: flex;
+
+    .title {
+      font-weight: bold;
+      flex-grow: 1;
+    }
+  }
+}
