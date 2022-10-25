@@ -3,12 +3,13 @@ import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
 import log from 'electron-log';
 
-import i18n from '../../i18n/main';
-import config from '../../config/main';
-import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
-import { RecentProjectsLocalStorage } from '../../shared/interfaces/settings';
-import createProjectWindow from '../windows/project';
-import { FileStoreMetaData } from '../../store/entities/file';
+import fileVersion from './fileVersion';
+import config from '../../../../config/main';
+import i18n from '../../../../i18n/main';
+import { ProjectFile } from './interfaces';
+import { RecentProjectsLocalStorage } from '../../../interfaces/settings';
+import createProjectWindow from '../../../../main/windows/project';
+import { FileStoreMetaData } from '../../../../store/entities/file';
 
 const { t } = i18n;
 
@@ -39,7 +40,7 @@ export const writeFile = async (projectFile: ProjectFile, fileMetaData: FileStor
     }
     else {
       const dataToSave = {
-        fileVersion: config.projectFileVersion,
+        fileVersion,
         ...projectFile,
       };
 

@@ -9,7 +9,7 @@ import config from '../config';
 import createProjectWindow from './windows/project';
 import checkForUpdates from './lib/checkForUpdates';
 import { launchWorkerWindow } from './lib/workerHelpers';
-import { openFile } from './lib/projectFile';
+import { openFile } from '../shared/lib/projectFiles/1-0/main';
 
 let app: Electron.App;
 
