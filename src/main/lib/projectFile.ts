@@ -5,12 +5,14 @@ import log from 'electron-log';
 
 import i18n from '../../i18n/main';
 import config from '../../config/main';
-import { ProjectFile, ProjectFileMetaData, RecentProjectsLocalStorage } from '../../shared/interfaces/file';
+import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
+import { RecentProjectsLocalStorage } from '../../shared/interfaces/settings';
 import createProjectWindow from '../windows/project';
+import { FileStoreMetaData } from '../../store/entities/file';
 
 const { t } = i18n;
 
-export const saveFileAs = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
+export const saveFileAs = async (projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void> => {
   const { filePath, canceled } = await dialog.showSaveDialog(window, {
     filters: [
       { name: t('files:inOrdnungProjectFile'), extensions: [config.extensions.default] },
@@ -30,7 +32,7 @@ export const saveFileAs = async (projectFile: ProjectFile, fileMetaData: Project
   }
 };
 
-export const writeFile = async (projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, window: BrowserWindow): Promise<void> => {
+export const writeFile = async (projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void> => {
   try {
     if (!fileMetaData.path) {
       throw new Error('No file path can be found for writing!');

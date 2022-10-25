@@ -1,12 +1,12 @@
 import { IpcRendererEvent } from 'electron';
 
-import { ProjectFileMetaData, ProjectFile } from '../shared/interfaces/file';
+import { ProjectFile } from '../shared/lib/projectFiles/1-0/interfaces';
 import { serializeProjectForSaving, setProjectFromFile } from '../shared/lib/project';
 import { dispatch, getState } from '../store';
-import { setFileMetaData } from '../store/entities/file';
+import { FileStoreMetaData, setFileMetaData } from '../store/entities/file';
 import { setIsLoading } from '../store/entities/ui/session';
 
-window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: ProjectFileMetaData) => {
+window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: FileStoreMetaData) => {
   const { file } = getState();
   dispatch(setFileMetaData({
     ...file,

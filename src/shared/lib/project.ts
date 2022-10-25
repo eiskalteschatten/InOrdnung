@@ -8,7 +8,7 @@ import { setBookmarkUiPreferences } from '../../store/entities/ui/preferences/bo
 import { setTaskUiPreferences } from '../../store/entities/ui/preferences/tasks';
 import { setFileMetaData } from '../../store/entities/file';
 
-import { ProjectFile } from '../interfaces/file';
+import { ProjectFile } from './projectFiles/1-0/interfaces';
 
 export const serializeProjectForSaving = (): ProjectFile => {
   const state = getState();

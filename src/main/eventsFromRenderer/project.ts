@@ -1,9 +1,10 @@
 import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 
-import { ProjectFile, ProjectFileMetaData } from '../../shared/interfaces/file';
+import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
+import { FileStoreMetaData } from '../../store/entities/file';
 import { openFile, openFileDialog, saveFileAs, writeFile } from '../lib/projectFile';
 
-ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, closeWindow = false) => {
+ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData, closeWindow = false) => {
   const window = BrowserWindow.fromWebContents(e.sender);
 
   if (window) {
@@ -20,7 +21,7 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
   }
 });
 
-ipcMain.on('saveProjectAs', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData) => {
+ipcMain.on('saveProjectAs', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData) => {
   const window = BrowserWindow.fromWebContents(e.sender);
 
   if (window) {

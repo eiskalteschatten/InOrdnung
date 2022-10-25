@@ -4,8 +4,8 @@ import path from 'path';
 import log from 'electron-log';
 
 import config from '../../../config/main';
-import { RecentProjectsLocalStorage } from '../../../shared/interfaces/file';
 import { getRecentProjects } from '../../lib/projectFile';
+import { RecentProjectsLocalStorage } from '../../../shared/interfaces/settings';
 
 ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath }): Promise<void> => {
   const pathToLockFile = path.resolve(config.storagePath, 'recentProjects.lock');

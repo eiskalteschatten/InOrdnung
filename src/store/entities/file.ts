@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ProjectFileMetaData } from '../../shared/interfaces/file';
+export interface FileStoreMetaData {
+  fileLoaded?: boolean;
+  path: string;
+  saved?: boolean;
+}
 
-export type State = ProjectFileMetaData;
+export type State = FileStoreMetaData;
 
 const initialState: State = {
   saved: false,

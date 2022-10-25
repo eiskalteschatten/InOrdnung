@@ -28,7 +28,7 @@ export default {
       light: '#222222',
     },
   },
-  projectFileVersion: 1,
+  projectFileVersion: '1.0',
   storagePath,
   updates: {
     url: 'https://api.github.com/repos/eiskalteschatten/InOrdnung/releases',
