@@ -9,7 +9,7 @@ import i18n from '../../../../i18n/main';
 import { ProjectFile } from './interfaces';
 import { RecentProjectsLocalStorage } from '../../../interfaces/settings';
 import createProjectWindow from '../../../../main/windows/project';
-import { FileStoreMetaData } from '../../../../store/entities/file';
+import { FileStoreMetaData } from '../../../interfaces/fileMetaData';
 
 const { t } = i18n;
 
