@@ -1,7 +1,7 @@
 import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
+import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 
 import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
-import { FileStoreMetaData } from '../../store/entities/file';
 import { openFile, openFileDialog, saveFileAs, writeFile } from '../../shared/lib/projectFiles/1-0/main';
 
 ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData, closeWindow = false) => {
