@@ -1,9 +1,10 @@
 import { IpcRendererEvent } from 'electron';
 
+import { FileStoreMetaData } from '../shared/interfaces/fileMetaData';
 import { ProjectFile } from '../shared/lib/projectFiles/1-0/interfaces';
 import { serializeProjectForSaving, setProjectFromFile } from '../shared/lib/projectFiles/1-0/renderer';
 import { dispatch, getState } from '../store';
-import { FileStoreMetaData, setFileMetaData } from '../store/entities/file';
+import { setFileMetaData } from '../store/entities/file';
 import { setIsLoading } from '../store/entities/ui/session';
 
 window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: FileStoreMetaData) => {
