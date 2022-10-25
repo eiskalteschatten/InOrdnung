@@ -5,7 +5,7 @@ import { ProjectFile } from '../shared/lib/projectFiles/1-0/interfaces';
 import { dispatch, getState } from '../store';
 import { setFileMetaData } from '../store/entities/file';
 import { setIsLoading } from '../store/entities/ui/session';
-import getFileRendererInstance from '../shared/lib/projectFiles/getFileRendererInstance';
+import getFileRendererInstance from '../shared/lib/projectFiles';
 
 window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: FileStoreMetaData) => {
   const { file } = getState();

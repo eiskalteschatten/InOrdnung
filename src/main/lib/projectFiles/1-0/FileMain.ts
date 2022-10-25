@@ -3,12 +3,12 @@ import { promises as fsPromises } from 'fs';
 import log from 'electron-log';
 
 import i18n from '../../../../i18n/main';
-import { FileStoreMetaData } from '../../../interfaces/fileMetaData';
+import { FileStoreMetaData } from '../../../../shared/interfaces/fileMetaData';
 import config from '../../../../config/main';
 import AbstractFileMain from '../AbstractFileMain';
 
-import fileVersion from './fileVersion';
-import { ProjectFile } from './interfaces';
+import fileVersion from '../../../../shared/lib/projectFiles/1-0/fileVersion';
+import { ProjectFile } from '../../../../shared/lib/projectFiles/1-0/interfaces';
 
 const { t } = i18n;
 

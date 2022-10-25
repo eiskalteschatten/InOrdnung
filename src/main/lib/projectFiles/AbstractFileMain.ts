@@ -5,9 +5,9 @@ import path from 'path';
 
 import config from '../../../config/main';
 import i18n from '../../../i18n/main';
-import { FileStoreMetaData } from '../../interfaces/fileMetaData';
-import createProjectWindow from '../../../main/windows/project';
-import { RecentProjectsLocalStorage } from '../../interfaces/settings';
+import { FileStoreMetaData } from '../../../shared/interfaces/fileMetaData';
+import createProjectWindow from '../../windows/project';
+import { RecentProjectsLocalStorage } from '../../../shared/interfaces/settings';
 
 const { t } = i18n;
 

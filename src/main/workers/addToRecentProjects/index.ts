@@ -4,7 +4,7 @@ import path from 'path';
 import log from 'electron-log';
 
 import config from '../../../config/main';
-import AbstractFileMain from '../../../shared/lib/projectFiles/AbstractFileMain';
+import AbstractFileMain from '../../lib/projectFiles/AbstractFileMain';
 import { RecentProjectsLocalStorage } from '../../../shared/interfaces/settings';
 
 ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath }): Promise<void> => {

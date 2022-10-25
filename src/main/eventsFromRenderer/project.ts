@@ -2,7 +2,7 @@ import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 
 import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
-import getFileMainInstance from '../../shared/lib/projectFiles/getFileMainInstance';
+import getFileMainInstance from '../lib/projectFiles';
 
 ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData, closeWindow = false) => {
   const window = BrowserWindow.fromWebContents(e.sender);
