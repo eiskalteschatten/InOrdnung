@@ -2,10 +2,10 @@ import { IpcRendererEvent } from 'electron';
 
 import { FileStoreMetaData } from '../shared/interfaces/fileMetaData';
 import { ProjectFile } from '../shared/lib/projectFiles/1-0/interfaces';
-import { serializeProjectForSaving, setProjectFromFile } from '../shared/lib/projectFiles/1-0/renderer';
 import { dispatch, getState } from '../store';
 import { setFileMetaData } from '../store/entities/file';
 import { setIsLoading } from '../store/entities/ui/session';
+import getFileRendererInstance from '../shared/lib/projectFiles/getFileRendererInstance';
 
 window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: FileStoreMetaData) => {
   const { file } = getState();
@@ -15,19 +15,22 @@ window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: File
   }));
 });
 
-window.api.on('saveProject', (e: IpcRendererEvent, closeWindow = false) => {
+window.api.on('saveProject', async (e: IpcRendererEvent, closeWindow = false) => {
   dispatch(setIsLoading(true));
   const { file } = getState();
-  window.api.send('saveProject', serializeProjectForSaving(), file, closeWindow);
+  const fileClass = await getFileRendererInstance();
+  window.api.send('saveProject', fileClass.serializeProjectForSaving(), file, closeWindow);
 });
 
-window.api.on('saveProjectAs', () => {
+window.api.on('saveProjectAs', async () => {
   dispatch(setIsLoading(true));
   const { file } = getState();
-  window.api.send('saveProjectAs', serializeProjectForSaving(), file);
+  const fileClass = await getFileRendererInstance();
+  window.api.send('saveProjectAs', fileClass.serializeProjectForSaving(), file);
 });
 
-window.api.on('openProject', (e: IpcRendererEvent, projectFile: ProjectFile, path: string) => {
-  setProjectFromFile(projectFile, path);
+window.api.on('openProject', async (e: IpcRendererEvent, projectFile: ProjectFile, path: string) => {
+  const fileClass = await getFileRendererInstance();
+  fileClass.setProjectFromFile(projectFile, path);
   window.api.send('projectIsEdited', false);
 });
