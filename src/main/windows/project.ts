@@ -7,7 +7,7 @@ import config from '../../config/main';
 import initializeRenderer from '../initializeRenderer';
 import getAppMenu from '../menus/appMenus/main';
 import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
-import { addToRecentProjects } from '../../shared/lib/projectFiles/1-0/main';
+import AbstractFileMain from '../../shared/lib/projectFiles/AbstractFileMain';
 import i18n from '../../i18n/main';
 import { WindowPreferences } from '../interfaces/windows';
 
@@ -120,7 +120,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
       if (projectFile && filePath) {
         newWindow.webContents.send('openProject', projectFile, filePath);
         const { name } = projectFile.project.info;
-        await addToRecentProjects(filePath, name);
+        await AbstractFileMain.addToRecentProjects(filePath, name);
       }
     });
 

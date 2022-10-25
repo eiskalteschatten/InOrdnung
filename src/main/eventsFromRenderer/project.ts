@@ -2,17 +2,18 @@ import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 
 import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
-import { openFile, openFileDialog, saveFileAs, writeFile } from '../../shared/lib/projectFiles/1-0/main';
+import getFileMainInstance from '../../shared/lib/projectFiles/getFileMainInstance';
 
 ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData, closeWindow = false) => {
   const window = BrowserWindow.fromWebContents(e.sender);
+  const fileClass = await getFileMainInstance();
 
   if (window) {
     if (!fileMetaData.path) {
-      await saveFileAs(projectFile, fileMetaData, window);
+      await fileClass.saveFileAs(projectFile, fileMetaData, window);
     }
     else {
-      await writeFile(projectFile, fileMetaData, window);
+      await fileClass.writeFile(projectFile, fileMetaData, window);
 
       if (closeWindow) {
         window.close();
@@ -23,9 +24,10 @@ ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, file
 
 ipcMain.on('saveProjectAs', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData) => {
   const window = BrowserWindow.fromWebContents(e.sender);
+  const fileClass = await getFileMainInstance();
 
   if (window) {
-    await saveFileAs(projectFile, fileMetaData, window);
+    await fileClass.saveFileAs(projectFile, fileMetaData, window);
   }
 });
 
@@ -35,9 +37,11 @@ ipcMain.on('projectIsEdited', (e: IpcMainEvent, isEdited = true): void => {
 });
 
 ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
-  await openFile(filePath);
+  const fileClass = await getFileMainInstance();
+  await fileClass.openFile(filePath);
 });
 
 ipcMain.on('openFileDialog', async (): Promise<void> => {
-  await openFileDialog();
+  const fileClass = await getFileMainInstance();
+  await fileClass.openFileDialog();
 });

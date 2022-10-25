@@ -4,7 +4,7 @@ import path from 'path';
 import log from 'electron-log';
 
 import config from '../../../config/main';
-import { getRecentProjects } from '../../../shared/lib/projectFiles/1-0/main';
+import AbstractFileMain from '../../../shared/lib/projectFiles/AbstractFileMain';
 import { RecentProjectsLocalStorage } from '../../../shared/interfaces/settings';
 
 ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath }): Promise<void> => {
@@ -19,7 +19,7 @@ ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePat
 
   const recentProjectsFilePath = path.resolve(config.storagePath, 'recentProjects.json');
 
-  let recentProjects = await getRecentProjects();
+  let recentProjects = await AbstractFileMain.getRecentProjects();
   recentProjects = recentProjects.filter((project: RecentProjectsLocalStorage) => project.path !== filePath);
 
   recentProjects.unshift({

@@ -9,7 +9,7 @@ import config from '../config';
 import createProjectWindow from './windows/project';
 import checkForUpdates from './lib/checkForUpdates';
 import { launchWorkerWindow } from './lib/workerHelpers';
-import { openFile } from '../shared/lib/projectFiles/1-0/main';
+import AbstractFileMain from '../shared/lib/projectFiles/AbstractFileMain';
 
 let app: Electron.App;
 
@@ -24,7 +24,7 @@ export default (_app: Electron.App): void => {
   });
 
   app.on('open-file', async (e: Event, path: string): Promise<void> => {
-    await openFile(path);
+    await AbstractFileMain.openFile(path);
   });
 
   app.whenReady().then(async (): Promise<void> => {

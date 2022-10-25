@@ -15,7 +15,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
   abstract saveFileAs(projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void>
   abstract writeFile(projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void>
 
-  async openFileDialog() {
+  static async openFileDialog() {
     try {
       const { filePaths, canceled } = await dialog.showOpenDialog({
         filters: [
@@ -25,7 +25,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
       });
 
       if (!canceled) {
-        await this.openFile(filePaths[0]);
+        await AbstractFileMain.openFile(filePaths[0]);
       }
     }
     catch (error) {
@@ -33,7 +33,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
     }
   }
 
-  async openFile(filePath: string) {
+  static async openFile(filePath: string) {
     try {
       const fileContentsString = await fsPromises.readFile(filePath, 'utf8');
       const fileContents = JSON.parse(fileContentsString);

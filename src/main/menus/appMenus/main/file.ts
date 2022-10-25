@@ -2,7 +2,7 @@ import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
 
 import { MenuItem, nonMacPlatforms } from '../../menuBuilder';
 import i18n from '../../../../i18n/main';
-import { openFileDialog } from '../../../../shared/lib/projectFiles/1-0/main';
+import AbstractFileMain from '../../../../shared/lib/projectFiles/AbstractFileMain';
 import createProjectWindow from '../../../windows/project';
 
 const { t } = i18n;
@@ -56,7 +56,7 @@ export default (): MenuItem => {
         label: t('appMenu:open'),
         accelerator: 'CmdOrCtrl+O',
         click: async (): Promise<void> => {
-          await openFileDialog();
+          await AbstractFileMain.openFileDialog();
         },
       },
     },
