@@ -1,14 +1,14 @@
-import { dispatch, getState } from '../../store';
-import { bookmarkSelectors } from '../../store/entities/project/bookmarks';
-import { setTaskLists, setTasks, taskListSelectors, taskSelectors } from '../../store/entities/project/tasks';
-import { setBookmarks } from '../../store/entities/project/bookmarks';
-import { setProjectInfo } from '../../store/entities/project/info';
-import { setGeneralUiPreferences } from '../../store/entities/ui/preferences/general';
-import { setBookmarkUiPreferences } from '../../store/entities/ui/preferences/bookmarks';
-import { setTaskUiPreferences } from '../../store/entities/ui/preferences/tasks';
-import { setFileMetaData } from '../../store/entities/file';
+import { dispatch, getState } from '../../../../store';
+import { bookmarkSelectors } from '../../../../store/entities/project/bookmarks';
+import { setTaskLists, setTasks, taskListSelectors, taskSelectors } from '../../../../store/entities/project/tasks';
+import { setBookmarks } from '../../../../store/entities/project/bookmarks';
+import { setProjectInfo } from '../../../../store/entities/project/info';
+import { setGeneralUiPreferences } from '../../../../store/entities/ui/preferences/general';
+import { setBookmarkUiPreferences } from '../../../../store/entities/ui/preferences/bookmarks';
+import { setTaskUiPreferences } from '../../../../store/entities/ui/preferences/tasks';
+import { setFileMetaData } from '../../../../store/entities/file';
 
-import { ProjectFile } from './projectFiles/1-0/interfaces';
+import { ProjectFile } from './interfaces';
 
 export const serializeProjectForSaving = (): ProjectFile => {
   const state = getState();

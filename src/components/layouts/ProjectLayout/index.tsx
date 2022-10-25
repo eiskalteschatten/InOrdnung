@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../store/hooks';
 import { setSaved } from '../../../store/entities/file';
 
-import { serializeProjectForSaving } from '../../../shared/lib/project';
+import { serializeProjectForSaving } from '../../../shared/lib/projectFiles/1-0/renderer';
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
