@@ -5,7 +5,7 @@ export default async <T>(type: 'main' | 'renderer'): Promise<T> => {
 
   switch (type) {
     case 'main':
-      const Main = await import(`./${fileVersion}/FileMain`).default;
+      const Main = (await import(`./${fileVersion}/FileMain`)).default;
       return new Main();
     case 'renderer':
       const Renderer = (await import(`./${fileVersion}/FileRenderer`)).default;
