@@ -1,4 +1,4 @@
-@import "../../scss/variables";
+@import "../../../scss/variables";
 
 .cover {
   height: 100%;
@@ -9,4 +9,5 @@
   background-color: var(--background-color);
   z-index: 1000;
   opacity: .6;
+  -webkit-app-region: drag;
 }

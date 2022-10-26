@@ -1,4 +1,4 @@
-@import "../../scss/variables";
+@import "../../../scss/variables";
 
 .content {
   $titleHeight: 50px;
@@ -7,8 +7,4 @@
   width: 100%;
   height: calc(100% - #{$titleHeight});
   overflow: auto;
-
-  @media (max-width: $xsMax) {
-    min-width: 80vw;
-  }
 }

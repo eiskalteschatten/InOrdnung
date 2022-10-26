@@ -11,6 +11,7 @@ import getFileRendererInstance from '../../../shared/lib/projectFiles';
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
+import WelcomeDialog from './components/WelcomeDialog';
 import GlobalInfo from '../../elements/GlobalInfo';
 import GlobalError from '../../elements/GlobalError';
 import GlobalLoader from '../../elements/GlobalLoader';
@@ -99,6 +100,8 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
 
         {children}
       </div>
+
+      <WelcomeDialog />
 
       <GlobalInfo />
       <GlobalError />
