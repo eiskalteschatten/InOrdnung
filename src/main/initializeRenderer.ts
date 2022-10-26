@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron';
 import AbstractFileMain from './lib/projectFiles/AbstractFileMain';
 
-export default async (browserWindow: BrowserWindow) => {
+export default async (browserWindow: BrowserWindow, openWelcomeDialog?: boolean) => {
   const { webContents } = browserWindow;
 
   webContents.send('setPlatform', process.platform);
@@ -12,4 +12,6 @@ export default async (browserWindow: BrowserWindow) => {
   });
 
   await AbstractFileMain.getRecentProjects(webContents);
+
+  webContents.send('setOpenWelcomeDialog', openWelcomeDialog ?? false);
 };

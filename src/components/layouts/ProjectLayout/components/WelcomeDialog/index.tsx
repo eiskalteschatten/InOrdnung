@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
-import { useAppSelector } from '../../../../../store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../../store/hooks';
+import { setOpenWelcomeDialog } from '../../../../../store/entities/ui/session';
 
 import config from '../../../../../config';
 import Dialog from '../../../../elements/Dialog';
@@ -18,9 +19,10 @@ const WelcomeDialog: React.FC = () => {
   const { t } = useTranslation(['common', 'projects']);
   const { recentProjects } = useAppSelector(state => state.app);
   const { fileLoaded } = useAppSelector(state => state.file);
-  const [open, setOpen] = useState<boolean>(false);
+  const { openWelcomeDialog } = useAppSelector(state => state.ui.session);
+  const dispatch = useAppDispatch();
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => dispatch(setOpenWelcomeDialog(false));
 
   const handleNewProject = () => fileLoaded
     ? window.api.send('createNewProject')
@@ -35,7 +37,7 @@ const WelcomeDialog: React.FC = () => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog open={openWelcomeDialog} onClose={handleClose}>
       <DialogContent className={styles.welcomeDialog}>
         <div className={styles.iconSide}>
           <Icon className={styles.icon} />

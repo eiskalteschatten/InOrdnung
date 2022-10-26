@@ -39,7 +39,7 @@ export default (_app: Electron.App): void => {
       await installExtension(REDUX_DEVTOOLS);
     }
 
-    createProjectWindow();
+    createProjectWindow({ openWelcomeDialog: true });
 
     setTimeout(() => checkForUpdates(false), 3000);
   }).catch(log.error);

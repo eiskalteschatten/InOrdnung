@@ -31,7 +31,14 @@ const getWindowPreferences = async (): Promise<WindowPreferences> => {
   }
 };
 
-export default async (projectFile?: ProjectFile, filePath?: string): Promise<BrowserWindow> => {
+interface ProjectWindowOptions {
+  projectFile?: ProjectFile;
+  filePath?: string;
+  openWelcomeDialog?: boolean;
+}
+
+export default async (options?: ProjectWindowOptions): Promise<BrowserWindow> => {
+  const { projectFile, filePath, openWelcomeDialog } = options ?? {};
   const preferences = await getWindowPreferences();
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
   const defaultWidth = Math.floor(screenWidth * 0.6);
@@ -115,7 +122,7 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     newWindow.on('closed', () => closed(newWindow));
 
     newWindow.webContents.on('did-finish-load', async (): Promise<void> => {
-      await initializeRenderer(newWindow);
+      await initializeRenderer(newWindow, openWelcomeDialog);
 
       if (projectFile && filePath) {
         newWindow.webContents.send('openProject', projectFile, filePath);
