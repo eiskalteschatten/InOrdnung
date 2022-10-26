@@ -79,7 +79,7 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
         setJustOpened(false);
       }, 1000));
     }
-  }, [project, ui]);
+  }, [project, ui.preferences]);
 
   return (
     <div
