@@ -115,12 +115,12 @@ export default async (projectFile?: ProjectFile, filePath?: string): Promise<Bro
     newWindow.on('closed', () => closed(newWindow));
 
     newWindow.webContents.on('did-finish-load', async (): Promise<void> => {
-      initializeRenderer(newWindow);
+      await initializeRenderer(newWindow);
 
       if (projectFile && filePath) {
         newWindow.webContents.send('openProject', projectFile, filePath);
         const { name } = projectFile.project.info;
-        await AbstractFileMain.addToRecentProjects(filePath, name);
+        await AbstractFileMain.addToRecentProjects(filePath, newWindow, name);
       }
     });
 

@@ -1,6 +1,7 @@
 import { BrowserWindow } from 'electron';
+import AbstractFileMain from './lib/projectFiles/AbstractFileMain';
 
-export default (browserWindow: BrowserWindow): void => {
+export default async (browserWindow: BrowserWindow) => {
   const { webContents } = browserWindow;
 
   webContents.send('setPlatform', process.platform);
@@ -9,4 +10,6 @@ export default (browserWindow: BrowserWindow): void => {
     webContents.send('setCanGoBack', webContents.canGoBack());
     webContents.send('setCanGoForward', webContents.canGoForward());
   });
+
+  await AbstractFileMain.getRecentProjects(webContents);
 };

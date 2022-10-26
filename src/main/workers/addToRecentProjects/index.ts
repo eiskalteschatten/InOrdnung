@@ -7,7 +7,7 @@ import config from '../../../config/main';
 import AbstractFileMain from '../../lib/projectFiles/AbstractFileMain';
 import { RecentProjectsLocalStorage } from '../../../shared/interfaces/settings';
 
-ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath }): Promise<void> => {
+ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePath, window }): Promise<void> => {
   const pathToLockFile = path.resolve(config.storagePath, 'recentProjects.lock');
 
   if (fs.existsSync(pathToLockFile)) {
@@ -34,5 +34,10 @@ ipcMain.on('addToRecentProjects', async (e: IpcMainEvent, { projectName, filePat
   await fsPromises.unlink(pathToLockFile);
 
   log.info('Project added to recent projects list');
+
+  if (window) {
+    window.webContents.send('setRecentProjects', recentProjects);
+  }
+
   e.sender.send('addToRecentProjectsFinished');
 });

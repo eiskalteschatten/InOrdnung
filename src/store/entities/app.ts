@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { RecentProjectsLocalStorage } from '../../shared/interfaces/settings';
+
 export interface State {
   platform: string;
   prefersDarkMode?: boolean;
   canGoBack: boolean;
   canGoForward: boolean;
+  recentProjects?: RecentProjectsLocalStorage[];
 }
 
 const initialState: State = {
@@ -12,6 +15,7 @@ const initialState: State = {
   prefersDarkMode: false,
   canGoBack: false,
   canGoForward: false,
+  recentProjects: [],
 };
 
 export const slice = createSlice({
@@ -30,6 +34,9 @@ export const slice = createSlice({
     setCanGoForward: (state, action: PayloadAction<boolean>) => {
       state.canGoForward =  action.payload;
     },
+    setRecentProjects: (state, action: PayloadAction<RecentProjectsLocalStorage[]>) => {
+      state.recentProjects =  action.payload;
+    },
   },
 });
 
@@ -38,6 +45,7 @@ export const {
   setPrefersDarkMode,
   setCanGoBack,
   setCanGoForward,
+  setRecentProjects,
 } = slice.actions;
 
 export const { reducer } = slice;

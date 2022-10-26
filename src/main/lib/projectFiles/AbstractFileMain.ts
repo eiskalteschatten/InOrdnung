@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog } from 'electron';
+import { app, BrowserWindow, dialog, WebContents } from 'electron';
 import log from 'electron-log';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
@@ -46,7 +46,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
     }
   }
 
-  static async addToRecentProjects(filePath: string, projectName?: string) {
+  static async addToRecentProjects(filePath: string, window?: BrowserWindow, projectName?: string) {
     try {
       const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../workers/addToRecentProjects', 'index.html');
 
@@ -62,7 +62,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
 
       addToRecentProjectsWindow.loadURL(addToRecentProjectsPath);
       addToRecentProjectsWindow.webContents.on('did-finish-load', () => {
-        addToRecentProjectsWindow.webContents.send('startWorker', { projectName, filePath });
+        addToRecentProjectsWindow.webContents.send('startWorker', { projectName, filePath, window });
       });
     }
     catch (error) {
@@ -70,7 +70,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
     }
   }
 
-  static async getRecentProjects(): Promise<RecentProjectsLocalStorage[]> {
+  static async getRecentProjects(webContents?: WebContents): Promise<RecentProjectsLocalStorage[]> {
     let recentProjects = [];
 
     try {
@@ -86,6 +86,10 @@ export default abstract class AbstractFileMain<ProjectFile> {
         if (!fs.existsSync(recentProjects[index].path)) {
           delete recentProjects[index];
         }
+      }
+
+      if (webContents) {
+        webContents.send('setRecentProjects', recentProjects);
       }
     }
     catch (error) {
