@@ -56,7 +56,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
         show: false,
         webPreferences: {
           contextIsolation: true,
-          preload: path.join(__dirname, '../preload.js'),
+          preload: path.join(__dirname, '../../preload.js'),
         },
       });
 
