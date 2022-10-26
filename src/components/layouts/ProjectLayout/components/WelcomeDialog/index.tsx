@@ -2,6 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
+import { useAppSelector } from '../../../../../store/hooks';
+
 import config from '../../../../../config';
 import Dialog from '../../../../elements/Dialog';
 import DialogContent from '../../../../elements/DialogContent';
@@ -14,12 +16,17 @@ import styles from './styles.module.scss';
 
 const WelcomeDialog: React.FC = () => {
   const { t } = useTranslation(['common', 'projects']);
+  const { recentProjects } = useAppSelector(state => state.app);
 
   const handleNewProject = () => {
     // TODO
   };
 
   const handleOpenProject = () => {
+    // TODO
+  };
+
+  const handleOpenRecentProject = () => {
     // TODO
   };
 
@@ -52,11 +59,27 @@ const WelcomeDialog: React.FC = () => {
         </div>
 
         <div className={clsx(styles.recentProjects, {
-          [styles.loading]: true,
+          [styles.loading]: !Array.isArray(recentProjects),
         })}>
-          <div className={styles.spinner}>
-            <Spinner />
-          </div>
+          {Array.isArray(recentProjects) ? (
+            <>
+              {recentProjects.map((project, index) => (
+                <Button
+                  key={index}
+                  large
+                  onClick={handleOpenRecentProject}
+                  contentClassName={styles.recentProjectButton}
+                >
+                  <div className={styles.name}>{project.name}</div>
+                  <div className={styles.path}>{project.path}</div>
+                </Button>
+              ))}
+            </>
+          ) : (
+            <div className={styles.spinner}>
+              <Spinner />
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>

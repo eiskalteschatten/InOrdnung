@@ -17,6 +17,7 @@ interface InitialProps {
   showLoader?: boolean;
   fullWidth?: boolean;
   centerContent?: boolean;
+  contentClassName?: string;
 }
 
 interface LinkProps extends InitialProps, AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -30,7 +31,7 @@ interface ButtonProps extends InitialProps, ButtonHTMLAttributes<HTMLButtonEleme
 type Props = LinkProps | ButtonProps;
 
 const Button: React.FC<Props> = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>((props, ref) => {
-  const { children, to, iconButton, deleteButton, large, primary, icon, iconRight, showLoader, fullWidth, centerContent, ...leftoverProps } = props;
+  const { children, to, iconButton, deleteButton, large, primary, icon, iconRight, showLoader, fullWidth, centerContent, contentClassName, ...leftoverProps } = props;
 
   const classes = useMemo(() => clsx(styles.button, props.className, {
     [styles.iconButton]: iconButton,
@@ -41,7 +42,7 @@ const Button: React.FC<Props> = forwardRef<HTMLAnchorElement | HTMLButtonElement
   }), [props]);
 
   const Content: React.FC = () => (
-    <div className={clsx(styles.content, {
+    <div className={clsx(styles.content, contentClassName, {
       [styles.centerContent]: centerContent,
     })}>
       {showLoader && (

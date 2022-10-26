@@ -15,7 +15,6 @@ const initialState: State = {
   prefersDarkMode: false,
   canGoBack: false,
   canGoForward: false,
-  recentProjects: [],
 };
 
 export const slice = createSlice({

@@ -36,10 +36,30 @@
     display: flex;
     flex-direction: column;
     flex-basis: 50%;
+    gap: 10px;
 
     &.loading {
       align-items: center;
       justify-content: center;
+    }
+
+    .recentProjectButton {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .name {
+        font-size: .9em;
+      }
+
+      .path {
+        font-size: .7em;
+        opacity: .5;
+      }
     }
 
     .spinner {
