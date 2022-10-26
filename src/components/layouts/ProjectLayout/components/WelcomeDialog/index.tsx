@@ -31,7 +31,11 @@ const WelcomeDialog: React.FC = () => {
   const handleOpenProject = () => window.api.send('openFileDialog');
   const handleOpenRecentProject = (filePath: string) => window.api.send('openFile', filePath);
 
-  useEffect(() => window.api.send('getRecentProjects'), []);
+  useEffect(() => {
+    if (openWelcomeDialog) {
+      window.api.send('getRecentProjects');
+    }
+  }, [openWelcomeDialog]);
 
   return (
     <Dialog open={openWelcomeDialog} onClose={handleClose}>
