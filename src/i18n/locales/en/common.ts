@@ -18,4 +18,5 @@ export default {
   url: 'URL',
   status: 'Status',
   none: 'None',
+  version: 'Version',
 };

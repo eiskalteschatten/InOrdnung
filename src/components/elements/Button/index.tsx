@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, AnchorHTMLAttributes, forwardRef, RefObject } from 'react';
+import React, { ButtonHTMLAttributes, AnchorHTMLAttributes, forwardRef, RefObject, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
@@ -15,6 +15,8 @@ interface InitialProps {
   iconRight?: React.ReactNode;
   ref?: React.ForwardedRef<HTMLAnchorElement | HTMLButtonElement>;
   showLoader?: boolean;
+  fullWidth?: boolean;
+  centerContent?: boolean;
 }
 
 interface LinkProps extends InitialProps, AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -28,17 +30,20 @@ interface ButtonProps extends InitialProps, ButtonHTMLAttributes<HTMLButtonEleme
 type Props = LinkProps | ButtonProps;
 
 const Button: React.FC<Props> = forwardRef<HTMLAnchorElement | HTMLButtonElement, Props>((props, ref) => {
-  const { children, to, iconButton, deleteButton, large, primary, icon, iconRight, showLoader, ...leftoverProps } = props;
+  const { children, to, iconButton, deleteButton, large, primary, icon, iconRight, showLoader, fullWidth, centerContent, ...leftoverProps } = props;
 
-  const classes = clsx(styles.button, props.className, {
+  const classes = useMemo(() => clsx(styles.button, props.className, {
     [styles.iconButton]: iconButton,
     [styles.deleteButton]: deleteButton,
     [styles.large]: large,
     [styles.primary]: primary,
-  });
+    [styles.fullWidth]: fullWidth,
+  }), [props]);
 
   const Content: React.FC = () => (
-    <div className={styles.content}>
+    <div className={clsx(styles.content, {
+      [styles.centerContent]: centerContent,
+    })}>
       {showLoader && (
         <div className={styles.loader}>
           <Spinner />
