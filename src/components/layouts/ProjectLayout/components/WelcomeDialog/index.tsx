@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
@@ -17,10 +17,14 @@ import styles from './styles.module.scss';
 const WelcomeDialog: React.FC = () => {
   const { t } = useTranslation(['common', 'projects']);
   const { recentProjects } = useAppSelector(state => state.app);
+  const { fileLoaded } = useAppSelector(state => state.file);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleNewProject = () => {
-    // TODO
-  };
+  const handleClose = () => setOpen(false);
+
+  const handleNewProject = () => fileLoaded
+    ? window.api.send('createNewProject')
+    : handleClose();
 
   const handleOpenProject = () => {
     // TODO
@@ -31,7 +35,7 @@ const WelcomeDialog: React.FC = () => {
   };
 
   return (
-    <Dialog open={true} onClose={() => {}}>
+    <Dialog open={open} onClose={handleClose}>
       <DialogContent className={styles.welcomeDialog}>
         <div className={styles.iconSide}>
           <Icon className={styles.icon} />

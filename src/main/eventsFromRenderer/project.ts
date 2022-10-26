@@ -3,6 +3,9 @@ import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 
 import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
 import getFileMainInstance from '../lib/projectFiles';
+import createProjectWindow from '../windows/project';
+
+ipcMain.on('createNewProject', () => createProjectWindow());
 
 ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData, closeWindow = false) => {
   const window = BrowserWindow.fromWebContents(e.sender);
