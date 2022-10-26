@@ -38,6 +38,9 @@
     flex-direction: column;
     flex-basis: 50%;
     gap: 10px;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
 
     &.noRecentProject {
       align-items: center;
