@@ -49,7 +49,6 @@ export default class FileMain extends AbstractFileMain<ProjectFile> {
           ...fileMetaData,
           saved: true,
           fileLoaded: true,
-          isNewProject: false,
         });
 
         window.setDocumentEdited(false);

@@ -43,7 +43,6 @@ export default class FileRenderer extends AbstractFileRenderer<ProjectFile> {
       path,
       fileLoaded: true,
       saved: true,
-      isNewProject: false,
     }));
   }
 }
