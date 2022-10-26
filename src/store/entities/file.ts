@@ -5,9 +5,10 @@ import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 export type State = FileStoreMetaData;
 
 const initialState: State = {
-  saved: false,
+  saved: true,
   fileLoaded: false,
   path: '',
+  isNewProject: true,
 };
 
 export const slice = createSlice({
@@ -27,6 +28,9 @@ export const slice = createSlice({
     setPath: (state, action: PayloadAction<string>) => {
       state.path = action.payload;
     },
+    setIsNewProject: (state, action: PayloadAction<boolean>) => {
+      state.isNewProject = action.payload;
+    },
   },
 });
 
@@ -35,6 +39,7 @@ export const {
   setSaved,
   setFileLoaded,
   setPath,
+  setIsNewProject,
 } = slice.actions;
 
 export const { reducer } = slice;

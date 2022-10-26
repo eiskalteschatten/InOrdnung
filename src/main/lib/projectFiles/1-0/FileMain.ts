@@ -22,7 +22,6 @@ export default class FileMain extends AbstractFileMain<ProjectFile> {
 
     if (!canceled) {
       window.setRepresentedFilename(filePath || '');
-      window.webContents.send('setProjectFileMetaData', { path: filePath });
 
       const writeFileMetaData = {
         ...fileMetaData,
@@ -50,6 +49,7 @@ export default class FileMain extends AbstractFileMain<ProjectFile> {
           ...fileMetaData,
           saved: true,
           fileLoaded: true,
+          isNewProject: false,
         });
 
         window.setDocumentEdited(false);
