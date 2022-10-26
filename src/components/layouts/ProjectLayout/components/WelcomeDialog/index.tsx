@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import clsx from 'clsx';
 
@@ -30,6 +30,8 @@ const WelcomeDialog: React.FC = () => {
 
   const handleOpenProject = () => window.api.send('openFileDialog');
   const handleOpenRecentProject = (filePath: string) => window.api.send('openFile', filePath);
+
+  useEffect(() => window.api.send('getRecentProjects'), []);
 
   return (
     <Dialog open={openWelcomeDialog} onClose={handleClose}>

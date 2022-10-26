@@ -47,3 +47,7 @@ ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> 
 ipcMain.on('openFileDialog', async (): Promise<void> => {
   await AbstractFileMain.openFileDialog();
 });
+
+ipcMain.on('getRecentProjects', async (e: IpcMainEvent): Promise<void> => {
+  await AbstractFileMain.getRecentProjects(e.sender);
+});
