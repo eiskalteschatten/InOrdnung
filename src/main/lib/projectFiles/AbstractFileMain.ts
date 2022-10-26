@@ -48,7 +48,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
 
   static async addToRecentProjects(filePath: string, window?: BrowserWindow, projectName?: string) {
     try {
-      const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../workers/addToRecentProjects', 'index.html');
+      const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../../workers/addToRecentProjects', 'index.html');
 
       const addToRecentProjectsWindow = new BrowserWindow({
         width: 400,
@@ -62,7 +62,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
 
       addToRecentProjectsWindow.loadURL(addToRecentProjectsPath);
       addToRecentProjectsWindow.webContents.on('did-finish-load', () => {
-        addToRecentProjectsWindow.webContents.send('startWorker', { projectName, filePath, window });
+        addToRecentProjectsWindow.webContents.send('startWorker', { projectName, filePath });
       });
     }
     catch (error) {
