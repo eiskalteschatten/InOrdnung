@@ -62,9 +62,9 @@ const WelcomeDialog: React.FC = () => {
         </div>
 
         <div className={clsx(styles.recentProjects, {
-          [styles.loading]: !Array.isArray(recentProjects),
+          [styles.noRecentProject]: !Array.isArray(recentProjects) || recentProjects.length === 0,
         })}>
-          {Array.isArray(recentProjects) ? (
+          {Array.isArray(recentProjects) && recentProjects.length > 0 ? (
             <>
               {recentProjects.map((project, index) => (
                 <Button
@@ -79,6 +79,12 @@ const WelcomeDialog: React.FC = () => {
               ))}
             </>
           ) : (
+            <div className={styles.noRecentProjectsFound}>
+              {t('projects:noRecentProjectsFound')}
+            </div>
+          )}
+
+          {!Array.isArray(recentProjects) && (
             <div className={styles.spinner}>
               <Spinner />
             </div>

@@ -39,7 +39,7 @@
     flex-basis: 50%;
     gap: 10px;
 
-    &.loading {
+    &.noRecentProject {
       align-items: center;
       justify-content: center;
     }
@@ -61,6 +61,11 @@
         font-size: .7em;
         opacity: .5;
       }
+    }
+
+    .noRecentProjectsFound {
+      font-size: .8em;
+      opacity: .5;
     }
 
     .spinner {
