@@ -55,8 +55,8 @@ export default (): MenuItem => {
       item: {
         label: t('appMenu:open'),
         accelerator: 'CmdOrCtrl+O',
-        click: async (): Promise<void> => {
-          await AbstractFileMain.openFileDialog();
+        click: async (item: ElectronMenuItem, focusedWindow?: BrowserWindow): Promise<void> => {
+          await AbstractFileMain.openFileDialog(focusedWindow?.webContents);
         },
       },
     },

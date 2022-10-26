@@ -41,11 +41,11 @@ ipcMain.on('projectIsEdited', (e: IpcMainEvent, isEdited = true): void => {
 });
 
 ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
-  await AbstractFileMain.openFile(filePath);
+  await AbstractFileMain.openFile(filePath, e.sender);
 });
 
-ipcMain.on('openFileDialog', async (): Promise<void> => {
-  await AbstractFileMain.openFileDialog();
+ipcMain.on('openFileDialog', async (e: IpcMainEvent): Promise<void> => {
+  await AbstractFileMain.openFileDialog(e.sender);
 });
 
 ipcMain.on('getRecentProjects', async (e: IpcMainEvent): Promise<void> => {

@@ -15,7 +15,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
   abstract saveFileAs(projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void>
   abstract writeFile(projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void>
 
-  static async openFileDialog() {
+  static async openFileDialog(webContents?: WebContents) {
     try {
       const { filePaths, canceled } = await dialog.showOpenDialog({
         filters: [
@@ -25,7 +25,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
       });
 
       if (!canceled) {
-        await AbstractFileMain.openFile(filePaths[0]);
+        await AbstractFileMain.openFile(filePaths[0], webContents);
       }
     }
     catch (error) {
@@ -33,13 +33,17 @@ export default abstract class AbstractFileMain<ProjectFile> {
     }
   }
 
-  static async openFile(filePath: string) {
+  static async openFile(filePath: string, webContents?: WebContents) {
     try {
       const fileContents = await fsPromises.readFile(filePath, 'utf8');
       const projectFile = JSON.parse(fileContents);
       const window = await createProjectWindow({ projectFile, filePath });
       window.setRepresentedFilename(filePath || '');
       app.addRecentDocument(filePath);
+
+      if (webContents) {
+        webContents.send('closeWindowIfFileNotLoaded');
+      }
     }
     catch (error) {
       log.error(error);
