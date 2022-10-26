@@ -1,3 +1,5 @@
+import { BrowserWindow, MenuItem as ElectronMenuItem } from 'electron';
+
 import { MenuItem } from '../../menuBuilder';
 import i18n from '../../../../i18n/main';
 
@@ -34,6 +36,15 @@ export default (): MenuItem => {
       item: {
         label: t('appMenu:togglefullscreen'),
         role: 'togglefullscreen',
+      },
+    },
+    { item: { type: 'separator' } },
+    {
+      item: {
+        label: t('appMenu:openWelcomeDialog'),
+        click: (item: ElectronMenuItem, focusedWindow?: BrowserWindow): void => {
+          focusedWindow?.webContents.send('setOpenWelcomeDialog', true);
+        },
       },
     },
     { item: { type: 'separator' } },
