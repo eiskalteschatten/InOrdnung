@@ -28,13 +28,8 @@ const WelcomeDialog: React.FC = () => {
     ? window.api.send('createNewProject')
     : handleClose();
 
-  const handleOpenProject = () => {
-    // TODO
-  };
-
-  const handleOpenRecentProject = () => {
-    // TODO
-  };
+  const handleOpenProject = () => window.api.send('openFileDialog');
+  const handleOpenRecentProject = (filePath: string) => window.api.send('openFile', filePath);
 
   return (
     <Dialog open={openWelcomeDialog} onClose={handleClose}>
@@ -73,7 +68,7 @@ const WelcomeDialog: React.FC = () => {
                 <Button
                   key={index}
                   large
-                  onClick={handleOpenRecentProject}
+                  onClick={() => handleOpenRecentProject(project.path)}
                   contentClassName={styles.recentProjectButton}
                 >
                   <div className={styles.name}>{project.name}</div>

@@ -3,6 +3,7 @@ import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 
 import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
 import getFileMainInstance from '../lib/projectFiles';
+import AbstractFileMain from '../lib/projectFiles/AbstractFileMain';
 import createProjectWindow from '../windows/project';
 
 ipcMain.on('createNewProject', () => createProjectWindow());
@@ -40,11 +41,9 @@ ipcMain.on('projectIsEdited', (e: IpcMainEvent, isEdited = true): void => {
 });
 
 ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
-  const fileClass = await getFileMainInstance();
-  await fileClass.openFile(filePath);
+  await AbstractFileMain.openFile(filePath);
 });
 
 ipcMain.on('openFileDialog', async (): Promise<void> => {
-  const fileClass = await getFileMainInstance();
-  await fileClass.openFileDialog();
+  await AbstractFileMain.openFileDialog();
 });
