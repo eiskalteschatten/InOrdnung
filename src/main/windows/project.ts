@@ -127,7 +127,7 @@ export default async (options?: ProjectWindowOptions): Promise<BrowserWindow> =>
       if (projectFile && filePath) {
         newWindow.webContents.send('openProject', projectFile, filePath);
         const { name } = projectFile.project.info;
-        await AbstractFileMain.addToRecentProjects(filePath, newWindow, name);
+        await AbstractFileMain.addToRecentProjects(filePath, name);
       }
     });
 

@@ -46,7 +46,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
     }
   }
 
-  static async addToRecentProjects(filePath: string, window?: BrowserWindow, projectName?: string) {
+  static async addToRecentProjects(filePath: string, projectName?: string) {
     try {
       const addToRecentProjectsPath = 'file://' + path.join(__dirname, '../../workers/addToRecentProjects', 'index.html');
 

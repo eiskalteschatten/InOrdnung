@@ -57,7 +57,6 @@ export default class FileMain extends AbstractFileMain<ProjectFile> {
 
         await AbstractFileMain.addToRecentProjects(
           fileMetaData.path,
-          window,
           projectFile.project.info.name
         );
       }
