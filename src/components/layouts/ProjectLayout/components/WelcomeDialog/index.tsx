@@ -1,10 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import clsx from 'clsx';
 
 import config from '../../../../../config';
 import Dialog from '../../../../elements/Dialog';
 import DialogContent from '../../../../elements/DialogContent';
 import Button from '../../../../elements/Button';
+import Spinner from '../../../../elements/Spinner';
 
 import { ReactComponent as Icon } from '../../../../../assets/images/icon.svg';
 
@@ -49,8 +51,12 @@ const WelcomeDialog: React.FC = () => {
           </div>
         </div>
 
-        <div>
-          recent projects
+        <div className={clsx(styles.recentProjects, {
+          [styles.loading]: true,
+        })}>
+          <div className={styles.spinner}>
+            <Spinner />
+          </div>
         </div>
       </DialogContent>
     </Dialog>
