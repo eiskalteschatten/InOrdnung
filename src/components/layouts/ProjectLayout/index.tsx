@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { IpcRendererEvent } from 'electron';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +24,6 @@ interface Props {
 
 const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
   const dispatch = useAppDispatch();
-  const platform = useAppSelector(state => state.app.platform);
   const { project, ui, file } = useAppSelector(state => state);
   const { t } = useTranslation(['common']);
   const [autoSaveTimeout, setAutoSaveTimeout] = useState<NodeJS.Timeout>();
