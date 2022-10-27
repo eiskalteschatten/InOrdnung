@@ -1,19 +1,7 @@
 import { IpcRendererEvent } from 'electron';
 
-import { Bookmark } from '../interfaces/bookmarks';
-import { isValidUrl } from '../lib/links';
+import { createBookmark, deleteBookmark, editBookmark } from '../shared/lib/bookmarks';
 
-import { dispatch } from '../store';
-import { projectDeleteBookmark } from '../store/actions/projectActions/bookmarkActions';
-
-window.api.on('openBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
-  if (bookmark.url && isValidUrl(bookmark.url)) {
-    window.shell.openExternal(bookmark.url);
-  }
-});
-
-window.api.on('deleteBookmark', (e: IpcRendererEvent, bookmark: Bookmark): void => {
-  if (bookmark.id) {
-    dispatch(projectDeleteBookmark(bookmark.id));
-  }
-});
+window.api.on('createBookmark', () => createBookmark());
+window.api.on('editBookmark', (e: IpcRendererEvent, id: string) => editBookmark(id));
+window.api.on('deleteBookmark', (e: IpcRendererEvent, id: string) => deleteBookmark(id));

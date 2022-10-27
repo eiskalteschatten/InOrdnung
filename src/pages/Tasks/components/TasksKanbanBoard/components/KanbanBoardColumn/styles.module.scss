@@ -1,0 +1,48 @@
+@import "../../../../../../scss/variables";
+
+.kanbanBoardColumn {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  width: 33%;
+  padding: 10px 15px;
+  margin: 5px;
+  background-color: var(--background-color);
+  border-radius: $borderRadius;
+
+  &.draggedOver {
+    opacity: .5;
+  }
+
+  .title {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .marker {
+      $size: 15px;
+      height: $size;
+      width: $size;
+      border-radius: 50%;
+
+      &.todo {
+        background-color: $todoColor;
+      }
+
+      &.doing {
+        background-color: $doingColor;
+      }
+
+      &.done {
+        background-color: $doneColor;
+      }
+    }
+  }
+
+  .tasks {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
+}

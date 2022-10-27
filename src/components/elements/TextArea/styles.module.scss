@@ -1,0 +1,71 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.wrapper {
+  display: inline-block;
+
+  &.fullWidth {
+    display: block;
+    width: 100%;
+
+    .inputIcon {
+      display: block;
+    }
+  }
+
+  .label {
+    margin-bottom: 5px;
+    text-align: left;
+    user-select: none;
+  }
+
+  .inputIcon {
+    @include formBase;
+
+    display: flex;
+    padding: 0 5px;
+    background-color: darken($lightBg, 6%);
+    align-items: center;
+    display: inline-block;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: lighten($darkBg, 2%);
+    }
+
+    &.error {
+      border: 1px solid $errorColor;
+    }
+
+    &.focused {
+      box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+      background-color: darken($lightBg, 6%);
+
+      @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+        background-color: lighten($darkBg, 5%);
+      }
+    }
+
+    .input {
+      background-color: transparent;
+      outline: none;
+      padding: 4px 10px;
+      border: none;
+      color: var(--color);
+      width: 100%;
+
+      &.large {
+        font-size: 1.1em;
+        padding: 8px 14px;
+      }
+    }
+  }
+
+  .errorMessage {
+    font-size: .8em;
+    margin-top: 5px;
+    color: $errorColor;
+    text-align: left;
+  }
+}
+

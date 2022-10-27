@@ -1,7 +1,6 @@
 import './app';
+import './ui';
 import './project';
-import './projectInfo';
-import './tasks';
-import './quickNotes';
 import './bookmarks';
-import './kanban';
+import './tasks';
+import './window';

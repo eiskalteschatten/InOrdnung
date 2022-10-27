@@ -1,6 +1,7 @@
+import './general';
+import './generalContextMenus';
+import './navigation';
 import './project';
-import './projectInfo';
-import './tasks';
-import './quickNotes';
+import './windows';
 import './bookmarks';
-import './kanban';
+import './tasks';

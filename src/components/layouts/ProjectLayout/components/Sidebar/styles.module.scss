@@ -1,0 +1,26 @@
+@import "../../../../../scss/variables";
+
+.sidebar {
+  min-width: 260px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  font-size: .8em;
+  display: flex;
+
+  .contents {
+    height: 100%;
+    max-width: calc(100% - #{$columnDraggerWidth});
+    flex-grow: 1;
+
+    .title {
+      flex-grow: 0;
+      font-size: 1.2em;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px 0 20px;
+      user-select: none;
+    }
+  }
+}

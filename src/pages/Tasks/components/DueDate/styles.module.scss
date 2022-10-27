@@ -1,0 +1,7 @@
+@import "../../../../scss/variables";
+
+.dueDate {
+  &.overdue {
+    color: $paletteRed;
+  }
+}

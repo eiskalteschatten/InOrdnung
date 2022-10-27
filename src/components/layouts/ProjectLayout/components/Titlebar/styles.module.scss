@@ -1,0 +1,33 @@
+@import "../../../../../scss/variables";
+
+.titlebar {
+  height: $titlebarHeight;
+  width: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  -webkit-app-region: drag;
+  user-select: none;
+  z-index: 1000;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+
+  &.darwin {
+    padding: 5px 5px 5px 80px;
+  }
+
+  .appMenu {
+    margin-right: 15px;
+  }
+
+  .noDrag {
+    -webkit-app-region: no-drag;
+  }
+
+  .navButtons {
+    display: flex;
+  }
+}

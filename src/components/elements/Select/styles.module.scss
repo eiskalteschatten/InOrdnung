@@ -1,0 +1,46 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
+.label {
+  margin-bottom: 5px;
+}
+
+.select {
+  @include formBase;
+
+  background-color: darken($lightBg, 5%);
+  outline: none;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+
+  &:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: darken($darkBg, 5%);
+  }
+
+  &.large {
+    font-size: 1.1em;
+    padding: 8px 14px;
+  }
+
+  &.error {
+    border: 1px solid $errorColor;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.errorMessage {
+  font-size: .8em;
+  margin-top: 5px;
+  color: $errorColor;
+}

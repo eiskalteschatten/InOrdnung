@@ -1,0 +1,25 @@
+.checkbox {
+  padding: 0 5px;
+  user-select: none;
+
+  &:active {
+    opacity: .6;
+  }
+}
+
+.buttonCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  visibility: hidden;
+
+  &.visible {
+    visibility: visible;
+  }
+}
+
+.done {
+  opacity: .4;
+  text-decoration: line-through;
+}

@@ -1,13 +1,9 @@
 import { ipcMain, IpcMainEvent, BrowserWindow, Menu } from 'electron';
 
-import bookmarkMenuCm from '../menus/cmMenus/bookmarkMenu';
-import { Bookmark } from '../../interfaces/bookmarks';
+import bookmarkContextMenu from '../menus/contextMenus/bookmark';
 
-ipcMain.on('showBookmarkMenu', (e: IpcMainEvent, bookmark: Bookmark): void => {
-  const window = BrowserWindow.fromWebContents(e.sender);
-
-  if (window) {
-    const menu = Menu.buildFromTemplate(bookmarkMenuCm(bookmark));
-    menu.popup({ window });
-  }
+ipcMain.on('openBookmarkContextMenu', (e: IpcMainEvent, bookmarkId: string): void => {
+  const window = BrowserWindow.fromWebContents(e.sender) || undefined;
+  const menu = Menu.buildFromTemplate(bookmarkContextMenu(bookmarkId));
+  menu?.popup({ window });
 });

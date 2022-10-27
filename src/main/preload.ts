@@ -1,11 +1,10 @@
 import { contextBridge, ipcRenderer, shell } from 'electron';
 
-import config from '../config';
-
 contextBridge.exposeInMainWorld(
   'api',
   {
     send: ipcRenderer.send,
+    sendSync: ipcRenderer.sendSync,
     on: (channel: any, callback: any): void => {
       ipcRenderer.on(channel, callback);
     },
@@ -25,12 +24,5 @@ contextBridge.exposeInMainWorld(
   'shell',
   {
     openExternal: (url: string): Promise<void> => shell.openExternal(url),
-  }
-);
-
-contextBridge.exposeInMainWorld(
-  'app',
-  {
-    getVersion: () => config.app.version,
   }
 );

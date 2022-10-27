@@ -1,7 +1,5 @@
 node_modules
 
-src/assets/css
-
 *.code-workspace
 
 .DS_Store
@@ -12,3 +10,5 @@ build
 
 .build-cache
 .eslintcache
+
+.env

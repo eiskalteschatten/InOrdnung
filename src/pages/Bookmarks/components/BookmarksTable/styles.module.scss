@@ -1,0 +1,17 @@
+.linkCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttonCell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  visibility: hidden;
+
+  &.visible {
+    visibility: visible;
+  }
+}

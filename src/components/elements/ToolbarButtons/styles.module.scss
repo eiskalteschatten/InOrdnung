@@ -1,0 +1,19 @@
+@import "../../../scss/variables";
+
+.button {
+  position: relative;
+
+  .dropdownOpen {
+    background-color: darken($lightBg, 6%);
+    color: $lightColor;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: darken($darkBg, 3%);
+      color: $darkColor;
+    }
+  }
+}
+
+.dropdownIcon {
+  font-size: .9em !important;
+}

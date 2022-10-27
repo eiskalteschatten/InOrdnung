@@ -1,0 +1,34 @@
+@import "../../../scss/variables";
+
+.rightSidebar {
+  display: flex;
+  font-size: .9em;
+
+  .contentWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+    border-top-left-radius: $borderRadius;
+    background-color: var(--secondary-background-color);
+    padding: 15px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+
+      .title {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+    }
+
+    .content {
+      flex-grow: 1;
+    }
+  }
+}

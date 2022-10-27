@@ -1,0 +1,16 @@
+@import "../../../scss/variables";
+
+.popupBase {
+  position: absolute;
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: $borderRadius;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: lighten(#000000, 8%);
+    border: 1px solid $darkBorderColor;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+  }
+}

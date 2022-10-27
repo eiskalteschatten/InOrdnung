@@ -1,25 +1,37 @@
-import { ipcMain, IpcMainEvent, BrowserWindow } from 'electron';
+import { BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
+import { FileStoreMetaData } from '../../shared/interfaces/fileMetaData';
 
+import { ProjectFile } from '../../shared/lib/projectFiles/1-0/interfaces';
+import getFileMainInstance from '../lib/projectFiles';
+import AbstractFileMain from '../lib/projectFiles/AbstractFileMain';
 import createProjectWindow from '../windows/project';
-import { openFile, openFileDialog, saveFileAs, writeFile } from '../lib/projectFile';
-import { ProjectFile, ProjectFileMetaData } from '../../interfaces/project';
 
 ipcMain.on('createNewProject', () => createProjectWindow());
 
-ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: ProjectFileMetaData, closeWindow = false): Promise<void> => {
+ipcMain.on('saveProject', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData, closeWindow = false) => {
   const window = BrowserWindow.fromWebContents(e.sender);
+  const fileClass = await getFileMainInstance();
 
   if (window) {
     if (!fileMetaData.path) {
-      await saveFileAs(window);
+      await fileClass.saveFileAs(projectFile, fileMetaData, window);
     }
     else {
-      await writeFile(projectFile, fileMetaData, window);
+      await fileClass.writeFile(projectFile, fileMetaData, window);
 
       if (closeWindow) {
         window.close();
       }
     }
+  }
+});
+
+ipcMain.on('saveProjectAs', async (e: IpcMainEvent, projectFile: ProjectFile, fileMetaData: FileStoreMetaData) => {
+  const window = BrowserWindow.fromWebContents(e.sender);
+  const fileClass = await getFileMainInstance();
+
+  if (window) {
+    await fileClass.saveFileAs(projectFile, fileMetaData, window);
   }
 });
 
@@ -29,9 +41,13 @@ ipcMain.on('projectIsEdited', (e: IpcMainEvent, isEdited = true): void => {
 });
 
 ipcMain.on('openFile', async (e: IpcMainEvent, filePath: string): Promise<void> => {
-  await openFile(filePath);
+  await AbstractFileMain.openFile(filePath, e.sender);
 });
 
-ipcMain.on('openFileDialog', async (): Promise<void> => {
-  await openFileDialog();
+ipcMain.on('openFileDialog', async (e: IpcMainEvent): Promise<void> => {
+  await AbstractFileMain.openFileDialog(e.sender);
+});
+
+ipcMain.on('getRecentProjects', async (e: IpcMainEvent): Promise<void> => {
+  await AbstractFileMain.getRecentProjects(e.sender);
 });

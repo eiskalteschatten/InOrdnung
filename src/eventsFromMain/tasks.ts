@@ -1,12 +1,15 @@
 import { IpcRendererEvent } from 'electron';
 
-import { Task } from '../interfaces/tasks';
+import { createTask, createTaskList, deleteTask, deleteTaskList, editTask, renameTaskList } from '../shared/lib/tasks';
 
-import { dispatch } from '../store';
-import { projectDeleteTask } from '../store/actions/projectActions/taskActions';
+window.api.on('createTaskList', () => createTaskList());
+window.api.on('renameTaskList', (e: IpcRendererEvent, id: string) => renameTaskList(id));
+window.api.on('deleteTaskList', (e: IpcRendererEvent, id: string) => deleteTaskList(id));
 
-window.api.on('deleteTask', (e: IpcRendererEvent, task: Task): void => {
-  if (task.id) {
-    dispatch(projectDeleteTask(task.id));
-  }
+window.api.on('createTask', (e: IpcRendererEvent, taskListId?: string) => {
+  createTask(taskListId);
+  const navigateEvent = new CustomEvent('navigateTo', { detail: '/tasks' });
+  window.dispatchEvent(navigateEvent);
 });
+window.api.on('editTask', (e: IpcRendererEvent, taskId: string) => editTask(taskId));
+window.api.on('deleteTask', (e: IpcRendererEvent, taskId: string) => deleteTask(taskId));

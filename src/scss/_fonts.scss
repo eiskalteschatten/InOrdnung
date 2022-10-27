@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/MaterialIconsOutlined-Regular.otf') format("opentype");
+}
+
+@font-face {
+  font-family: 'Material Icons Filled';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/MaterialIcons-Regular.ttf') format("truetype");
+}
+
+@mixin material-icons {
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.3em;  /* Preferred icon size */
+  display: inline-block;
+  // line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  @include material-icons;
+}
+
+.material-icons-filled {
+  font-family: 'Material Icons Filled';
+  @include material-icons;
+}

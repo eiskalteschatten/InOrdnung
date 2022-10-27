@@ -1,0 +1,15 @@
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 5px 0;
+
+  .button {
+    display: flex;
+    align-items: center;
+    opacity: .6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+.welcomeDialog {
+  display: flex;
+  gap: 15px;
+  width: 600px;
+
+  .iconSide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-basis: 50%;
+    user-select: none;
+
+    .icon {
+      width: 150px;
+    }
+
+    .appName {
+      font-size: 2em;
+    }
+
+    .version {
+      opacity: .5;
+      font-size: .9em;
+    }
+
+    .buttons {
+      margin: 25px 0;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 175px;
+    }
+  }
+
+  .recentProjects {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    gap: 10px;
+    height: 100%;
+    overflow-y: auto;
+    position: relative;
+
+    &.noRecentProject {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .recentProjectButton {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .name {
+        font-size: .9em;
+      }
+
+      .path {
+        font-size: .7em;
+        opacity: .5;
+      }
+    }
+
+    .noRecentProjectsFound {
+      font-size: .8em;
+      opacity: .5;
+    }
+
+    .spinner {
+      width: 35px;
+      opacity: .8;
+    }
+  }
+}

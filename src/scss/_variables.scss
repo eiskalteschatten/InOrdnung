@@ -1,20 +1,37 @@
-$systemFont: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$macTitlebarSize: 22px;
+$primaryColor: #0d589b;
+$primaryColorLighter: #d1e3f9;
 
-$lightBgColor: #f0f0f0;
+$paletteBlue: #4285f4;
+$paletteDarkBlue: #01579b;
+$paletteYellow: #fbbc05;
+$paletteRed: #ea4335;
+$paletteGreen: #24a853;
+$paletteOrange: #ff8f00;
+$paletteDarkGray: #2F3436;
+$paletteLightGray: #D3D3D3;
+
+$lightBg: #fafafa;
+$lightSecondaryBg: #ffffff;
 $lightColor: #000000;
-$darkBgColor: #222222;
+$lightShadowColor: $paletteLightGray;
+$darkBg: #212121;
 $darkColor: #f0f0f0;
+$darkSecondaryBg: #333333;
+$lightBorderColor: #cfcfcf;
+$darkBorderColor: #333333;
+$darkShadowColor: #111111;
 
-$lightSidebarBgColor: #f0f0f0;
-$darkSidebarBgColor: #292929;
+$borderRadius: 3px;
 
-$lightButtonHoverBg: rgba(0, 0, 0, .1);
-$darkButtonHoverBg: rgba(255, 255, 255, .1);
-$lightButtonActiveBg: rgba(0, 0, 0, .15);
-$darkButtonActiveBg: rgba(255, 255, 255, .15);
+$dialogPadding: 10px;
+$dialogZIndex: 1000000;
 
-$darkFormBg: #121212;
+$titlebarHeight: 55px;
+$columnDraggerWidth: 5px;
 
-$lightBorderColor: rgba(0, 0, 0, 0.23);
-$darkBorderColor: rgba(255, 255, 255, 0.23);
+$successColor: $paletteGreen;
+$errorColor: $paletteRed;
+
+$todoColor: $paletteBlue;
+$doingColor: $paletteYellow;
+$doneColor: $paletteGreen;

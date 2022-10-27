@@ -1,0 +1,32 @@
+@import '../../../scss/variables';
+
+.column {
+  border-top-left-radius: $borderRadius;
+  border-top-right-radius: $borderRadius;
+  background-color: var(--secondary-background-color);
+  height: 100%;
+  overflow: auto;
+  position: relative;
+  margin-right: 5px;
+
+  &.flexGrow {
+    flex-grow: 1;
+  }
+
+  &.centered {
+    display: flex;
+    justify-content: center;
+
+    &.centeredContent {
+      flex-grow: 1;
+    }
+  }
+
+  &.padding {
+    padding: 5px 10px;
+  }
+
+  &.fullWidth {
+    margin-right: 10px;
+  }
+}

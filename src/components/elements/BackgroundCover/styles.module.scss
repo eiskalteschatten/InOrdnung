@@ -1,0 +1,13 @@
+@import "../../../scss/variables";
+
+.cover {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--background-color);
+  z-index: 1000;
+  opacity: .6;
+  -webkit-app-region: drag;
+}
