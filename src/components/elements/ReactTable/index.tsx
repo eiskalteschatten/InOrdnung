@@ -16,9 +16,10 @@ interface Props<T> {
   onRowHover?: (row: Row<T>) => void;
   onRowOut?: (row: Row<T>) => void;
   onRowContextMenu?: (row: Row<T>) => void;
+  onRowClick?: (row: Row<T>) => void;
 }
 
-function ReactTable<T>({ tableData, className, onRowHover, onRowOut, onRowContextMenu }: Props<T>): React.ReactElement {
+function ReactTable<T>({ tableData, className, onRowHover, onRowOut, onRowContextMenu, onRowClick }: Props<T>): React.ReactElement {
   const table = useReactTable(tableData);
 
   return (
@@ -65,6 +66,7 @@ function ReactTable<T>({ tableData, className, onRowHover, onRowOut, onRowContex
             onMouseOver={() => onRowHover && onRowHover(row)}
             onMouseOut={() => onRowOut && onRowOut(row)}
             onContextMenu={() => onRowContextMenu && onRowContextMenu(row)}
+            onClick={() => onRowClick && onRowClick(row)}
           >
             {row.getVisibleCells().map(cell => (
               <td key={cell.id} className={styles.column} style={{ width: cell.column.getSize() }}>

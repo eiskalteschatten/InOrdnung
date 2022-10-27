@@ -21,6 +21,7 @@ const KanbanBoardTask: React.FC<Props> = ({ task }) => {
       onContextMenu={() => window.api.send('openTaskContextMenu', task.id, taskListId)}
       draggable
       onDragStart={e => e.dataTransfer.setData('drag-task', task.id)}
+      onMouseUp={() => editTask(task.id)}
     >
       <div className={styles.name}>
         {task.name}

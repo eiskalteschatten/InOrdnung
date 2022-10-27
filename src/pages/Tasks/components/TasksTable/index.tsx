@@ -60,6 +60,10 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
     window.api.send('openTaskContextMenu', row.original.id, taskListId);
   };
 
+  const handleRowClick = (row: Row<Task>) => {
+    editTask(row.original.id);
+  };
+
   const handleMarkTaskAsDone = (id: string, status: TaskStatus) => {
     dispatch(updateTask({
       id,
@@ -161,6 +165,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       onRowHover={handleRowHover}
       onRowOut={handleRowOut}
       onRowContextMenu={handleRowContextMenu}
+      onRowClick={handleRowClick}
       tableData={{
         data: filteredTasks,
         columns,
