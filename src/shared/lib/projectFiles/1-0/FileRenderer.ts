@@ -1,6 +1,6 @@
 import { dispatch, getState } from '../../../../store';
 import { bookmarkSelectors } from '../../../../store/entities/project/bookmarks';
-import { setTaskLists, setTasks, taskListSelectors, taskSelectors } from '../../../../store/entities/project/tasks';
+import { setCurrentTaskNumber, setTaskLists, setTasks, taskListSelectors, taskSelectors } from '../../../../store/entities/project/tasks';
 import { setBookmarks } from '../../../../store/entities/project/bookmarks';
 import { setProjectInfo } from '../../../../store/entities/project/info';
 import { setGeneralUiPreferences } from '../../../../store/entities/ui/preferences/general';
@@ -34,6 +34,7 @@ export default class FileRenderer extends AbstractFileRenderer<ProjectFile> {
 
     dispatch(setTasks(projectFile.project.tasks || []));
     dispatch(setTaskLists(projectFile.project.taskLists || []));
+    dispatch(setCurrentTaskNumber(projectFile.project.currentTaskNumber));
 
     dispatch(setGeneralUiPreferences(projectFile.ui.general));
     dispatch(setBookmarkUiPreferences(projectFile.ui.bookmarks || {}));
