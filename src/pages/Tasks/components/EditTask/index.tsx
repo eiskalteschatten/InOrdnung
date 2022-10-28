@@ -78,6 +78,7 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
         value={toEdit?.description ?? ''}
         height='250px'
         minimap={false}
+        path={toEdit?.id}
       />
 
       <Select

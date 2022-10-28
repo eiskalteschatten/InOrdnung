@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import Editor, { EditorProps, loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor';
+import { v4 as uuidv4 } from 'uuid';
 
 import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
@@ -35,6 +36,7 @@ const MonacoEditor: React.FC<Props> = props => {
     resizeEventName,
     hideCurrentLanguage,
     wordWrap = 'on',
+    path = uuidv4(),
     ...leftoverProps
   } = props;
 
@@ -93,6 +95,7 @@ const MonacoEditor: React.FC<Props> = props => {
         defaultLanguage={defaultLanguage}
         loading={<Spinner className={styles.loader} />}
         onMount={handleEditorDidMount}
+        path={path}
         {...leftoverProps}
       />
 
