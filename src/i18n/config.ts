@@ -8,9 +8,10 @@ export const defaulti18nConfig: InitOptions = {
   defaultNS: 'common',
   fallbackLng: config.intl.defaultLocale,
   supportedLngs: config.intl.languages,
+  nonExplicitSupportedLngs: true,
   preload: config.intl.languages,
   keySeparator: false,
-  debug: process.env.NODE_ENV === 'development',
+  debug: false,// process.env.NODE_ENV === 'development',
 };
 
 export default defaulti18nConfig;
