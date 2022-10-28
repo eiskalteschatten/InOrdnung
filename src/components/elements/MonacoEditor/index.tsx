@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef } from 'react';
-import Editor, { EditorProps } from '@monaco-editor/react';
+import Editor, { EditorProps, loader } from '@monaco-editor/react';
+import * as monaco from 'monaco-editor';
+
 import { editor as editorApi } from 'monaco-editor/esm/vs/editor/editor.api';
 
 import Spinner from '../Spinner';
@@ -9,6 +11,8 @@ import LightTheme from '../../../shared/monacoThemes/InOrdnungLight.json';
 import styles from './styles.module.scss';
 
 const lightThemeName = 'InOrdnungLight';
+
+loader.config({ monaco });
 
 interface Props extends EditorProps {
   minimap?: boolean;
