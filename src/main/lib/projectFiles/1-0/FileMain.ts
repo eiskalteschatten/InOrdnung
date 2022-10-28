@@ -63,8 +63,5 @@ export default class FileMain extends AbstractFileMain<ProjectFile> {
     catch (error) {
       log.error(error);
     }
-    finally {
-      window.webContents.send('setIsLoading', false);
-    }
   }
 }

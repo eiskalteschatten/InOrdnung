@@ -4,7 +4,6 @@ import { FileStoreMetaData } from '../shared/interfaces/fileMetaData';
 import { ProjectFile } from '../shared/lib/projectFiles/1-0/interfaces';
 import { dispatch, getState } from '../store';
 import { setFileMetaData } from '../store/entities/file';
-import { setIsLoading } from '../store/entities/ui/session';
 import getFileRendererInstance from '../shared/lib/projectFiles';
 
 window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: FileStoreMetaData) => {
@@ -16,14 +15,12 @@ window.api.on('setProjectFileMetaData', (e: IpcRendererEvent, fileMetaData: File
 });
 
 window.api.on('saveProject', async (e: IpcRendererEvent, closeWindow = false) => {
-  dispatch(setIsLoading(true));
   const { file } = getState();
   const fileClass = await getFileRendererInstance();
   window.api.send('saveProject', fileClass.serializeProjectForSaving(), file, closeWindow);
 });
 
 window.api.on('saveProjectAs', async () => {
-  dispatch(setIsLoading(true));
   const { file } = getState();
   const fileClass = await getFileRendererInstance();
   window.api.send('saveProjectAs', fileClass.serializeProjectForSaving(), file);
