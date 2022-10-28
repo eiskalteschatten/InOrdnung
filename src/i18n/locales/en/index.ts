@@ -6,6 +6,7 @@ import projects from './projects';
 import projectInfo from './projectInfo';
 import bookmarks from './bookmarks';
 import tasks from './tasks';
+import updates from './updates';
 
 // Namespaces are defined here
 export default {
@@ -17,4 +18,5 @@ export default {
   projectInfo,
   bookmarks,
   tasks,
+  updates,
 };

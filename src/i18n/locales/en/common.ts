@@ -8,6 +8,7 @@ export default {
   loading: 'Loading...',
   yes: 'Yes',
   no: 'No',
+  ok: 'OK',
   areYouSureYouWantToContinue: 'Are you sure you want to continue?',
   thisCannotBeUndone: 'This cannot be undone.',
   rename: 'Rename',
