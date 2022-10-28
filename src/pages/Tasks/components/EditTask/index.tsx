@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { Suspense }  from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../../../store/hooks';
 import { taskListSelectors, taskSelectors, updateTask } from '../../../../store/entities/project/tasks';
 
 import Input from '../../../../components/elements/Input';
-import MonacoEditor from '../../../../components/elements/MonacoEditor';
 import Select from '../../../../components/elements/Select';
 import { TaskStatus } from '../../../../shared/interfaces/tasks';
 import Button from '../../../../components/elements/Button';
 import RightSidebarCenterButton from '../../../../components/elements/RightSidebarCenterButton';
+import SuspeseLoader from '../../../../components/elements/SuspenseLoader';
 import { deleteTask } from '../../../../shared/lib/tasks';
 
 import styles from './styles.module.scss';
+
+const MonacoEditor = React.lazy(() => import('../../../../components/elements/MonacoEditor'));
 
 interface Props {
   editingId: string;
@@ -72,14 +74,16 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
         value={toEdit?.name ?? ''}
       />
 
-      <MonacoEditor
-        label={`${t('common:description')}`}
-        onChange={handleDescriptionChange}
-        value={toEdit?.description ?? ''}
-        height='250px'
-        minimap={false}
-        path={toEdit?.id}
-      />
+      <Suspense fallback={<SuspeseLoader />}>
+        <MonacoEditor
+          label={`${t('common:description')}`}
+          onChange={handleDescriptionChange}
+          value={toEdit?.description ?? ''}
+          height='250px'
+          minimap={false}
+          path={toEdit?.id}
+        />
+      </Suspense>
 
       <Select
         label={t('tasks:taskLists')}

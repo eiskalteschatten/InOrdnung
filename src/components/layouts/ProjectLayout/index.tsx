@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IpcRendererEvent } from 'electron';
 import { useNavigate } from 'react-router-dom';
@@ -10,12 +10,14 @@ import getFileRendererInstance from '../../../shared/lib/projectFiles';
 import Titlebar from './components/Titlebar';
 import Toolbar from './components/Toolbar';
 import Sidebar from './components/Sidebar';
-import WelcomeDialog from './components/WelcomeDialog';
 import GlobalInfo from '../../elements/GlobalInfo';
 import GlobalError from '../../elements/GlobalError';
 import GlobalLoader from '../../elements/GlobalLoader';
+import SuspeseLoader from '../../elements/SuspenseLoader';
 
 import styles from './styles.module.scss';
+
+const WelcomeDialog = React.lazy(() => import('./components/WelcomeDialog'));
 
 interface Props {
   toolbar?: React.ReactNode;
@@ -95,7 +97,9 @@ const ProjectLayout: React.FC<Props> = ({ toolbar, children }) => {
         {children}
       </div>
 
-      <WelcomeDialog />
+      <Suspense fallback={<SuspeseLoader />}>
+        <WelcomeDialog />
+      </Suspense>
 
       <GlobalInfo />
       <GlobalError />
