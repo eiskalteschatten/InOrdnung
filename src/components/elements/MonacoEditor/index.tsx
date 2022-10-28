@@ -17,6 +17,7 @@ interface Props extends EditorProps {
   label?: string;
   resizeEventName?: string;
   hideCurrentLanguage?: boolean;
+  wordWrap?: 'off' | 'on' | 'wordWrapColumn' | 'bounded';
 }
 
 const MonacoEditor: React.FC<Props> = props => {
@@ -29,6 +30,7 @@ const MonacoEditor: React.FC<Props> = props => {
     label,
     resizeEventName,
     hideCurrentLanguage,
+    wordWrap = 'on',
     ...leftoverProps
   } = props;
 
@@ -42,6 +44,7 @@ const MonacoEditor: React.FC<Props> = props => {
       minimap: { enabled: minimap },
       readOnly,
       lineNumbers,
+      wordWrap,
     });
 
     monaco.editor.defineTheme(lightThemeName, LightTheme as any);
