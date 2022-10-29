@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import clsx from 'clsx';
 
+import { useAppSelector } from '../../../../../../store/hooks';
 import { Task } from '../../../../../../shared/interfaces/tasks';
 import Button from '../../../../../../components/elements/Button';
 import { deleteTask, editTask } from '../../../../../../shared/lib/tasks';
@@ -14,10 +16,13 @@ interface Props {
 
 const KanbanBoardTask: React.FC<Props> = ({ task }) => {
   const { taskListId } = useParams();
+  const { editingId } = useAppSelector(state => state.project.tasks);
 
   return (
     <div
-      className={styles.task}
+      className={clsx(styles.task, {
+        [styles.selected]: editingId === task.id,
+      })}
       onContextMenu={() => window.api.send('openTaskContextMenu', task.id, taskListId)}
       draggable
       onDragStart={e => e.dataTransfer.setData('drag-task', task.id)}
