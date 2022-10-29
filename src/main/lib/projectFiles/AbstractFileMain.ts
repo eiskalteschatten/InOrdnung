@@ -101,7 +101,11 @@ export default abstract class AbstractFileMain<ProjectFile> {
         const openRecentMenu = appMenu?.getMenuItemById('non-mac-open-recent');
 
         if (openRecentMenu?.submenu && recentProjects.length > 0) {
-          openRecentMenu.submenu.items = [];
+          // This is a nasty hack because Electron doesn't allow me to do any other way.
+          // It works even though clear() is not in the official API.
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          openRecentMenu.submenu.clear();
 
           for (const project of recentProjects) {
             openRecentMenu.submenu.append(new MenuItem({
