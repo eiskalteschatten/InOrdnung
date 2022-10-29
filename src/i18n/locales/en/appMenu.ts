@@ -35,7 +35,6 @@ export default {
   open: 'Open...',
   openRecent: 'Open Recent',
   clearMenu: 'Clear Menu',
-  noRecentItems: 'No Recent Items',
   saveAs: 'Save As...',
   openWelcomeDialog: 'Open Welcome Dialog',
 };

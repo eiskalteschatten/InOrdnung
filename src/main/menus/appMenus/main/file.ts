@@ -78,13 +78,7 @@ export default (): MenuItem => {
       item: {
         label: t('appMenu:openRecent'),
         id: 'non-mac-open-recent',
-        submenu: [
-          {
-            label: t('appMenu:noRecentItems'),
-            enabled: false,
-            id: 'no-recent-items',
-          },
-        ],
+        submenu: [],
       },
     },
     { item: { type: 'separator' } },

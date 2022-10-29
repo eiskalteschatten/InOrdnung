@@ -98,7 +98,6 @@ export default abstract class AbstractFileMain<ProjectFile> {
 
       const appMenu = Menu.getApplicationMenu();
       const openRecentMenu = appMenu?.getMenuItemById('non-mac-open-recent');
-      const noRecentItemsMenuItem = appMenu?.getMenuItemById('no-recent-items');
 
       if (openRecentMenu?.submenu && recentProjects.length > 0) {
         for (const index in recentProjects) {
@@ -112,13 +111,6 @@ export default abstract class AbstractFileMain<ProjectFile> {
             },
           }));
         }
-
-        if (noRecentItemsMenuItem) {
-          noRecentItemsMenuItem.visible = false;
-        }
-      }
-      else if (noRecentItemsMenuItem) {
-        noRecentItemsMenuItem.visible = true;
       }
     }
     catch (error) {
