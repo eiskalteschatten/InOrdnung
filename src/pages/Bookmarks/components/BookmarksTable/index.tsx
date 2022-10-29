@@ -28,6 +28,7 @@ const BookmarksTable: React.FC = () => {
   const dispatch = useAppDispatch();
   const bookmarks = useAppSelector(bookmarkSelectors.selectAll);
   const { bookmarks: bookmarksUi } = useAppSelector(state => state.ui.preferences);
+  const { editingId } = useAppSelector(state => state.project.bookmarks);
   const { t } = useTranslation(['common']);
   const [sorting, setSorting] = useState<SortingState>(bookmarksUi?.sortingState ?? []);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
@@ -93,6 +94,7 @@ const BookmarksTable: React.FC = () => {
       onRowHover={handleRowHover}
       onRowOut={handleRowOut}
       onRowContextMenu={handleRowContextMenu}
+      rowSelectedId={editingId}
       tableData={{
         data: bookmarks,
         columns,

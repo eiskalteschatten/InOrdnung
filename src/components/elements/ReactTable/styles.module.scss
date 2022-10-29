@@ -19,11 +19,11 @@
   .row {
     border-radius: $borderRadius;
 
-    &:hover {
+    &:hover, &.selected {
       background-color: darken($lightSecondaryBg, 3%);
 
       @media (prefers-color-scheme: dark) {
-        background-color: darken($darkSecondaryBg, 2%);
+        background-color: darken($darkSecondaryBg, 3%);
       }
     }
 

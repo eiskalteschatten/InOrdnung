@@ -17,9 +17,20 @@ interface Props<T> {
   onRowOut?: (row: Row<T>) => void;
   onRowContextMenu?: (row: Row<T>) => void;
   onRowClick?: (row: Row<T>) => void;
+  rowSelectedId?: string | number;
 }
 
-function ReactTable<T>({ tableData, className, onRowHover, onRowOut, onRowContextMenu, onRowClick }: Props<T>): React.ReactElement {
+function ReactTable<T>(props: Props<T & { id: string | number }>): React.ReactElement {
+  const {
+    tableData,
+    className,
+    onRowHover,
+    onRowOut,
+    onRowContextMenu,
+    onRowClick,
+    rowSelectedId,
+  } = props;
+
   const table = useReactTable(tableData);
 
   return (
@@ -62,7 +73,9 @@ function ReactTable<T>({ tableData, className, onRowHover, onRowOut, onRowContex
         {table.getRowModel().rows.map(row => (
           <tr
             key={row.id}
-            className={styles.row}
+            className={clsx(styles.row, {
+              [styles.selected]: rowSelectedId && row.original.id === rowSelectedId,
+            })}
             onMouseOver={() => onRowHover && onRowHover(row)}
             onMouseOut={() => onRowOut && onRowOut(row)}
             onContextMenu={() => onRowContextMenu && onRowContextMenu(row)}

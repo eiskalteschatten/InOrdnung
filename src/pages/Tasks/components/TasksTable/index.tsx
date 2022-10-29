@@ -36,6 +36,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector(state => state);
   const { tasks: tasksUi } = useAppSelector(state => state.ui.preferences);
+  const { editingId } = useAppSelector(state => state.project.tasks);
   const { t } = useTranslation(['common']);
   const [sorting, setSorting] = useState<SortingState>(tasksUi?.sortingState ?? []);
   const [hoverRowId, setHoverRowId] = useState<string | undefined>();
@@ -166,6 +167,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
       onRowOut={handleRowOut}
       onRowContextMenu={handleRowContextMenu}
       onRowClick={handleRowClick}
+      rowSelectedId={editingId}
       tableData={{
         data: filteredTasks,
         columns,
