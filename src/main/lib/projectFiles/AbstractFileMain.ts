@@ -96,20 +96,21 @@ export default abstract class AbstractFileMain<ProjectFile> {
         webContents.send('setRecentProjects', recentProjects);
       }
 
-      const appMenu = Menu.getApplicationMenu();
-      const openRecentMenu = appMenu?.getMenuItemById('non-mac-open-recent');
+      if (process.platform !== 'darwin') {
+        const appMenu = Menu.getApplicationMenu();
+        const openRecentMenu = appMenu?.getMenuItemById('non-mac-open-recent');
 
-      if (openRecentMenu?.submenu && recentProjects.length > 0) {
-        for (const index in recentProjects) {
-          const project = recentProjects[index];
-          const itemPosition = Number(index) + 1;  // Use index + 1 to account for the "No Recent Items" menu.
+        if (openRecentMenu?.submenu && recentProjects.length > 0) {
+          openRecentMenu.submenu.items = [];
 
-          openRecentMenu.submenu.insert(itemPosition, new MenuItem({
-            label: path.basename(project.path),
-            click: async (item: MenuItem, focusedWindow?: BrowserWindow) => {
-              await AbstractFileMain.openFile(project.path, focusedWindow?.webContents);
-            },
-          }));
+          for (const project of recentProjects) {
+            openRecentMenu.submenu.append(new MenuItem({
+              label: path.basename(project.path),
+              click: async (item: MenuItem, focusedWindow?: BrowserWindow) => {
+                await AbstractFileMain.openFile(project.path, focusedWindow?.webContents);
+              },
+            }));
+          }
         }
       }
     }
