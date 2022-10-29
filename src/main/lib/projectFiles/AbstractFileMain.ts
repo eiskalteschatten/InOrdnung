@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, WebContents } from 'electron';
+import { app, BrowserWindow, dialog, WebContents, MenuItem, Menu } from 'electron';
 import log from 'electron-log';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
@@ -75,7 +75,7 @@ export default abstract class AbstractFileMain<ProjectFile> {
   }
 
   static async getRecentProjects(webContents?: WebContents): Promise<RecentProjectsLocalStorage[]> {
-    let recentProjects = [];
+    let recentProjects: RecentProjectsLocalStorage[] = [];
 
     try {
       const recentProjectsFilePath = path.resolve(config.storagePath, 'recentProjects.json');
@@ -94,6 +94,31 @@ export default abstract class AbstractFileMain<ProjectFile> {
 
       if (webContents) {
         webContents.send('setRecentProjects', recentProjects);
+      }
+
+      const appMenu = Menu.getApplicationMenu();
+      const openRecentMenu = appMenu?.getMenuItemById('non-mac-open-recent');
+      const noRecentItemsMenuItem = appMenu?.getMenuItemById('no-recent-items');
+
+      if (openRecentMenu?.submenu && recentProjects.length > 0) {
+        for (const index in recentProjects) {
+          const project = recentProjects[index];
+          const itemPosition = Number(index) + 1;  // Use index + 1 to account for the "No Recent Items" menu.
+
+          openRecentMenu.submenu.insert(itemPosition, new MenuItem({
+            label: path.basename(project.path),
+            click: async (item: MenuItem, focusedWindow?: BrowserWindow) => {
+              await AbstractFileMain.openFile(project.path, focusedWindow?.webContents);
+            },
+          }));
+        }
+
+        if (noRecentItemsMenuItem) {
+          noRecentItemsMenuItem.visible = false;
+        }
+      }
+      else if (noRecentItemsMenuItem) {
+        noRecentItemsMenuItem.visible = true;
       }
     }
     catch (error) {

@@ -1,6 +1,6 @@
 <html>
   <script>
-    window.api.on('startWorker', (event, options) => {
+    window.api.on('startWorker', (e, options) => {
       window.api.send('addToRecentProjects', options);
       window.api.once('addToRecentProjectsFinished', () => window.close());
     });

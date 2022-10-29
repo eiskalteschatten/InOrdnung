@@ -2,7 +2,6 @@ import { ipcMain, IpcMainEvent, dialog, shell, BrowserWindow, Menu } from 'elect
 import log from 'electron-log';
 
 import { showGenericErrorDialog } from '../lib/errorHandling';
-import appMenu from '../menus/appMenus/main';
 
 type AlertTypes = 'none' | 'info' | 'error' | 'question' | 'warning';
 
@@ -40,6 +39,6 @@ ipcMain.on('openLink', async (e: IpcMainEvent, link: string): Promise<void> => s
 
 ipcMain.on('openAppMenu', (e: IpcMainEvent): void => {
   const window = BrowserWindow.fromWebContents(e.sender) || undefined;
-  const menu = Menu.buildFromTemplate(appMenu());
+  const menu = Menu.getApplicationMenu();
   menu?.popup({ window });
 });
