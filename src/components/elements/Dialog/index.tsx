@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useEffect } from 'react';
 import clsx from 'clsx';
 
 import Button from '../Button';
@@ -27,6 +27,21 @@ type Props = PropsWithNoCloseButton | PropsWithCloseButton;
 
 const Dialog: React.FC<Props> = props => {
   const { children, fullScreen, open, title, noCloseButton, onClose, className, ...leftoverProps } = props;
+
+  useEffect(() => {
+    const closeDialog = (e: KeyboardEvent) => {
+      if (onClose && e.key === 'Escape') {
+        e.preventDefault();
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', closeDialog);
+
+    return () => {
+      window.removeEventListener('keydown', closeDialog);
+    };
+  }, []);
 
   if (!open) {
     return null;
