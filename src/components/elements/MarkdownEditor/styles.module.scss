@@ -1,5 +1,18 @@
+@import "../../../scss/variables";
+@import "../../../scss/mixins";
+
 .label {
   margin-bottom: 5px;
   text-align: left;
   user-select: none;
+}
+
+.editor {
+  @include formBase;
+
+  background-color: darken($lightBg, 6%);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: lighten($darkBg, 2%);
+  }
 }
