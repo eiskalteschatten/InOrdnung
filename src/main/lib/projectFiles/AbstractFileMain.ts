@@ -2,6 +2,9 @@ import { app, BrowserWindow, dialog, WebContents, MenuItem, Menu } from 'electro
 import log from 'electron-log';
 import fs, { promises as fsPromises } from 'fs';
 import path from 'path';
+import { unzip, createGzip } from 'zlib';
+import { promisify } from 'util';
+import { pipeline } from 'stream';
 
 import config from '../../../config/main';
 import i18n from '../../../i18n/main';
@@ -14,6 +17,14 @@ const { t } = i18n;
 export default abstract class AbstractFileMain<ProjectFile> {
   abstract saveFileAs(projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void>
   abstract writeFile(projectFile: ProjectFile, fileMetaData: FileStoreMetaData, window: BrowserWindow): Promise<void>
+
+  protected async zipFile(tempFilePath: string, filePath: string) {
+    const gzip = createGzip();
+    const source = fs.createReadStream(tempFilePath);
+    const destination = fs.createWriteStream(filePath);
+    const _pipeline = promisify(pipeline);
+    await _pipeline(source, gzip, destination);
+  }
 
   static async openFileDialog(webContents?: WebContents) {
     try {
@@ -35,7 +46,10 @@ export default abstract class AbstractFileMain<ProjectFile> {
 
   static async openFile(filePath: string, webContents?: WebContents) {
     try {
-      const fileContents = await fsPromises.readFile(filePath, 'utf8');
+      const fileBuffer = await fsPromises.readFile(filePath);
+      const _unzip = promisify(unzip);
+      const fileContentsBuffer = await _unzip(fileBuffer);
+      const fileContents = fileContentsBuffer.toString();
       const projectFile = JSON.parse(fileContents);
       const window = await createProjectWindow({ projectFile, filePath });
       window.setRepresentedFilename(filePath || '');
