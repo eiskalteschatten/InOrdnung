@@ -14,7 +14,7 @@ import { deleteTask } from '../../../../shared/lib/tasks';
 
 import styles from './styles.module.scss';
 
-const MonacoEditor = React.lazy(() => import('../../../../components/elements/MonacoEditor'));
+const MarkdownEditor = React.lazy(() => import('../../../../components/elements/MarkdownEditor'));
 
 interface Props {
   editingId: string;
@@ -75,13 +75,10 @@ const EditTask: React.FC<Props> = ({ editingId }) => {
       />
 
       <Suspense fallback={<SuspeseLoader />}>
-        <MonacoEditor
+        <MarkdownEditor
           label={`${t('common:description')}`}
           onChange={handleDescriptionChange}
           value={toEdit?.description ?? ''}
-          height='250px'
-          minimap={false}
-          path={toEdit?.id}
         />
       </Suspense>
 
