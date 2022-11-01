@@ -12,7 +12,7 @@ import { setDescription, setName } from '../../store/entities/project/info';
 
 import styles from './styles.module.scss';
 
-const MonacoEditor = React.lazy(() => import('../../components/elements/MonacoEditor'));
+const MarkdownEditor = React.lazy(() => import('../../components/elements/MarkdownEditor'));
 
 const ProjectInfo: React.FC = () => {
   const { t } = useTranslation(['projectInfo']);
@@ -31,14 +31,13 @@ const ProjectInfo: React.FC = () => {
           />
 
           <Suspense fallback={<SuspeseLoader />}>
-            <MonacoEditor
-              height='200px'
+            <MarkdownEditor
               value={description}
               onChange={value => dispatch(setDescription(value || ''))}
-              minimap={false}
               label={`${t('common:description')}`}
             />
           </Suspense>
+
         </div>
       </Column>
     </ProjectLayout>

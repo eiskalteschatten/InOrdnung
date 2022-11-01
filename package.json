@@ -142,6 +142,7 @@
     "@monaco-editor/react": "^4.4.6",
     "@reduxjs/toolkit": "^1.8.1",
     "@tanstack/react-table": "^8.5.15",
+    "@uiw/react-md-editor": "^3.19.5",
     "axios": "^1.1.0",
     "clsx": "^1.1.1",
     "electron-log": "^4.4.4",
