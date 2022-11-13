@@ -91,7 +91,7 @@ export default async (options?: ProjectWindowOptions): Promise<BrowserWindow> =>
 
     newWindow.loadURL(
       process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000'
+        ? 'http://localhost:3100'
         : `file://${path.join(__dirname, '../../index.html')}`
     );
 
