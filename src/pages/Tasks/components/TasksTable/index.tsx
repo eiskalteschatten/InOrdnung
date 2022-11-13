@@ -124,7 +124,7 @@ const TasksTable: React.FC<Props> = ({ tasks, showTaskListColumn }) => {
         return date
           ? (
             <div className={clsx({ [styles.done]: info.row.original.status === TaskStatus.DONE })}>
-              <DueDate dueDate={date} />
+              <DueDate dueDate={date} taskStatus={info.row.original.status} />
             </div>
           ) : (<></>);
       },
