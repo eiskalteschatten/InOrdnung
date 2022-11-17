@@ -12,7 +12,6 @@ export const defaulti18nConfig: InitOptions = {
   preload: config.intl.languages,
   keySeparator: false,
   debug: false,// process.env.NODE_ENV === 'development',
-  returnNull: false,
 };
 
 export default defaulti18nConfig;
