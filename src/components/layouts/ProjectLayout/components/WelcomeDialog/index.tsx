@@ -77,8 +77,8 @@ const WelcomeDialog: React.FC = () => {
                   onClick={() => handleOpenRecentProject(project.path)}
                   contentClassName={styles.recentProjectButton}
                 >
-                  <div className={styles.name}>{project.name}</div>
-                  <div className={styles.path}>{project.path}</div>
+                  <div className={styles.name}>{project?.name}</div>
+                  <div className={styles.path}>{project?.path}</div>
                 </Button>
               ))}
             </>

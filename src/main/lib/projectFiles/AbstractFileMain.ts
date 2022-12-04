@@ -101,8 +101,8 @@ export default abstract class AbstractFileMain<ProjectFile> {
       recentProjects = recentProjectsString ? JSON.parse(recentProjectsString) : [];
 
       for (const index in recentProjects) {
-        if (!fs.existsSync(recentProjects[index].path)) {
-          delete recentProjects[index];
+        if (recentProjects[index]?.path && !fs.existsSync(recentProjects[index].path)) {
+          recentProjects.splice(Number(index), 1);
         }
       }
 
