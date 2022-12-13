@@ -2,8 +2,6 @@ import React, { HTMLAttributes } from 'react';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 
-import ButtonBase from '../../../../../../elements/ButtonBase';
-
 import styles from './styles.module.scss';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -20,7 +18,7 @@ const SidebarButton: React.FC<Props> = ({ children, className, icon, to, end, ..
   return (
     <NavLink to={to} className={styles.link} end={end}>
       {({ isActive }) => (
-        <ButtonBase
+        <div
           className={clsx(styles.button, className, {
             [styles.active]: isActive,
           })}
@@ -35,7 +33,7 @@ const SidebarButton: React.FC<Props> = ({ children, className, icon, to, end, ..
           <div className={styles.contents}>
             {children}
           </div>
-        </ButtonBase>
+        </div>
       )}
     </NavLink>
   );

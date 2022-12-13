@@ -1,10 +1,13 @@
 @import "../../../../../../../scss/variables";
+@import "../../../../../../../scss/mixins";
 
 .link {
   text-decoration: none;
   cursor: default;
 
   .button {
+    @include formBase(false);
+
     color: var(--color);
     display: flex;
     align-items: center;
@@ -12,13 +15,15 @@
     user-select: none;
     margin: 0 5px 5px 10px;
     font-size: 1.1em;
+    padding: 3px 10px;
+    white-space: nowrap;
 
     &.active {
-      background-color: $primaryColorLighter;
+      background-color: $primaryColorLighter !important;
       color: var(--primary-color);
 
       @media (prefers-color-scheme: dark) {
-        background-color: $primaryColor;
+        background-color: $primaryColor !important;
         color: $darkColor;
       }
     }

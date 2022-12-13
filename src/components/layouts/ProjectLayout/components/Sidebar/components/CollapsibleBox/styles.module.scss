@@ -23,7 +23,7 @@
     padding: 3px;
     font-size: 1.1em;
 
-    @include hoverActiveBackgrounds;
+    @include hoverBackgrounds;
 
     .title {
       font-size: 14px;
