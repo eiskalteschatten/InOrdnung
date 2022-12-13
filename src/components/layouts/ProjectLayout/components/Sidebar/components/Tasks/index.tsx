@@ -82,7 +82,7 @@ const Tasks: React.FC = () => {
       ))}
 
       <SidebarButton
-        to='/tasks/list/archive'
+        to='/tasks/archive'
         icon={<span className='material-icons'>inventory_2</span>}
         end
       >

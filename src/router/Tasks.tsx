@@ -8,8 +8,8 @@ import TaskList from '../pages/Tasks/TaskList';
 const TasksRouter: React.FC = () => {
   return (
     <Routes>
-      <Route path='/list/archive' element={<TaskArchive />} />
       <Route path='/list/:taskListId' element={<TaskList />} />
+      <Route path='/archive' element={<TaskArchive />} />
       <Route path='*' element={<Tasks />} />
     </Routes>
   );
