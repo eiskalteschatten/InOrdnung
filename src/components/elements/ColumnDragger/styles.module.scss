@@ -4,9 +4,6 @@
   width: $columnDraggerWidth;
   height: 100%;
   cursor: col-resize;
-  background-color: $lightBg;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $darkBg;
-  }
+  // border-right: 1px solid #262F34;
+  border-right: 1px solid var(--border-color);
 }
