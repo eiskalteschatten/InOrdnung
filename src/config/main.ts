@@ -20,7 +20,7 @@ switch (process.platform) {
 export default {
   windows: {
     defaultBackgroundColors: {
-      dark: '#0a0e11',
+      dark: '#222222',
       light: '#f0f0f0',
     },
     defaultForegroundColors: {
