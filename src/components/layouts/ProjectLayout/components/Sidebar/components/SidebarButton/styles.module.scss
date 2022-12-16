@@ -6,8 +6,7 @@
   cursor: default;
 
   .button {
-    @include formBase(false);
-
+    border-radius: $borderRadius;
     color: var(--color);
     display: flex;
     align-items: center;
@@ -18,13 +17,13 @@
     padding: 3px 10px;
     white-space: nowrap;
 
+    @include hoverBackgrounds;
+
     &.active {
-      background-color: $primaryColorLighter !important;
-      color: var(--primary-color);
+      background-color: darken($lightSidebarBg, 15%);
 
       @media (prefers-color-scheme: dark) {
-        background-color: $primaryColor !important;
-        color: $darkColor;
+        background-color: lighten($darkSidebarBg, 7%);
       }
     }
 
