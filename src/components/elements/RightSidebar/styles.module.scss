@@ -3,13 +3,13 @@
 .rightSidebar {
   display: flex;
   font-size: .9em;
+  background-color: var(--sidebar-background-color);
 
   .contentWrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
     flex-grow: 1;
-    border-top-left-radius: $borderRadius;
     padding: 15px;
     height: 100%;
     overflow-x: hidden;

@@ -4,6 +4,7 @@
   --background-color: #{$lightBg};
   --secondary-background-color: #{$lightSecondaryBg};
   --opposite-background-color: #{$darkBg};
+  --sidebar-background-color: #{$lightSidebarBg};
   --color: #{$lightColor};
   --opposite-color: #{$darkColor};
   --primary-color: #{$primaryColor};
@@ -16,6 +17,7 @@
     --background-color: #{$darkBg};
     --secondary-background-color: #{$darkSecondaryBg};
     --opposite-background-color: #{$lightBg};
+    --sidebar-background-color: #{$darkSidebarBg};
     --color: #{$darkColor};
     --opposite-color: #{$lightColor};
     --primary-color: #{$primaryColor};
