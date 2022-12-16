@@ -9,11 +9,10 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   flexGrow?: boolean;
   centered?: boolean;
   padding?: boolean;
-  fullWidth?: boolean;
 }
 
 const Column: React.FC<Props> = forwardRef<HTMLDivElement, Props>((props, ref) => {
-  const { children, className, flexGrow, centered, padding, fullWidth, ...leftoverProps } = props;
+  const { children, className, flexGrow, centered, padding, ...leftoverProps } = props;
 
   return (
     <div
@@ -22,7 +21,6 @@ const Column: React.FC<Props> = forwardRef<HTMLDivElement, Props>((props, ref) =
         [styles.flexGrow]: flexGrow,
         [styles.centered]: centered,
         [styles.padding]: padding,
-        [styles.fullWidth]: fullWidth,
       })}
       {...leftoverProps}
     >

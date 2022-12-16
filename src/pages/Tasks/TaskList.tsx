@@ -36,7 +36,7 @@ const TaskListPage: React.FC = () => {
 
   return (
     <ProjectLayout toolbar={<Toolbar />}>
-      <Column flexGrow padding fullWidth={!editingId}>
+      <Column flexGrow padding>
         {taskList?.view === TaskListViewType.KANBAN_BOARD ? (
           <TasksKanbanBoard tasks={filteredTasks} />
         ) : (

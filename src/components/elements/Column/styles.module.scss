@@ -4,7 +4,6 @@
   height: 100%;
   overflow: auto;
   position: relative;
-  margin-right: 5px;
 
   &.flexGrow {
     flex-grow: 1;
@@ -21,9 +20,5 @@
 
   &.padding {
     padding: 5px 10px;
-  }
-
-  &.fullWidth {
-    margin-right: 10px;
   }
 }
