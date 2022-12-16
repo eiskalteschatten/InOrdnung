@@ -27,6 +27,10 @@ export default {
       dark: '#f0f0f0',
       light: '#222222',
     },
+    titleBarOverlayColors: {
+      dark: '#222a2e',
+      light: '#ffffff',
+    },
   },
   storagePath,
   updates: {
