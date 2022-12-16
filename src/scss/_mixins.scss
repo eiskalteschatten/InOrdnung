@@ -42,7 +42,7 @@
     color: $lightColor;
 
     @media (prefers-color-scheme: dark) {
-      background-color: darken($darkSecondaryBg, 4%);
+      background-color: darken($darkSecondaryBg, 2%);
       color: $darkColor;
     }
   }
