@@ -16,7 +16,7 @@
 
   display: flex;
   padding: 0 5px;
-  background-color: darken($lightBg, 4%);
+  background-color: darken($lightBg, 9%);
 
   @media (prefers-color-scheme: dark) {
     background-color: darken($darkBg, 3%);

@@ -21,7 +21,7 @@ export default {
   windows: {
     defaultBackgroundColors: {
       dark: '#222222',
-      light: '#f0f0f0',
+      light: '#ffffff',
     },
     defaultForegroundColors: {
       dark: '#f0f0f0',

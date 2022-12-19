@@ -24,12 +24,12 @@
 
     display: flex;
     padding: 0 5px;
-    background-color: darken($lightBg, 6%);
+    background-color: darken($lightBg, 9%);
     align-items: center;
     display: inline-block;
 
     @media (prefers-color-scheme: dark) {
-      background-color: lighten($darkBg, 2%);
+      background-color: darken($darkBg, 3%);
     }
 
     &.error {

@@ -8,7 +8,7 @@
 .select {
   @include formBase;
 
-  background-color: darken($lightBg, 5%);
+  background-color: darken($lightBg, 9%);
   outline: none;
   padding: 4px 10px;
   border: 1px solid transparent;
@@ -22,7 +22,7 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    background-color: darken($darkBg, 5%);
+    background-color: darken($darkBg, 3%);
   }
 
   &.large {
