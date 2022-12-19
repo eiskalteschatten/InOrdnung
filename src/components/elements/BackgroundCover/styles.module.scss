@@ -8,10 +8,11 @@
   left: 0;
   background-color: #ffffff;
   z-index: 1000;
-  opacity: .6;
+  opacity: .7;
   -webkit-app-region: drag;
 
   @media (prefers-color-scheme: dark) {
     background-color: #000000;
+    opacity: .6;
   }
 }

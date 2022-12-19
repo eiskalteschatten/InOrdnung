@@ -10,7 +10,7 @@
 .editor {
   @include formBase;
 
-  background-color: darken($lightBg, 6%);
+  background-color: darken($lightBg, 9%);
 
   @media (prefers-color-scheme: dark) {
     background-color: darken($darkBg, 3%);
