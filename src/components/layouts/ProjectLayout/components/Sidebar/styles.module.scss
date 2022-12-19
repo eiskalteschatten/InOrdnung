@@ -8,6 +8,8 @@
   position: relative;
   font-size: .8em;
   display: flex;
+  background-color: var(--sidebar-background-color);
+  border-right: 1px solid var(--border-color);
 
   .contents {
     height: 100%;

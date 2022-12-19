@@ -6,8 +6,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: var(--background-color);
+  background-color: #ffffff;
   z-index: 1000;
   opacity: .6;
   -webkit-app-region: drag;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #000000;
+  }
 }

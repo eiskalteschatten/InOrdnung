@@ -4,9 +4,4 @@
   width: $columnDraggerWidth;
   height: 100%;
   cursor: col-resize;
-  background-color: $lightBg;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: $darkBg;
-  }
 }

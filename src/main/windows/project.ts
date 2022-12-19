@@ -52,6 +52,10 @@ export default async (options?: ProjectWindowOptions): Promise<BrowserWindow> =>
     ? config.windows.defaultForegroundColors.dark
     : config.windows.defaultForegroundColors.light;
 
+  const titleBarOverlayColor = nativeTheme.shouldUseDarkColors
+    ? config.windows.titleBarOverlayColors.dark
+    : config.windows.titleBarOverlayColors.light;
+
   const browserWindowOptions: BrowserWindowConstructorOptions = {
     width: preferences.width || defaultWidth,
     height: preferences.height || defaultHeight,
@@ -70,7 +74,7 @@ export default async (options?: ProjectWindowOptions): Promise<BrowserWindow> =>
   else if (process.platform === 'win32') {
     browserWindowOptions.titleBarStyle = 'hidden';
     browserWindowOptions.titleBarOverlay = {
-      color: backgroundColor,
+      color: titleBarOverlayColor,
       symbolColor: foregroundColor,
     };
   }
