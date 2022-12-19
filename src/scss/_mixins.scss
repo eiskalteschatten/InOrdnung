@@ -1,6 +1,6 @@
 @import "./variables";
 
-@mixin formBase($hasActiveEffect: true) {
+@mixin formBase($hasActiveEffect: false) {
   background: transparent;
   border: 0;
   border-radius: $borderRadius;
@@ -12,21 +12,21 @@
   }
 
   &:hover:not(:disabled) {
-    background-color: darken($lightSecondaryBg, 10%);
+    background-color: darken($lightBg, 10%);
     color: $lightColor;
 
     @media (prefers-color-scheme: dark) {
-      background-color: darken($darkSecondaryBg, 4%);
+      background-color: darken($darkBg, 4%);
       color: $darkColor;
     }
   }
 
   @if $hasActiveEffect {
     &:active:not(:disabled), &:not(button):focus {
-      background-color: darken($lightSecondaryBg, 15%);
+      background-color: darken($lightBg, 15%);
 
       @media (prefers-color-scheme: dark) {
-        background-color: darken($darkSecondaryBg, 10%);
+        background-color: darken($darkBg, 10%);
       }
     }
   }
