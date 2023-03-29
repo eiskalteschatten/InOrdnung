@@ -9,6 +9,9 @@ const { t } = i18n;
 
 export const WINDOW_ID = 'about';
 
+const today = new Date();
+const currentYear = today.getFullYear();
+
 // Copied from /src/assets/images/icon.svg since assets can't be loaded using the file:// protocol after building
 const appIcon = `
 <svg width="64" height="64" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
@@ -102,7 +105,7 @@ const html = `
       ${appIcon}
       <p class="name">${config.app.name}</p>
       <p class="version">Version ${config.app.version}</p>
-      <p class="copyright">&copy; 2022 Alex Seifert</p>
+      <p class="copyright">&copy; 2022-${currentYear} Alex Seifert</p>
       <p class="nodejs"><b>Node.js:</b> ${process.versions.node}</p>
       <p class="chrome"><b>Chrome:</b> ${process.versions.chrome}</p>
       <p class="electron"><b>Electron:</b> ${process.versions.electron}</p>
