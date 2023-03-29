@@ -81,6 +81,14 @@ const Tasks: React.FC = () => {
         </SidebarButton>
       ))}
 
+      <SidebarButton
+        to='/tasks/archive'
+        icon={<span className='material-icons'>inventory_2</span>}
+        end
+      >
+        {t('tasks:taskArchive')}
+      </SidebarButton>
+
       <CollapsibleBoxAddButton onClick={() => createTaskList()}>
         <span className='material-icons'>add</span>{t('tasks:newTaskList')}
       </CollapsibleBoxAddButton>
